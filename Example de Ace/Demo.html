@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ACE in Action</title>
+<style type="text/css" media="screen">
+    #editor { 
+        position: absolute;
+        top: 200px;
+        bottom: 0;
+        left: 20px;
+        width:800px;
+        height:500px;
+    }
+</style>
+</head>
+<body>
+
+<div id="editor" onkeypress="Patate()">void patate (int poids) {
+    
+    return poids;
+}</div>
+
+<p id="zeTest"> Ici se trouvera le string extrait de l'objet éditeur pour l'envoyer vers le service web ;) (il manque toujours le derniere caractere a cause du keypress que l'on utilise
+				DANS LE CADRE DU TEST ) utilise l'éditeur et tu verra la string :) </p>
+
+<script src="ace-builds\src-noconflict\ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/chrome");
+    editor.getSession().setMode("ace/mode/c_cpp");
+    function Patate(){
+		var temp = editor.getValue();
+		document.getElementById("zeTest").textContent = temp;
+	}
+
+</script>
+</body>
+</html>
