@@ -1,4 +1,4 @@
-﻿#enteteSite{
+﻿div#enteteSite{
 	height:50px;
 	width:inherit;
 	background-color:#0066FF;
@@ -26,6 +26,7 @@
 	background:#CCCCFF;
 	display:block;
 	text-align:center;
+	min-height:600px;
 }
 
 body{
@@ -59,6 +60,7 @@ html,body{
 	border-radius: 30px;
 	border:2px black solid;
 	position:relative;
+	line-height:50px;
 }
 
 #titreConnexion{
