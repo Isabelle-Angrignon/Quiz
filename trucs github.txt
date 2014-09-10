@@ -1,0 +1,12 @@
+pour failed to sync
+git status  (corriger fichier)
+git add	(tab tab = autofill) 
+git rebase --continue
+
+
+
+pour roll back:
+git reset (sha genre: 45c4e50) --hard
+git push --force
+
+
