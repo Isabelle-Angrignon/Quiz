@@ -10,3 +10,12 @@ git reset (sha genre: 45c4e50) --hard
 git push --force
 
 
+////deux push bon (sorti), 3 pull a scraper (in)  
+Sur le PC avec le bon push... et les autres...
+git reset (sha genre: 45c4e50) --hard
+git push --force
+
+
+
+
+
