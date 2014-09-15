@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="CSS/Login.css" type="text/css" media="screen" >
+	<link rel="stylesheet" href="CSS/Template.css" type="text/css" media="screen" >
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+
+
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" >
+	
+	<script src="jquery.min.js"></script>
+  	<script src="jquery-ui-1.11.1.custom/jquery-ui.min.js"></script>
+  	<script src="Javascript/Prof-GererQuiz.js"></script>
+  	<script>
+	  $(function() {
+	    $( "#sortable" ).sortable();
+	    $( "#sortable" ).disableSelection();
+	  });
+	</script>
+
+</head>
+
+<body>
+
+	<div id="enteteSite" class="fixed">
+		<img class="logo" src="Images/Logo_QIz.png" alt="logo"/>
+		<p id="nomSite"> QUIZINFO</p>
+	</div>
+	
+	<nav class="fixed">
+		<a href='GererQuiz' class='NavBar'>Gerer ses quiz</a>
+		<a href='Éleves' class='NavBar'>Éleves</a>
+		<a href='CréerQuestion' class='NavBar'>Créer une question</a>
+	</nav>
+	
+	<div id="contenu" onclick="onClick()">
+		<select id="DDL_Cours"></select>
+		<ul id="sortable">
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+		</ul>
+
+		
+	</div>
+	
+	<div id="bdp">
+		<div>
+			<p id="bdpAPropos"><a>À propos</a></p>
+			<p id="bdpFAQ"><a>FAQ</a></p>
+			<p id="bdpDevelopeur"><a>Dévelopeur</a></p>
+		</div>
+	</div>
+
+</body>
+
+</html>

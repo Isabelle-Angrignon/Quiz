@@ -19,8 +19,9 @@ div#enteteSite{
 }
 .logo{
 	float:left;
-	width:50px;
+	width:70px;
 	height:auto;
+	margin-top:-5px;
 }
 
 #nomSite{
@@ -47,134 +48,14 @@ div#enteteSite{
 }
 
 
-#login{
-	border:2px black solid;
-	border-radius:15px;
-	background:#9999FF; 
-	width:50%;
-	height:260px;
-	margin-top: 50px;
-    left: 20%;
-    position:relative;
-    padding:5%;
-}
-
-#login div {
-	position:relative;
-}
-#alerte{
-	width:60%;
-	left: 20%;
-	margin-top: 50px;
-	height:5%;
-	background:#FFFF66;
-	border-radius: 30px;
-	border:2px black solid;
-	line-height:300%;
-	position:relative;
-}
-
-#login_Form {
-	margin-top:5%;
-	line-height:3em;
-	display:inline-block;
-}
-#titreConnexion{
-	text-align:center;
-	font-size:2em;
-	margin:0 auto;
-}
-
-#loginLabels {
-	margin:0;
-	float:left;
-}
-#loginLabels p {
-	margin:0;
-	
-}
-#loginTextFields {
-	margin-left:40%;
-}
-					/*Firefox explose la disposition du form de login lorsqu'il y a une margin-left. Mathieu Dumoulin*/
-          			@-moz-document url-prefix() {
-                        #loginTextFields{
-                        	margin:0 auto;
-                    	}
-                    }
-#TBNomUsager{
-	position:relative;
-	top:0;
-	left:0;
-}
-
-
-#TBMotDePasse{
-	position:relative;
-	top:10%;
-	left:0;
-}
-
-#linkLostAcount{
-	top:70%;
-	left:40%;
-}
-
-
-#btnConnexion{
-	padding:5px;
-	border:2px solid black; 
-	border-radius: 5px;
-	background-color:silver;
-}
-
-#btnConnexion:hover {
-	background-color:white;
-}
-#btnConnexion:focus {
-	border-color:gray;
-}
-
-/* bdp = bas de page */
-#bdp{
-	width: 1200px;
-	height: 50px;
-	margin: 0 auto;
-	position: relative;
-	background-color: #0066CC;
-	border: 2px black solid;
-	text-align: center;
-}
-
-#bdp div{
-	height: 100%;
-	width: 60%;
-	display: inline-block;}
-
-#bdp div p{
-	position: relative;
-}
-#bdpAPropos{
-	float: left;
-}
-
-#bdpFAQ{
-	margin-left: 40%;
-	float: left;
-}
-
-#bdpDevelopeur{
-	float: right;
-}
-
-
+/*------------------------------------------------ Menu de navigation ------------------------------------------------*/
 nav {
 	list-style-type:none;
 	width:1200px;
 	margin-left:-600px;
 	left:50%;
 	height:50px;
-	top:51px;
+	top:54px;
 }
 .NavBar {
 	float:left;
