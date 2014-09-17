@@ -2,19 +2,22 @@
 <html>
 
 <head>
-	<link rel="stylesheet" href="CSS/Login.css" type="text/css" media="screen" >
-	<link rel="stylesheet" href="CSS/Template.css" type="text/css" media="screen" >
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="CSS/Prof-GererQuiz.css" type="text/css" media="screen" >
+	<link rel="stylesheet" href="jquery-ui-1.11.1.custom/jquery-ui.theme.css" type="text/css" media="all" >
+	<link rel="stylesheet" href="jquery-ui-1.11.1.custom/jquery-ui.structure.css" type="text/css" media="all" >
+	<script src="jquery.min.js"></script>
+  	<script src="jquery-ui-1.11.1.custom/jquery-ui.min.js"></script>
 
 
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" >
-	
-	<script src="jquery.min.js"></script>
-  	<script src="jquery-ui-1.11.1.custom/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="CSS/Login.css" type="text/css" media="screen" >
+	<link rel="stylesheet" href="CSS/Template.css" type="text/css" media="screen" >
+
   	<script src="Javascript/Prof-GererQuiz.js"></script>
   	<script>
 	  $(function() {
-	    $( "#sortable" ).sortable();
+	    $( "#ListeQuiz" ).sortable();
+	    $("#DDL_Cours").selectmenu();
 	    $( "#sortable" ).disableSelection();
 	  });
 	</script>
@@ -34,9 +37,9 @@
 		<a href='CréerQuestion' class='NavBar'>Créer une question</a>
 	</nav>
 	
-	<div id="contenu" onclick="onClick()">
-		<select id="DDL_Cours"></select>
-		<ul id="sortable">
+	<div id="contenu" onclick="contenuonClick">
+		<fieldset> <label for="DDL_Cours">Select a Cours</label><select id="DDL_Cours"></select></fieldset>
+		<ul id="ListeQuiz">
 		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
 		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
 		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
@@ -45,8 +48,6 @@
 		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
 		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
 		</ul>
-
-		
 	</div>
 	
 	<div id="bdp">
