@@ -1,5 +1,14 @@
-﻿#ListeQuiz {
-	list-style-type:none;
-	padding:0;
+﻿fieldset {
+	border:0;
+	width:50%;
 }
-
+#DDL_Cours {
+	margin-left:-100px;
+}
+#ListeQuiz {
+	width:20%;
+	height:500px;
+	margin-left:5%;
+	margin-top:0;
+	margin-right:0;
+}

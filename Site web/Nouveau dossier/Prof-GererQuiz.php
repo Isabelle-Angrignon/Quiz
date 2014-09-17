@@ -9,6 +9,7 @@
 		include("Vue/PHP de base/InclusionJQuery.php");
 	?>
 	
+  	<script src="Javascript/Generique.js"></script>
   	<script src="Javascript/Prof-GererQuiz.js"></script>
   	<script>
 	  $(function() {
@@ -27,9 +28,10 @@
 		include("Vue/PHP de base/MenuProf.php");
 	?>
 		
-	<div id="contenu" onclick="contenuonClick">
+	<div class="contenu">
 		<fieldset><select id="DDL_Cours"></select></fieldset>
-		<ul id="ListeQuiz">
+		<label for="ListeQuiz">Mes quiz</label>
+		<ul id="ListeQuiz" class="Liste">
 		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
 		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
 		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
