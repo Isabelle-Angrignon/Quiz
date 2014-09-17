@@ -8,6 +8,7 @@
     left: 20%;
     position:relative;
     padding:5%;
+    text-align:center;
 }
 
 #login div {
@@ -23,6 +24,7 @@
 	border:2px black solid;
 	line-height:300%;
 	position:relative;
+	text-align:center;
 }
 
 #login_Form {

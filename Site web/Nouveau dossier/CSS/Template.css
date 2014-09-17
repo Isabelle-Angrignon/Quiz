@@ -22,6 +22,7 @@ div#enteteSite{
 	width:70px;
 	height:auto;
 	margin-top:-5px;
+	cursor:pointer;
 }
 
 #nomSite{
@@ -31,15 +32,15 @@ div#enteteSite{
 	position:relative;
 	margin: 0.5%;
 	margin-left: 5%;
+	cursor:pointer;
 }
 
-#contenu{
+.contenu{
 	width:1200px;
 	height:80%;
 	margin:0 auto;
 	background-color:rgb(253,254,255);
 	display:block;
-	text-align:center;
 	min-height:750px;
 	overflow:hidden;
 	padding-top:100px;
@@ -61,10 +62,12 @@ div#enteteSite{
 #bdp div{
 	height: 100%;
 	width: 60%;
-	display: inline-block;}
+	display: inline-block;
+}
 
 #bdp div p{
 	position: relative;
+	cursor:pointer;
 }
 #bdpAPropos{
 	float: left;
@@ -79,7 +82,21 @@ div#enteteSite{
 	float: right;
 }
 
+/*------------------------------------------------ Objets fréquemment utilisés ---------------------------------------*/
+/* Style de base pour les listes de QuizInfo */
+.Liste {
+	list-style-type:none;
+	background-color:gray;
+	padding:20px;
+	margin:0;
+	border-radius:15px;
+	border:solid black;
+	text-align:center;
+}
 
+.Liste li {
+	height:50px;
+}
 
 /*------------------------------------------------ Menu de navigation ------------------------------------------------*/
 nav {
