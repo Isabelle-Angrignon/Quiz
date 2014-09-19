@@ -41,9 +41,9 @@ But:
 			    {
 			    	// mettre le idUsager dans cookie de session
 			    	$_SESSION['idUsager'] = 'nomUsager';
-			    	$_SESSION['message'] = 'Le idUSer et le mot de passe sont valides';
+			    	$_SESSION['erreur'] = 'Le idUSer et le mot de passe sont valides';
 			    	// aller à la bonne page: admin, prof, etudiant
-			    	http_redirect("templatePage.php", array(""), true, HTTP_REDIRECT_PERM);
+			    	header('Location: templatePage.php');
 			    	//todo				    
 			    }
 			    else
