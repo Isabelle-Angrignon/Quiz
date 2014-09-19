@@ -1,14 +1,54 @@
 ﻿fieldset {
 	border:0;
-	width:50%;
+	width:25%;
+	margin-top:30px;
+	margin-left:5%;
+	padding:0;
 }
 #DDL_Cours {
-	margin-left:-100px;
+	width:100%;
 }
 #ListeQuiz {
-	width:20%;
-	height:500px;
 	margin-left:5%;
 	margin-top:0;
 	margin-right:0;
+}
+#ListeModifQuiz {
+	margin-left:10%;
+}
+
+.ListeGererQuiz {
+	width:20%;
+	height:500px;
+	display:inline-block;
+}
+
+#LBL_ListesGererQuiz {
+	margin-left:5%;
+	width:90%;
+	text-align:center;
+	padding:10px;
+	font-size:x-large;
+}
+
+#GererQuiz {
+	float:left;
+	margin-left:8%;
+}
+#ModifierQuiz{
+	margin-left:5%;
+}
+#GererQuestions {
+	float:right;
+	margin-right:8%;
+}
+/* Partie à mettre dans Template.css */ 
+
+.ListeGererQuiz li {
+	border-radius:10px;
+	cursor:pointer;
+}
+
+.ListeGererQuiz {
+	overflow:auto;
 }

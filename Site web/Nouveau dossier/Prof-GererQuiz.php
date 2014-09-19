@@ -1,3 +1,8 @@
+<!-- Prof-GererQuiz
+Par: Mathieu Dumoulin
+Date: 19/09/2014
+Description: Cette interface représente l'interface principale d'un professeur lorsqu'il veut modifier un quiz--> 
+
 <!DOCTYPE html>
 <html>
 
@@ -15,7 +20,7 @@
 	  $(function() {
 	    $( "#ListeQuiz" ).sortable();
 	    $("#DDL_Cours").selectmenu();
-	    $( "#sortable" ).disableSelection();
+	    $( "#ListeQuiz" ).disableSelection();
 	  });
 	</script>
 
@@ -29,9 +34,23 @@
 	?>
 		
 	<div class="contenu">
-		<fieldset><select id="DDL_Cours"></select></fieldset>
-		<label for="ListeQuiz">Mes quiz</label>
-		<ul id="ListeQuiz" class="Liste">
+		<fieldset><select id="DDL_Cours"><option value="TousLesCours">Tous les cours</option></select></fieldset>
+		<div id="LBL_ListesGererQuiz">
+			<label id="GererQuiz" for="ListeQuiz">Mes quiz</label>
+			<label id="ModifierQuiz" for="ListeModifQuiz">Modifier votre quiz ici</label>
+			<label id="GererQuestions" for="ListeModifQuiz">Mes questions</label>
+		</div>
+		<ul id="ListeQuiz" class="Liste ListeGererQuiz">
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+		</ul>
+		
+		<ul id="ListeModifQuiz" class="Liste ListeGererQuiz">
 		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
 		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
 		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
