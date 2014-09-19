@@ -14,28 +14,20 @@ But:
 	si non, affiche l'alerte de mot de passe / idUsager non valide.
 -->
 
-
-<!DOCTYPE html >
-<html>
-
-	<head>
-		<meta content="fr-ca" http-equiv="Content-Language" />
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<title>Validation</title>
-	</head>
-	
-	<body>	
 	
 		<?php
-		
-			session_start();
+			if (isset($_POST['Connect']))
+			{
+				session_start();
+				$_SESSION['Connect'];
+			}
 				
 			$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'Etudiant', 'etudiant');
 			
 			if (isset($_POST['nomUsager']) AND isset($_POST['motDePasse']))
 			{
-			    $idUsager   = 'nomUsager'; 
-			    $motDePasse = 'motDePasse';    
+			    $idUsager   = 'asf'; 
+			    $motDePasse = 'asd';    
 			    
 			    $requete = $bdd->prepare("CALL validerUsager(?, ?)");
 			    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
@@ -51,23 +43,31 @@ But:
 			    	$_SESSION['idUsager'] = 'nomUsager';
 			    	$_SESSION['message'] = 'Le idUSer et le mot de passe sont valides';
 			    	// aller à la bonne page: admin, prof, etudiant
+			    	echo 'Sa marche';
+			    	//http_redirect("templatePage.php", array(""), true, HTTP_REDIRECT_PERM);
 			    	//todo				    
 			    }
-			    else
+			    else if ($estValide[0] == 0)
 			    {
 			    	//afficher alerte
 			    	$_SESSION['erreur'] = 'Le idUSer ou le mot de passe n\'est pas valide';
+			    	echo 'damn';
 			    	//retourner à index.php
 			        //todo		
-			    }    
+			    }
+			    else
+			    {
+			    	echo 'Very damn';
+				}    
 			    
 			    $requete->closeCursor();    
 			}
 			
 			else 
 			{
-				//On n'a pas encore rempli le formulaire
+				 
 			}
+			
 		?>
 		
 		
@@ -102,10 +102,3 @@ But:
 		}
 		?> -->
 		
-		
-		
-	
-	
-	</body>
-
-</html>

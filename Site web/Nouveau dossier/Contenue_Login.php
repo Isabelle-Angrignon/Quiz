@@ -1,6 +1,13 @@
-
 <div id="alerte" class="Alerte">
-			Vous êtes-tu a Lionnel ? Non ben CIAO ! Oui entrez votre mot de passe S.V.P  
+			<?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur'])))
+					{
+						echo $_SESSION['erreur'];
+					}
+					else
+					{
+						echo 'Veuillez vous connecter';
+					} 
+			?>
 		</div>
 		<div id="login">
 			<p id="titreConnexion">Connexion</p>

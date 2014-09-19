@@ -12,6 +12,7 @@
 <body>
 
 	<?php
+		include("Controleur/validationIUsagerMotDePasse.php");
 		include("Vue/PHP de base/EnteteSite.php");
 		include("Vue/PHP de base/MenuProf.php");
 	?>
