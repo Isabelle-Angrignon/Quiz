@@ -89,13 +89,22 @@ div#enteteSite{
 	background-color:gray;
 	padding:20px;
 	margin:0;
-	border-radius:15px;
+	border-radius:30px;
 	border:solid black;
 	text-align:center;
 }
 
 .Liste li {
 	height:50px;
+	border-radius:30px;
+}
+
+.Alerte{
+	background:#FFFF66;
+	border-radius: 30px;
+	border:2px black solid;
+	line-height:300%;
+	text-align:center;
 }
 
 /*------------------------------------------------ Menu de navigation ------------------------------------------------*/

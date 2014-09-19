@@ -19,12 +19,8 @@
 	left: 20%;
 	margin-top: 50px;
 	height:5%;
-	background:#FFFF66;
-	border-radius: 30px;
-	border:2px black solid;
 	line-height:300%;
 	position:relative;
-	text-align:center;
 }
 
 #login_Form {
