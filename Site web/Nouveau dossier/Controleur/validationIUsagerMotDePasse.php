@@ -28,19 +28,22 @@ But:
 	
 		<?php
 				
-			$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '');
+			$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'Etudiant', 'etudiant');
 			
 			if (isset($_POST['idUsager']) AND isset($_POST['motDePasse']))
 			{
 			    $idUsager   = 'idUsager'; 
 			    $motDePasse = 'motDePasse';    
 			    
-			    $valide = $bdd->prepare("CALL validerUsager(?, ?)");
-			    $valide->bindparam(1, $idUsager, PDO::PARAM_STR,10);
-			    $valide->bindparam(2, $motDePasse , PDO::PARAM_STR,16);    
-			    $valide->execute();
+			    $requete = $bdd->prepare("CALL validerUsager(?, ?)");
+			    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
+			    $requete->bindparam(2, $motDePasse , PDO::PARAM_STR,16); 
+			       
+			    $requete->execute();
 			    
-			    if($valide->fetch())//////////////////probleme ici //////////////////
+			    $estValide = $requete->fetch(); 
+			    
+			    if($estValide[0] == 1)// si ici, il d=faut sauvegarder le idUsager dans la session+ si prof, eleve+
 			    {
 			    	// créer une session et afficher la page accueil selon étudiant ou prof
 				    echo 'Le idUSer et le mot de passe sont valides';
@@ -51,7 +54,7 @@ But:
 			        echo 'Le idUSer ou le mot de passe n\'est pas valide';			
 			    }    
 			    
-			    $valide->closeCursor();    
+			    $requete->closeCursor();    
 			}
 			
 			else 
