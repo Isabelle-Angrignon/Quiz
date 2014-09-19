@@ -22,12 +22,12 @@ But:
 				$_SESSION['Connect'];
 			}
 				
-			$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'Etudiant', 'etudiant');
+			$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '');
 			
 			if (isset($_POST['nomUsager']) AND isset($_POST['motDePasse']))
 			{
-			    $idUsager   = 'asf'; 
-			    $motDePasse = 'asd';    
+			    $idUsager   = $_POST['nomUsager']; 
+			    $motDePasse = $_POST['motDePasse'];    
 			    
 			    $requete = $bdd->prepare("CALL validerUsager(?, ?)");
 			    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
