@@ -15,7 +15,7 @@
 		include("Vue/PHP de base/MenuProf.php");
 	?>
 	
-	<div id="contenu">
+	<div class="contenu">
 	</div>
 	
 	<?php
