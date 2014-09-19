@@ -27,12 +27,14 @@ But:
 	<body>	
 	
 		<?php
+		
+			session_start();
 				
 			$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'Etudiant', 'etudiant');
 			
-			if (isset($_POST['idUsager']) AND isset($_POST['motDePasse']))
+			if (isset($_POST['nomUsager']) AND isset($_POST['motDePasse']))
 			{
-			    $idUsager   = 'idUsager'; 
+			    $idUsager   = 'nomUsager'; 
 			    $motDePasse = 'motDePasse';    
 			    
 			    $requete = $bdd->prepare("CALL validerUsager(?, ?)");
@@ -45,13 +47,18 @@ But:
 			    
 			    if($estValide[0] == 1)// si ici, il d=faut sauvegarder le idUsager dans la session+ si prof, eleve+
 			    {
-			    	// créer une session et afficher la page accueil selon étudiant ou prof
-				    echo 'Le idUSer et le mot de passe sont valides';
+			    	// mettre le idUsager dans cookie de session
+			    	$_SESSION['idUsager'] = 'nomUsager';
+			    	$_SESSION['message'] = 'Le idUSer et le mot de passe sont valides';
+			    	// aller à la bonne page: admin, prof, etudiant
+			    	//todo				    
 			    }
 			    else
 			    {
 			    	//afficher alerte
-			        echo 'Le idUSer ou le mot de passe n\'est pas valide';			
+			    	$_SESSION['erreur'] = 'Le idUSer ou le mot de passe n\'est pas valide';
+			    	//retourner à index.php
+			        //todo		
 			    }    
 			    
 			    $requete->closeCursor();    
