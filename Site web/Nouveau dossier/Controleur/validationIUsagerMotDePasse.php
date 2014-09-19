@@ -16,7 +16,7 @@ But:
 
 	
 		<?php
-			if (isset($_POST['Connect']))
+			if (!isset($_POST['Connect']))
 			{
 				session_start();
 				$_SESSION['Connect'];
@@ -63,6 +63,8 @@ But:
 			{
 				 
 			}
+			
+			unset($bdd);//// fermer connection bd
 			
 		?>
 		
