@@ -1,15 +1,3 @@
-<?php
-try
-{
-	$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '');
-}
-catch (Exception $e)
-{
-        die('Erreur : ' . $e->getMessage());
-}
-
-
-?>
 
 <div id="alerte" class="Alerte">
 			Vous êtes-tu a Lionnel ? Non ben CIAO ! Oui entrez votre mot de passe S.V.P  
