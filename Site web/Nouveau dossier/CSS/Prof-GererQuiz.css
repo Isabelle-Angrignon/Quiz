@@ -2,19 +2,22 @@
 	border:0;
 	width:25%;
 	margin-top:30px;
-	margin-left:5%;
+	margin-left:3%;
 	padding:0;
 }
 #DDL_Cours {
 	width:100%;
 }
 #ListeQuiz {
-	margin-left:5%;
+	margin-left:3%;
 	margin-top:0;
 	margin-right:0;
 }
 #ListeModifQuiz {
-	margin-left:10%;
+	margin-left:11%;
+}
+#ListeGererQuestions {
+	margin-left:11%;
 }
 
 .ListeGererQuiz {
@@ -33,22 +36,13 @@
 
 #GererQuiz {
 	float:left;
-	margin-left:8%;
+	margin-left:6%;
 }
 #ModifierQuiz{
-	margin-left:5%;
+	margin-left:2%;
 }
 #GererQuestions {
 	float:right;
-	margin-right:8%;
+	margin-right:5%;
 }
 /* Partie à mettre dans Template.css */ 
-
-.ListeGererQuiz li {
-	border-radius:10px;
-	cursor:pointer;
-}
-
-.ListeGererQuiz {
-	overflow:auto;
-}
