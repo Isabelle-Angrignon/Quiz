@@ -43,22 +43,18 @@ But:
 			    	$_SESSION['idUsager'] = 'nomUsager';
 			    	$_SESSION['message'] = 'Le idUSer et le mot de passe sont valides';
 			    	// aller à la bonne page: admin, prof, etudiant
-			    	echo 'Sa marche';
-			    	//http_redirect("templatePage.php", array(""), true, HTTP_REDIRECT_PERM);
+			    	http_redirect("templatePage.php", array(""), true, HTTP_REDIRECT_PERM);
 			    	//todo				    
-			    }
-			    else if ($estValide[0] == 0)
-			    {
-			    	//afficher alerte
-			    	$_SESSION['erreur'] = 'Le idUSer ou le mot de passe n\'est pas valide';
-			    	echo 'damn';
-			    	//retourner à index.php
-			        //todo		
 			    }
 			    else
 			    {
-			    	echo 'Very damn';
-				}    
+			    	//afficher alerte
+			    	$_SESSION['erreur'] = 'Le idUSer ou le mot de passe n\'est pas valide';
+
+			    	//retourner à index.php
+			        //todo		
+			    }
+   
 			    
 			    $requete->closeCursor();    
 			}
