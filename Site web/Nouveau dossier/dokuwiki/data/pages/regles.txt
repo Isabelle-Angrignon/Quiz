@@ -1,4 +1,7 @@
-__**Quelques règles:**__
+[[start|Index:]]
+
+======Règles de la structure de BD:======
+
 
 1.	Un usager peut être un étudiant qui répond à des questions ou des quiz de questions ou un enseignant qui écrit des questions et ses réponses et assemble des quiz avec des questions.
 
@@ -89,3 +92,5 @@ __**Quelques règles:**__
 30.1.	ExProg - Compilation : Exercice de programmation qui sert à tester si un code compile. L’accent est mis sur l’analyse des codes d’erreurs reçus. Le professeur peut fournir un programme qui ne compile pas et demander de corriger l’erreur.  L’étudiant pourra apprendre à « traduire » les codes d’erreurs de Visual Studio et mieux cible les causes du problème. Chaque tentative de compilation pourra être compilée dans les statistiques comme « non réussi ».  On pourra ainsi savoir combien de tentatives ont été nécessaires pour trouver la solution.   Bien entendu, un étudiant pourrait simplement supprimer une partie du code… Une façon de vérifier cela serait de valider la longueur de la String du code…
 
 30.2.	ExProg - Validation : Exercice de programmation qui sert à tester si un code retourne un extrant spécifique. L’accent est mis sur l’analyse des codes d’erreurs reçus. Le professeur peut fournir un cadre de programme à compléter (dans la BD, on stockerait l’énoncé, le code de début et le code de fin dans le même champ « énoncé » en séparant les 3 éléments par un caractère spécial.  L’interface utiliserait une reg-ex pour récupérer les blocs et les mettre dans les champs appropriés.  Pour la réponse, le professeur fournirait des jeux de tests.  Encore ici, les informations seraient stockées dans le champ « énoncé » de la table réponse en séparant les intrants, extrant de chaque jeu de test avec des caractères spéciaux et une reg-ex permettrait de tout replacer dans l’interface.   C’est l’interface qui procéderait à la « composition » et à la  « décomposition » de ces énoncés spéciaux…   Chaque tentative de validation d’un ensemble de jeux test pourra être compilée dans les statistiques comme « non réussi ».  On pourra ainsi savoir combien de tentatives ont été nécessaire pour trouver la solution.   Avec le principe de jeux de tests, si les valeurs testées sont inconnues des étudiants, il leur sera plus difficile de « hard coder ».
+
+[[start|Index:]]

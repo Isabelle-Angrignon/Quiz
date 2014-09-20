@@ -1,12 +1,7 @@
-{{:logo_qiz.png?nolink&100|}}
+{{:logo_qiz.png?nolink&300 |}}  ====== Index ======
 
+[[https://www.dokuwiki.org/fr:dokuwiki | Aide Docuwiki]]
 
-----
+[[intro | Introduction]] 
 
-__**Introduction :**__
-  
-Le QuizInfo est un outil de génération de quiz avec une base de données contenant entre autre une banque de questions de plusieurs types : des questions à choix de réponse, réponses multiples et questions à vrai ou faux. 
-
-Cet outil comporte plusieurs interfaces dont une pour les professeurs et les administrateurs et une autre pour les étudiants. Le QuizInfo pourrait particulièrement être utilisé pour permettre aux étudiants de première année de se pratiquer afin d’augmenter leur potentiel de réussite et réduire les abandons du programme.   Les enseignants créent des questions et les agences en quiz à soumettre aux étudiants. 
-
-[[Regles|Regles]]
+[[regles |Règles de la structure de BD ]] 
