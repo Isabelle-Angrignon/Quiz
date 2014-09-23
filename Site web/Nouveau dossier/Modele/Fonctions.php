@@ -46,8 +46,7 @@ But:
 		    	$_SESSION['idUsager'] = 'nomUsager';
 		    	$_SESSION['erreur'] = 'Le idUSer et le mot de passe sont valides';
 		    	// aller à la bonne page: admin, prof, etudiant
-		    	header('Location: templatePage.php');
-		    	//todo				    
+		    	redirigerUsager();		    					    
 		    }
 		    else
 		    {

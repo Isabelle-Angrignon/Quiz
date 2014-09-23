@@ -33,13 +33,14 @@ But: Contient diverses fonctions génériques
 	function redirigerUsager()
 	{
 		$usager = $_SESSION['idUsager'];
-		if ($usager[0] == 4)
+		$t = substr ( $usager, 0 , 1 );
+		
+		if ($t == '4')
 		{
 			//Prof
 			$_SESSION['typeUsager'] = 'prof';	
 			//redirect	
-			header('Location: Prof-GererQuiz.php');
-	
+			header('Location: Prof-GererQuiz.php');	
 		} 
 		else
 		{
@@ -48,9 +49,6 @@ But: Contient diverses fonctions génériques
 			//redirect
 			header('Location: Etudiant-Accueil.php');
 		}
-	}	
-	
-
-				
+	}				
 ?>
 
