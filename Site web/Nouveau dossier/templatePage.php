@@ -5,6 +5,8 @@
 	<?php 
 		include("Vue/PHP de base/InclusionTemplate.php");
 		include("Vue/PHP de base/InclusionJQuery.php");
+		include("Vue/Utilitaires.php"); // recupererSession()
+
 	?>
 </head>
 
