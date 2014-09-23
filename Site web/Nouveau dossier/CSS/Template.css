@@ -8,7 +8,7 @@ html,body{
 
 .fixed {
 	position:fixed;
-	z-index:199999;
+	z-index:30;
 }
 div#enteteSite{
 	height:50px;

@@ -18,16 +18,27 @@ Description: Cette interface représente l'interface principale d'un professeur 
   	<script src="Javascript/Prof-GererQuiz.js"></script>
   	<script>
 	  $(function() {
-	    $(".ListeGererQuiz ul").sortable({
-	    	connectWith: "#UlModifQuiz, #Quiz_DropZone",
+	    $("#UlQuiz").sortable({
+	    	connectWith: "#QuizDropZone",
 	    	revert: "valid"
 	    });
-	    $("#Quiz_DropZone").droppable({
-	    	/*hoverClass: "Quiz_DropZone_hover",
-	    	accept: function(sender) {
-	    		return $(this).children().length == 0;
-	    	}*/
+	    $("#UlModifQuiz").sortable({
+	    	connectWith: "#UlQuestion",
+	    	revert: "valid"
 	    });
+	    $("#UlQuestion").sortable({
+	    	connectWith: "#UlModifQuiz",
+	    	revert: "valid"
+	    });
+	    $("#QuizDropZone").sortable({
+	    	//disabled: "true"
+	    });
+	    /*$("#QuizDropZone").droppable({
+    		accept: "li",
+    		 drop: function(ev, ui) {
+        		ui.draggable.remove();
+    		}
+    	});*/
 	    $("#DDL_Cours").selectmenu();
 	    $(".ListeGererQuiz ul").disableSelection();
 	    $(".ListeGererQuiz ul").click( function() {
@@ -35,8 +46,11 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
 	    });
 	  });
-	</script>
+	  	    	/*hoverClass: "Quiz_DropZone_hover",
+	    	accept: function(sender) {
+	    		return $(this).children().length == 0;*/
 
+	</script>
 </head>
 
 <body>
@@ -65,7 +79,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 			</ul>
 		</div>
 		<div id="ListeModifQuiz" class="Liste ListeGererQuiz">
-			<div id="Quiz_DropZone"></div>
+			<li id="QuizDropZone"></li>
 			<ul id="UlModifQuiz">
 			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
 			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>

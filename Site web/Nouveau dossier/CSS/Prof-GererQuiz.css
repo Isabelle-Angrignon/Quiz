@@ -33,7 +33,7 @@ fieldset {
 	height:85%;
 }
 
-#Quiz_DropZone {
+#QuizDropZone {
 	width:100%;
 	height: 50px;
 	margin-bottom:20px;
@@ -42,7 +42,7 @@ fieldset {
 	background-color:#FD8740;
 }
 
-.Quiz_DropZone_hover {
+.QuizDropZone_hover {
 	background-color: #FDA068;
 }
 
@@ -76,4 +76,19 @@ fieldset {
 #GererQuestions {
 	float:right;
 	margin-right:5%;
+}
+
+/* CSS propre au div créé dynamiquement */
+/* Le d au début des classe signifie Dynamique */
+.dFondOmbrage {
+	background-color:rgba(0,0,0,0.3);
+	width:100%;
+	height:100%;
+	z-index:35;
+	overflow:hidden;
+}
+
+.dDivPrincipale {
+	
+	
 }
