@@ -17,34 +17,41 @@ Description: Cette interface représente l'interface principale d'un professeur 
   	<script src="Javascript/Generique.js"></script>
   	<script src="Javascript/Prof-GererQuiz.js"></script>
   	<script>
+  	/////////////////////////////////////////////////////////////////////////////////////////
+  	////// Aide mémoire de Mathieu pour prochaine rencontre 
+  	/////////////////////////////////////////////////////////////////////////////////////////
+  	////// - Remplir la liste de cours avec la BD
+  	////// - Continuer le Pop up dynamique
+  	/////////////////////////////////////////////////////////////////////////////////////////
+  	/////////////////////////////////////////////////////////////////////////////////////////
 	  $(function() {
 	    $("#UlQuiz").sortable({
 	    	connectWith: "#QuizDropZone",
-	    	revert: "valid"
+	    	revert: 150
 	    });
 	    $("#UlModifQuiz").sortable({
 	    	connectWith: "#UlQuestion",
-	    	revert: "valid"
+	    	revert: 150
 	    });
 	    $("#UlQuestion").sortable({
 	    	connectWith: "#UlModifQuiz",
-	    	revert: "valid"
+	    	revert: 150
 	    });
-	   /* $("#QuizDropZone").sortable({
-	    	
-	    });*/
-	    $("#QuizDropZone").droppable({
-    		accept: "li",
-    		 drop: function(ev, ui) {
-        		ui.draggable.remove();
-    		}
-    	});
+	    $("#QuizDropZone").sortable({
+	    	connectWith: "#UlQuiz",
+	    	revert: 150,
+	    });
+	    
 	    $("#DDL_Cours").selectmenu();
-	    $(".ListeGererQuiz ul").disableSelection();
-	    $(".ListeGererQuiz ul").click( function() {
-	    	var id = $(this).attr("id");
-	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
+	    $("#UlQuestion").click( function() {
+	    	/*var id = $(this).attr("id");
+	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);*/
+	    	creeFrameDynamique();
 	    });
+	     $("#AjouterQuestion").click( function() {
+	    	var id = "UlQuestion";
+	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
+		});
 	  });
 	  /*accept: function(sender) {
 	    		return $(this).children("li") == 0;
@@ -76,9 +83,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
 			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
 			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
 			</ul>
+			<div id="ajouterQuiz"></div>
 		</div>
 		<div id="ListeModifQuiz" class="Liste ListeGererQuiz">
-			<li id="QuizDropZone"></li>
+			<div id="QuizDropZone" class="ListeDivElementStyle"></div>
 			<ul id="UlModifQuiz">
 			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
 			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
@@ -100,6 +108,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
 			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
 			</ul>
+			<div id="AjouterQuestion" class="ListeDivElementStyle">Ajouter une question</div>
 		</div>
 	</div>
 	

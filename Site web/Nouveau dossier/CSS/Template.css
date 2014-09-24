@@ -90,6 +90,7 @@ div#enteteSite{
 	margin:0;
 	border-radius:30px;
 	border:solid black;
+	vertical-align:middle;
 }
 
 .Liste ul {
@@ -122,6 +123,32 @@ div#enteteSite{
 	line-height:300%;
 	text-align:center;
 }
+
+/* CSS propre au div créé dynamiquement du "pop up" */
+/* Le 'd' au début des classe signifie Dynamique */
+.dFondOmbrage {
+	background-color:rgba(0,0,0,0.5);
+	width:100%;
+	height:100%;
+	z-index:35;
+	overflow:auto;
+	position:fixed;
+	top:0;
+	left:0;
+}
+
+.dDivPrincipale {
+	width:800px;
+	min-height: 600px;
+	background-color:white;
+	margin:auto;
+	margin-top:150px;
+	margin-bottom:150px;
+	z-index:40;
+	overflow-x:hidden;
+	border-radius:5px;
+}
+
 
 /*------------------------------------------------ Menu de navigation ------------------------------------------------*/
 nav {

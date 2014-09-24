@@ -50,5 +50,29 @@ function ajouterLi_ToUl(idUl, element, estSortable) {
 // Extrant(s) : La balise que la fonction à créée
 // Description : Cette fonction créée une balise et lui affecte une classe.
 function creeBaliseAvecClasse(baliseACreer, classe) {
-	return document.createElement(baliseCreer).setAttribute("class", classe);
+	var balise = document.createElement(baliseACreer);
+	balise.setAttribute("class", classe);
+	return balise;
 } 
+
+
+// creeFrameDynamique
+// Par Mathieu Dumoulin
+// Date : 23/09/14
+// Intrant(s) : Il n'y en a pas
+// Extrant(s) : Il n'y en a pas
+// Description : Cette fonction créée, à l'aide de balises div, un squelette de fenêtre "pop up" avec un fond en ombragé
+function creeFrameDynamique() {
+	var fondOmbrage = creeBaliseAvecClasse("div", "dFondOmbrage");
+	fondOmbrage.setAttribute("id", "fondOmbrage");
+	fondOmbrage.onclick = function(event) { 
+		// detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
+		$(this).detach();
+	}
+	var divPrincipale =  creeBaliseAvecClasse("div", "dDivPrincipale");
+	// Nécessaire pour empecher l'événement onclick de son parent d'être activé lorsqu'on clic dessus ce div
+	divPrincipale.onclick = function(event) { event.stopPropagation(); }
+	
+	document.body.insertBefore(fondOmbrage);
+	fondOmbrage.appendChild(divPrincipale);
+}
