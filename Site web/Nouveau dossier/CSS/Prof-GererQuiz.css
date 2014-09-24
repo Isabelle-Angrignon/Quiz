@@ -40,6 +40,7 @@ fieldset {
 	border:outset;
 	border-radius:10px;
 	background-color:#FD8740;
+	list-style-type:none;
 }
 
 .QuizDropZone_hover {

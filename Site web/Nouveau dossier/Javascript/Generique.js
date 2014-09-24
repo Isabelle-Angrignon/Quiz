@@ -41,3 +41,14 @@ function ajouterLi_ToUl(idUl, element, estSortable) {
 	document.getElementById(idUl).appendChild(liTag);
 
 }
+
+
+// creeBaliseAvecClasse(baliseACreer, classe)
+// Par Mathieu Dumoulin
+// Date: 24/09/2014
+// Intrant(s) : baliseACreer = "tag" de la balise à créer, classe = classe que la balise va avoir
+// Extrant(s) : La balise que la fonction à créée
+// Description : Cette fonction créée une balise et lui affecte une classe.
+function creeBaliseAvecClasse(baliseACreer, classe) {
+	return document.createElement(baliseCreer).setAttribute("class", classe);
+} 

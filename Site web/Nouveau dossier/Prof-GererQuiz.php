@@ -30,15 +30,15 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    	connectWith: "#UlModifQuiz",
 	    	revert: "valid"
 	    });
-	    $("#QuizDropZone").sortable({
-	    	//disabled: "true"
-	    });
-	    /*$("#QuizDropZone").droppable({
+	   /* $("#QuizDropZone").sortable({
+	    	
+	    });*/
+	    $("#QuizDropZone").droppable({
     		accept: "li",
     		 drop: function(ev, ui) {
         		ui.draggable.remove();
     		}
-    	});*/
+    	});
 	    $("#DDL_Cours").selectmenu();
 	    $(".ListeGererQuiz ul").disableSelection();
 	    $(".ListeGererQuiz ul").click( function() {
@@ -46,10 +46,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
 	    });
 	  });
-	  	    	/*hoverClass: "Quiz_DropZone_hover",
-	    	accept: function(sender) {
-	    		return $(this).children().length == 0;*/
-
+	  /*accept: function(sender) {
+	    		return $(this).children("li") == 0;
+	    	}*/
 	</script>
 </head>
 
