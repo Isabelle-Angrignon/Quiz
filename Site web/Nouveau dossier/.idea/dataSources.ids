@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - projetquiz@127.0.0.1" uuid="f0cb4f12-3eb6-4043-9c95-f42463b25246">
+    <database-info product="MySQL" version="5.6.15-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.31 ( Revision: alexander.soklakov@oracle.com-20140520065950-groqzzbvxprqdmnz )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="projetquiz"/>
+    <table name="associationpreferencedroits" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idPreferenceQuestionProf" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idUsager_ProfAutorise" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idPreferenceQuestionProf,idUsager_ProfAutorise"/>
+      <foreign-key name="FK_AssPrefDroits_Preference" columns="idPreferenceQuestionProf" ref-table="preferencesquestionprof" ref-schema="" ref-catalog="projetquiz" ref-columns="idPreferenceQuestionProf" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_AssPrefDroits_ProfAutorise" columns="idUsager_ProfAutorise" ref-table="usagers" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_AssPrefDroits_ProfAutorise_idx" unique="false" columns="idUsager_ProfAutorise"/>
+    </table>
+    <table name="associationprofesseurcours" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idUsager_Professeur" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idCours" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idUsager_Professeur,idCours"/>
+      <foreign-key name="FK_AssProfCours_Cours" columns="idCours" ref-table="cours" ref-schema="" ref-catalog="projetquiz" ref-columns="idCours" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_AssProfCours_Professeur" columns="idUsager_Professeur" ref-table="usagers" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_InscriptionsEtudiantCours_Cours" table="inscriptionsetudiantcours" schema="" catalog="projetquiz" columns="idCours"/>
+      <exported-key name="FK_InscriptionsEtudiantCours_ProfCours" table="inscriptionsetudiantcours" schema="" catalog="projetquiz" columns="idUsager_Professeur"/>
+      <index name="FK_AssProfCours_Cours_idx" unique="false" columns="idCours"/>
+    </table>
+    <table name="associationquestioncours" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idQuestion" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idCours" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idQuestion,idCours"/>
+      <foreign-key name="FK_AssQuestionCours_Cours" columns="idCours" ref-table="cours" ref-schema="" ref-catalog="projetquiz" ref-columns="idCours" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_AssQuestionCours_Question" columns="idQuestion" ref-table="questions" ref-schema="" ref-catalog="projetquiz" ref-columns="idQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_AssQuestionCours_Cours_idx" unique="false" columns="idCours"/>
+    </table>
+    <table name="associationquizcours" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idQuiz" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idCours" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idQuiz,idCours"/>
+      <foreign-key name="FK_AssQuizCours_Cours" columns="idCours" ref-table="cours" ref-schema="" ref-catalog="projetquiz" ref-columns="idCours" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_AssQuizCours_Quiz" columns="idQuiz" ref-table="quiz" ref-schema="" ref-catalog="projetquiz" ref-columns="idQuiz" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_AssQuizCours_Cours_idx" unique="false" columns="idCours"/>
+    </table>
+    <table name="associationsdroitsquestionsprof" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idUsager_Professeur" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idQuestion" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="nomDroit" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idUsager_Professeur,idQuestion"/>
+      <foreign-key name="FK_DroitQuestion_Droit" columns="nomDroit" ref-table="droits" ref-schema="" ref-catalog="projetquiz" ref-columns="nomDroit" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_DroitQuestion_Prof" columns="idUsager_Professeur" ref-table="usagers" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_DroitQuestion_Question" columns="idQuestion" ref-table="questions" ref-schema="" ref-catalog="projetquiz" ref-columns="idQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_Droit_Question_idx" unique="false" columns="idQuestion"/>
+      <index name="FK_DroitQuestion_Droit_idx" unique="false" columns="nomDroit"/>
+    </table>
+    <table name="associationsquizquestion" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idQuiz" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idQuestion" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="positionQuestion" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idQuiz,idQuestion"/>
+      <foreign-key name="FK_QuizQuestion_Question" columns="idQuestion" ref-table="questions" ref-schema="" ref-catalog="projetquiz" ref-columns="idQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_QuizQuestion_Quiz" columns="idQuiz" ref-table="quiz" ref-schema="" ref-catalog="projetquiz" ref-columns="idQuiz" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_QuizQuestion_Question_idx" unique="false" columns="idQuestion"/>
+    </table>
+    <table name="associationstagquestion" schema="" catalog="projetquiz" type="TABLE">
+      <column name="nomTag" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idQuestion" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="nomTag,idQuestion"/>
+      <foreign-key name="FK_TagQuestion_Question" columns="idQuestion" ref-table="questions" ref-schema="" ref-catalog="projetquiz" ref-columns="idQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_TagQuestion_Tag" columns="nomTag" ref-table="tags" ref-schema="" ref-catalog="projetquiz" ref-columns="nomTag" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_TagQuestion_Question_idx" unique="false" columns="idQuestion"/>
+    </table>
+    <table name="associationtypequizquestions" schema="" catalog="projetquiz" type="TABLE">
+      <column name="typeQuiz" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idQuestion" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="typeQuiz,idQuestion"/>
+      <foreign-key name="FK_QuestionTypeQuiz_Question" columns="idQuestion" ref-table="questions" ref-schema="" ref-catalog="projetquiz" ref-columns="idQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_QuestionTypeQuiz_typeQuiz" columns="typeQuiz" ref-table="typesquiz" ref-schema="" ref-catalog="projetquiz" ref-columns="typeQuiz" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_disponibiliteQuestion_Question_idx" unique="false" columns="idQuestion"/>
+    </table>
+    <table name="codesderreur" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idCodeDErreur" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="dmFsZXVyIHJldG91cm7DqWUgcGFzIFZpc3VhbCBTdHVkaW8="/>
+      <column name="descrErreurOriginale" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="TWVzc2FnZSBhZmZpY2jDqSBwYXIgVmlzdWFsIFN0dWRpbyA="/>
+      <column name="traductionErreur" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="RXhwbGljYXRpb24gZGVzIGNhdXNlcyBwb3NzaWJsZSBkZSBsJ2VycmV1ciBlbiBmcmFuw6djYWlzLg=="/>
+      <primary-key name="PRIMARY" columns="idCodeDErreur"/>
+    </table>
+    <table name="cours" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idCours" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="codeCours" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="nomCours" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idCours"/>
+      <exported-key name="FK_AssProfCours_Cours" table="associationprofesseurcours" schema="" catalog="projetquiz" columns="idCours"/>
+      <exported-key name="FK_AssQuestionCours_Cours" table="associationquestioncours" schema="" catalog="projetquiz" columns="idCours"/>
+      <exported-key name="FK_AssQuizCours_Cours" table="associationquizcours" schema="" catalog="projetquiz" columns="idCours"/>
+      <exported-key name="FK_PrefQuestProf_Cours" table="preferencesquestionprof" schema="" catalog="projetquiz" columns="idCours"/>
+    </table>
+    <table name="difficultesquestion" schema="" catalog="projetquiz" type="TABLE">
+      <column name="difficulteQuestion" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" remarks="ZmFjaWxlLCBtb3llbiwgZGlmZmljaWxl"/>
+      <primary-key name="PRIMARY" columns="difficulteQuestion"/>
+      <exported-key name="FK_PrefQuestProf_Difficulte" table="preferencesquestionprof" schema="" catalog="projetquiz" columns="difficulte"/>
+      <exported-key name="FK_Questions_Difficulte" table="questions" schema="" catalog="projetquiz" columns="difficulte"/>
+    </table>
+    <table name="droits" schema="" catalog="projetquiz" type="TABLE">
+      <column name="nomDroit" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12" remarks="UG91ciBsJ2luc3RhbnQgdW4gc2V1bCBlbnJlZ2lzdHJlbWVudDogZHJvaXQgZGUgbGVjdHVyZS9hc3NvY2lhdGlvbkBxdWl6Lg=="/>
+      <column name="descriptionDroit" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="nomDroit"/>
+      <exported-key name="FK_DroitQuestion_Droit" table="associationsdroitsquestionsprof" schema="" catalog="projetquiz" columns="nomDroit"/>
+    </table>
+    <table name="inscriptionsetudiantcours" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idUsager_Etudiant" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idCours" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idUsager_Professeur" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idUsager_Etudiant,idCours"/>
+      <foreign-key name="FK_InscriptionsEtudiantCours_Cours" columns="idCours" ref-table="associationprofesseurcours" ref-schema="" ref-catalog="projetquiz" ref-columns="idCours" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_InscriptionsEtudiantCours_Etudiant" columns="idUsager_Etudiant" ref-table="usagers" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_InscriptionsEtudiantCours_ProfCours" columns="idUsager_Professeur" ref-table="associationprofesseurcours" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager_Professeur" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_InscriptionsEtudiantCours_Cours_idx" unique="false" columns="idCours"/>
+      <index name="FK_InscriptionsEtudiantCours_Professeur_idx" unique="false" columns="idUsager_Professeur"/>
+    </table>
+    <table name="preferencesquestionprof" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idPreferenceQuestionProf" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nomPreference" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idUsager_Proprietaire" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="typeQuestion" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ordreReponsesAleatoire" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="difficulte" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idCours" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idPreferenceQuestionProf"/>
+      <foreign-key name="FK_PrefQuestProf_Cours" columns="idCours" ref-table="cours" ref-schema="" ref-catalog="projetquiz" ref-columns="idCours" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_PrefQuestProf_Difficulte" columns="difficulte" ref-table="difficultesquestion" ref-schema="" ref-catalog="projetquiz" ref-columns="difficulteQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_PrefQuestProf_Prof" columns="idUsager_Proprietaire" ref-table="usagers" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_PrefQuestProf_TypeQuestion" columns="typeQuestion" ref-table="typesquestion" ref-schema="" ref-catalog="projetquiz" ref-columns="typeQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_AssPrefDroits_Preference" table="associationpreferencedroits" schema="" catalog="projetquiz" columns="idPreferenceQuestionProf"/>
+      <index name="FK_PrefQuestProf_Cours_idx" unique="false" columns="idCours"/>
+      <index name="FK_PrefQuestProf_Difficulte_idx" unique="false" columns="difficulte"/>
+      <index name="FK_PrefQuestProf_Prof_idx" unique="false" columns="idUsager_Proprietaire"/>
+      <index name="FK_PrefQuestProf_TypeQuestion_idx" unique="false" columns="typeQuestion"/>
+    </table>
+    <table name="questions" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idQuestion" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="enonceQuestion" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1" remarks="RW5vbmPDqSBldC9vdSBxdWVzdGlvbi4gIFVuIGRlcyBkZXV4IG1pbmltdW0="/>
+      <column name="imageQuestion" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12" remarks="RW5vbmPDqSBldC9vdSBxdWVzdGlvbi4gIFVuIGRlcyBkZXV4IG1pbmltdW0uIA=="/>
+      <column name="difficulte" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="dateCreationQuestion" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="dateModifQuestion" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="ordreReponsesAleatoire" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA==" remarks="T3JkcmUgZCdhZmZpY2hhZ2UgZGVzIHLDqXBvbnNlcyBlc3QgYWzDqWF0b2lyZS4="/>
+      <column name="typeQuestion" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idUsager_Proprietaire" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="referenceWeb" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="idQuestion"/>
+      <foreign-key name="FK_Questions_Difficulte" columns="difficulte" ref-table="difficultesquestion" ref-schema="" ref-catalog="projetquiz" ref-columns="difficulteQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_Questions_Proprietaire" columns="idUsager_Proprietaire" ref-table="usagers" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_Questions_TypeQuestion" columns="typeQuestion" ref-table="typesquestion" ref-schema="" ref-catalog="projetquiz" ref-columns="typeQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_AssQuestionCours_Question" table="associationquestioncours" schema="" catalog="projetquiz" columns="idQuestion"/>
+      <exported-key name="FK_DroitQuestion_Question" table="associationsdroitsquestionsprof" schema="" catalog="projetquiz" columns="idQuestion"/>
+      <exported-key name="FK_QuizQuestion_Question" table="associationsquizquestion" schema="" catalog="projetquiz" columns="idQuestion"/>
+      <exported-key name="FK_TagQuestion_Question" table="associationstagquestion" schema="" catalog="projetquiz" columns="idQuestion"/>
+      <exported-key name="FK_QuestionTypeQuiz_Question" table="associationtypequizquestions" schema="" catalog="projetquiz" columns="idQuestion"/>
+      <exported-key name="FK_QuestionsVF_Question" table="questionsvraifaux" schema="" catalog="projetquiz" columns="idQuestion"/>
+      <exported-key name="FK_Reponses_Question" table="reponses" schema="" catalog="projetquiz" columns="idQuestion"/>
+      <exported-key name="FK_StatsQuestEtudiant_Question" table="statsquestionetudiantquiz" schema="" catalog="projetquiz" columns="idQuestion"/>
+      <index name="FK_Proprietaire_idx" unique="false" columns="idUsager_Proprietaire"/>
+      <index name="FK_Question_TypeQuestion_idx" unique="false" columns="typeQuestion"/>
+      <index name="FK_Questions_Difficulte_idx" unique="false" columns="difficulte"/>
+    </table>
+    <table name="questionsvraifaux" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idQuestion" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="reponseEstVrai" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="idQuestion"/>
+      <foreign-key name="FK_QuestionsVF_Question" columns="idQuestion" ref-table="questions" ref-schema="" ref-catalog="projetquiz" ref-columns="idQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="quiz" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idQuiz" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="titreQuiz" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ordreQuestionsAleatoire" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA==" remarks="b3JkcmUgZGUgcHLDqXNlbnRhdGlvbiBkZXMgcXVlc3Rpb25zZHUgcXVpeiBlc3QgYWzDqWF0b2k="/>
+      <column name="typeQuiz" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idUsager_Proprietaire" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idQuiz"/>
+      <foreign-key name="FK_Quiz_Proprietaire" columns="idUsager_Proprietaire" ref-table="usagers" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_Quiz_TypeQuiz" columns="typeQuiz" ref-table="typesquiz" ref-schema="" ref-catalog="projetquiz" ref-columns="typeQuiz" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_AssQuizCours_Quiz" table="associationquizcours" schema="" catalog="projetquiz" columns="idQuiz"/>
+      <exported-key name="FK_QuizQuestion_Quiz" table="associationsquizquestion" schema="" catalog="projetquiz" columns="idQuiz"/>
+      <exported-key name="FK_StatsQuestEtudiant_Quiz" table="statsquestionetudiantquiz" schema="" catalog="projetquiz" columns="idQuiz"/>
+      <index name="FK_Quiz_Proprietaire_idx" unique="false" columns="idUsager_Proprietaire"/>
+      <index name="FK_Quiz_TypeQuiz_idx" unique="false" columns="typeQuiz"/>
+    </table>
+    <table name="reponses" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idReponse" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="enonceReponse" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1" remarks="RW5vbmPDqSBldC9vdSBxdWVzdGlvbi4gIFVuIGRlcyBkZXV4IG1pbmltdW0u"/>
+      <column name="imageReponse" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12" remarks="RW5vbmPDqSBldC9vdSBxdWVzdGlvbi4gIFVuIGRlcyBkZXV4IG1pbmltdW0uIA=="/>
+      <column name="idQuestion" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="reponseEstValide" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="nbreOccurenceRepChoisie" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="positionReponse" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idReponse"/>
+      <foreign-key name="FK_Reponses_Question" columns="idQuestion" ref-table="questions" ref-schema="" ref-catalog="projetquiz" ref-columns="idQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_Reponses_Question_idx" unique="false" columns="idQuestion"/>
+    </table>
+    <table name="statsquestionetudiantquiz" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idUsager_Etudiant" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idQuestion" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idQuiz" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="nbreFoisRepondu" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" def="MQ=="/>
+      <column name="nbreReussi" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="idUsager_Etudiant,idQuestion,idQuiz"/>
+      <foreign-key name="FK_StatsQuestEtudiant_Etudiant" columns="idUsager_Etudiant" ref-table="usagers" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_StatsQuestEtudiant_Question" columns="idQuestion" ref-table="questions" ref-schema="" ref-catalog="projetquiz" ref-columns="idQuestion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_StatsQuestEtudiant_Quiz" columns="idQuiz" ref-table="quiz" ref-schema="" ref-catalog="projetquiz" ref-columns="idQuiz" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_StatsQuestEtudiant_Question_idx" unique="false" columns="idQuestion"/>
+      <index name="FK_StatsQuestEtudiant_Quiz_idx" unique="false" columns="idQuiz"/>
+    </table>
+    <table name="tags" schema="" catalog="projetquiz" type="TABLE">
+      <column name="nomTag" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="nomTag"/>
+      <exported-key name="FK_TagQuestion_Tag" table="associationstagquestion" schema="" catalog="projetquiz" columns="nomTag"/>
+    </table>
+    <table name="typesquestion" schema="" catalog="projetquiz" type="TABLE">
+      <column name="typeQuestion" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descriptionTypeQuestion" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="typeQuestion"/>
+      <exported-key name="FK_PrefQuestProf_TypeQuestion" table="preferencesquestionprof" schema="" catalog="projetquiz" columns="typeQuestion"/>
+      <exported-key name="FK_Questions_TypeQuestion" table="questions" schema="" catalog="projetquiz" columns="typeQuestion"/>
+    </table>
+    <table name="typesquiz" schema="" catalog="projetquiz" type="TABLE">
+      <column name="typeQuiz" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descriptionTypeQuiz" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="typeQuiz"/>
+      <exported-key name="FK_QuestionTypeQuiz_typeQuiz" table="associationtypequizquestions" schema="" catalog="projetquiz" columns="typeQuiz"/>
+      <exported-key name="FK_Quiz_TypeQuiz" table="quiz" schema="" catalog="projetquiz" columns="typeQuiz"/>
+    </table>
+    <table name="usagers" schema="" catalog="projetquiz" type="TABLE">
+      <column name="idUsager" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12" remarks="aWRVc2FnZXIgcGV1dCDDqnRyZSBhdXNzaSBldHVkaWFudCwgcHJvcHJpZXRhaXJlIG91IHByb2ZmZXNzZXVyIGRhbnMgZCdhdXRyZXMgdGFibGVzLg=="/>
+      <column name="motDePasse" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12"/>
+      <column name="adresseCourriel" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="prenom" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="nom" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="paramChange" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="datedDernierCours" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" remarks="RGF0ZSBkZSBsYSBkZXJuaWVyZSBpbnNjcmlwdGlvbiBhIHVuIGNvdXJzLiAgU2VydCBhIGTDqXRlcm1pbmVyIGwnaW5hY3Rpdml0w6kgZCd1biDDqXR1ZGlhbnQu"/>
+      <column name="estAdmin" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <primary-key name="PRIMARY" columns="idUsager"/>
+      <exported-key name="FK_AssPrefDroits_ProfAutorise" table="associationpreferencedroits" schema="" catalog="projetquiz" columns="idUsager_ProfAutorise"/>
+      <exported-key name="FK_AssProfCours_Professeur" table="associationprofesseurcours" schema="" catalog="projetquiz" columns="idUsager_Professeur"/>
+      <exported-key name="FK_DroitQuestion_Prof" table="associationsdroitsquestionsprof" schema="" catalog="projetquiz" columns="idUsager_Professeur"/>
+      <exported-key name="FK_InscriptionsEtudiantCours_Etudiant" table="inscriptionsetudiantcours" schema="" catalog="projetquiz" columns="idUsager_Etudiant"/>
+      <exported-key name="FK_PrefQuestProf_Prof" table="preferencesquestionprof" schema="" catalog="projetquiz" columns="idUsager_Proprietaire"/>
+      <exported-key name="FK_Questions_Proprietaire" table="questions" schema="" catalog="projetquiz" columns="idUsager_Proprietaire"/>
+      <exported-key name="FK_Quiz_Proprietaire" table="quiz" schema="" catalog="projetquiz" columns="idUsager_Proprietaire"/>
+      <exported-key name="FK_StatsQuestEtudiant_Etudiant" table="statsquestionetudiantquiz" schema="" catalog="projetquiz" columns="idUsager_Etudiant"/>
+    </table>
+    <table name="vueprofparcour" schema="" catalog="projetquiz" type="VIEW">
+      <column name="Nom" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Prenom" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Code" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Cours" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+    </table>
+    <procedure name="ajouterUsager" schema="" catalog="projetquiz" type="1">
+      <prototype>
+        <parameter name="PIDUSAGER" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" type="1" index="1"/>
+        <parameter name="PPRENOM" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" type="1" index="2"/>
+        <parameter name="PNOM" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12" type="1" index="3"/>
+      </prototype>
+    </procedure>
+    <procedure name="inscrireEtudiantCours" schema="" catalog="projetquiz" type="1">
+      <prototype>
+        <parameter name="PID_E" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" type="1" index="1"/>
+        <parameter name="PID_C" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="2"/>
+        <parameter name="PID_P" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" type="1" index="3"/>
+      </prototype>
+    </procedure>
+    <procedure name="insererTag" schema="" catalog="projetquiz" type="1">
+      <prototype>
+        <parameter name="PTAG" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" type="1" index="1"/>
+      </prototype>
+    </procedure>
+    <procedure name="modifierMotDePasse" schema="" catalog="projetquiz" type="1">
+      <prototype>
+        <parameter name="PID" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" type="1" index="1"/>
+        <parameter name="PMDP" sqlType="VARCHAR" precision="16" scale="0" nullable="true" jdbcType="12" type="1" index="2"/>
+      </prototype>
+    </procedure>
+    <procedure name="validerUsager" schema="" catalog="projetquiz" type="1" remarks="cmV0b3VybmUgMSBzaSB1c2FnZXIgZXQgbW90IGRlIHBhc3NlIHZhbGlkZSBzaW5vbiByZXRvdXJuZSAw">
+      <prototype>
+        <parameter name="PID" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" type="1" index="1"/>
+        <parameter name="PMDP" sqlType="VARCHAR" precision="16" scale="0" nullable="true" jdbcType="12" type="1" index="2"/>
+      </prototype>
+    </procedure>
+    <procedure name="verifierSiAdmin" schema="" catalog="projetquiz" type="1">
+      <prototype>
+        <parameter name="PID" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" type="1" index="1"/>
+      </prototype>
+    </procedure>
+  </data-source>
+</component>
