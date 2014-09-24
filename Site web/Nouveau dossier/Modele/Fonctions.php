@@ -43,7 +43,7 @@ But:
 		    if($estValide[0] == 1)// si ici, il d=faut sauvegarder le idUsager dans la session+ si prof, eleve+
 		    {
 		    	// mettre le idUsager dans cookie de session
-		    	$_SESSION['idUsager'] = 'nomUsager';
+		    	$_SESSION['idUsager'] = $idUsager;
 		    	$_SESSION['erreur'] = 'Le idUSer et le mot de passe sont valides';
 		    	// aller à la bonne page: admin, prof, etudiant
 		    	redirigerUsager();		    					    

@@ -30,25 +30,30 @@ But: Contient diverses fonctions génériques
 	}
 	
 	//Détermine notre type d'usager: les profs d'info commencent tous pas 420
-	function redirigerUsager()
+/**
+ *
+ */
+function redirigerUsager()
 	{
-		$usager = $_SESSION['idUsager'];
+		$usager = '420';//$_SESSION['idUsager'];
 		$t = substr ( $usager, 0 , 1 );
-		
-		if ($t == '4')
-		{
-			//Prof
-			$_SESSION['typeUsager'] = 'prof';	
-			//redirect	
-			header('Location: Prof-GererQuiz.php');	
-		} 
-		else
-		{
-			//etudiant
-			$_SESSION['typeUsager'] = 'etudiant';
-			//redirect
-			header('Location: Etudiant-Accueil.php');
-		}
+
+        if (!empty($t)) {
+            if ('4' == $usager[0])
+            {
+                //Prof
+                $_SESSION['typeUsager'] = 'prof';
+                //redirect
+                header('Location: Prof-GererQuiz.php');
+            }
+            else
+            {
+                //etudiant
+                $_SESSION['typeUsager'] = 'etudiant';
+                //redirect
+                header('Location: Etudiant-Accueil.php');
+            }
+        }
 	}				
 ?>
 
