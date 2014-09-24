@@ -7,6 +7,7 @@
 	<?php 
 		include("Vue/PHP de base/InclusionTemplate.php");
 		include("Vue/PHP de base/InclusionJQuery.php");
+		include("Vue/PHP de base/Utilitaires.php");		
 	?>
 
 </head>
@@ -16,6 +17,8 @@
 	<?php
 		include("Vue/PHP de base/EnteteSite.php");
 		include("Vue/PHP de base/MenuEtudiant.php");
+		demarrerSession();
+		redirigerSiNonConnecte();		
 	?>
 	<div class="Cadre"	>
 		<!--drop down liste de mes cours  -->
