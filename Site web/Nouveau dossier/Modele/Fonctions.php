@@ -27,11 +27,13 @@ function ajouterUsager($id, $prenom, $nom)
 	}
 }
 
+
+
 /*validerUsager
 But:
 	Interroge la base de donnée pour valider que le idUsager et le mot de passe sont une combinaison valide.
 	Utilise la procédure stockée "validerUsager"
-	si oui, ajoute le idUsager à la session et redirige à l'accueuil selon prof ou étudiantparamChange
+	si oui, ajoute le idUsager à la session et redirige à l'accueuil selon prof ou étudiant
 	si non, affiche l'alerte de mot de passe / idUsager non valide et retourne à la page index.  */
 function validerUsager()
 {				
