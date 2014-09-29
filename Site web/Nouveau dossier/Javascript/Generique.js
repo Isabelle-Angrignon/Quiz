@@ -60,17 +60,17 @@ function creeBaliseAvecClasse(baliseACreer, classe) {
 // Par Mathieu Dumoulin
 // Date : 23/09/14
 // Intrant(s) : Il n'y en a pas
-// Extrant(s) : Il n'y en a pas
+// Extrant(s) : Le div représentant la page de base du "pop up" 
 // Description : Cette fonction créée, à l'aide de balises div, un squelette de fenêtre "pop up" avec un fond en ombragé
 function creeFrameDynamique() {
 	var fondOmbrage = creeBaliseAvecClasse("div", "dFondOmbrage");
-	fondOmbrage.setAttribute("id", "fondOmbrage");
+	fondOmbrage.setAttribute("id", "dFondOmbrage");
 	fondOmbrage.onclick = function(event) { 
 		// detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
 		$(this).detach();
 	}
 	
-	/*fondOmbrage.onkeydown = function(event) {                  /////////////////   Ne marche pas car le div ne peut pas avoir le focus.
+	/*fondOmbrage.onkeydown = function(event) {                 												 /////////////////   Ne marche pas car le div ne peut pas avoir le focus.
 		alert(event.keyCode);
 		if(event.keyCode == 27){
 			$(this).detach();
@@ -82,13 +82,6 @@ function creeFrameDynamique() {
 
 	document.body.appendChild(fondOmbrage);
 	fondOmbrage.appendChild(divPrincipale);
-}
-
-
-function afficherChargement() {
-	var div = document.createElement("div");
-	div.setAttribute("id", "divChargement");
-	document.body.insertBefore(div);
 	
-	$("#divChargement").fadeIn(300);
+	return divPrincipale;
 }
