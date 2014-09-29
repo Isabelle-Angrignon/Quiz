@@ -2,13 +2,32 @@
 <html>
 
 <head>
-	<link rel="stylesheet" href="CSS/Etudiant-RepondreQuestionFrame.css" type="text/css" media="screen" >
+	<link rel="stylesheet" href="CSS/Etudiant-Accueil.css" type="text/css" media="screen" >
 	
 	<?php 
 		include("Vue/PHP de base/InclusionTemplate.php");
 		include("Vue/PHP de base/InclusionJQuery.php");
 		include("Vue/PHP de base/Utilitaires.php");		
 	?>
+
+    <script>
+        // fait quoi
+        $(function() {
+            $("#DDL_Cours").selectmenu();
+            $("#DDL_Cours").load(function() {
+                ajouterOption_ToSelect("DDL_Cours","Un premier cours");
+                ajouterOption_ToSelect("DDL_Cours","Un second cours");
+                ajouterOption_ToSelect("DDL_Cours","Un troisième cours");
+            });
+
+            $("#UlQuiz").selectable();
+            $("#UlQuiz").load(function() {
+                ajouterLi_ToUl("UlQuiz","Un premier titre de quiz",true);
+                ajouterLi_ToUl("UlQuiz","Un second titre de quiz",true);
+                ajouterLi_ToUl("UlQuiz","Un troisième titre de quiz",true);
+            });
+        });
+    </script>
 
 </head>
 
@@ -20,26 +39,23 @@
 		demarrerSession();
 		redirigerSiNonConnecte();		
 	?>
-	<div class="Cadre"	>
-		<!--drop down liste de mes cours  -->
-		<div class="Style-Liste"></div>
-			Répondre à mes quiz:
-			
-			<div id="contenu" onclick="OuvrirQuiz">
-				<fieldset><select id="DDL_Cours"></select></fieldset>
-				Formatifs:
-				<ul id="Liste">
-				  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 1</li>
-				  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 2</li>
-				  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 3</li>
-				  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 4</li>
-				  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 5</li>
-				  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 6</li>
-				  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 7</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+
+	<div class="contenu">
+
+        Répondre à mes quiz:
+        Formatifs:
+        <fieldset >
+            <select id="DDL_Cours">
+            </select>
+        </fieldset>
+
+        <!--  mettre un div qui contient un div qui contient un ul avec un id UlQuiz-->
+
+
+
+
+    </div>
+
 	
 	<?php
 		include("Vue/PHP de base/BasDePage.php");
