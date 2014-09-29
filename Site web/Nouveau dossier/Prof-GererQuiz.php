@@ -39,7 +39,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    });
 	    $("#QuizDropZone").sortable({
 	    	connectWith: "#UlQuiz",
-	    	revert: 150,
+	    	revert: 150
 	    });
 	    
 	    $("#DDL_Cours").selectmenu();

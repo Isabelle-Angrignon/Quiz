@@ -22,15 +22,15 @@ function ajouterOption_ToSelect(idSelect, element) {
 // Nom : ajouterLi_ToUl
 // Par : Mathieu Dumoulin
 // Date : 19/09/2014
-// Intrant(s) : String idUl, String element, bool estSortable
+// Intrant(s) : String idUl, String element, bool estThemeJqueryUI
 // Extrant(s) : Il n'y a pas d'extrant
 // Description : Cette fonction prend l'id d'une balise Ul et lui ajoute un Li créé dynamiquement comportant le texte (element) passer en paramêtre
-//				 en donnant les classe nécessaire à un sortable au Li si estSortable est à true
-function ajouterLi_ToUl(idUl, element, estSortable) {
+//				 en donnant les classe pour le thême d'un sortable au Li si estThemeJqueryUI est à true
+function ajouterLi_ToUl(idUl, element, estThemeJqueryUI) {
 	// Initialisation du li
 	var liTag = document.createElement("li");
 	liTag.Value = element;
-	if(estSortable) {
+	if(estThemeJqueryUI) {
 		liTag.setAttribute("class", "ui-state-default");
 		// Initialisation du span contenu dans le li (nécéssaire pour les sortables)
 		var spanTag = document.createElement("span");
@@ -69,11 +69,18 @@ function creeFrameDynamique() {
 		// detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
 		$(this).detach();
 	}
+	
+	/*fondOmbrage.onkeydown = function(event) {                  /////////////////   Ne marche pas car le div ne peut pas avoir le focus.
+		alert(event.keyCode);
+		if(event.keyCode == 27){
+			$(this).detach();
+		}
+	}*/
 	var divPrincipale =  creeBaliseAvecClasse("div", "dDivPrincipale");
 	// Nécessaire pour empecher l'événement onclick de son parent d'être activé lorsqu'on clic dessus ce div
 	divPrincipale.onclick = function(event) { event.stopPropagation(); }
-	
-	document.body.insertBefore(fondOmbrage);
+
+	document.body.appendChild(fondOmbrage);
 	fondOmbrage.appendChild(divPrincipale);
 }
 
