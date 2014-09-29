@@ -6,6 +6,7 @@
 		include("Vue/PHP de base/InclusionTemplate.php");
 		include("Vue/PHP de base/InclusionJQuery.php");
 	?>
+	<script src="Javascript/Generique.js"></script>
 </head>
 
 <body>
@@ -20,7 +21,7 @@
 		enctype="multipart/form-data">
 			<label for="file">Filename:</label>
 			<input type="file" name="file" id="file" accept=".csv"><br>
-			<input type="submit" name="submit" value="Submit">
+			<input type="submit" name="submit" value="Submit" onclick="afficherChargement">
 		</form>
 	</div>
 	

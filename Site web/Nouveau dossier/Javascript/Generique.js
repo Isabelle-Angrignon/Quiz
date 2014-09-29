@@ -76,3 +76,12 @@ function creeFrameDynamique() {
 	document.body.insertBefore(fondOmbrage);
 	fondOmbrage.appendChild(divPrincipale);
 }
+
+
+function afficherChargement() {
+	var div = document.createElement("div");
+	div.setAttribute("id", "divChargement");
+	document.body.insertBefore(div);
+	
+	$("#divChargement").fadeIn(300);
+}

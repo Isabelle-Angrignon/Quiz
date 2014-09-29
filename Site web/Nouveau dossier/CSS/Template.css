@@ -216,3 +216,13 @@ background: linear-gradient(to bottom, #c3e5f6 0%,#62aed3 45%,#044666 100%);
 
 
 background-color:rgb(16,112,255); // Entete*/
+
+
+
+#divChargement {
+	width:500px;
+	height:300px;
+	background-color:fuchsia;
+	margin:0 auto;
+	margin-top:600px;
+}

@@ -2,7 +2,7 @@
 
 
 <?php
-	include("vue/Modele/Fonction.php");
+	include("Modele/Fonctions.php");
 
 	$nomFichier = UploadFile();
 	LireCSV($nomFichier);
@@ -43,7 +43,8 @@
     		while(!feof($leFichier))
     		{
     			$ligne = fgets($leFichier);
-    			
+    			$parametre = explode(';', $ligne);
+    			ajouterUsager($parametre[2] , $parametre[0] , $parametre[1]);
     		}
     	}
     	else
@@ -60,8 +61,9 @@
     // 2014-09-24
     // 
     function GererLigneEleve($ligne )
-    {
-    
+    {	
+    	
+    	ajouterUsager();
     }
     
     
