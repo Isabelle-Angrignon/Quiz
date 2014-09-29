@@ -21,8 +21,6 @@
       <primary-key name="PRIMARY" columns="idUsager_Professeur,idCours"/>
       <foreign-key name="FK_AssProfCours_Cours" columns="idCours" ref-table="cours" ref-schema="" ref-catalog="projetquiz" ref-columns="idCours" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_AssProfCours_Professeur" columns="idUsager_Professeur" ref-table="usagers" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="FK_InscriptionsEtudiantCours_Cours" table="inscriptionsetudiantcours" schema="" catalog="projetquiz" columns="idCours"/>
-      <exported-key name="FK_InscriptionsEtudiantCours_ProfCours" table="inscriptionsetudiantcours" schema="" catalog="projetquiz" columns="idUsager_Professeur"/>
       <index name="FK_AssProfCours_Cours_idx" unique="false" columns="idCours"/>
     </table>
     <table name="associationquestioncours" schema="" catalog="projetquiz" type="TABLE">
@@ -109,12 +107,9 @@
       <column name="idUsager_Etudiant" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
       <column name="idCours" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="idUsager_Professeur" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="idUsager_Etudiant,idCours"/>
-      <foreign-key name="FK_InscriptionsEtudiantCours_Cours" columns="idCours" ref-table="associationprofesseurcours" ref-schema="" ref-catalog="projetquiz" ref-columns="idCours" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="FK_InscriptionsEtudiantCours_Etudiant" columns="idUsager_Etudiant" ref-table="usagers" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="FK_InscriptionsEtudiantCours_ProfCours" columns="idUsager_Professeur" ref-table="associationprofesseurcours" ref-schema="" ref-catalog="projetquiz" ref-columns="idUsager_Professeur" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="FK_InscriptionsEtudiantCours_Cours_idx" unique="false" columns="idCours"/>
-      <index name="FK_InscriptionsEtudiantCours_Professeur_idx" unique="false" columns="idUsager_Professeur"/>
+      <primary-key name="PRIMARY" columns="idUsager_Etudiant,idCours,idUsager_Professeur"/>
+      <index name="FK_InscriptionsEtudiantCours_Cours" unique="false" columns="idCours"/>
+      <index name="FK_InscriptionsEtudiantCours_ProfCours" unique="false" columns="idUsager_Professeur"/>
     </table>
     <table name="preferencesquestionprof" schema="" catalog="projetquiz" type="TABLE">
       <column name="idPreferenceQuestionProf" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -240,7 +235,6 @@
       <exported-key name="FK_AssPrefDroits_ProfAutorise" table="associationpreferencedroits" schema="" catalog="projetquiz" columns="idUsager_ProfAutorise"/>
       <exported-key name="FK_AssProfCours_Professeur" table="associationprofesseurcours" schema="" catalog="projetquiz" columns="idUsager_Professeur"/>
       <exported-key name="FK_DroitQuestion_Prof" table="associationsdroitsquestionsprof" schema="" catalog="projetquiz" columns="idUsager_Professeur"/>
-      <exported-key name="FK_InscriptionsEtudiantCours_Etudiant" table="inscriptionsetudiantcours" schema="" catalog="projetquiz" columns="idUsager_Etudiant"/>
       <exported-key name="FK_PrefQuestProf_Prof" table="preferencesquestionprof" schema="" catalog="projetquiz" columns="idUsager_Proprietaire"/>
       <exported-key name="FK_Questions_Proprietaire" table="questions" schema="" catalog="projetquiz" columns="idUsager_Proprietaire"/>
       <exported-key name="FK_Quiz_Proprietaire" table="quiz" schema="" catalog="projetquiz" columns="idUsager_Proprietaire"/>
@@ -259,11 +253,18 @@
         <parameter name="PNOM" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12" type="1" index="3"/>
       </prototype>
     </procedure>
+    <procedure name="genererQuestionsAleatoires" schema="" catalog="projetquiz" type="1">
+      <prototype>
+        <parameter name="PID_C" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="1"/>
+      </prototype>
+    </procedure>
     <procedure name="inscrireEtudiantCours" schema="" catalog="projetquiz" type="1">
       <prototype>
         <parameter name="PID_E" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" type="1" index="1"/>
-        <parameter name="PID_C" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="2"/>
-        <parameter name="PID_P" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" type="1" index="3"/>
+        <parameter name="PNOM" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12" type="1" index="2"/>
+        <parameter name="PPRENOM" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" type="1" index="3"/>
+        <parameter name="PID_C" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="4"/>
+        <parameter name="PID_P" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" type="1" index="5"/>
       </prototype>
     </procedure>
     <procedure name="insererTag" schema="" catalog="projetquiz" type="1">
