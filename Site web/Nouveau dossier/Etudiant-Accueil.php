@@ -42,15 +42,24 @@
 
 	<div class="contenu">
 
-        Répondre à mes quiz:
+
         Formatifs:
         <fieldset >
             <select id="DDL_Cours">
             </select>
         </fieldset>
 
-        <!--  mettre un div qui contient un div qui contient un ul avec un id UlQuiz-->
 
+        <div class="cadre_Liste" id="types_quiz">
+            <p class="titre" content="Répondre à mes quiz:"></p>
+            <div class="cadre_Liste" id="liste_Quiz_Formatifs" >
+                <p class="titre" content="Formatifs:"></p>
+                <ul id="UlQuiz"></ul>
+
+
+            </div>
+
+        </div>
 
 
 
