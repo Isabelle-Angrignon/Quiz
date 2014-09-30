@@ -4,26 +4,9 @@
 <head>
 	<?php 
 		include("Vue/PHP de base/InclusionTemplate.php");
-		include("Vue/PHP de base/InclusionJQuery.php");		
-		include("Vue/PHP de base/Utilitaires.php");	
+		include("Vue/PHP de base/InclusionJQuery.php");
 	?>
-	
-	<script>
-		$(".contenu").click( function() {
-			$.ajax({
-				type: 'post',
-				url: 'Test.php',
-				data: {
-					NombreUn: 1,
-					NombreDeux: 5
-				},
-				datatype: "text",
-				success: function(reponse) {
-					alert(reponse);
-				}
-			});
-		});
-	</script>
+	<script></script>
 </head>
 
 <body>
@@ -33,13 +16,30 @@
 		include("Vue/PHP de base/MenuProf.php");
 	?>
 	
-	
 	<div class="contenu">
 	</div>
 	
 	<?php
 		include("Vue/PHP de base/BasDePage.php");
 	?>
+	<script>
+	
+	/* "127.0.0.1\\ProjetQuiz\\Test.php"
+		"172.17.104.120\\ProjetQuiz\\Test.php"
+		"Test.php
+		"172.17.104.120/ProjetQuiz/Test.php" */
+		$("div").click( function() {
+			$.ajax({
+                        type: 'POST',
+                        url: 'Test.php',
+                        data: { "NombreUn":1, "NombreDeux":5},
+                        dataType: 'text',
+                        success: function (data) {
+                                alert(data);
+                        }
+                });
+		});
+	</script>
 
 </body>
 

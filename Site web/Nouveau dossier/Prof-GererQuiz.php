@@ -97,7 +97,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
 			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
 			</ul>
 		</div>
-		
 		<div id="ListeGererQuestions" class="Liste ListeGererQuiz">
 			<ul id="UlQuestion">
 			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
