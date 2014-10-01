@@ -7,8 +7,6 @@
  */
 function genererQuestionsAleatoires($cours)
 {
-    $QuizAleatoire = array();
-
     // a retirer et mettre connecterEtudiant
     $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '');
 
@@ -18,35 +16,19 @@ function genererQuestionsAleatoires($cours)
         $requete->bindparam(1, $cours, PDO::PARAM_INT,10);
 
         if (!empty($requete)) {
-            $QuizAleatoire = $requete->executeQuery();
+            $requete->execute();
         }
+        $QuizAleatoire = $requete->fetchAll();
 
-        echo 'test isa' + $QuizAleatoire;
-
-        while($ligneAffectee = $requete->fetch())
+        if (!empty($QuizAleatoire))
         {
-            lireQuestion($ligneAffectee);
+            $_SESSION['listeQuestionsAleatoires'] = $QuizAleatoire;
+            echo 'Quiz généré.';
         }
     }
 }
 
-function lireQuestion($ligneQuestion)
-{
-    $idQuestion = $ligneQuestion[0];
-    $enonceQuestion = $ligneQuestion[1];
-    $imageQuestion = $ligneQuestion[2];
-    $ordreReponsesAleatoire = $ligneQuestion[3];
-    $typeQuestion = $ligneQuestion[4];
-    $idUsager_Proprietaire = $ligneQuestion[5];
-    $referenceWeb = $ligneQuestion[6];
-    $typeQuiz = $ligneQuestion[7];
-    $idCours = $ligneQuestion[8];
 
-    echo $idQuestion + ', ' + $enonceQuestion + ', ' + $imageQuestion + ', ' +
-            $ordreReponsesAleatoire + ', ' + $typeQuestion + ', ' +
-            $idUsager_Proprietaire + ', ' + $referenceWeb + ', ' +
-            $typeQuiz + ', ' + $idCours + '. ' ;
-}
 
 
 
