@@ -57,14 +57,14 @@ function validerUsager()
 	    {
 	    	// mettre le idUsager dans cookie de session
 	    	$_SESSION['idUsager'] = $idUsager;
-	    	$_SESSION['erreur'] = 'Le idUSer et le mot de passe sont valides';
+	    	$_SESSION['erreur'] = 'Le nom d\'usager et le mot de passe sont valides';
 	    	// aller à la bonne page: admin, prof, etudiant
 	    	redirigerUsager();		    					    
 	    }
 	    else
 	    {
 	    	//afficher alerte
-	    	$_SESSION['erreur'] = 'Le idUSer ou le mot de passe n\'est pas valide';		
+	    	$_SESSION['erreur'] = 'Le nom d\'usager ou le mot de passe n\'est pas valide';
 	    }		    
 	    $requete->closeCursor();    
 	}			

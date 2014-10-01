@@ -73,6 +73,7 @@ function creeFrameDynamique() {
 	
 	/*fondOmbrage.onkeydown = function(event) {                 												 /////////////////   Ne marche pas car le div ne peut pas avoir le focus.
 		alert(event.keyCode);
+		// KeyCode 27 == Le boutton escape
 		if(event.keyCode == 27){
 			$(this).detach();
 		}

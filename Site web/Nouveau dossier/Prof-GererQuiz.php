@@ -12,7 +12,8 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	<?php 
 		include("Vue/PHP de base/InclusionTemplate.php");
 		include("Vue/PHP de base/InclusionJQuery.php");
-	?>
+        include("Vue/PHP de base/Utilitaires.php");
+    ?>
 	
   	<script src="Javascript/Generique.js"></script>
   	<script src="Javascript/Prof-GererQuiz.js"></script>
@@ -52,6 +53,14 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    	var id = "UlQuestion";
 	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
 		});
+
+          $("nav").ready(function() {
+              var nbElement = $("nav a").length;
+              var format = 100/nbElement;
+              $("nav a").each( function() {
+                  $(this).width(format + "%");
+              });
+          });
 	  });
 	  /*accept: function(sender) {
 	    		return $(this).children("li") == 0;
@@ -62,6 +71,8 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <body>
 
 	<?php
+        demarrerSession();
+        redirigerSiNonConnecte();
 		include("Vue/PHP de base/EnteteSite.php");
 		include("Vue/PHP de base/MenuProf.php");
 	?>

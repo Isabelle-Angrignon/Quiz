@@ -23,22 +23,17 @@
 		include("Vue/PHP de base/BasDePage.php");
 	?>
 	<script>
-	
-	/* "127.0.0.1\\ProjetQuiz\\Test.php"
-		"172.17.104.120\\ProjetQuiz\\Test.php"
-		"Test.php
-		"172.17.104.120/ProjetQuiz/Test.php" */
-		$("div").click( function() {
-			$.ajax({
-                        type: 'POST',
-                        url: 'Test.php',
-                        data: { "NombreUn":1, "NombreDeux":5},
-                        dataType: 'text',
-                        success: function (data) {
-                                alert(data);
-                        }
-                });
-		});
+        $("div").click( function() {
+            $.ajax({
+                type: 'POST',
+                url: 'Test.php',
+                data: { "NombreUn":1, "NombreDeux":5},
+                dataType: 'text',
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        });
 	</script>
 
 </body>
