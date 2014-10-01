@@ -51,6 +51,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    	var id = "UlQuestion";
 	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
 		});
+
 	  });
 	  /*accept: function(sender) {
 	    		return $(this).children("li") == 0;
@@ -100,9 +101,13 @@ Description: Cette interface représente l'interface principale d'un professeur 
 		</div>
 		<div id="ListeGererQuestions" class="Liste ListeGererQuiz">
 			<ul id="UlQuestion">
-                <?php
-
-                ?>
+                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
 			</ul>
 			<div id="AjouterQuestion" class="ListeDivElementStyle">Ajouter une question</div>
 		</div>
@@ -111,7 +116,19 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	<?php
 		include("Vue/PHP de base/BasDePage.php");
 	?>
-
+    <script>
+        $("#UlQuestion").ready(function() {
+            $.ajax({
+                type: 'POST',
+                url: 'Modele/ListerQuestions.php',
+                data: {"Triage":"default", "idCours":4 , "idProprietaire": "420jean"},
+                dataType: "json",
+                success: function(resultat) {
+                    alert( JSON.stringify(resultat) );
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

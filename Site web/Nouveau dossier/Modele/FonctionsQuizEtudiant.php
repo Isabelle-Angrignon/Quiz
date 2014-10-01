@@ -25,8 +25,12 @@ function genererQuestionsAleatoires($cours)
             $_SESSION['listeQuestionsAleatoires'] = $QuizAleatoire;
             echo 'Quiz généré.';
         }
+        $requete->closeCursor();
     }
+
+    unset($bdd);// fermer connection bd
 }
+
 
 
 
