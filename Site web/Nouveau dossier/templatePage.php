@@ -2,9 +2,9 @@
 <html>
 
 <head>
-	<?php 
+	<?php
+        include("Vue/PHP de base/InclusionJQuery.php");
 		include("Vue/PHP de base/InclusionTemplate.php");
-		include("Vue/PHP de base/InclusionJQuery.php");		
 		include("Vue/PHP de base/Utilitaires.php");	
 	?>
 </head>
@@ -15,7 +15,8 @@
 		demarrerSession();
 		redirigerSiNonConnecte();
 		include("Vue/PHP de base/EnteteSite.php");
-		include("Vue/PHP de base/MenuProf.php");
+        //faire un if sur $_SESSION["typeUsager"]
+		include("Vue/PHP de base/MenuProf.php");   // ou MenuEtudiant.php
 	?>
 	
 	<div class="contenu">
