@@ -71,8 +71,8 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <body>
 
 	<?php
-        demarrerSession();
-        redirigerSiNonConnecte();
+        /*demarrerSession();
+        redirigerSiNonConnecte();*/
 		include("Vue/PHP de base/EnteteSite.php");
 		include("Vue/PHP de base/MenuProf.php");
 	?>
