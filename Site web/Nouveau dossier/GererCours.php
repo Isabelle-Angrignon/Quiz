@@ -17,7 +17,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
     ?>
 	
   	<script src="Javascript/Generique.js"></script>
-  	<script src="Javascript/Prof-GererCours.js"></script>
+  	<script src="Javascript/GererCours.js"></script>
   	<script>
   	/////////////////////////////////////////////////////////////////////////////////////////
   	////// Aide mémoire de Mathieu pour prochaine rencontre 
@@ -45,11 +45,11 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    });
 	    
 	    $("#DDL_Cours").selectmenu();
-	    $("#UlEtudiants").click( function() {
+	    /*$("#UlEtudiants").click( function() {
 	    	/*var id = $(this).attr("id");
-	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);*/
+	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
 	    	creeFrameDynamique();
-	    });
+	    });*/
 	     $("#AjouterQuestion").click( function() {
 	    	var id = "UlEtudiants";
 	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
@@ -86,7 +86,8 @@ Description: Cette interface représente l'interface principale d'un professeur 
 		</div>
 		<div id="ListeCours"class="Liste ListeGererCours">
 			<ul id="UlCours">
-                <?php InsererCours(); ?>
+             <?php InsererCours(); ?>
+
 			</ul>
 			<div id="ajouterQuiz"></div>
 		</div>
@@ -98,7 +99,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 		</div>
 		<div id="ListeGererEtudiants" class="Liste ListeGererCours">
 			<ul id="UlEtudiants">
-
+            <?php InsererEleves(); ?>
 			</ul>
 			<div class="ListeDivElementStyle">Ajouter un étudiant</div>
 		</div>

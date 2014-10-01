@@ -6,27 +6,42 @@
  * Time: 09:08
  */
 
-
+//InsererCours();
 
 function InsererCours()
 {
-    $Donne = LireCours();
-    foreach($Donne as $Row)
+    $Donnee = LireCours();
+    foreach($Donnee as $Row)
     {
-       echo "<script>ajouterLi_ToUl_V2('UlCours',$Row[codeCours] . ' ' . $Row[nomCours],'C' . $Row[idCours],true) </script>";
+      GenererLi('UlCours',$Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
     }
+}
+
+function InsererEleves()
+{
+    $Donnee = LireEtudiant();
+    foreach($Donnee as $Row)
+    {
+        GenererLi('UlEtudiants',$Row['nom'] . ' ' . $Row['prenom'], $Row['idUsager']);
+    }
+}
+
+function GenererLi($idUi , $valeur , $idLi)
+{
+    //echo "<script>ajouterLi_ToUl_V2( " . $idUi . " , " . $valeur . " , " . $idLi . " , true);</script>";
+    echo "<script>ajouterLi_ToUl_V2( '". $idUi . "' , '".$valeur."' ,'".$idLi."', true);</script>";
 }
 
 function LireCours()
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $requete = $bdd->prepare("CALL listerCours()");
     $requete->execute();
     $resultat = $requete->fetchAll();
     return $resultat;
 }
 function LireEtudiant(){
-    $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $requete = $bdd->prepare("CALL listerEtudiants()");
     $requete->execute();
     $resultat = $requete->fetchAll();
