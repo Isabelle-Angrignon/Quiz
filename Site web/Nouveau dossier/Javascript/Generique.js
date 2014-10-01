@@ -3,7 +3,16 @@
 // Date : 15/09/2014
 // Description : Contient tout le code Javascript générique de l'application QuizInfo
 
-
+$(function() {
+    // Ce bout de code sert à "resize" le menu selon le nombre d'enfant (de balise <a> ) qu'il contient
+    $("nav").ready(function() {
+        var nbElement = $("nav a").length;
+        var format = 100/nbElement;
+        $("nav a").each( function() {
+            $(this).width(format + "%");
+        });
+    });
+});
 // Nom : ajouterOption_ToSelect
 // Par : Mathieu Dumoulin
 // Date : 15/09/2014

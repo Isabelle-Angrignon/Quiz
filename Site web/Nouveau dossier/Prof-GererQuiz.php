@@ -45,22 +45,12 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    
 	    $("#DDL_Cours").selectmenu();
 	    $("#UlQuestion").click( function() {
-	    	/*var id = $(this).attr("id");
-	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);*/
 	    	creeFrameDynamique();
 	    });
 	     $("#AjouterQuestion").click( function() {
 	    	var id = "UlQuestion";
 	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
 		});
-
-          $("nav").ready(function() {
-              var nbElement = $("nav a").length;
-              var format = 100/nbElement;
-              $("nav a").each( function() {
-                  $(this).width(format + "%");
-              });
-          });
 	  });
 	  /*accept: function(sender) {
 	    		return $(this).children("li") == 0;
@@ -110,13 +100,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
 		</div>
 		<div id="ListeGererQuestions" class="Liste ListeGererQuiz">
 			<ul id="UlQuestion">
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+                <?php
+
+                ?>
 			</ul>
 			<div id="AjouterQuestion" class="ListeDivElementStyle">Ajouter une question</div>
 		</div>
