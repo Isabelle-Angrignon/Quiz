@@ -16,7 +16,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
     ?>
 	
   	<script src="Javascript/Generique.js"></script>
-  	<script src="Javascript/Prof-GererQuiz.js"></script>
+  	<script src="Javascript/GererCours.js"></script>
   	<script>
   	/////////////////////////////////////////////////////////////////////////////////////////
   	////// Aide mémoire de Mathieu pour prochaine rencontre 

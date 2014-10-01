@@ -16,9 +16,9 @@
         $(function() {
             $("#DDL_Cours").selectmenu();
             $("#DDL_Cours").load(function() {
-                ajouterOption_ToSelect("DDL_Cours","Un premier cours");
-                ajouterOption_ToSelect("DDL_Cours","Un second cours");
-                ajouterOption_ToSelect("DDL_Cours","Un troisième cours");
+                ajouterOption_ToSelect("DDL_Cours","Un premier cours", "1");
+                ajouterOption_ToSelect("DDL_Cours","Un second cours", "2");
+                ajouterOption_ToSelect("DDL_Cours","Un troisième cours", "3");
             });
 
             $("#UlQuiz").selectable();
@@ -26,6 +26,10 @@
                 ajouterLi_ToUl("UlQuiz","Un premier titre de quiz",true);
                 ajouterLi_ToUl("UlQuiz","Un second titre de quiz",true);
                 ajouterLi_ToUl("UlQuiz","Un troisième titre de quiz",true);
+            });
+            $("#QuizAleatoire").click( function() {
+                //appeler la fonction php;
+                this.submit = true;
             });
         });
     </script>
@@ -42,46 +46,48 @@ redirigerSiNonConnecte();
 ?>
 
 <div class="contenu">
+    <!-- Liste déroulante pour choisir un cours -->
     <fieldset><select id="DDL_Cours"><option value="Tous les cours">Tous les cours</option></select></fieldset>
+
+    <!-- Entete du Cadre principal contenant tous les types de quiz -->
     <div id="LBL_ListesGererQuiz">
+
         <label id="GererQuiz" for="ListeQuiz">Mes quiz</label>
-        <label id="ModifierQuiz" for="ListeModifQuiz">Modifier votre quiz ici</label>
-        <label id="GererQuestions" for="ListeModifQuiz">Mes questions</label>
+
+        <label id="GenereQuestions" for="boutonAleatoire">Générer un quiz aléatoire</label>
     </div>
+    <!-- Cadre principal contenant tous les types de quiz -->
     <div id="ListeQuiz"class="Liste ListeGererQuiz">
-        <ul id="UlQuiz">
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 1</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 2</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 3</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 4</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 5</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 6</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz 7</li>
+        <label>Formatif</label>
+        <ul id="UlQuizFormatif">
+            <li class="ui-state-default">Quiz 1</li>
+            <li class="ui-state-default">Quiz 2</li>
+            <li class="ui-state-default">Quiz 3</li>
+            <li class="ui-state-default">Quiz 4</li>
+            <li class="ui-state-default">Quiz 5</li>
+            <li class="ui-state-default">Quiz 6</li>
+            <li class="ui-state-default">Quiz 7</li>
         </ul>
 
-        <p><?php  genererQuestionsAleatoires(4);  ?></p>
-    </div>
 
-    <!--
-    <div id="ListeGererQuestions" class="Liste ListeGererQuiz">
-        <ul id="UlQuestion">
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
-        </ul>
-        <div id="AjouterQuestion" class="ListeDivElementStyle">Ajouter une question</div>
     </div>
-    -->
+    <form action=genererQuestionsAleatoires(4) >
+    <div id="QuizAleatoire"class="Liste ListeGererQuiz">
+        <label>Aléatoire</label>
+        <ul id="UlQuizAleatoire">
+            <li class="ui-state-default" >Générer</li>
+
+        </ul>
+
+
+    </div>
+    </form>
+
+
 
 </div>
 
-<?php
-include("Vue/PHP de base/BasDePage.php");
-?>
+<?php  include("Vue/PHP de base/BasDePage.php");  ?>
 
 </body>
 
