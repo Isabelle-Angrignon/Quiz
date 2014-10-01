@@ -18,12 +18,20 @@ fieldset {
     width:100%;
 }
 
-
 /* CSS propre aux listes principales */
 #ListeQuiz {
     margin-left:3%;
     margin-top:0;
     margin-right:0;
+}
+
+/*Div qui contient le ul - li - Bouton générer*/
+#QuizAleatoire{
+    margin-left:20%;
+    vertical-align: top;
+    margin-top:0;
+    margin-right:0;
+    height: 50%;
 }
 
 .ListeGererQuiz {
@@ -46,11 +54,5 @@ fieldset {
     margin-left:6%;
 }
 
-/*Div qui contient le ul - li - Bouton générer*/
-#QuizAleatoire{
-    margin-left:40%;
-    margin-top:0;
-    margin-right:0;
-    height: 50%;
-}
+
 

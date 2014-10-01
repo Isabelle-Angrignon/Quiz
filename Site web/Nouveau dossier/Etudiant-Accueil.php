@@ -5,29 +5,30 @@
     <link rel="stylesheet" href="CSS/Etudiant-Accueil.css" type="text/css" media="screen" >
 
     <?php
-    include("Vue/PHP de base/InclusionTemplate.php");
     include("Vue/PHP de base/InclusionJQuery.php");
+    include("Vue/PHP de base/InclusionTemplate.php");
+
     include("Vue/PHP de base/Utilitaires.php");
     include("Modele/FonctionsQuizEtudiant.php");
     ?>
 
     <script>
-        // fait quoi
+
         $(function() {
             $("#DDL_Cours").selectmenu();
-            $("#DDL_Cours").load(function() {
-                ajouterOption_ToSelect("DDL_Cours","Un premier cours", "1");
-                ajouterOption_ToSelect("DDL_Cours","Un second cours", "2");
-                ajouterOption_ToSelect("DDL_Cours","Un troisième cours", "3");
+            $("#DDL_Cours").ready(function() {
+                ajouterOption_ToSelect("DDL_Cours", "1","Un premier cours");
+                ajouterOption_ToSelect("DDL_Cours", "2","Un second cours");
+                ajouterOption_ToSelect("DDL_Cours", "3","Un troisième cours");
             });
 
-            $("#UlQuiz").selectable();
-            $("#UlQuiz").load(function() {
-                ajouterLi_ToUl("UlQuiz","Un premier titre de quiz",true);
-                ajouterLi_ToUl("UlQuiz","Un second titre de quiz",true);
-                ajouterLi_ToUl("UlQuiz","Un troisième titre de quiz",true);
+            $("#UlQuizFormatif").selectable();
+            $("#UlQuizFormatif").ready(function() {
+                ajouterLi_ToUl_V2("UlQuizFormatif","Un premier titre de quiz","01",true);
+                ajouterLi_ToUl_V2("UlQuizFormatif","Un second titre de quiz","02",true);
+                ajouterLi_ToUl_V2("UlQuizFormatif","Un troisième titre de quiz","03",true);
             });
-            $("#QuizAleatoire").click( function() {
+            $("#UlQuizAleatoire").click( function() {
                 //appeler la fonction php;
                 this.submit = true;
             });
@@ -47,7 +48,7 @@ redirigerSiNonConnecte();
 
 <div class="contenu">
     <!-- Liste déroulante pour choisir un cours -->
-    <fieldset><select id="DDL_Cours"><option value="Tous les cours">Tous les cours</option></select></fieldset>
+    <fieldset><select id="DDL_Cours"><option value="Tous mes cours">Tous mes cours</option></select></fieldset>
 
     <!-- Entete du Cadre principal contenant tous les types de quiz -->
     <div id="LBL_ListesGererQuiz">
@@ -60,28 +61,27 @@ redirigerSiNonConnecte();
     <div id="ListeQuiz"class="Liste ListeGererQuiz">
         <label>Formatif</label>
         <ul id="UlQuizFormatif">
-            <li class="ui-state-default">Quiz 1</li>
-            <li class="ui-state-default">Quiz 2</li>
-            <li class="ui-state-default">Quiz 3</li>
-            <li class="ui-state-default">Quiz 4</li>
-            <li class="ui-state-default">Quiz 5</li>
-            <li class="ui-state-default">Quiz 6</li>
-            <li class="ui-state-default">Quiz 7</li>
+            <!-- les items de quiz appaîtront ici -->
         </ul>
+        <!--
+        <label>Formatif</label>
+        <ul id="UlQuizFormatif">
+             les items de quiz appaîtront ici
+        </ul>-->
 
 
     </div>
-    <form action=genererQuestionsAleatoires(4) >
-    <div id="QuizAleatoire"class="Liste ListeGererQuiz">
-        <label>Aléatoire</label>
-        <ul id="UlQuizAleatoire">
-            <li class="ui-state-default" >Générer</li>
 
-        </ul>
+    <div id="QuizAleatoire" class="Liste ListeGererQuiz">
+        <form action=genererQuestionsAleatoires(4) >
+            <label>Aléatoire</label>
+            <ul id="UlQuizAleatoire">
+                <li class="ui-state-default" >Générer</li>
 
-
+            </ul>
+        </form>
     </div>
-    </form>
+
 
 
 
