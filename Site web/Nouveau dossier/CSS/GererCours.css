@@ -1,0 +1,113 @@
+﻿/*  
+	Prof-GererCours.css
+	Par : Mathieu Dumoulin
+	Date : 19/09/2014
+	Description : Contient le css qui est spécifique au HTML de la page Prof-GererCours.php 
+*/
+
+/* CSS propre au drop down list des cours */
+fieldset {
+	border:0;
+	width:25%;
+	margin-top:30px;
+	margin-left:3%;
+	padding:0;
+}
+
+#DDL_Cours {
+	width:100%;
+}
+
+
+/* CSS propre aux listes principales */
+#ListeCours {
+	margin-left:3%;
+	margin-top:0;
+	margin-right:0;
+}
+
+#ListeModifGroupe {
+	margin-left:11%;
+}
+
+#ListeModifGroupe ul {
+	height:85%;
+}
+
+#QuizDropZone {
+	margin-bottom:20px;
+	background-color:#FD8740;
+	list-style-type:none;
+	vertical-align:middle;
+	border:outset;
+}
+
+#QuizDropZone li {
+	border-radius: inherit;
+	padding-top:15px;
+	height:35px;
+}
+
+#QuizDropZone li span {
+	float:left;
+	line-height:50px;
+}
+
+.QuizDropZone_hover {
+	background-color: #FDA068;
+}
+
+#ListeGererEtudiants {
+	margin-left:11%;
+}
+
+#UlQuestion {
+	height:85%;
+}
+
+#AjouterQuestion {
+	border:solid black;
+	margin-top:10%;
+	line-height: 50px;
+	background-color:white;
+}
+
+#AjouterQuestion:hover {
+	background-color:#E4E4E4;
+}
+
+.ListeGererCours {
+	width:20%;
+	height:500px;
+	display:inline-block;
+}
+
+.ListeDivElementStyle {
+	width:100%;
+	height: 50px;
+	border-radius:10px;
+	cursor:pointer;
+	text-align: center;
+}
+
+/* Label pour les listes principales */
+#LBL_ListesGererCours {
+	margin-left:5%;
+	width:90%;
+	text-align:center;
+	padding:10px;
+	font-size:x-large;
+}
+
+#GererCours {
+	float:left;
+	margin-left:6%;
+}
+#ModifierGroupe{
+	margin-left:2%;
+}
+#GererEtudiants {
+	float:right;
+	margin-right:5%;
+}
+

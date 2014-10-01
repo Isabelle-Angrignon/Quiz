@@ -40,7 +40,29 @@ function ajouterLi_ToUl(idUl, element, estThemeJqueryUI) {
 	}
 	liTag.appendChild(document.createTextNode(element));
 	document.getElementById(idUl).appendChild(liTag);
+}
 
+// Nom : ajouterLi_ToUl
+// Par : Mathieu Dumoulin
+// Date : 19/09/2014
+// Intrant(s) : String idUl, String element,String idElement , bool estThemeJqueryUI
+// Extrant(s) : Il n'y a pas d'extrant
+// Description : Cette fonction prend l'id d'une balise Ul et lui ajoute un Li créé dynamiquement comportant le texte (element) passer en paramêtre
+//				 en donnant les classe pour le thême d'un sortable au Li si estThemeJqueryUI est à true
+function ajouterLi_ToUl_V2(idUl, element,idElement, estThemeJqueryUI) {
+    // Initialisation du li
+    var liTag = document.createElement("li");
+    liTag.Value = element;
+    liTag.setAttribute("id",idElement);
+    if(estThemeJqueryUI) {
+        liTag.setAttribute("class", "ui-state-default");
+        // Initialisation du span contenu dans le li (nécéssaire pour les sortables)
+        var spanTag = document.createElement("span");
+        spanTag .setAttribute("class", "ui-icon ui-icon-arrowthick-2-n-s");
+        liTag.appendChild(spanTag);
+    }
+    liTag.appendChild(document.createTextNode(element));
+    document.getElementById(idUl).appendChild(liTag);
 }
 
 
