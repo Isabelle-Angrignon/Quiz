@@ -9,9 +9,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <head>
 	<link rel="stylesheet" href="CSS/GererCours.css" type="text/css" media="screen" >
 	
-	<?php 
-		include("Vue/PHP de base/InclusionTemplate.php");
+	<?php
 		include("Vue/PHP de base/InclusionJQuery.php");
+        include("Vue/PHP de base/InclusionTemplate.php");
         include("Vue/PHP de base/Utilitaires.php");
         include("Modele/FonctionCours.php");
     ?>
@@ -41,7 +41,12 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    });
 	    $("#QuizDropZone").sortable({
 	    	connectWith: "#UlCours",
-	    	revert: 150
+	    	revert: 150,
+            receive: function(event,ui) {
+                ajouterLi_ToUl('UlModifGroupe','Je marche',true);
+                $('#UICours').sortable("option","connectWith",false);
+            }
+
 	    });
 	    
 	    $("#DDL_Cours").selectmenu();
@@ -64,8 +69,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
           });
 	  });
 	  /*accept: function(sender) {
-	    		return $(this).children("li") == 0;
+	    		return $(this).children("li").length == 0;
 	    	}*/
+
 	</script>
 </head>
 
