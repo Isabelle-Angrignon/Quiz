@@ -40,6 +40,24 @@ function LireCours()
     $resultat = $requete->fetchAll();
     return $resultat;
 }
+/*
+    Nom: LireCoursEtudiant
+    Par: Simon Bouchard, adapté par Isabelle Angrignon
+    Date: 03/10/2014
+    Intrants: $idEtudiant = Le id d'un étudiant
+    Extrant(s): Tableau de cours: idCours, codeCours, nomCours, idProfesseur
+    Description: Cette fonction communique à la BD et récupère La liste des cours auquel cet étudiant est inscrit
+*/
+function LireCoursEtudiant($idEtudiant)
+{
+    $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $requete = $bdd->prepare("CALL listerCoursEtudiant( ? )");
+    $requete->bindparam(1, $idEtudiant, PDO::PARAM_STR,10);
+    $requete->execute();
+    $resultat = $requete->fetchAll();
+    return $resultat;
+}
+
 function LireEtudiant(){
     $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $requete = $bdd->prepare("CALL listerEtudiants()");
@@ -59,14 +77,24 @@ function LireEtudiant(){
 */
 function ListerCoursDansSelect($IdSelect, $tousMesCours)
 {
-    $Donnee = LireCours();
     if($tousMesCours)
     {
+        $Donnee = LireCoursEtudiant( $_SESSION['idUsager'] );
+
         GenererOption($IdSelect, 'Tous mes cours', '0');
+
+        foreach($Donnee as $Row)
+        {
+            GenererOption($IdSelect, $Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
+        }
     }
-    foreach($Donnee as $Row)
+    else
     {
-        GenererOption($IdSelect,$Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
+        $Donnee = LireCours();
+        foreach($Donnee as $Row)
+        {
+            GenererOption($IdSelect,$Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
+        }
     }
 }
 
