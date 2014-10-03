@@ -4,6 +4,7 @@
     <data-source name="MySQL - projetquiz@127.0.0.1" uuid="f0cb4f12-3eb6-4043-9c95-f42463b25246">
       <secret-storage>master_key</secret-storage>
       <user-name>Admin</user-name>
+      <user-password>dfcbdfcedfc7dfc3dfc4</user-password>
       <schema-pattern>projetquiz.*</schema-pattern>
       <default-schemas>projetquiz.*</default-schemas>
     </data-source>

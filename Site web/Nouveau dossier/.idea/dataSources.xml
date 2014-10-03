@@ -6,8 +6,6 @@
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://127.0.0.1:3306/projetquiz</jdbc-url>
-      <user-name>Admin</user-name>
-      <user-password>dfcbdfcedfc7dfc3dfc4</user-password>
       <driver-properties>
         <property name="zeroDateTimeBehavior" value="convertToNull" />
         <property name="tinyInt1isBit" value="false" />
