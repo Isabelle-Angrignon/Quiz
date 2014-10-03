@@ -55,6 +55,10 @@ function LireCoursEtudiant($idEtudiant)
     $requete->bindparam(1, $idEtudiant, PDO::PARAM_STR,10);
     $requete->execute();
     $resultat = $requete->fetchAll();
+
+    $requete->closeCursor();
+    unset($bdd);
+
     return $resultat;
 }
 
@@ -63,6 +67,10 @@ function LireEtudiant(){
     $requete = $bdd->prepare("CALL listerEtudiants()");
     $requete->execute();
     $resultat = $requete->fetchAll();
+
+    $requete->closeCursor();
+    unset($bdd);
+
     return $resultat;
 
 }
