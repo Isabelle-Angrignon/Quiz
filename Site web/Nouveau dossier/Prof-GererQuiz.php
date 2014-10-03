@@ -69,7 +69,11 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	?>
 		
 	<div class="contenu">
-		<fieldset><select id="DDL_Cours"><option value="TousLesCours">Tous les cours</option></select></fieldset>
+		<fieldset><select id="DDL_Cours">
+                <?php
+                    InsererCours();
+                ?>
+		</select></fieldset>
 		<div id="LBL_ListesGererQuiz">
 			<label id="GererQuiz" for="ListeQuiz">Mes quiz</label>
 			<label id="ModifierQuiz" for="ListeModifQuiz">Modifier votre quiz ici</label>
@@ -90,24 +94,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
 		<div id="ListeModifQuiz" class="Liste ListeGererQuiz">
 			<div id="QuizDropZone" class="ListeDivElementStyle"></div>
 			<ul id="UlModifQuiz">
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-			  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
 			</ul>
 		</div>
 		<div id="ListeGererQuestions" class="Liste ListeGererQuiz">
 			<ul id="UlQuestion">
-                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-                <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
 			</ul>
 			<div id="AjouterQuestion" class="ListeDivElementStyle">Ajouter une question</div>
 		</div>
@@ -124,7 +114,14 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 data: {"Triage":"default", "idCours":4 , "idProprietaire": "420jean"},
                 dataType: "json",
                 success: function(resultat) {
-                    alert( JSON.stringify(resultat) );
+                    var enonceDeLaQuestion;
+                    for(var i = 0; i < resultat.length; ++i) {
+                        enonceDeLaQuestion = resultat[i].enonceQuestion;
+                        if(enonceDeLaQuestion.length > 25) {
+                            enonceDeLaQuestion = enonceDeLaQuestion.substring(0, 25) + "...";
+                        }
+                        ajouterLi_ToUl_V2("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true);
+                    }
                 }
             });
         });
