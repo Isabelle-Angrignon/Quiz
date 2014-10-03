@@ -43,8 +43,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    	connectWith: "#UlCours",
 	    	revert: 150,
             receive: function(event,ui) {
-                ajouterLi_ToUl('UlModifGroupe','Je marche',true);
-                $('#UICours').sortable("option","connectWith",false);
+                $("#UlCours").sortable("option","connectWith",false);
+            },
+            remove: function(event,ui){
+                $("#UlCours").sortable("option","connectWith","#QuizDropZone");
             }
 
 	    });
@@ -92,7 +94,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 		</div>
 		<div id="ListeCours"class="Liste ListeGererCours">
 			<ul id="UlCours">
-             <?php InsererCours("UlCours"); ?>
+             <?php ListerCoursDansUl("UlCours"); ?>
 
 			</ul>
 			<div id="ajouterQuiz"></div>
