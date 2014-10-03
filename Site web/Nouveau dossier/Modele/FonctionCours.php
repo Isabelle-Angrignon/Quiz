@@ -8,12 +8,12 @@
 
 //InsererCours();
 
-function InsererCours()
+function ListerCoursDansUl($IdUl)
 {
     $Donnee = LireCours();
     foreach($Donnee as $Row)
     {
-      GenererLi('UlCours',$Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
+      GenererLi($IdUl,$Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
     }
 }
 

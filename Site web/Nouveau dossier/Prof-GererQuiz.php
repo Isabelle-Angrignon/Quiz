@@ -71,7 +71,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	<div class="contenu">
 		<fieldset><select id="DDL_Cours">
                 <?php
-                    InsererCours();
+                    
                 ?>
 		</select></fieldset>
 		<div id="LBL_ListesGererQuiz">

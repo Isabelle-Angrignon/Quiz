@@ -86,7 +86,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 		</div>
 		<div id="ListeCours"class="Liste ListeGererCours">
 			<ul id="UlCours">
-             <?php InsererCours(); ?>
+             <?php InsererCours("UlCours"); ?>
 
 			</ul>
 			<div id="ajouterQuiz"></div>
