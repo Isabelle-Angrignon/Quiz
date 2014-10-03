@@ -10,27 +10,23 @@
 
     include("Vue/PHP de base/Utilitaires.php");
     include("Modele/FonctionsQuizEtudiant.php");
+    include("Modele/FonctionCours.php");
     ?>
 
     <script>
 
         $(function() {
             $("#DDL_Cours").selectmenu();
-            $("#DDL_Cours").ready(function() {
-                ajouterOption_ToSelect("DDL_Cours", "1","Un premier cours");
-                ajouterOption_ToSelect("DDL_Cours", "2","Un second cours");
-                ajouterOption_ToSelect("DDL_Cours", "3","Un troisième cours");
-            });
 
             $("#UlQuizFormatif").selectable();
-            $("#UlQuizFormatif").ready(function() {
-                ajouterLi_ToUl_V2("UlQuizFormatif","Un premier titre de quiz","01",true);
-                ajouterLi_ToUl_V2("UlQuizFormatif","Un second titre de quiz","02",true);
-                ajouterLi_ToUl_V2("UlQuizFormatif","Un troisième titre de quiz","03",true);
-            });
+
             $("#UlQuizAleatoire").click( function() {
                 //appeler la fonction php;
                 this.submit = true;
+            });
+
+            $("#UlQuizAleatoire").click( function() {
+                creeFrameDynamique();
             });
         });
     </script>
@@ -48,7 +44,11 @@ redirigerSiNonConnecte();
 
 <div class="contenu">
     <!-- Liste déroulante pour choisir un cours -->
-    <fieldset><select id="DDL_Cours"><option value="Tous mes cours">Tous mes cours</option></select></fieldset>
+    <fieldset><select id="DDL_Cours">
+            <?php
+            ListerCoursDansSelect("DDL_Cours", false);
+            ?>
+        </select></fieldset>
 
     <!-- Entete du Cadre principal contenant tous les types de quiz -->
     <div id="LBL_ListesGererQuiz">
@@ -61,8 +61,10 @@ redirigerSiNonConnecte();
     <div id="ListeQuiz"class="Liste ListeGererQuiz">
         <label>Formatif</label>
         <ul id="UlQuizFormatif">
-            <!-- les items de quiz appaîtront ici -->
+            <!-- les items de quiz apparaîtront ici -->
         </ul>
+
+
         <!--
         <label>Formatif</label>
         <ul id="UlQuizFormatif">
