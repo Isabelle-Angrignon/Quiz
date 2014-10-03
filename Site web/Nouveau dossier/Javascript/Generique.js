@@ -94,7 +94,7 @@ function creeBaliseAvecClasse(baliseACreer, classe) {
 // Intrant(s) : Il n'y en a pas
 // Extrant(s) : Le div représentant la page de base du "pop up" 
 // Description : Cette fonction créée, à l'aide de balises div, un squelette de fenêtre "pop up" avec un fond en ombragé
-function creeFrameDynamique() {
+function creeFrameDynamique(idDivPrincipal) {
 	var fondOmbrage = creeBaliseAvecClasse("div", "dFondOmbrage");
 	fondOmbrage.setAttribute("id", "dFondOmbrage");
 	fondOmbrage.onclick = function(event) { 
@@ -112,9 +112,27 @@ function creeFrameDynamique() {
 	var divPrincipale =  creeBaliseAvecClasse("div", "dDivPrincipale");
 	// Nécessaire pour empecher l'événement onclick de son parent d'être activé lorsqu'on clic dessus ce div
 	divPrincipale.onclick = function(event) { event.stopPropagation(); }
+    divPrincipale.setAttribute("id", idDivPrincipal);
 
 	document.body.appendChild(fondOmbrage);
 	fondOmbrage.appendChild(divPrincipale);
 	
 	return divPrincipale;
+}
+
+// insererNouveauDiv
+// Par Mathieu Dumoulin
+// Date: 03/10/2014
+// Intrant(s) : idDiv = id que vous voulez affecter au nouveau div.
+//              idParent = id du parent
+//              classDiv = classe du nouveau div. Entrer null s'il n'y a pas de classe
+function insererNouveauDiv(idDiv, idParent, classDiv) {
+    var parent = document.getElementById(idParent);
+    var nouveauDiv = document.createElement("div");
+    nouveauDiv.setAttribute("id", idDiv);
+
+    if(classDiv != null) {
+        nouveauDiv.setAttribute("class", classDiv);
+    }
+    parent.appendChild(nouveauDiv);
 }

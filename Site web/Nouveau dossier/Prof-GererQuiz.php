@@ -13,11 +13,13 @@ Description: Cette interface représente l'interface principale d'un professeur 
     include("Vue/PHP de base/InclusionJQuery.php");
     include("Vue/PHP de base/InclusionTemplate.php");
     include("Vue/PHP de base/Utilitaires.php");
+    include("Modele/FonctionsProf-Quiz.php");
     include("Modele/FonctionCours.php");
     ?>
 
     <script src="Javascript/Generique.js"></script>
     <script src="Javascript/GererCours.js"></script>
+    <script src="Javascript/Prof-GererQuiz.js"></script>
     <script>
         /////////////////////////////////////////////////////////////////////////////////////////
         ////// Aide mémoire de Mathieu pour prochaine rencontre
@@ -45,7 +47,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
             $("#DDL_Cours").selectmenu();
             $("#UlQuestion").click( function() {
-                creeFrameDynamique();
+                creeFrameDynamique("popupPrincipal");
+                insererNouveauDiv("EnonceQuestion", "popupPrincipal", null);
+                $("#EnonceQuestion").html("Enoncé de question tres grand et tres gros, comme les boulles de Francis qui ressemblent à une souche souche souchesouchesouches ouchesouchesouchesou chesouchesouchesouchesouche souchesouchesouche souchesouch esoucheso uchesouche");
+                insererNouveauDiv("reponseConteneur", "popupPrincipal", null);
             });
             $("#AjouterQuestion").click( function() {
                 var id = "UlQuestion";
@@ -93,11 +98,13 @@ include("Vue/PHP de base/MenuProf.php");
     </div>
     <div id="ListeModifQuiz" class="Liste ListeGererQuiz">
         <div id="QuizDropZone" class="ListeDivElementStyle"></div>
-        <ul id="UlModifQuiz">
-        </ul>
+        <ul id="UlModifQuiz"></ul>
     </div>
     <div id="ListeGererQuestions" class="Liste ListeGererQuiz">
         <ul id="UlQuestion">
+            <?php
+                remplirListeQuestions(4, "420jean");
+            ?>
         </ul>
         <div id="AjouterQuestion" class="ListeDivElementStyle">Ajouter une question</div>
     </div>
@@ -106,6 +113,7 @@ include("Vue/PHP de base/MenuProf.php");
 <?php
 include("Vue/PHP de base/BasDePage.php");
 ?>
+<!--
 <script>
     $("#UlQuestion").ready(function() {
         $.ajax({
@@ -114,18 +122,12 @@ include("Vue/PHP de base/BasDePage.php");
             data: {"Triage":"default", "idCours":4 , "idProprietaire": "420jean"},
             dataType: "json",
             success: function(resultat) {
-                var enonceDeLaQuestion;
-                for(var i = 0; i < resultat.length; ++i) {
-                    enonceDeLaQuestion = resultat[i].enonceQuestion;
-                    if(enonceDeLaQuestion.length > 25) {
-                        enonceDeLaQuestion = enonceDeLaQuestion.substring(0, 25) + "...";
-                    }
-                    ajouterLi_ToUl_V2("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true);
-                }
+                traiterJSONQuestions(resultat);
             }
         });
     });
 </script>
+-->
 </body>
 
 </html>

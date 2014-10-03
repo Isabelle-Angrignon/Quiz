@@ -111,3 +111,26 @@ fieldset {
 	margin-right:5%;
 }
 
+
+#EnonceQuestion {
+    background-color:red;
+    width:60%;
+    min-height:70px;
+    //font-size:12px;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border:solid black;
+    border-radius:10px;
+    padding:10px;
+}
+#reponseConteneur {
+    background-color:blue;
+    width:50%;
+    min-height:400px;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border:solid black;
+    border-radius:10px;
+    margin-top:20px;
+}
+.dDivPrincipale {
+    padding:10px;
+}
