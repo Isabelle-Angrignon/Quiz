@@ -9,11 +9,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <head>
 	<link rel="stylesheet" href="CSS/Prof-GererQuiz.css" type="text/css" media="screen" >
 	
-	<?php
-        include("Vue/PHP de base/InclusionJQuery.php");
+	<?php 
 		include("Vue/PHP de base/InclusionTemplate.php");
+		include("Vue/PHP de base/InclusionJQuery.php");
         include("Vue/PHP de base/Utilitaires.php");
-        include("Modele/FonctionCours.php");
     ?>
 	
   	<script src="Javascript/Generique.js"></script>
@@ -72,7 +71,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	<div class="contenu">
 		<fieldset><select id="DDL_Cours">
                 <?php
-                    ListerCoursDansSelect("DDL_Cours", false);
+                    
                 ?>
 		</select></fieldset>
 		<div id="LBL_ListesGererQuiz">
