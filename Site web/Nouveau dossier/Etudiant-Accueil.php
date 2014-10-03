@@ -9,8 +9,9 @@
     include("Vue/PHP de base/InclusionTemplate.php");
 
     include("Vue/PHP de base/Utilitaires.php");
-    include("Modele/FonctionsQuizEtudiant.php");
     include("Modele/FonctionCours.php");
+    include("Modele/FonctionsQuizEtudiant.php");
+
     ?>
 
     <script>
