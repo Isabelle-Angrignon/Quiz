@@ -105,7 +105,14 @@ function ListerCoursDansSelect($IdSelect, $tousMesCours)
         }
     }
 }
-
+/*
+    Nom: GenererOption
+    Par: Mathieu Dumoulin
+    Date: 06/10/2014
+    Intrants: $IdSelect : L'id du select parent
+              $valeur : le texte que la balise option doit contenir
+              $idOption : le id du nouveau option
+*/
 function GenererOption($IdSelect, $valeur, $idOption)
 {
     echo "<script>ajouterOption_ToSelect( '". $IdSelect . "' , '".$idOption."' , '".$valeur."' , true);</script>";

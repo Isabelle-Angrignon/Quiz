@@ -142,7 +142,7 @@ div#enteteSite{
 	min-height: 600px;
 	background-color:white;
 	margin:auto;
-	margin-top:150px;
+	margin-top:10%;
 	margin-bottom:150px;
 	z-index:40;
 	overflow-x:hidden;
