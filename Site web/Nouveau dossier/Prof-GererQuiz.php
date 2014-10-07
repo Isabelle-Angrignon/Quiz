@@ -10,11 +10,11 @@ Description: Cette interface représente l'interface principale d'un professeur 
     <link rel="stylesheet" href="CSS/Prof-GererQuiz.css" type="text/css" media="screen" >
 
     <?php
-    include("Vue/PHP de base/InclusionJQuery.php");
-    include("Vue/PHP de base/InclusionTemplate.php");
-    include("Vue/PHP de base/Utilitaires.php");
-    include("Modele/FonctionsProf-Quiz.php");
-    include("Modele/FonctionCours.php");
+        include("Vue/PHP de base/InclusionJQuery.php");
+        include("Vue/PHP de base/InclusionTemplate.php");
+        include("Vue/PHP de base/Utilitaires.php");
+        include("Modele/FonctionsProf-Quiz.php");
+        include("Modele/FonctionCours.php");
     ?>
 
     <script src="Javascript/Generique.js"></script>
@@ -51,6 +51,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 insererNouveauDiv("EnonceQuestion", "popupPrincipal", null);
                 $("#EnonceQuestion").html("Enoncé de question tres grand et tres gros, comme les boulles de Francis qui ressemblent à une souche souche souchesouchesouches ouchesouchesouchesou chesouchesouchesouchesouche souchesouchesouche souchesouch esoucheso uchesouche");
                 insererNouveauDiv("reponseConteneur", "popupPrincipal", null);
+                alert($(this).attr("id"));
             });
             $("#AjouterQuestion").click( function() {
                 var id = "UlQuestion";
@@ -67,10 +68,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <body>
 
 <?php
-/*demarrerSession();
-redirigerSiNonConnecte();*/
-include("Vue/PHP de base/EnteteSite.php");
-include("Vue/PHP de base/MenuProf.php");
+    /*demarrerSession();
+    redirigerSiNonConnecte();*/
+    include("Vue/PHP de base/EnteteSite.php");
+    include("Vue/PHP de base/MenuProf.php");
 ?>
 
 <div class="contenu">
@@ -111,7 +112,7 @@ include("Vue/PHP de base/MenuProf.php");
 </div>
 
 <?php
-include("Vue/PHP de base/BasDePage.php");
+    include("Vue/PHP de base/BasDePage.php");
 ?>
 <!--
 <script>

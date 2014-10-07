@@ -37,16 +37,20 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    });
 	    $("#UlEtudiants").sortable({
 	    	connectWith: "#UlModifGroupe",
-	    	revert: 150
+	    	revert: 150,
+            dropOnEmpty:false
 	    });
 	    $("#QuizDropZone").sortable({
 	    	connectWith: "#UlCours",
 	    	revert: 150,
             receive: function(event,ui) {
                 $("#UlCours").sortable("option","connectWith",false);
+                $( "#UlEtudiants" ).sortable( "option", "dropOnEmpty", true );
             },
             remove: function(event,ui){
                 $("#UlCours").sortable("option","connectWith","#QuizDropZone");
+                $( "#UlEtudiants" ).sortable( "option", "dropOnEmpty", false );
+                $('#UlModifGroupe').empty();
             }
 
 	    });

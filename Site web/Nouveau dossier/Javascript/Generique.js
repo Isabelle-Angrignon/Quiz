@@ -100,7 +100,7 @@ function creeFrameDynamique(idDivPrincipal) {
 	fondOmbrage.onclick = function(event) { 
 		// detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
 		$(this).detach();
-	}
+	};
 	
 	/*fondOmbrage.onkeydown = function(event) {                 												 /////////////////   Ne marche pas car le div ne peut pas avoir le focus.
 		alert(event.keyCode);
@@ -111,7 +111,7 @@ function creeFrameDynamique(idDivPrincipal) {
 	}*/
 	var divPrincipale =  creeBaliseAvecClasse("div", "dDivPrincipale");
 	// Nécessaire pour empecher l'événement onclick de son parent d'être activé lorsqu'on clic dessus ce div
-	divPrincipale.onclick = function(event) { event.stopPropagation(); }
+	divPrincipale.onclick = function(event) { event.stopPropagation(); };
     divPrincipale.setAttribute("id", idDivPrincipal);
 
 	document.body.appendChild(fondOmbrage);
@@ -126,13 +126,17 @@ function creeFrameDynamique(idDivPrincipal) {
 // Intrant(s) : idDiv = id que vous voulez affecter au nouveau div.
 //              idParent = id du parent
 //              classDiv = classe du nouveau div. Entrer null s'il n'y a pas de classe
+// Extrant(s) : Il n'y en a pas
+// Description : Cette méthode créée un div dynamiquement, lui affecte l'id idDiv,
+//              la classe classDiv (si elle n'est pas nulle) et l'insère dans le parent ayant comme id idParent.
 function insererNouveauDiv(idDiv, idParent, classDiv) {
     var parent = document.getElementById(idParent);
     var nouveauDiv = document.createElement("div");
     nouveauDiv.setAttribute("id", idDiv);
-
+    // Ici j'utilise className au lieu de setAttribute car ça me permet d'ajouter plusieurs classes à l'élément
+    // sans avoir à modifier le code lorsqu'il y a plusieurs classes
     if(classDiv != null) {
-        nouveauDiv.setAttribute("class", classDiv);
+        nouveauDiv.className = classDiv;
     }
     parent.appendChild(nouveauDiv);
 }
