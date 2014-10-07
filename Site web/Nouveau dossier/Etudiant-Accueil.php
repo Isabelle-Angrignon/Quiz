@@ -11,6 +11,7 @@
     include("Vue/PHP de base/Utilitaires.php");
     include("Modele/FonctionCours.php");
     include("Modele/FonctionsQuizEtudiant.php");
+    include("Vue/FonctionsQuizEtudiant.php");
 
     ?>
 
@@ -24,10 +25,7 @@
             $("#UlQuizAleatoire").click( function() {
                 //appeler la fonction php;
                 this.submit = true;
-            });
-
-            $("#UlQuizAleatoire").click( function() {
-                creeFrameDynamique();
+           //     creeFrameDynamique();
             });
         });
     </script>
@@ -45,7 +43,7 @@ redirigerSiNonConnecte();
 
 <div class="contenu">
     <!-- Liste déroulante pour choisir un cours -->
-    <fieldset><select id="DDL_Cours">
+    <fieldset><select id="DDL_Cours" name="DDL_Cours">
             <?php
             ListerCoursDansSelect("DDL_Cours", false);
             ?>
@@ -63,6 +61,8 @@ redirigerSiNonConnecte();
         <label>Formatif</label>
         <ul id="UlQuizFormatif">
             <!-- les items de quiz apparaîtront ici -->
+            <?php $idCours =
+            ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF") ?>
         </ul>
 
 
@@ -76,12 +76,17 @@ redirigerSiNonConnecte();
     </div>
 
     <div id="QuizAleatoire" class="Liste ListeGererQuiz">
-        <form action=genererQuestionsAleatoires(4) >
+        <form action=genererQuestionsAleatoires() >
             <label>Aléatoire</label>
             <ul id="UlQuizAleatoire">
                 <li class="ui-state-default" >Générer</li>
 
             </ul>
+            <?php if (isset($_SESSION['listeQuestionsAleatoires']))
+            {
+                echo 'print_r($_SESSION[\'listeQuestionsAleatoires\'])';
+            }
+            ?>
         </form>
     </div>
 

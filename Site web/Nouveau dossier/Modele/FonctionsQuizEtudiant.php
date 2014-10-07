@@ -1,12 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Isabelle
- * Date: 2014-09-30
- * Time: 13:03
- */
-function genererQuestionsAleatoires($cours)
+/*
+    Nom: genererQuestionsAleatoires
+    Par: Isabelle Angrignon
+    Date: 03/10/2014
+    Description: Cette fonction communique à la BD et récupère La liste des questions de type aléatoire
+                pour un cours donné.
+*/
+function genererQuestionsAleatoires()
 {
+    $cours = $_POST['DDL_Cours'];
+
     // a retirer et mettre connecterEtudiant
     $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '');
 
@@ -22,22 +25,49 @@ function genererQuestionsAleatoires($cours)
 
         if (!empty($quizAleatoire))
         {
-            $_SESSION['listeQuestionsAleatoires'] = $quizAleatoire;
-            echo 'Quiz généré.';
+            $_SESSION['listeQuestionsAleatoires'] = shuffle($quizAleatoire);
         }
         $requete->closeCursor();
     }
-
     unset($bdd);// fermer connection bd
+
+
 }
 
 /*
-    Nom: LireCoursEtudiant
-    Par: Simon Bouchard, adapté par Isabelle Angrignon
+    Nom: recupererElementsQuestion
+    Par: Isabelle Angrignon
+    Date: 04/10/2014
+    Description: Cette fonction communique à la BD et récupère Les informations pertinentes
+                a une question.
+*/
+function recupererElementsQuestion($idQuestion)
+{
+    // a retirer et mettre connecterEtudiant
+    $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '');
+
+    if (isset($idQuestion))
+    {
+        $requete = $bdd->prepare("CALL recupererElementsQuestion(?)");
+        $requete->bindparam(1, $idQuestion, PDO::PARAM_INT,10);
+
+        if (!empty($requete)) {
+            $requete->execute();
+        }
+        $infosQuestion = $requete->fetchAll();
+        $requete->closeCursor();
+    }
+    unset($bdd);// fermer connection bd
+
+    return $infosQuestion;
+}
+
+/*
+    Nom: ListerQuizEtudiantCours
+    Par: Isabelle Angrignon
     Date: 03/10/2014
-    Intrants: $idEtudiant = Le id d'un étudiant
-    Extrant(s): Tableau de cours: idCours, codeCours, nomCours, idProfesseur
-    Description: Cette fonction communique à la BD et récupère La liste des cours auquel cet étudiant est inscrit
+    Description: Cette fonction communique à la BD et récupère La liste des Quiz d'un type donné
+                pour un cours donné auquel un étudiant est inscrit.
 */
 function ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz)
 {
@@ -53,15 +83,6 @@ function ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz)
     unset($bdd);
 
     return $resultat;
-}
-
-function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz)
-{
-    $Donnee = ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz );
-    foreach($Donnee as $Row)
-    {
-        GenererLi($idUl,$Row['titrequiz'], $Row['idQuiz']);
-    }
 }
 
 ?>
