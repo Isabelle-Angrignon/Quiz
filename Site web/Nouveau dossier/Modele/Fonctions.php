@@ -11,7 +11,7 @@ But: Contient diverses fonctions d'accès à la BD
 function ajouterUsager($id, $prenom, $nom)
 {
 	// a retirer et mettre connecterProf
-    $bdd = connecterAdmin();
+    $bdd = connecterProf();
 	if (isset($id) AND isset($prenom) AND isset($nom))
 	{
 		$requete = $bdd->prepare("CALL ajouterUsager(?, ?, ?)");
@@ -38,7 +38,7 @@ But:
 function validerUsager()
 {				
 	// a retirer et mettre connecterEtudiant
-	$bdd = connecterAdmin();
+	$bdd = connecterEtudiant();
 
 	if (isset($_POST['nomUsager']) AND isset($_POST['motDePasse']))
 	{
@@ -72,6 +72,12 @@ function validerUsager()
 }	
 
 
+
+function getStringConnection()
+{
+    return 'mysql:host=172.17.104.99:8080;dbname=projetquiz';
+}
+
 //pour les méthodes de connection:  crypter mdp????
 /*	Retourne une connection à la base de donnée en tant que professeur */
 function connecterProf()
@@ -79,7 +85,7 @@ function connecterProf()
     //'mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Professeur', 'prof'
     try
     {
-        $bdd = new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $bdd = new PDO(getStringConnection(), 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         return $bdd;
     }
     catch (Exception $e)
@@ -94,7 +100,7 @@ function connecterAdmin()
 {
 	try
 	{
-        $bdd = new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $bdd = new PDO(getStringConnection(), 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         return $bdd;
 	}
 	catch (Exception $e)
@@ -110,7 +116,7 @@ function connecterEtudiant()
 	try
     {
         //'mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Etudiant', 'etudiant'
-        $bdd = new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $bdd = new PDO(getStringConnection(), 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         return $bdd;
     }
     catch (Exception $e)
