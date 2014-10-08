@@ -116,7 +116,7 @@ function connecterEtudiant()
 	try
     {
         //'mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Etudiant', 'etudiant'
-        $bdd = new PDO(getStringConnection(), 'Admin', 'aXdmin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $bdd = new PDO(getStringConnection(), 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         return $bdd;
     }
     catch (Exception $e)
