@@ -5,7 +5,6 @@
 	<?php
         include("Vue/Template/InclusionJQuery.php");
 		include("Vue/Template/InclusionTemplate.php");
-		include("Vue/Template/Utilitaires.php");
 	?>
     <link rel="stylesheet" href="Vue/CSS/GererSonCompte.css" type="text/css" media="screen" >
 </head>
@@ -14,7 +13,7 @@
 
 	<?php
 		demarrerSession();
-		redirigerSiNonConnecte();
+		//redirigerSiNonConnecte();
 		include("Vue/Template/EnteteSite.php");
         //faire un if sur $_SESSION["typeUsager"]
 		include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
@@ -44,7 +43,7 @@
                 </div>
 
                 <div id="loginTextFields">
-                    <input type="text" id="TBNomUsager" name="nomUsager" />
+                    <input type="text" id="TBNomUsager" name="nomUsager" value="<?php echo $_SESSION['idUsager'] ?>"/>
                     <input type="text" id="TBMotDePasse" name="motDePasse" />
                 </div>
 

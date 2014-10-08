@@ -7,13 +7,15 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <html>
 
 <head>
-	<link rel="stylesheet" href="CSS/GererCours.css" type="text/css" media="screen" >
+	<link rel="stylesheet" href="Vue/CSS/GererCours.css" type="text/css" media="screen" >
 	
 	<?php
 		include("Vue/Template/InclusionJQuery.php");
         include("Vue/Template/InclusionTemplate.php");
-     //   include("Vue/Template/Utilitaires.php");
-        include("Modele/mFonctionCours.php");
+        include("Modele/ModeleCours.php");
+        include("Modele/ModeleEtudiants.php");
+        include("Controleur/cFonctionCours.php");
+
     ?>
 	
   	<script src="Javascript/Generique.js"></script>
