@@ -92,7 +92,8 @@ function connecterAdmin()
 {
 	try
 	{
-        return new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $bdd = new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Admin', 'admin');
+        return $bdd;
 	}
 	catch (Exception $e)
 	{
