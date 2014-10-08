@@ -76,9 +76,10 @@ function validerUsager()
 /*	Retourne une connection à la base de donnée en tant que professeur */
 function connecterProf()
 {
+    //'mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Professeur', 'prof'
     try
     {
-        $bdd = new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Professeur', 'prof',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $bdd = new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         return $bdd;
     }
     catch (Exception $e)
@@ -108,7 +109,8 @@ function connecterEtudiant()
 {
 	try
     {
-        $bdd = new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Etudiant', 'etudiant',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        //'mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Etudiant', 'etudiant'
+        $bdd = new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         return $bdd;
     }
     catch (Exception $e)
