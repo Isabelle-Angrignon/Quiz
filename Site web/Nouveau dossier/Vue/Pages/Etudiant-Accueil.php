@@ -7,7 +7,7 @@
     <?php
     include("Vue/Template/InclusionJQuery.php");
     include("Vue/Template/InclusionTemplate.php");
-    include("Vue/Template/Utilitaires.php");
+
     include("Controleur/cFonctionCours.php");
     include("Modele/ModeleCours.php");
     include("Modele/mFonctionsQuizEtudiant.php");
