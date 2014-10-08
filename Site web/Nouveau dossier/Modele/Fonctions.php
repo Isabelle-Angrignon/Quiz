@@ -38,7 +38,7 @@ But:
 function validerUsager()
 {				
 	// a retirer et mettre connecterEtudiant
-	$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '');
+	$bdd = connecterAdmin();
 	
 	if (isset($_POST['nomUsager']) AND isset($_POST['motDePasse']))
 	{
@@ -78,7 +78,7 @@ function connecterProf()
 {
 	try
 	{
-		$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'Professeur', 'prof');
+		$bdd = new PDO('mysql:host=%;dbname=projetquiz', 'Professeur', 'prof');
 	}
 	catch (Exception $e)
 	{
@@ -86,16 +86,16 @@ function connecterProf()
 	}
 }
 
-/*  Se connecter à la base de donnée en tant d'admin */
+/*  Retourne une connection à la base de donnée en tant d'admin */
 function connecterAdmin()
 {
 	try
 	{
-		$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'Admin', 'admin');
+        return new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 	}
 	catch (Exception $e)
 	{
-	        die('Erreur : ' . $e->getMessage());
+	    echo 'alert(' .$e->getMessage(). ' ); ';
 	}
 }
 
