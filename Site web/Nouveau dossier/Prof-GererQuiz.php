@@ -32,26 +32,26 @@ Description: Cette interface représente l'interface principale d'un professeur 
             $("#UlQuiz").sortable({
                 connectWith: "#QuizDropZone",
                 revert: 150
-            });
+            }).disableSelection();
             $("#UlModifQuiz").sortable({
                 connectWith: "#UlQuestion",
                 revert: 150
-            });
+            }).disableSelection();
             $("#UlQuestion").sortable({
                 connectWith: "#UlModifQuiz",
                 revert: 150
-            });
+            }).disableSelection();
             $("#QuizDropZone").sortable({
                 connectWith: "#UlQuiz",
                 revert: 150
-            });
+            }).disableSelection();
 
             $("#DDL_Cours").selectmenu();
-            $("#UlQuestion").click( function() {
-                creeFrameDynamique("popupPrincipal");
-                insererNouveauDiv("EnonceQuestion", "popupPrincipal", null);
+            $("#UlQuestion li").click( function() {
+                creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
+                /*insererNouveauDiv("EnonceQuestion", "popupPrincipal", null);
                 $("#EnonceQuestion").html("Enoncé de question tres grand et tres gros, comme les boulles de Francis qui ressemblent à une souche souche souchesouchesouches ouchesouchesouchesou chesouchesouchesouchesouche souchesouchesouche souchesouch esoucheso uchesouche");
-                insererNouveauDiv("reponseConteneur", "popupPrincipal", null);
+                insererNouveauDiv("reponseConteneur", "popupPrincipal", null);*/
                 alert($(this).attr("id"));
             });
             $("#AjouterQuestion").click( function() {
