@@ -54,12 +54,17 @@ function validerUsager()
 	       
 	    $requete->execute();
 	    
-	    $estValide = $requete->fetch(); 
+	    $infoUsager = $requete->fetch();
 	    
-	    if($estValide[0] == 1)// si ici, il d=faut sauvegarder le idUsager dans la session+ si prof, eleve+
+	    if($infoUsager['nom'] != null)// si ici, il d=faut sauvegarder le idUsager dans la session+ si prof, eleve+
 	    {
 	    	// mettre le idUsager dans cookie de session
 	    	$_SESSION['idUsager'] = $idUsager;
+            $_SESSION['Nom'] = $infoUsager['nom'];
+            $_SESSION['Prenom'] = $infoUsager['prenom'];
+            $_SESSION['Nom'] = $infoUsager['paramchange'];
+            definirTypeUsager($idUsager, $_SESSION['estAdmin']);
+
 	    	$_SESSION['erreur'] = 'Le nom d\'usager et le mot de passe sont valides';
 	    	// aller à la bonne page: admin, prof, etudiant
 	    	redirigerUsager();		    					    

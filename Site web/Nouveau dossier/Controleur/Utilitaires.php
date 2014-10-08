@@ -36,25 +36,43 @@ function redirigerSiNonConnecte()
     }
 }
 
-//Détermine notre type d'usager: les profs d'info commencent tous pas 420
+//Redirige à la bonne page d'accueil selon notre type d'usager
 function redirigerUsager()
 {
-    $usager = $_SESSION['idUsager'];
+    $typeUsager = $_SESSION['typeUsager'];
 
-    if ('4' == $usager[0])
+    if ($typeUsager == 'Prof'|| $typeUsager == 'Admin' )
     {
-        //Prof
-        $_SESSION['typeUsager'] = 'prof';
-        //redirect
         header('Location: Prof-GererQuiz.php');
+    }
+    elseif($typeUsager == 'Etudiant' )
+    {
+        header('Location: Etudiant-Accueil.php');
     }
     else
     {
-        //etudiant
-        $_SESSION['typeUsager'] = 'etudiant';
-        //redirect
-        header('Location: Etudiant-Accueil.php');
+        header('Location: Index.php');
     }
+}
+//Définit la variable de session Type d'usager selon qu'il est Étudiant, Prof ou Admin.
+function definirTypeUsager($usager, $estAdmin )
+{
+    if ('4' == $usager[0])
+    {
+        if ($estAdmin)
+        {
+            $_SESSION['typeUsager'] = 'Admin';
+        }
+        else
+        {
+            $_SESSION['typeUsager'] = 'Prof';
+        }
+    }
+    else
+    {
+        $_SESSION['typeUsager'] = 'Etudiant';
+    }
+
 }
 
 /*
