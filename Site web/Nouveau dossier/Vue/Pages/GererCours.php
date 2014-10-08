@@ -10,14 +10,14 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	<link rel="stylesheet" href="CSS/GererCours.css" type="text/css" media="screen" >
 	
 	<?php
-		include("Vue/PHP de base/InclusionJQuery.php");
-        include("Vue/PHP de base/InclusionTemplate.php");
-        include("Vue/PHP de base/Utilitaires.php");
-        include("Modele/FonctionCours.php");
+		include("Vue/Template/InclusionJQuery.php");
+        include("Vue/Template/InclusionTemplate.php");
+        include("Vue/Template/Utilitaires.php");
+        include("Modele/mFonctionCours.php");
     ?>
 	
-  	<script src="Javascript/Generique.js"></script>
-  	<script src="Javascript/GererCours.js"></script>
+  	<script src="../../Javascript/Generique.js"></script>
+  	<script src="../../Javascript/GererCours.js"></script>
   	<script>
   	/////////////////////////////////////////////////////////////////////////////////////////
   	////// Aide mémoire de Mathieu pour prochaine rencontre 
@@ -86,8 +86,8 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	<?php
         /*demarrerSession();
         redirigerSiNonConnecte();*/
-		include("Vue/PHP de base/EnteteSite.php");
-		include("Vue/PHP de base/MenuProf.php");
+		include("Vue/Template/EnteteSite.php");
+		include("Vue/Template/MenuProf.php");
 	?>
 		
 	<div class="contenu">
@@ -118,7 +118,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	</div>
 	
 	<?php
-		include("Vue/PHP de base/BasDePage.php");
+		include("Vue/Template/BasDePage.php");
 	?>
 
 </body>

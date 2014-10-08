@@ -2,7 +2,7 @@
 
 
 <?php
-	include("Modele/Fonctions.php");
+	include("Modele/ModeleUsagers.php");
 
 	$nomFichier = UploadFile();
 	LireCSV($nomFichier);
@@ -63,7 +63,7 @@
     function GererLigneEleve($ligne )
     {	
     	
-    	ajouterUsager();
+    	//ajouterUsager();
     }
     
     

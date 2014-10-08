@@ -24,4 +24,6 @@ function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz)
     }
 }
 
+
+
 ?>

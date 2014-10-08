@@ -2,21 +2,19 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="CSS/Etudiant-Accueil.css" type="text/css" media="screen" >
+    <link rel="stylesheet" href="Vue/CSS/Etudiant-Accueil.css" type="text/css" media="screen" >
 
     <?php
-    include("Vue/PHP de base/InclusionJQuery.php");
-    include("Vue/PHP de base/InclusionTemplate.php");
-
-    include("Vue/PHP de base/Utilitaires.php");
-    include("Modele/FonctionCours.php");
-    include("Modele/FonctionsQuizEtudiant.php");
-    include("Vue/FonctionsQuizEtudiant.php");
-
+    include("Vue/Template/InclusionJQuery.php");
+    include("Vue/Template/InclusionTemplate.php");
+    include("Vue/Template/Utilitaires.php");
+    include("Controleur/cFonctionCours.php");
+    include("Modele/ModeleCours.php");
+    include("Modele/mFonctionsQuizEtudiant.php");
+    include("Controleur/cFonctionsQuizEtudiant.php");
     ?>
 
     <script>
-
         $(function() {
             $("#DDL_Cours").selectmenu();
 
@@ -25,7 +23,7 @@
             $("#UlQuizAleatoire").click( function() {
                 //appeler la fonction php;
                 this.submit = true;
-           //     creeFrameDynamique();
+                //     creeFrameDynamique();
             });
         });
     </script>
@@ -35,8 +33,8 @@
 <body>
 
 <?php
-include("Vue/PHP de base/EnteteSite.php");
-include("Vue/PHP de base/MenuEtudiant.php");
+include("Vue/Template/EnteteSite.php");
+include("Vue/Template/MenuEtudiant.php");
 demarrerSession();
 redirigerSiNonConnecte();
 ?>
@@ -61,8 +59,9 @@ redirigerSiNonConnecte();
         <label>Formatif</label>
         <ul id="UlQuizFormatif">
             <!-- les items de quiz apparaîtront ici -->
-            <?php $idCours =
-            ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF") ?>
+            <?php
+            $idCours = ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF")
+            ?>
         </ul>
 
 
@@ -95,7 +94,7 @@ redirigerSiNonConnecte();
 
 </div>
 
-<?php  include("Vue/PHP de base/BasDePage.php");  ?>
+<?php  include("Vue/Template/BasDePage.php");  ?>
 
 </body>
 

@@ -1,3 +1,0 @@
-Contitent les fichiers reliés aux vues.
-
-Tous les fichiers qui concernent les interfaces usagers.

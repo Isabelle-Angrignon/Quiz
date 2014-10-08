@@ -1,3 +1,0 @@
-Contitent les fichiers reliés au contrôleur
-
-Tous les fichiers qui permettent la gestion des fonctionnalités, le métier.

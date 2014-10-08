@@ -1,3 +1,0 @@
-Contitent les fichiers reliés au modèle.
-
-Tous les fichiers qui ont lien à la BD.

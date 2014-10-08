@@ -2,22 +2,22 @@
 <html>
 
 <head>
-	<?php 
+	<?php
+        include("Vue/Template/InclusionJQuery.php");
 		include("Vue/Template/InclusionTemplate.php");
-		include("Vue/Template/InclusionJQuery.php");
-		include("Modele/ModeleUsagers.php");                                        // validerUsager()
 		include("Vue/Template/Utilitaires.php");
 	?>
-	<link rel="stylesheet" href="Vue/CSS/Login.css" type="text/css" media="screen" >
+    <link rel="stylesheet" href="../CSS/GererSonCompte.css" type="text/css" media="screen" >
 </head>
 
 <body>
 
-	<?php		
+	<?php
 		demarrerSession();
-		redirigerSiDejaConnecte();		
-		validerUsager();		
+		redirigerSiNonConnecte();
 		include("Vue/Template/EnteteSite.php");
+        //faire un if sur $_SESSION["typeUsager"]
+		include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
 	?>
 	
 	<div class="contenu">
@@ -33,10 +33,11 @@
             }
             ?>
         </div>
+
         <div id="login">
             <p id="titreConnexion">Connexion</p>
 
-            <form id="login_Form" method="post" action="../index.php">
+            <form id="login_Form" method="post" action="../../index.php">
                 <div id="loginLabels">
                     <p id="nomUsager">Nom d'usager </p>
                     <p id="motDePasse">Mot de passe </p>
@@ -44,7 +45,7 @@
 
                 <div id="loginTextFields">
                     <input type="text" id="TBNomUsager" name="nomUsager" />
-                    <input type="password" id="TBMotDePasse" name="motDePasse" />
+                    <input type="text" id="TBMotDePasse" name="motDePasse" />
                 </div>
 
                 <input type="submit" id="btnConnexion" value="Se connecter"/>
@@ -53,7 +54,16 @@
 
             <p id="linkLostAcount"><a href="#">Mot de passe oublié ? </a></p>
 
+
+
         </div>
+
+
+
+
+
+
+
 
     </div>
 	
