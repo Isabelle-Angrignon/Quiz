@@ -34,7 +34,7 @@ function GenererLi($idUi , $valeur , $idLi)
 
 function LireCours()
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $bdd = connecterProf();
     $requete = $bdd->prepare("CALL listerCours()");
     $requete->execute();
     $resultat = $requete->fetchAll();
@@ -50,7 +50,7 @@ function LireCours()
 */
 function LireCoursEtudiant($idEtudiant)
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $bdd = connecterEtudiant();
     $requete = $bdd->prepare("CALL listerCoursEtudiant( ? )");
     $requete->bindparam(1, $idEtudiant, PDO::PARAM_STR,10);
     $requete->execute();
@@ -63,7 +63,7 @@ function LireCoursEtudiant($idEtudiant)
 }
 
 function LireEtudiant(){
-    $bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $bdd = connecterProf();
     $requete = $bdd->prepare("CALL listerEtudiants()");
     $requete->execute();
     $resultat = $requete->fetchAll();
