@@ -4,6 +4,6 @@
 
 <?php
 include("Vue/Template/Utilitaires.php");
-include("Modele/ModeleUsagers.php");
 include("Modele/ModeleUtilisateurs.php");
+include("Modele/ModeleUsagers.php");
 ?>

@@ -23,10 +23,13 @@ function ajouterUsager($id, $prenom, $nom)
 	    
 	    $ligneAffectee = $requete->fetch(); 
 	    $requete->closeCursor();
-
+        unset($bdd);
 	    return $ligneAffectee;
 	}
-    unset($bdd);
+    else
+    {
+        unset($bdd);
+    }
 }
 
 /*validerUsager

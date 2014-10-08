@@ -5,8 +5,7 @@
 	<?php 
 		include("Vue/Template/InclusionTemplate.php");
 		include("Vue/Template/InclusionJQuery.php");
-		include("Modele/ModeleUsagers.php");                                        // validerUsager()
-		include("Vue/Template/Utilitaires.php");
+
 	?>
 	<link rel="stylesheet" href="Vue/CSS/Login.css" type="text/css" media="screen" >
 </head>
