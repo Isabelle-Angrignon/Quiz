@@ -38,7 +38,7 @@ But:
 function validerUsager()
 {				
 	// a retirer et mettre connecterEtudiant
-	$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '');
+	$bdd = new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Admin', 'admin');
 	
 	if (isset($_POST['nomUsager']) AND isset($_POST['motDePasse']))
 	{
