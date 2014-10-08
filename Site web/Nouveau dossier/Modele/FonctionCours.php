@@ -115,5 +115,6 @@ function ListerCoursDansSelect($IdSelect, $tousMesCours)
 */
 function GenererOption($IdSelect, $valeur, $idOption)
 {
-    echo "<script>ajouterOption_ToSelect( '". $IdSelect . "' , '".$idOption."' , '".$valeur."' , true);</script>";
+    // Important de mettre des guillemets (") comme marqueur de paramètre au lieu des apostrophes(') car si la variable contient des apostrophes, Chrome te sort des erreurs
+    echo '<script>ajouterOption_ToSelect( "'. $IdSelect . '" , "'.$idOption.'" , "'.$valeur.'" , true);</script>';
 }
