@@ -7,15 +7,15 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <html>
 
 <head>
-    <link rel="stylesheet" href="CSS/Prof-GererQuiz.css" type="text/css" media="screen" >
+    <link rel="stylesheet" href="Vue/CSS/Prof-GererQuiz.css" type="text/css" media="screen" >
 
     <?php
-        include("../Template/InclusionJQuery.php");
+        include("Vue/Template/InclusionJQuery.php");
         include("Vue/Template/InclusionTemplate.php");
-     //   include("Vue/Template/Utilitaires.php");
-     //   include("Modele/ModeleUsagers.php");
-        include("Modele/FonctionsProf-Quiz.php");
+        include("Controleur/cFonctionsProf-GererQuiz.php");
+        include("Controleur/cFonctionsCours.php");
         include("Modele/ModeleCours.php");
+        include("Modele/ModeleQuestions.php");
     ?>
 
     <script src="Javascript/Generique.js"></script>
