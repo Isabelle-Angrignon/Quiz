@@ -3,7 +3,7 @@
 <script src="Javascript/Generique.js"></script>
 
 <?php
-include("Vue/Template/Utilitaires.php");
 include("Modele/ModeleUtilisateurs.php");
 include("Modele/ModeleUsagers.php");
+include("Vue/Template/Utilitaires.php");
 ?>
