@@ -11,7 +11,7 @@ But: Contient diverses fonctions d'accès à la BD
 function ajouterUsager($id, $prenom, $nom)
 {
 	// a retirer et mettre connecterProf
-	$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'root', '');
+    $bdd = connecterAdmin();
 	if (isset($id) AND isset($prenom) AND isset($nom))
 	{
 		$requete = $bdd->prepare("CALL ajouterUsager(?, ?, ?)");
@@ -22,12 +22,12 @@ function ajouterUsager($id, $prenom, $nom)
 	    $requete->execute();
 	    
 	    $ligneAffectee = $requete->fetch(); 
-	    
+	    $requete->closeCursor();
+
 	    return $ligneAffectee;
 	}
+    unset($bdd);
 }
-
-
 
 /*validerUsager
 But:
@@ -40,7 +40,6 @@ function validerUsager()
 	// a retirer et mettre connecterEtudiant
 	$bdd = connecterAdmin();
 
-	
 	if (isset($_POST['nomUsager']) AND isset($_POST['motDePasse']))
 	{
 	    $idUsager   = $_POST['nomUsager']; 
@@ -74,20 +73,22 @@ function validerUsager()
 
 
 //pour les méthodes de connection:  crypter mdp????
-/*	Se connecter à la base de donnée en tant que professeur */
+/*	Retourne une connection à la base de donnée en tant que professeur */
 function connecterProf()
 {
-	try
-	{
-		$bdd = new PDO('mysql:host=%;dbname=projetquiz', 'Professeur', 'prof');
-	}
-	catch (Exception $e)
-	{
-	        die('Erreur : ' . $e->getMessage());
-	}
+    try
+    {
+        $bdd = new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Professeur', 'prof',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        return $bdd;
+    }
+    catch (Exception $e)
+    {
+        echo 'alert(' .$e->getMessage(). ' ); ';
+        return false;
+    }
 }
 
-/*  Retourne une connection à la base de donnée en tant d'admin */
+/*  Retourne une connection à la base de donnée en tant qu'admin */
 function connecterAdmin()
 {
 	try
@@ -102,17 +103,19 @@ function connecterAdmin()
 	}
 }
 
-/*  Se connecter à la base de donnée en tant qu'étudiant */
+/*  Retourne une connection à la base de donnée en tant qu'étudiant */
 function connecterEtudiant()
 {
 	try
-	{
-		$bdd = new PDO('mysql:host=localhost;dbname=projetquiz', 'Etudiant', 'etudiant');
-	}
-	catch (Exception $e)
-	{
-	        die('Erreur : ' . $e->getMessage());
-	}
+    {
+        $bdd = new PDO('mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Etudiant', 'etudiant',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        return $bdd;
+    }
+    catch (Exception $e)
+    {
+        echo 'alert(' .$e->getMessage(). ' ); ';
+        return false;
+    }
 }
 
 ?>
