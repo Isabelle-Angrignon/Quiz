@@ -1,0 +1,1 @@
+<div onclick="maFonctionPourChanger"></div>

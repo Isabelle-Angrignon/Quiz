@@ -72,7 +72,6 @@ function definirTypeUsager($usager, $estAdmin )
     {
         $_SESSION['typeUsager'] = 'Etudiant';
     }
-
 }
 
 /*

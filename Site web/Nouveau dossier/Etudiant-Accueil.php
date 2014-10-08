@@ -23,7 +23,6 @@
             $("#UlQuizAleatoire").click( function() {
                 //appeler la fonction php;
                 this.submit = true;
-                creeFrameDynamique();
             });
         });
     </script>
@@ -37,6 +36,12 @@ include("Vue/Template/EnteteSite.php");
 include("Vue/Template/MenuEtudiant.php");
 demarrerSession();
 redirigerSiNonConnecte();
+
+if (isset($_SESSION['listeQuestionsAleatoires']))
+{
+    creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
+}
+
 ?>
 
 <div class="contenu">
@@ -75,7 +80,7 @@ redirigerSiNonConnecte();
     </div>
 
     <div id="QuizAleatoire" class="Liste ListeGererQuiz">
-        <form action=genererQuestionsAleatoires() >
+        <form action=Controleur/GenererQuestionsAleatoires.php method="post">
             <label>Aléatoire</label>
             <ul id="UlQuizAleatoire">
                 <li class="ui-state-default" >Générer</li>
@@ -83,7 +88,7 @@ redirigerSiNonConnecte();
             </ul>
             <?php if (isset($_SESSION['listeQuestionsAleatoires']))
             {
-                echo 'print_r($_SESSION[\'listeQuestionsAleatoires\'])';
+                echo 'alert($_SESSION["listeQuestionsAleatoires"])';
             }
             ?>
         </form>
