@@ -8,7 +8,7 @@
     include("Vue/Template/InclusionJQuery.php");
     include("Vue/Template/InclusionTemplate.php");
 
-    include("Controleur/cFonctionCours.php");
+    include("Controleur/cFonctionsCours.php");
     include("Modele/ModeleCours.php");
     include("Modele/mFonctionsQuizEtudiant.php");
     include("Controleur/cFonctionsQuizEtudiant.php");
@@ -23,7 +23,7 @@
             $("#UlQuizAleatoire").click( function() {
                 //appeler la fonction php;
                 this.submit = true;
-                //     creeFrameDynamique();
+                creeFrameDynamique();
             });
         });
     </script>
