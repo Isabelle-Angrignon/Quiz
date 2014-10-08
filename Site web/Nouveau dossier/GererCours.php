@@ -12,12 +12,12 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	<?php
 		include("Vue/Template/InclusionJQuery.php");
         include("Vue/Template/InclusionTemplate.php");
-        include("Vue/Template/Utilitaires.php");
+     //   include("Vue/Template/Utilitaires.php");
         include("Modele/mFonctionCours.php");
     ?>
 	
-  	<script src="../../Javascript/Generique.js"></script>
-  	<script src="../../Javascript/GererCours.js"></script>
+  	<script src="Javascript/Generique.js"></script>
+  	<script src="Javascript/GererCours.js"></script>
   	<script>
   	/////////////////////////////////////////////////////////////////////////////////////////
   	////// Aide mémoire de Mathieu pour prochaine rencontre 

@@ -10,17 +10,17 @@ Description: Cette interface représente l'interface principale d'un professeur 
     <link rel="stylesheet" href="CSS/Prof-GererQuiz.css" type="text/css" media="screen" >
 
     <?php
-        include("Vue/Template/InclusionJQuery.php");
+        include("../Template/InclusionJQuery.php");
         include("Vue/Template/InclusionTemplate.php");
-        include("Vue/Template/Utilitaires.php");
-        include("Modele/ModeleUsagers.php");
+     //   include("Vue/Template/Utilitaires.php");
+     //   include("Modele/ModeleUsagers.php");
         include("Modele/FonctionsProf-Quiz.php");
         include("Modele/ModeleCours.php");
     ?>
 
-    <script src="../../Javascript/Generique.js"></script>
-    <script src="../../Javascript/GererCours.js"></script>
-    <script src="../../Javascript/Prof-GererQuiz.js"></script>
+    <script src="Javascript/Generique.js"></script>
+    <script src="Javascript/GererCours.js"></script>
+    <script src="Javascript/Prof-GererQuiz.js"></script>
     <script>
         /////////////////////////////////////////////////////////////////////////////////////////
         ////// Aide mémoire de Mathieu pour prochaine rencontre

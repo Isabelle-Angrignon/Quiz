@@ -7,7 +7,7 @@
 		include("Vue/Template/InclusionTemplate.php");
 		include("Vue/Template/Utilitaires.php");
 	?>
-    <link rel="stylesheet" href="../CSS/GererSonCompte.css" type="text/css" media="screen" >
+    <link rel="stylesheet" href="Vue/CSS/GererSonCompte.css" type="text/css" media="screen" >
 </head>
 
 <body>
@@ -37,7 +37,7 @@
         <div id="login">
             <p id="titreConnexion">Connexion</p>
 
-            <form id="login_Form" method="post" action="../../index.php">
+            <form id="login_Form" method="post" action="index.php">
                 <div id="loginLabels">
                     <p id="nomUsager">Nom d'usager </p>
                     <p id="motDePasse">Mot de passe </p>

@@ -46,14 +46,14 @@ function redirigerUsager()
         //Prof
         $_SESSION['typeUsager'] = 'prof';
         //redirect
-        header('Location: Vue/Pages/Prof-GererQuiz.php');
+        header('Location: Prof-GererQuiz.php');
     }
     else
     {
         //etudiant
         $_SESSION['typeUsager'] = 'etudiant';
         //redirect
-        header('Location: Vue/Pages/Etudiant-Accueil.php');
+        header('Location: Etudiant-Accueil.php');
     }
 }
 
