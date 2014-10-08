@@ -20,7 +20,7 @@
 				
 				<div id="loginTextFields">
 					<input type="text" id="TBNomUsager" name="nomUsager" />
-					<input type="text" id="TBMotDePasse" name="motDePasse" />
+					<input type="password" id="TBMotDePasse" name="motDePasse" />
 				</div>
 				
 				<input type="submit" id="btnConnexion" value="Se connecter"/>
