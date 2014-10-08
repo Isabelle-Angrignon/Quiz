@@ -5,5 +5,5 @@
 <?php
 include("Modele/ModeleUtilisateurs.php");
 include("Modele/ModeleUsagers.php");
-include("Vue/Template/Utilitaires.php");
+include("Controleur/Utilitaires.php");
 ?>
