@@ -13,6 +13,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
         include("Vue/PHP de base/InclusionJQuery.php");
         include("Vue/PHP de base/InclusionTemplate.php");
         include("Vue/PHP de base/Utilitaires.php");
+        include("Modele/Fonctions.php");
         include("Modele/FonctionsProf-Quiz.php");
         include("Modele/FonctionCours.php");
     ?>
