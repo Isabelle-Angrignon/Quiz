@@ -39,6 +39,7 @@ function validerUsager()
 {				
 	// a retirer et mettre connecterEtudiant
 	$bdd = connecterAdmin();
+
 	
 	if (isset($_POST['nomUsager']) AND isset($_POST['motDePasse']))
 	{

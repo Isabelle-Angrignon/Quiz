@@ -5,8 +5,9 @@
 	<?php
         include("Vue/PHP de base/InclusionJQuery.php");
 		include("Vue/PHP de base/InclusionTemplate.php");
-		include("Vue/PHP de base/Utilitaires.php");	
+		include("Vue/PHP de base/Utilitaires.php");
 	?>
+    <link rel="stylesheet" href="CSS/GererSonCompte.css" type="text/css" media="screen" >
 </head>
 
 <body>
@@ -20,7 +21,7 @@
 	?>
 	
 	<div class="contenu">
-
+        <?php include("ContenueCompte.php"); ?>
 	</div>
 	
 	<?php
