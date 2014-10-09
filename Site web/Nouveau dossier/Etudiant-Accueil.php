@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="Vue/CSS/Etudiant-Accueil.css" type="text/css" media="screen" >
+    <link rel="stylesheet" href="Vue/CSS/DynamiqueQuestionARepondre.css" type="text/css" media="screen" >
 
     <?php
     include("Vue/Template/InclusionJQuery.php");
@@ -19,11 +20,21 @@
             $("#DDL_Cours").selectmenu();
 
             $("#UlQuizFormatif").selectable();
+            $("#UlQuizFormatif").click( function() {
+                //appeler la fonction php;
+                this.submit = true;
+            });
 
             $("#UlQuizAleatoire").click( function() {
                 //appeler la fonction php;
                 this.submit = true;
             });
+
+            $("#UlChoixReponse").selectable();
+            $("#UlChoixReponse").click( function() {
+                //Changer la couleur;
+            });
+
         });
     </script>
 
@@ -39,6 +50,7 @@ redirigerSiNonConnecte();
 
 if (isset($_SESSION['listeQuestionsAleatoires']))
 {
+    echo 'alert "quiz set"';
     creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
 }
 
@@ -65,7 +77,7 @@ if (isset($_SESSION['listeQuestionsAleatoires']))
         <ul id="UlQuizFormatif">
             <!-- les items de quiz apparaîtront ici -->
             <?php
-            $idCours = ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF")
+            ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF")
             ?>
         </ul>
 

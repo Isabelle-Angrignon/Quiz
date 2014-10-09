@@ -8,8 +8,6 @@
 */
 function genererQuestionsAleatoires($cours)
 {
-
-
     $bdd = connecterEtudiant();
 
     if (isset($cours))
@@ -29,6 +27,8 @@ function genererQuestionsAleatoires($cours)
         $requete->closeCursor();
     }
     unset($bdd);// fermer connection bd
+
+     echo 'alert "quiz set"';
 }
 
 

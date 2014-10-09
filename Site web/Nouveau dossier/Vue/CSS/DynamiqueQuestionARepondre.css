@@ -1,0 +1,50 @@
+/*
+    Par Isabelle Angrignon
+    Le 8/10/2014
+    CSS pour les éléments composant le div dynamique qui présente unequestion à répondre
+*/
+
+/*format du texte de la barre d'info de suivi du quiz*/
+.suiviQuiz{
+
+}
+
+#divSuiviQuiz{
+    height:50px;
+    width:90%;
+    background-color: rgba(232, 119, 37, 0.73);
+    border:2px black solid;
+    margin-top:20px;
+    align-self: auto;
+}
+
+#labelCours {
+
+}
+
+#labelScore{
+
+}
+
+#labelTitre {
+
+}
+
+#labelProp {
+
+}
+
+/* mettre une classe pour les éléments de laquestion ici au besoin*/
+
+
+#divQuestion{
+
+}
+
+#labelEnonce{
+
+}
+
+#UlChoixReponse{
+
+}
