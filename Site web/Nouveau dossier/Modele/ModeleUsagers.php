@@ -68,8 +68,8 @@ function validerUsager()
 	    	unset($_SESSION['erreur']);
             $_SESSION['Nom'] = $infoUsager['nom'];
             $_SESSION['Prenom'] = $infoUsager['prenom'];
-            $_SESSION['Nom'] = $infoUsager['paramchange'];
-            definirTypeUsager($idUsager, $_SESSION['estAdmin']);
+            $_SESSION['ParamChange'] = $infoUsager['paramchange'];
+            definirTypeUsager($idUsager, $infoUsager['estAdmin']);
 	    	// aller à la bonne page: admin, prof, etudiant
 	    	redirigerUsager();		    					    
 	    }
