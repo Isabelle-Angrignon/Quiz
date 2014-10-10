@@ -1,6 +1,7 @@
 <?php  /*récupérer les infos de la question*/?>
 
 
+
 <script>
     $(function() {
 
@@ -30,8 +31,9 @@
     <div id="labelEnonce" class="zoneQuestion" >
         <label  class="zoneQuestion">
             Super méga énoncé de question ici...
-            <?php //print_r($_SESSION['test']);
-            echo $_SESSION['Test'] ?>
+            <?php
+            echo  $_SESSION['listeQuestions'][0][0] ;
+            ?>
 
 
         </label>
