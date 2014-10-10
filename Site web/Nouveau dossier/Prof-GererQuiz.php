@@ -35,11 +35,13 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 }).disableSelection();
                 $("#UlModifQuiz").sortable({
                     connectWith: "#UlQuestion",
-                    revert: 150
+                    revert: 150,
+                    helper : 'clone'
                 }).disableSelection();
                 $("#UlQuestion").sortable({
                     connectWith: "#UlModifQuiz",
-                    revert: 150
+                    revert: 150,
+                    helper : 'clone'
                 }).disableSelection();
                 $("#QuizDropZone").sortable({
                     connectWith: "#UlQuiz",
@@ -54,10 +56,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     }
                 });
 
-                $("#UlQuestion li").click( function() {
-                    creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
-                    alert($(this).attr("id"));
-                });
+                addClickEventToQuestions();
                 $("#AjouterQuestion").click( function() {
                     var id = "UlQuestion";
                     ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);

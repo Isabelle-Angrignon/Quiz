@@ -4,6 +4,12 @@
 // Description : Contient tout le code Javascript spécifique à la page Prof-GererQuiz.php
 
 
+function addClickEventToQuestions() {
+    $("#UlQuestion li").click( function() {
+        creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
+        alert($(this).attr("id"));
+    });
+}
 
 function traiterJSONQuestions(resultat) {
     var enonceDeLaQuestion;
@@ -18,7 +24,7 @@ function traiterJSONQuestions(resultat) {
 
 function updateUlQuestion(idCours) {
     if(idCours != "") {
-        document.getElementById("UlQuestion").innerHTML = "";
+        $("#UlQuestion li").remove();
 
         $.ajax({
             type: 'POST',
@@ -27,6 +33,8 @@ function updateUlQuestion(idCours) {
             dataType: "json",
             success: function(resultat) {
                 traiterJSONQuestions(resultat);
+                // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
+                addClickEventToQuestions();
             },
             error: function() {
                 alert("Erreur! ");
