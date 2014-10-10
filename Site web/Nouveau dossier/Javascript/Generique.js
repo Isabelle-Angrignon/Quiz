@@ -91,31 +91,36 @@ function creeBaliseAvecClasse(baliseACreer, classe) {
 // creeFrameDynamique
 // Par Mathieu Dumoulin
 // Date : 23/09/14
-// Intrant(s) : Il n'y en a pas
-// Extrant(s) : Le div représentant la page de base du "pop up" 
+// Intrant(s) : idDivPrincipal = l'identifiant du pop up
+//              pathFichierPHP = Le path du fichier PHP qui représente le contenu du divPrincipal
+// Extrant(s) : Le div représentant la page de base du "pop up"
 // Description : Cette fonction créée, à l'aide de balises div, un squelette de fenêtre "pop up" avec un fond en ombragé
-function creeFrameDynamique(idDivPrincipal) {
+function creeFrameDynamique(idDivPrincipal, pathFichierPHP) {
 	var fondOmbrage = creeBaliseAvecClasse("div", "dFondOmbrage");
 	fondOmbrage.setAttribute("id", "dFondOmbrage");
 	fondOmbrage.onclick = function(event) { 
 		// detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
 		$(this).detach();
 	};
-	
-	/*fondOmbrage.onkeydown = function(event) {                 												 /////////////////   Ne marche pas car le div ne peut pas avoir le focus.
+
+   /* fondOmbrage.onkeydown = function(event) {               												 /////////////////   Ne marche pas car le div ne peut pas avoir le focus.
 		alert(event.keyCode);
 		// KeyCode 27 == Le boutton escape
 		if(event.keyCode == 27){
 			$(this).detach();
 		}
-	}*/
+	};*/
 	var divPrincipale =  creeBaliseAvecClasse("div", "dDivPrincipale");
 	// Nécessaire pour empecher l'événement onclick de son parent d'être activé lorsqu'on clic dessus ce div
-	divPrincipale.onclick = function(event) { event.stopPropagation(); };
+	divPrincipale.onclick = function(event) {  event.stopPropagation(); };
     divPrincipale.setAttribute("id", idDivPrincipal);
 
 	document.body.appendChild(fondOmbrage);
 	fondOmbrage.appendChild(divPrincipale);
+
+    if(pathFichierPHP != null) {
+        insererHTMLfromPHP(idDivPrincipal, pathFichierPHP);
+    }
 	
 	return divPrincipale;
 }
@@ -140,3 +145,37 @@ function insererNouveauDiv(idDiv, idParent, classDiv) {
     }
     parent.appendChild(nouveauDiv);
 }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////     FONCTIONS POUR PEUPLER/VIDER     ////////////////////////////////////////////////////////////////////////
+
+// insererHTMLfromPHP
+// Par Mathieu Dumoulin
+// Date: 08/10/2014
+// Intrants : idConteneur = l'identifiant du conteneur
+// Extrant : Il n'y en a pas
+// Description : Cette méthode utilise AJAX pour inserer le contenu HTML du fichier PHP dans le Conteneur.
+function insererHTMLfromPHP(idConteneur, pathFichierPHP) {
+    $.ajax({
+        type: 'GET',
+        url: pathFichierPHP,
+        dataType: "html",
+        success: function(resultat) {
+            var selecteur = "#" + idConteneur;
+            $(selecteur).html(resultat);
+        }
+    });
+}
+
+// viderHTMLfromElement
+// Par Mathieu Dumoulin
+// Date: 08/10/2014
+// Description : Cette fonction vide le html de l'élément correspondant à l'id passé en paramètre
+function viderHTMLfromElement(idElement) {
+    var selecteur = "#" + idConteneur;
+    $(selecteur).html("");
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

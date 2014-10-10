@@ -6,10 +6,8 @@
     Description: Cette fonction communique à la BD et récupère La liste des questions de type aléatoire
                 pour un cours donné.
 */
-function genererQuestionsAleatoires()
+function genererQuestionsAleatoires($cours)
 {
-    $cours = $_POST['DDL_Cours'];
-
     $bdd = connecterEtudiant();
 
     if (isset($cours))
@@ -29,6 +27,8 @@ function genererQuestionsAleatoires()
         $requete->closeCursor();
     }
     unset($bdd);// fermer connection bd
+
+     echo 'alert "quiz set"';
 }
 
 

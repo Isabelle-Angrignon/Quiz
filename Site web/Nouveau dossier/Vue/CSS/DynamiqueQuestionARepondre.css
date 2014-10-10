@@ -1,0 +1,97 @@
+/*
+    Par Isabelle Angrignon
+    Le 8/10/2014
+    CSS pour les éléments composant le div dynamique qui présente unequestion à répondre
+*/
+
+/*Div dynamique*/
+#QuestionAleatoire{
+    background-color: rgba(79, 168, 255, 0.45);
+}
+
+
+/*format du texte de la barre d'info de suivi du quiz*/
+.suiviQuiz{
+    text-align: center;
+    padding:10px;
+    text-decoration:none;
+}
+
+div.suiviQuiz {
+    width:90%;
+    background-color: #FDA068;
+    margin: 0 auto;
+}
+
+#divSuiviQuiz{
+    margin-top: 20px;
+    font-size: 30px;
+
+    -webkit-border-top-left-radius: 30px;
+    -moz-border-radius-topleft: 30px;
+    border-top-left-radius: 30px;
+
+}
+
+#divSuiviQuiz2{
+    text-align: right;
+    padding-top: 40px;
+
+    -webkit-border-bottom-right-radius: 30px;
+    -moz-border-radius-bottomright: 30px;
+    border-bottom-right-radius: 30px;
+
+}
+#labelCours {
+    float: left;
+    padding-left: 10px;
+}
+
+#labelScore{
+    position: relative;
+}
+
+#labelTitre {
+    float: right;
+    padding-right: 10px;
+}
+
+#labelProp {
+    padding-right: 10px;
+}
+
+/* mettre une classe pour les éléments de laquestion ici au besoin*/
+
+.zoneQuestion {
+
+}
+
+#divQuestion{
+    margin-top: 20px;
+    background-color: #ffffff;
+    font-size:large;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    text-align: center;
+}
+
+#labelEnonce{
+    background-color: rgba(79, 168, 255, 0.45);
+    width:90%;
+    min-height:70px;
+    border-radius:10px;
+    padding:10px;
+    position: relative;
+}
+
+.zoneReponses{
+
+}
+#UlChoixReponse{
+    width:50%;
+    min-height:400px;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    /*border:solid black;*/
+    border-radius:10px;
+    margin-top:20px;
+}
+

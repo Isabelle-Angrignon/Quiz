@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="Vue/CSS/Etudiant-Accueil.css" type="text/css" media="screen" >
+    <link rel="stylesheet" href="Vue/CSS/DynamiqueQuestionARepondre.css" type="text/css" media="screen" >
 
     <?php
     include("Vue/Template/InclusionJQuery.php");
@@ -19,12 +20,21 @@
             $("#DDL_Cours").selectmenu();
 
             $("#UlQuizFormatif").selectable();
+            $("#UlQuizFormatif").click( function() {
+                //appeler la fonction php;
+                this.submit = true;
+            });
 
             $("#UlQuizAleatoire").click( function() {
                 //appeler la fonction php;
                 this.submit = true;
-                creeFrameDynamique();
             });
+
+            $("#UlChoixReponse").selectable();
+            $("#UlChoixReponse").click( function() {
+                //Changer la couleur;
+            });
+
         });
     </script>
 
@@ -37,6 +47,13 @@ include("Vue/Template/EnteteSite.php");
 include("Vue/Template/MenuEtudiant.php");
 demarrerSession();
 redirigerSiNonConnecte();
+
+if (isset($_SESSION['listeQuestionsAleatoires']))
+{
+    echo 'alert "quiz set"';
+    creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
+}
+
 ?>
 
 <div class="contenu">
@@ -60,7 +77,7 @@ redirigerSiNonConnecte();
         <ul id="UlQuizFormatif">
             <!-- les items de quiz apparaîtront ici -->
             <?php
-            $idCours = ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF")
+            ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF")
             ?>
         </ul>
 
@@ -75,7 +92,7 @@ redirigerSiNonConnecte();
     </div>
 
     <div id="QuizAleatoire" class="Liste ListeGererQuiz">
-        <form action=genererQuestionsAleatoires() >
+        <form action=Controleur/GenererQuestionsAleatoires.php method="post">
             <label>Aléatoire</label>
             <ul id="UlQuizAleatoire">
                 <li class="ui-state-default" >Générer</li>
@@ -83,7 +100,7 @@ redirigerSiNonConnecte();
             </ul>
             <?php if (isset($_SESSION['listeQuestionsAleatoires']))
             {
-                echo 'print_r($_SESSION[\'listeQuestionsAleatoires\'])';
+                echo 'alert($_SESSION["listeQuestionsAleatoires"])';
             }
             ?>
         </form>
