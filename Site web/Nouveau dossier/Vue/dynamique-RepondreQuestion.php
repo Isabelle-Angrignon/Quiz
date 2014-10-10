@@ -1,4 +1,4 @@
-<div onclick="maFonctionPourChanger"></div>
+<div onclick="maFonctionPourChanger" xmlns="http://www.w3.org/1999/html"></div>
 
 <?php  /*récupérer les infos de la question*/?>
 
@@ -8,14 +8,18 @@
     <label id="labelScore" class="suiviQuiz"> 4 / 10 <?php  /*méthode qui récupère les infos de la session*/?> </label>
 
     <label id="labelTitre" class="suiviQuiz"> Aléatoire <?php  /*méthode qui récupère les infos de la session*/?> </label>
-
+</div>
+<div id="divSuiviQuiz2" class="suiviQuiz" >
     <label id="labelProp" class="suiviQuiz">Nom du prof <?php  /*méthode qui récupère les infos de la question*/?> </label>
 </div>
 
 
 
-<div id="divQuestion" class="tbd" >
-    <label id="labelEnonce" class="tbd">Super méga énoncé de question ici...<?php  /*le nom du chours tel que le selected*/?> </label>
+<div id="divQuestion" class="zoneQuestion" >
+
+    <div id="labelEnonce" class="zoneQuestion" >
+        <label  class="zoneQuestion">Super méga énoncé de question ici...<?php  /*le nom du chours tel que le selected*/?> </label>
+    </div>
 
     <ul id="UlChoixReponse" class="liste">
         <!-- les choix de réponse apparaitront ici selon le type de question -->
@@ -24,11 +28,7 @@
         ?>
     </ul>
 
-    <label id="labelScore" class="tbd"> 4 / 10 <?php  /*méthode qui récupère les infos de la session*/?> </label>
 
-    <label id="labelTitre" class="tbd"> Aléatoire <?php  /*méthode qui récupère les infos de la session*/?> </label>
-
-    <label id="labelProp" class="tbd">Nom du prof <?php  /*méthode qui récupère les infos de la question*/?> </label>
 </div>
 
 
