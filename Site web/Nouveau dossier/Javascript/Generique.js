@@ -22,7 +22,7 @@ $(function() {
 // l'élément "unique" en tant qu'attribut value(passés en paramètre) à l'aide d'une balise option.
 function ajouterOption_ToSelect(idSelect, element, texte) {
 	var optionTag = document.createElement("option");
-	optionTag.Value = element;
+	optionTag.setAttribute("value", element);
 	// createTextNode permet de mettre du texte représentant notre balise (ce que l'usager voit comme texte)
 	optionTag.appendChild(document.createTextNode(texte));
 	document.getElementById(idSelect).appendChild(optionTag);
