@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-
 <?php
 include("Vue/Template/InclusionJQuery.php");
 include("Vue/Template/InclusionTemplate.php");
@@ -21,6 +20,5 @@ genererQuestionsAleatoires($cours);
 
 header('Location: Etudiant-Accueil.php');
 ?>
-
 
 </html>

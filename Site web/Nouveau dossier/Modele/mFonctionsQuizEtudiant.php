@@ -22,7 +22,11 @@ function genererQuestionsAleatoires($cours)
 
         if (!empty($quizAleatoire))
         {
-            $_SESSION['listeQuestionsAleatoires'] = shuffle($quizAleatoire);
+            $_SESSION['listeQuestions'] = shuffle($quizAleatoire);
+        }
+        else
+        {
+            unset($_SESSION['listeQuestions']);
         }
         $requete->closeCursor();
     }

@@ -52,12 +52,8 @@ redirigerSiNonConnecte();
 //{
     $_SESSION['idCours'] = 4/*$_POST['DDL_Cours']*/;
 //}
-/*
-if (isset($_SESSION['listeQuestionsAleatoires']))
-{
-echo 'alert "quiz set"';
-creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
-}*/
+
+
 
 ?>
 
@@ -86,15 +82,11 @@ creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
                 ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF")
                 ?>
             </ul>
-
-
             <!--
             <label>Formatif</label>
             <ul id="UlQuizFormatif">
                  les items de quiz appaîtront ici
             </ul>-->
-
-
         </div>
 
         <div id="QuizAleatoire" class="Liste ListeGererQuiz">
@@ -102,23 +94,33 @@ creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
             <label>Aléatoire</label>
             <ul id="UlQuizAleatoire">
                 <li class="ui-state-default" >Générer</li>
-
             </ul>
             <?php
+            $listeQuestions = $_SESSION['listeQuestions'];
 
-            if (isset($_SESSION['listeQuestionsAleatoires']))
+            if (!empty($listeQuestions))
             {
-                echo print_r($_SESSION["listeQuestionsAleatoires"]) ;
+                foreach ($listeQuestions as $Questtion)
+                {
+                    echo 'idQuestion: '. $Questtion . ' ';
+                }
             }
             ?>
-
         </div>
-
     </form>
-
 </div>
 
-<?php  include("Vue/Template/BasDePage.php");  ?>
+<?php  include("Vue/Template/BasDePage.php");
+
+if (!empty($_SESSION['listeQuestions']))
+{
+    echo ' <script>creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php")</script> ';
+}
+
+?>
+
+
+
 
 </body>
 
