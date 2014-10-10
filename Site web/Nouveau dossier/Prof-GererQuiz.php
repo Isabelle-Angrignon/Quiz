@@ -29,35 +29,43 @@ Description: Cette interface représente l'interface principale d'un professeur 
         /////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////
         $(function() {
-            $("#UlQuiz").sortable({
-                connectWith: "#QuizDropZone",
-                revert: 150
-            }).disableSelection();
-            $("#UlModifQuiz").sortable({
-                connectWith: "#UlQuestion",
-                revert: 150
-            }).disableSelection();
-            $("#UlQuestion").sortable({
-                connectWith: "#UlModifQuiz",
-                revert: 150
-            }).disableSelection();
-            $("#QuizDropZone").sortable({
-                connectWith: "#UlQuiz",
-                revert: 150
-            }).disableSelection();
+                $("#UlQuiz").sortable({
+                    connectWith: "#QuizDropZone",
+                    revert: 150
+                }).disableSelection();
+                $("#UlModifQuiz").sortable({
+                    connectWith: "#UlQuestion",
+                    revert: 150
+                }).disableSelection();
+                $("#UlQuestion").sortable({
+                    connectWith: "#UlModifQuiz",
+                    revert: 150
+                }).disableSelection();
+                $("#QuizDropZone").sortable({
+                    connectWith: "#UlQuiz",
+                    revert: 150
+                }).disableSelection();
 
-            $("#DDL_Cours").selectmenu();
-            $("#UlQuestion li").click( function() {
-                creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
-                /*insererNouveauDiv("EnonceQuestion", "popupPrincipal", null);
-                $("#EnonceQuestion").html("Enoncé de question tres grand et tres gros, comme les boulles de Francis qui ressemblent à une souche souche souchesouchesouches ouchesouchesouchesou chesouchesouchesouchesouche souchesouchesouche souchesouch esoucheso uchesouche");
-                insererNouveauDiv("reponseConteneur", "popupPrincipal", null);*/
-                alert($(this).attr("id"));
-            });
-            $("#AjouterQuestion").click( function() {
-                var id = "UlQuestion";
-                ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
-            });
+
+                $("#DDL_Cours").selectmenu({
+                    select: function(event, ui) {
+                         var id = $("#DDL_Cours option:selected").attr("value");
+                         updateUlQuestion( id );
+                    }
+                });
+
+                $("#UlQuestion li").click( function() {
+                    creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
+                    /*insererNouveauDiv("EnonceQuestion", "popupPrincipal", null);
+                     $("#EnonceQuestion").html("Enoncé de question tres grand et tres gros, comme les boulles de Francis qui ressemblent à une souche souche souchesouchesouches ouchesouchesouchesou chesouchesouchesouchesouche souchesouchesouche souchesouch esoucheso uchesouche");
+                     insererNouveauDiv("reponseConteneur", "popupPrincipal", null);*/
+                    alert($(this).attr("id"));
+                });
+                $("#AjouterQuestion").click( function() {
+                    var id = "UlQuestion";
+                    ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
+                });
+
 
         });
         /*accept: function(sender) {
@@ -115,9 +123,13 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <?php
     include("Vue/Template/BasDePage.php");
 ?>
-<!--
+
 <script>
-    $("#UlQuestion").ready(function() {
+
+
+
+
+   /* $("#UlQuestion").ready(function() {
         $.ajax({
             type: 'POST',
             url: 'Modele/ListerQuestions.php',
@@ -127,9 +139,8 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 traiterJSONQuestions(resultat);
             }
         });
-    });
+    });*/
 </script>
--->
 </body>
 
 </html>

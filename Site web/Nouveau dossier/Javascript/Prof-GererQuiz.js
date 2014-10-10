@@ -4,6 +4,7 @@
 // Description : Contient tout le code Javascript spécifique à la page Prof-GererQuiz.php
 
 
+
 function traiterJSONQuestions(resultat) {
     var enonceDeLaQuestion;
     for(var i = 0; i < resultat.length; ++i) {
@@ -13,4 +14,24 @@ function traiterJSONQuestions(resultat) {
         }
         ajouterLi_ToUl_V2("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true);
     }
+}
+
+function updateUlQuestion(idCours) {
+    if(idCours != "") {
+        document.getElementById("UlQuestion").innerHTML = "";
+
+        $.ajax({
+            type: 'POST',
+            url: 'Controleur/ListerQuestions.php',
+            data: {"Triage":"default", "idCours":idCours , "idProprietaire": "420jean"},
+            dataType: "json",
+            success: function(resultat) {
+                traiterJSONQuestions(resultat);
+            },
+            error: function() {
+                alert("Erreur! ");
+            }
+        });
+    }
+
 }
