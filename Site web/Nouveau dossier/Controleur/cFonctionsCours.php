@@ -31,7 +31,11 @@ function ListerCoursDansSelect($IdSelect, $tousMesCours)
     }
 }
 
-//InsererCours();
+// ListerCoursDansUI
+// Permet d'insérer un eleve dans un li
+// fait par : Simon Bouchard
+// Intrant : Le Ui dans lequel il faut ajouter les li
+// Extrant: Aucun
 
 function ListerCoursDansUl($IdUl)
 {
@@ -41,6 +45,12 @@ function ListerCoursDansUl($IdUl)
         GenererLi($IdUl,$Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
     }
 }
+
+// InsererEleves
+// Permet d'inserer un eleve dans un li
+// fait par :  Simon Bouchard
+// Intrant : Le UI dans lequels il faut ajouter les Li
+// Extrant : Aucun
 
 function InsererEleves()
 {
