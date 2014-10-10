@@ -37,11 +37,12 @@
 
             <form id="login_Form" method="post" action="../index.php">
                 <div id="loginLabels">
-                    <p id="nomUsager">Nom d'usager </p>
-                    <p id="motDePasse">Mot de passe </p>
+                    <p >Nom d'usager </p>
+                    <p >Mot de passe </p>
                 </div>
 
                 <div id="loginTextFields">
+                    <p></p>
                     <input type="text" id="TBNomUsager" name="nomUsager" />
                     <input type="password" id="TBMotDePasse" name="motDePasse" />
                 </div>

@@ -6,8 +6,6 @@
  * Time: 15:15
  */
 
-
-
 /*
     Nom: ListerQuizDansUl
     Par: Isabelle Angrignon copié de Simon Bouchard
@@ -54,6 +52,8 @@ function genererChoixDeReponses($idQuestion, $typeQuestion)
 function genererReponsesVF($idQuestion)
 {
     //générer deux li, un vrai et un faux
+    GenererLi('UlChoixReponse', 'Vrai', 'V' );
+    GenererLi('UlChoixReponse', 'Faux', 'F' );
 }
 function genererReponsesCMU($idQuestion)
 {

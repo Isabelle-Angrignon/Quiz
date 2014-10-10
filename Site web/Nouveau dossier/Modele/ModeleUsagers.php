@@ -7,7 +7,11 @@ But: Contient diverses fonctions d'accès à la BD
 -->
 
 <?php
-
+//AjouterUsager
+//Intrant : Id = Le numero de de DA de l'usager , prenom= prenom de l'usager , nom = nom de l'usager
+//Extrant : Retourne le nom de lignes affecté
+//Permet d'ajouter un usager de base qu'il soit prof ou non. Le numero de commence par 420 dans le cas d'un prof
+//
 function ajouterUsager($id, $prenom, $nom)
 {
 	// a retirer et mettre connecterProf
@@ -50,7 +54,7 @@ function validerUsager()
 	    
 	    $requete = $bdd->prepare("CALL validerUsager(?, ?)");
 	    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
-	    $requete->bindparam(2, $motDePasse , PDO::PARAM_STR,16); 
+	    $requete->bindparam(2, $motDePasse , PDO::PARAM_STR,16);
 	       
 	    $requete->execute();
 	    
@@ -60,12 +64,12 @@ function validerUsager()
 	    {
 	    	// mettre le idUsager dans cookie de session
 	    	$_SESSION['idUsager'] = $idUsager;
+
+	    	unset($_SESSION['erreur']);
             $_SESSION['Nom'] = $infoUsager['nom'];
             $_SESSION['Prenom'] = $infoUsager['prenom'];
-            $_SESSION['Nom'] = $infoUsager['paramchange'];
-            definirTypeUsager($idUsager, $_SESSION['estAdmin']);
-
-	    	$_SESSION['erreur'] = 'Le nom d\'usager et le mot de passe sont valides';
+            $_SESSION['ParamChange'] = $infoUsager['paramchange'];
+            definirTypeUsager($idUsager, $infoUsager['estAdmin']);
 	    	// aller à la bonne page: admin, prof, etudiant
 	    	redirigerUsager();		    					    
 	    }
