@@ -3,7 +3,6 @@
     border-radius:15px;
     background:#9999FF;
     width:50%;
-    height:260px;
     margin-top: 50px;
     left: 20%;
     position:relative;
@@ -23,27 +22,72 @@
     position:relative;
 }
 
+.gauche {
+    margin:0;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+}
+
+.alignLeft
+{
+    float:left;
+}
+
+.conteneur{
+    vertical-align: top;
+    margin-top:5%;
+    line-height:3em;
+    display:inline-block;
+    width :100%;
+
+}
+
+.alignRight
+{
+    float: right;
+}
+
+.droite {
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    margin-left: 15%;
+}
+
 #login_Form {
     margin-top:5%;
     line-height:3em;
     display:inline-block;
+    width :100%;
 }
-#titreConnexion{
+.titre{
     text-align:center;
     font-size:2em;
     margin:0 auto;
 }
 
-#loginLabels {
+#ChampInfoUsager {
     margin:0;
+    vertical-align: top;
     float:left;
+    text-align: left;
+    width: 40%;
+    padding-left:10% ;
+
 }
 #loginLabels p {
     margin:0;
 
 }
-#loginTextFields {
-    margin-left:40%;
+#InfoUsager {
+    vertical-align: top;
+    margin:0;
+    float:right;
+    text-align: left;
+    width: 40%;
+    padding-left: 10%;
+
 }
 /*Firefox explose la disposition du form de login lorsqu'il y a une margin-left. Mathieu Dumoulin*/
 @-moz-document url-prefix() {
