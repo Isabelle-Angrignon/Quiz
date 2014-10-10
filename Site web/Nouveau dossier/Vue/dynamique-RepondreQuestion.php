@@ -1,6 +1,17 @@
-<div onclick="maFonctionPourChanger" xmlns="http://www.w3.org/1999/html"></div>
-
 <?php  /*récupérer les infos de la question*/?>
+
+
+<script>
+    $(function() {
+
+        $("#UlChoixReponse").selectable();
+        $("#UlChoixReponse").click( function() {
+            //appeler la fonction php pour changer la couleur;
+            this.submit = true;
+        });
+    });
+</script>
+
 
 <div id="divSuiviQuiz" class="suiviQuiz" >
     <label id="labelCours" class="suiviQuiz">Nom Cours ici <?php  /*le nom du chours tel que le selected*/?> </label>
@@ -14,17 +25,26 @@
 </div>
 
 
-
 <div id="divQuestion" class="zoneQuestion" >
 
     <div id="labelEnonce" class="zoneQuestion" >
-        <label  class="zoneQuestion">Super méga énoncé de question ici...<?php  /*le nom du chours tel que le selected*/?> </label>
+        <label  class="zoneQuestion">
+            Super méga énoncé de question ici...
+            <?php //print_r($_SESSION['test']);
+            echo $_SESSION['Test'] ?>
+
+
+        </label>
     </div>
 
-    <ul id="UlChoixReponse" class="liste">
+    <ul id="UlChoixReponse" class="liste ">
         <!-- les choix de réponse apparaitront ici selon le type de question -->
         <?php
-        genererChoixDeReponses(4,'VRAI_FAUX'); // no question et type question
+       // genererChoixDeReponses(4,'VRAI_FAUX'); // no question et type question
+        echo "<script>ajouterLi_ToUl_V2( 'UlChoixReponse' , 'Vrai', '1', true);</script>";
+        echo "<script>ajouterLi_ToUl_V2( 'UlChoixReponse' , 'Faux', '0', true);</script>";
+ //       GenererLi('UlChoixReponse', 'Vrai', 'V' );
+  //      GenererLi('UlChoixReponse', 'Faux', 'F' );
         ?>
     </ul>
 
