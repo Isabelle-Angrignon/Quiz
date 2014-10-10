@@ -56,9 +56,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
                 $("#UlQuestion li").click( function() {
                     creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
-                    /*insererNouveauDiv("EnonceQuestion", "popupPrincipal", null);
-                     $("#EnonceQuestion").html("Enoncé de question tres grand et tres gros, comme les boulles de Francis qui ressemblent à une souche souche souchesouchesouches ouchesouchesouchesou chesouchesouchesouchesouche souchesouchesouche souchesouch esoucheso uchesouche");
-                     insererNouveauDiv("reponseConteneur", "popupPrincipal", null);*/
                     alert($(this).attr("id"));
                 });
                 $("#AjouterQuestion").click( function() {
@@ -129,14 +126,17 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
 
 
-   /* $("#UlQuestion").ready(function() {
+    /*$("#UlQuestion").ready(function() {
         $.ajax({
             type: 'POST',
-            url: 'Modele/ListerQuestions.php',
+            url: 'Controleur/ListerQuestions.php',
             data: {"Triage":"default", "idCours":4 , "idProprietaire": "420jean"},
             dataType: "json",
             success: function(resultat) {
                 traiterJSONQuestions(resultat);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
             }
         });
     });*/
