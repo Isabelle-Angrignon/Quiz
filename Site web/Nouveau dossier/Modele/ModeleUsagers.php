@@ -83,7 +83,23 @@ function validerUsager()
 	unset($bdd);// fermer connection bd	
 }
 
+//recupererAdresseEmail
+// Fait par: Simon Bouchard
+// Intrant : L'id usager possédant le e-mail
+// Extrant : Le e-mail de l'usager même si il n'en a pas
+// Fonction permettant de trouver l'adresse e-mail d'un usager.
 
+function recupererAdresseEmail($idUsager){
+    $bdd = connecterAdmin();
+    $requete = $bdd->prepare("CALL recupererEmailUsager(?)");
+    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
+
+    $requete->execute();
+
+    $infoUsager = $requete->fetch();
+
+    return $infoUsager;
+}
 
 
 ?>

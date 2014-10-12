@@ -13,10 +13,16 @@
 
 	<?php
 		demarrerSession();
-		//redirigerSiNonConnecte();
+		redirigerSiNonConnecte();
 		include("Vue/Template/EnteteSite.php");
         //faire un if sur $_SESSION["typeUsager"]
-		include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
+        if ($_SESSION['typeUsager'] == 'prof' || $_SESSION['typeUsager'] == 'admin' ) {
+            include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
+        }
+        else{
+            include("Vue/Template/MenuEtudiant.php");
+        }
+
 	?>
 	
 	<div class="contenu">
@@ -43,14 +49,14 @@
                 </div>
 
                 <div class="droite">
-                    Bouchard <br>
-                    Simon <br>
-                    201237936 <br>
+                    <?php echo $_SESSION['Nom']; ?> <br>
+                    <?php echo $_SESSION['Prenom']; ?>  <br>
+                    <?php echo $_SESSION['idUsager']; ?>  <br>
                 </div>
             </div>
                 <p class="titre">Mon Courriel</p>
                 <hr>
-                    <form class="conteneur" method="post" action="../index.php">
+                    <form class="conteneur" method="post" action="../Controleur/ChangerEmail.php">
                         <div class="gauche">
                             <label>Courriel actuel </label> <br>
                             <label>Nouveau Couriel </label> <br>
@@ -58,9 +64,9 @@
                         </div>
 
                         <div class="droite">
-                            <label> 851s2001@gmail.com</label> <br>
-                            <input type="email" id="TBNomUsager" name="nomUsager" /> <br>
-                            <input type="email" id="TBMotDePasse" name="motDePasse" />
+                            <label><?php echo recupererAdresseEmail($_SESSION['idUsager'])[0]; ?></label> <br>
+                            <input type="text" id="TBNomUsager" name="Email" /> <br>
+                            <input type="text" id="TBMotDePasse" name="ConfirmationEmail" />
                         </div>
                         <br>
                         <button type="submit" >Changer son courriel</button>
