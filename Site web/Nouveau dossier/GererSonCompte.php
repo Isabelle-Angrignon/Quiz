@@ -73,7 +73,7 @@
                     </form>
                 <p class="titre">Mot de passe</p>
                 <hr>
-            <form class="conteneur" method="post" action="../index.php">
+            <form class="conteneur" method="post" action="Controleur/ChangerMotDePasse.php">
                 <div class="gauche">
                     <label>Ancien mot de passe </label> <br>
                     <label>Nouveau mot de passe </label> <br>
@@ -81,9 +81,9 @@
                 </div>
 
                 <div class="droite">
-                    <input type="password" id="TBNomUsager" name="nomUsager" /> <br>
-                    <input type="password" id="TBNomUsager" name="nomUsager" /> <br>
-                    <input type="password" id="TBMotDePasse" name="motDePasse" />
+                    <input type="password" id="TBNomUsager" name="AncienMotPasse" /> <br>
+                    <input type="password" id="TBNomUsager" name="NouveauMotPasse" /> <br>
+                    <input type="password" id="TBMotDePasse" name="ConfNouveauMotPasse" />
                 </div>
                 <br>
                 <button type="submit" >Changer son mot de passe</button>
