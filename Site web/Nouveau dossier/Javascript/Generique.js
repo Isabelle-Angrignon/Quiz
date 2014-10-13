@@ -164,6 +164,9 @@ function insererHTMLfromPHP(idConteneur, pathFichierPHP) {
         success: function(resultat) {
             var selecteur = "#" + idConteneur;
             $(selecteur).html(resultat);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
         }
     });
 }
