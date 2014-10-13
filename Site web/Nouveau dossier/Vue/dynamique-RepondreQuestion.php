@@ -1,4 +1,4 @@
-<?php  session_start();/*récupérer les infos de la question*/
+<?php
 
 //include("Template/InclusionJQuery.php");
 include("..//Modele/ModeleUtilisateurs.php");
@@ -9,6 +9,9 @@ include("..//Modele/ModeleCours.php");
 include("..//Modele/mFonctionsQuizEtudiant.php");
 include("..//Controleur/cFonctionsQuizEtudiant.php");
 include("..//Modele/ModeleQuestions.php");
+
+demarrerSession();
+redirigerSiNonConnecte();
 
 //Retirer une question de la liste:
 //$idQuestion = array_pop($_SESSION['listeQuestions']);

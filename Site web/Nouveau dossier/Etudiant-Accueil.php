@@ -14,14 +14,28 @@
     include("Modele/mFonctionsQuizEtudiant.php");
     include("Controleur/cFonctionsQuizEtudiant.php");
     include("Modele/ModeleQuestions.php");
+
     ?>
 
+    <script src="Javascript/Etudiant-Accueil.js"></script>
     <script>
         $(function() {
             $("#DDL_Cours").selectmenu({
                 select: function(event, ui) {
-                    var id = $("#DDL_Cours option:selected").attr("value");
-                    updateUlQuestion( id );
+                    var idCours = $("#DDL_Cours option:selected").attr("value");
+                     //updateUlQuiz( idCours );
+
+                    $.ajax({
+                        type:"POST",
+                        url: 'Controleur/FonctionQuizEtudiant/SetIdCoursSession.php',
+                        data:{'selectCours':idCours},
+                        dataType:"text",
+                        sucess: function() {
+                            alert("Bravo! ");
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+                        }});
                 }
             });
 
@@ -112,7 +126,7 @@ $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion'] 
             </ul>
             <?php
 
-            echo $_SESSION['idCours'];
+          //  echo $_SESSION['idCours'];////////////////////////////////////////////////
 
             $listeQuestions = $_SESSION['listeQuestions'];
 
@@ -128,8 +142,9 @@ $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion'] 
     </form>
 </div>
 
-<?php  include("Vue/Template/BasDePage.php");
+<?php
 
+include("Vue/Template/BasDePage.php");
 
 //gestion des question du quiz...
 if (isset($_SESSION["listeQuestions"]))

@@ -6,6 +6,8 @@
  * Time: 15:15
  */
 
+
+
 /*
     Nom: ListerQuizDansUl
     Par: Isabelle Angrignon copié de Simon Bouchard
@@ -66,9 +68,9 @@ function genererReponsesCMU($idQuestion)
 }
 
 //Permet de vider la liste de questions de la variable session
-if (isset($_POST['unsetListeQuestions'])) {
+/*if (isset($_POST['unsetListeQuestions'])) {
     unset($_SESSION["listeQuestions"]);
-}
+}*/
 
 
 
