@@ -21,7 +21,18 @@
 
 ?>
 <script>
-    $("#Ul_Reponses li").sortable();
+    $("#Ul_Reponses").sortable();/*.click(function(){
+        if ( $(this).is('.ui-sortable-helper') || $(this).is('.ui-sortable-placeholder' ) {
+            return;
+        }
+        $(this).sortable( "option", "disabled", true );
+        var selector = this + " div";
+        $(selector).attr('contenteditable','true');
+    }).blur(function(){
+            $(this).sortable( 'option', 'disabled', false);
+            var selector = this + " div";
+            $(selector).attr('contenteditable','false');
+        });*/
 </script>
 <div id="QuestionConteneur">
     <div id="EnonceQuestion" contenteditable="true">
