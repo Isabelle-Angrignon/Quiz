@@ -5,9 +5,9 @@
 
 
 function addClickEventToQuestions() {
+    $("#UlQuestion li").off("click");
     $("#UlQuestion li").click( function() {
-        creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
-        alert($(this).attr("id"));
+        creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php", $(this).attr("id"));
     });
 }
 
