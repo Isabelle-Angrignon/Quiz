@@ -14,7 +14,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
         include("Vue/Template/InclusionTemplate.php");
         include("Modele/ModeleCours.php");
         include("Modele/ModeleEtudiants.php");
-        include("Controleur/cFonctionCours.php");
+        include("Controleur/cFonctionsCours.php");
 
     ?>
 	
@@ -49,14 +49,16 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 $("#UlCours").sortable("option","connectWith",false);
                 $( "#UlEtudiants" ).sortable( "option", "dropOnEmpty", true );
                 $('#UIModifGroupe').empty();
-                $('#UIEtudiants').empty();
-                alert(ui.item.id);
-                //remplirUIModifGroupeAjax(Cours);
+                $('#UlEtudiants').empty();
+                remplirUIModifGroupeAjax($(ui.item).attr('id'));
+                remplirUIEtudiantCoursAjax($(ui.item).attr('id'));
             },
             remove: function(event,ui){
                 $("#UlCours").sortable("option","connectWith","#QuizDropZone");
                 $( "#UlEtudiants" ).sortable( "option", "dropOnEmpty", false );
                 $('#UlModifGroupe').empty();
+                $('#UlEtudiants').empty();
+                ListerEtudiantAjax();
             }
 
 	    });
