@@ -17,5 +17,36 @@ function LireEtudiant()
     return $resultat;
 }
 
+function LireEtudiantDansUnCours($idCours, $IdProf)
+{
+    $bdd = connecterProf();
+    $requete = $bdd->prepare("CALL ListerEtudiantUnCours(? , ?)");
+    $requete->bindparam(1, $idCours, PDO::PARAM_INT,10);
+    $requete->bindparam(2, $IdProf, PDO::PARAM_STR,10);
+    $requete->execute();
+    $resultat = $requete->fetchAll();
+
+    $requete->closeCursor();
+    unset($bdd);
+
+    return $resultat;
+
+}
+
+function LireEtudiantPasDansUnCours($idCours, $IdProf)
+{
+    $bdd = connecterProf();
+    $requete = $bdd->prepare("CALL ListerEtudiantPasDansUnCours(? , ?)");
+    $requete->bindparam(1, $idCours, PDO::PARAM_INT,10);
+    $requete->bindparam(2, $IdProf, PDO::PARAM_STR,10);
+    $requete->execute();
+    $resultat = $requete->fetchAll();
+
+    $requete->closeCursor();
+    unset($bdd);
+
+    return $resultat;
+
+}
 
 ?>
