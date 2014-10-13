@@ -29,7 +29,7 @@ function LireEtudiantDansUnCours($idCours, $IdProf)
     $requete->closeCursor();
     unset($bdd);
 
-    return $resultat;
+    return json_encode($resultat);
 
 }
 
@@ -45,7 +45,7 @@ function LireEtudiantPasDansUnCours($idCours, $IdProf)
     $requete->closeCursor();
     unset($bdd);
 
-    return $resultat;
+    return json_encode($resultat);
 
 }
 

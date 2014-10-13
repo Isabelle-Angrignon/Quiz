@@ -48,8 +48,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
             receive: function(event,ui) {
                 $("#UlCours").sortable("option","connectWith",false);
                 $( "#UlEtudiants" ).sortable( "option", "dropOnEmpty", true );
-                $('UIModifGroupe').empty();
-                $('UIEtudiants').empty();
+                $('#UIModifGroupe').empty();
+                $('#UIEtudiants').empty();
+                alert(ui.item.id);
+                //remplirUIModifGroupeAjax(Cours);
             },
             remove: function(event,ui){
                 $("#UlCours").sortable("option","connectWith","#QuizDropZone");
