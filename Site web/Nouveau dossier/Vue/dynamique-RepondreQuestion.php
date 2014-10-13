@@ -1,6 +1,23 @@
-<?php  /*récupérer les infos de la question*/?>
+<?php  session_start();/*récupérer les infos de la question*/
 
+//include("Template/InclusionJQuery.php");
+include("..//Modele/ModeleUtilisateurs.php");
+include("..//Modele/ModeleUsagers.php");
+include("..//Controleur/Utilitaires.php");
+include("..//Controleur/cFonctionsCours.php");
+include("..//Modele/ModeleCours.php");
+include("..//Modele/mFonctionsQuizEtudiant.php");
+include("..//Controleur/cFonctionsQuizEtudiant.php");
+include("..//Modele/ModeleQuestions.php");
 
+//Retirer une question de la liste:
+//$idQuestion = array_pop($_SESSION['listeQuestions']);
+//recupérer infos question
+$infoQuestion = $_SESSION['infoQuestion'];
+
+//récupérer infos réponses
+
+?>
 
 <script>
     $(function() {
@@ -15,38 +32,59 @@
 
 
 <div id="divSuiviQuiz" class="suiviQuiz" >
-    <label id="labelCours" class="suiviQuiz">Nom Cours ici <?php  /*le nom du chours tel que le selected*/?> </label>
+    <label id="labelCours" class="suiviQuiz">Nom Cours ici <?php /* nom du cours  */   ?>   </label>
 
     <label id="labelScore" class="suiviQuiz"> 4 / 10 <?php  /*méthode qui récupère les infos de la session*/?> </label>
 
     <label id="labelTitre" class="suiviQuiz"> Aléatoire <?php  /*méthode qui récupère les infos de la session*/?> </label>
 </div>
 <div id="divSuiviQuiz2" class="suiviQuiz" >
-    <label id="labelProp" class="suiviQuiz">Nom du prof <?php  /*méthode qui récupère les infos de la question*/?> </label>
+    <label id="labelProp" class="suiviQuiz"> Quiz de:    <?php          ?>     </label>
 </div>
 
 
 <div id="divQuestion" class="zoneQuestion" >
 
-    <div id="labelEnonce" class="zoneQuestion" >
-        <label  class="zoneQuestion">
-            Super méga énoncé de question ici...
+    <div class="zoneReference">
+        <label id="idQuestion" class="zoneReference" >
             <?php
-            echo  $_SESSION['listeQuestions'][0][0] ;
+            // idQuestion pour reference...
+            echo "#id : " . $infoQuestion[0]['idQuestion']  . "</br>";
             ?>
+        </label>
+        <label  id="nomProfQuestion" class="zoneReference" >
+            <?php
+            if (!empty($infoQuestion))
+            {
+                foreach ($infoQuestion as $Questtion)
+                {
+                    echo 'Question de : '. $Questtion['idUsager_Proprietaire'] . '</br> ';
+                }
+            }
+            ?>
+        </label>
 
+    </div>
 
+    <div id="labelEnonce" class="zoneQuestion" >
+
+        <label  class="zoneQuestion">
+            <?php
+            if (!empty($infoQuestion))
+            {
+                foreach ($infoQuestion as $Questtion)
+                {
+                    echo $Questtion['enonceQuestion'] ;
+                }
+            }
+            ?>
         </label>
     </div>
 
     <ul id="UlChoixReponse" class="liste ">
         <!-- les choix de réponse apparaitront ici selon le type de question -->
         <?php
-       // genererChoixDeReponses(4,'VRAI_FAUX'); // no question et type question
-        echo "<script>ajouterLi_ToUl_V2( 'UlChoixReponse' , 'Vrai', '1', true);</script>";
-        echo "<script>ajouterLi_ToUl_V2( 'UlChoixReponse' , 'Faux', '0', true);</script>";
- //       GenererLi('UlChoixReponse', 'Vrai', 'V' );
-  //      GenererLi('UlChoixReponse', 'Faux', 'F' );
+        genererChoixDeReponses(4,'VRAI_FAUX'); // no question et type question
         ?>
     </ul>
 

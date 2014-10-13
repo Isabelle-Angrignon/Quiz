@@ -66,6 +66,18 @@ div.suiviQuiz {
 
 }
 
+.zoneReference {
+    font-size: small;
+    padding: 20px;
+}
+
+#idQuestion{
+    float: left;
+}
+#nomProfQuestion{
+    float: right;
+}
+
 #divQuestion{
     width:90%;
     margin: 0 auto;
@@ -81,8 +93,12 @@ div.suiviQuiz {
     background-color: rgba(79, 168, 255, 0.45);
     width:90%;
     min-height:70px;
+    max-height: 140px;
+    overflow-y: auto;
     border-radius:10px;
     padding:10px;
+
+
 }
 
 div.zoneReponses{

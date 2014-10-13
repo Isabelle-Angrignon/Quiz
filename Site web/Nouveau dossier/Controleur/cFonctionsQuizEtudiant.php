@@ -39,6 +39,8 @@ function genererChoixDeReponses($idQuestion, $typeQuestion)
             break;
         case 'CHOIX_MULTI_UNIQUE';
             genererReponsesCMU($idQuestion);
+            echo "Choix multiple unique";
+            break;
     }
 }
 
@@ -62,6 +64,13 @@ function genererReponsesCMU($idQuestion)
     //mettre toutes les réponses dans des li différents
    //   genre    ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF")
 }
+
+//Permet de vider la liste de questions de la variable session
+if (isset($_POST['unsetListeQuestions'])) {
+    unset($_SESSION["listeQuestions"]);
+}
+
+
 
 
 ?>

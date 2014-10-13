@@ -45,7 +45,15 @@ function recupererElementsQuestion($idQuestion)
         $requete->closeCursor();
     }
     unset($bdd);// fermer connection bd
-    return $infosQuestion;
+
+    if (isset($infosQuestion))
+    {
+        return $infosQuestion;
+    }
+    else
+    {
+        return null;
+    }
 }
 
 ?>

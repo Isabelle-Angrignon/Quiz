@@ -13,11 +13,17 @@
     include("Modele/ModeleCours.php");
     include("Modele/mFonctionsQuizEtudiant.php");
     include("Controleur/cFonctionsQuizEtudiant.php");
+    include("Modele/ModeleQuestions.php");
     ?>
 
     <script>
         $(function() {
-            $("#DDL_Cours").selectmenu();
+            $("#DDL_Cours").selectmenu({
+                select: function(event, ui) {
+                    var id = $("#DDL_Cours option:selected").attr("value");
+                    updateUlQuestion( id );
+                }
+            });
 
             $("#UlQuizFormatif").selectable();
             $("#UlQuizFormatif").click( function() {
@@ -28,7 +34,10 @@
             $("#UlQuizAleatoire").click( function() {
                 //appeler la fonction php;
                 $("#quiz").submit();
-                creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
+                $(".dFondOmbrage").click( function() {
+                    //appeler la fonction php;
+                    //PHP:    unset($_SESSION['listeQuestions']);
+                });
             });
 
             $("#UlChoixReponse").selectable();
@@ -48,12 +57,18 @@ include("Vue/Template/EnteteSite.php");
 include("Vue/Template/MenuEtudiant.php");
 demarrerSession();
 redirigerSiNonConnecte();
-//if (isset($_POST['DDL_Cours']))
-//{
-    $_SESSION['idCours'] = 4/*$_POST['DDL_Cours']*/;
-//}
 
+if (isset($_POST['DDL_Cours']))
+{
+    $_SESSION['idCours'] = $_POST['DDL_Cours'];
+}
+//Retirer une question de la liste:
+$idQuestion = $_SESSION['listeQuestions'][0];
+//recupérer infos question
+$_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion'] );
+//récupérer infos réponses
 
+//$_SESSION['listeReponses'] = recu
 
 ?>
 
@@ -96,13 +111,16 @@ redirigerSiNonConnecte();
                 <li class="ui-state-default" >Générer</li>
             </ul>
             <?php
+
+            echo $_SESSION['idCours'];
+
             $listeQuestions = $_SESSION['listeQuestions'];
 
             if (!empty($listeQuestions))
             {
                 foreach ($listeQuestions as $Questtion)
                 {
-                    echo 'idQuestion: '. $Questtion['idQuestion'] . ' ';
+                    echo 'idQuestion: '. $Questtion['idQuestion'] . '</br> ';
                 }
             }
             ?>
@@ -112,10 +130,22 @@ redirigerSiNonConnecte();
 
 <?php  include("Vue/Template/BasDePage.php");
 
-if (!empty($_SESSION['listeQuestions']))
+
+//gestion des question du quiz...
+if (isset($_SESSION["listeQuestions"]))
 {
-    echo ' <script>creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php")</script> ';
+    if (!empty($_SESSION["listeQuestions"])) {
+        echo ' <script>creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php")</script> ';
+        //retirer la première question de la liste, elle est récupérée au début de la page
+        array_shift($_SESSION['listeQuestions']);
+    }
+    else
+    {
+        unset($_SESSION['listeQuestions'] );
+    }
 }
+
+
 
 ?>
 

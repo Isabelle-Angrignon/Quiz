@@ -4,7 +4,7 @@
     Par: Isabelle Angrignon
     Date: 03/10/2014
     Description: Cette fonction communique à la BD et récupère La liste des questions de type aléatoire
-                pour un cours donné.
+                pour un cours donné.  La liste est retournée.
 */
 function genererQuestionsAleatoires($cours)
 {
@@ -17,20 +17,22 @@ function genererQuestionsAleatoires($cours)
 
         if (!empty($requete)) {
             $requete->execute();
+            $quizAleatoire = $requete->fetchAll();
         }
-        $quizAleatoire = $requete->fetchAll();
 
-        if (!empty($quizAleatoire))
+        if (isset($quizAleatoire)  && !empty($quizAleatoire))
         {
-            $_SESSION['listeQuestions'] = shuffle($quizAleatoire);
+            return $quizAleatoire;
         }
         else
         {
-            unset($_SESSION['listeQuestions']);
+            return null;
         }
         $requete->closeCursor();
     }
     unset($bdd);// fermer connection bd
+
+    return null;
 }
 
 
