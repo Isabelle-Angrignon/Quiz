@@ -31,7 +31,7 @@ fieldset {
 }
 
 #ListeModifGroupe ul {
-	height:85%;
+	height:75%;
 }
 
 #QuizDropZone {
@@ -65,11 +65,13 @@ fieldset {
 	height:85%;
 }
 
-#AjouterQuestion {
+.BoutonDiv {
 	border:solid black;
-	margin-top:10%;
 	line-height: 50px;
 	background-color:white;
+}
+.BoutonDiv:hover{
+    background-color: #FDA068;
 }
 
 #AjouterQuestion:hover {

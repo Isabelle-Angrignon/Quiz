@@ -2,7 +2,10 @@
 
 
 <?php
-	include("Modele/ModeleUsagers.php");
+    include("../Controleur/Utilitaires.php");
+	include("../Modele/ModeleInscriptionsEtudiantCours.php");
+    demarrerSession();
+    redirigerSiNonConnecte();
 
 	$nomFichier = UploadFile();
 	LireCSV($nomFichier);
@@ -36,7 +39,7 @@
     // Permet de lire un fichier CSV et d'insérer un élèves / le lier a son cours
     function LireCSV($nomFichier)
     {
-    	$leFichier = fopen('FichierCSV\\' . $nomFichier,'r');
+    	$leFichier = fopen('..\\FichierCSV\\' . $nomFichier,'r');
     	$ligne = fgets($leFichier);
     	if (ValiderFichier($ligne))
     	{
@@ -44,7 +47,7 @@
     		{
     			$ligne = fgets($leFichier);
     			$parametre = explode(';', $ligne);
-    			ajouterUsager($parametre[2] , $parametre[0] , $parametre[1]);
+                InscrireEtudiantCours($parametre[2] , $parametre[0] , $parametre[1],$_POST['cours'],$_SESSION['idUsager']);
     		}
     	}
     	else
