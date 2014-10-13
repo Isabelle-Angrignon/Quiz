@@ -1,12 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Isabelle
- * Date: 2014-10-06
- * Time: 15:15
- */
-
-
 
 /*
     Nom: ListerQuizDansUl
@@ -37,11 +29,9 @@ function genererChoixDeReponses($idQuestion, $typeQuestion)
     {
         case 'VRAI_FAUX':
             genererReponsesVF($idQuestion);
-            echo "Vrai-faux";
             break;
         case 'CHOIX_MULTI_UNIQUE';
             genererReponsesCMU($idQuestion);
-            echo "Choix multiple unique";
             break;
     }
 }
@@ -56,8 +46,8 @@ function genererChoixDeReponses($idQuestion, $typeQuestion)
 function genererReponsesVF($idQuestion)
 {
     //générer deux li, un vrai et un faux
-    GenererLi('UlChoixReponse', 'Vrai', 'V' );
-    GenererLi('UlChoixReponse', 'Faux', 'F' );
+    GenererLi('UlChoixReponse', 'Vrai', '1' );
+    GenererLi('UlChoixReponse', 'Faux', '0' );
 }
 function genererReponsesCMU($idQuestion)
 {
@@ -66,13 +56,5 @@ function genererReponsesCMU($idQuestion)
     //mettre toutes les réponses dans des li différents
    //   genre    ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF")
 }
-
-//Permet de vider la liste de questions de la variable session
-/*if (isset($_POST['unsetListeQuestions'])) {
-    unset($_SESSION["listeQuestions"]);
-}*/
-
-
-
 
 ?>

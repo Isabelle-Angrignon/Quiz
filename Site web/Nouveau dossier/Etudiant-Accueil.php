@@ -24,7 +24,6 @@
                 select: function(event, ui) {
                     var idCours = $("#DDL_Cours option:selected").attr("value");
                      //updateUlQuiz( idCours );
-
                     $.ajax({
                         type:"POST",
                         url: 'Controleur/FonctionQuizEtudiant/SetIdCoursSession.php',
@@ -35,7 +34,8 @@
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
-                        }});
+                        }
+                    });
                 }
             });
 
@@ -49,8 +49,18 @@
                 //appeler la fonction php;
                 $("#quiz").submit();
                 $(".dFondOmbrage").click( function() {
-                    //appeler la fonction php;
-                    //PHP:    unset($_SESSION['listeQuestions']);
+                    $.ajax({
+                        type:"POST",
+                        url: 'Controleur/FonctionQuizEtudiant/unsetSessionListeQuestions.php',
+                        data:{'aucun':null},
+                        dataType:"text",
+                        sucess: function() {
+                            alert("Bravo! ");
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+                        }
+                    });
                 });
             });
 
