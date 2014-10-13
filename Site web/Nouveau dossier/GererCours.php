@@ -48,6 +48,8 @@ Description: Cette interface représente l'interface principale d'un professeur 
             receive: function(event,ui) {
                 $("#UlCours").sortable("option","connectWith",false);
                 $( "#UlEtudiants" ).sortable( "option", "dropOnEmpty", true );
+                $('UIModifGroupe').empty();
+                $('UIEtudiants').empty();
             },
             remove: function(event,ui){
                 $("#UlCours").sortable("option","connectWith","#QuizDropZone");
@@ -86,8 +88,8 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <body>
 
 	<?php
-        /*demarrerSession();
-        redirigerSiNonConnecte();*/
+        demarrerSession();
+        redirigerSiNonConnecte();
 		include("Vue/Template/EnteteSite.php");
 		include("Vue/Template/MenuProf.php");
 	?>

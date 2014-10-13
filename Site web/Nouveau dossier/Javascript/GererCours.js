@@ -1,7 +1,4 @@
-﻿// Prof-GererQuiz.js
-// Par Mathieu Dumoulin
-// Date : 17/09/2014
-// Description : Contient tout le code Javascript spécifique à la page Prof-GererQuiz.php
-
-
-// 
+﻿//GererCours.js
+// Fait par : Simon Bouchard
+// Fait le : 2014-10-13
+// Contient toutes les fonctions spécifiques a gerer Cours
