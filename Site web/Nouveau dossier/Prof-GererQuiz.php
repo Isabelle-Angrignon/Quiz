@@ -60,6 +60,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 $("#AjouterQuestion").click( function() {
                     var id = "UlQuestion";
                     ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
+                    addClickEventToQuestions();
                 });
 
 

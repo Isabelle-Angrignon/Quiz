@@ -93,9 +93,10 @@ function creeBaliseAvecClasse(baliseACreer, classe) {
 // Date : 23/09/14
 // Intrant(s) : idDivPrincipal = l'identifiant du pop up
 //              pathFichierPHP = Le path du fichier PHP qui représente le contenu du divPrincipal
+//              idQuestion = La question selon laquelle le frame dynamique est relié
 // Extrant(s) : Le div représentant la page de base du "pop up"
 // Description : Cette fonction créée, à l'aide de balises div, un squelette de fenêtre "pop up" avec un fond en ombragé
-function creeFrameDynamique(idDivPrincipal, pathFichierPHP) {
+function creeFrameDynamique(idDivPrincipal, pathFichierPHP, idQuestion) {
 	var fondOmbrage = creeBaliseAvecClasse("div", "dFondOmbrage");
 	fondOmbrage.setAttribute("id", "dFondOmbrage");
 	fondOmbrage.onclick = function(event) { 
@@ -119,7 +120,7 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP) {
 	fondOmbrage.appendChild(divPrincipale);
 
     if(pathFichierPHP != null) {
-        insererHTMLfromPHP(idDivPrincipal, pathFichierPHP);
+        insererHTMLfromPHP(idDivPrincipal, pathFichierPHP, idQuestion);
     }
 	
 	return divPrincipale;
@@ -156,10 +157,12 @@ function insererNouveauDiv(idDiv, idParent, classDiv) {
 // Intrants : idConteneur = l'identifiant du conteneur
 // Extrant : Il n'y en a pas
 // Description : Cette méthode utilise AJAX pour inserer le contenu HTML du fichier PHP dans le Conteneur.
-function insererHTMLfromPHP(idConteneur, pathFichierPHP) {
+function insererHTMLfromPHP(idConteneur, pathFichierPHP, idQuestion) {
+    alert(idQuestion);
     $.ajax({
         type: 'GET',
         url: pathFichierPHP,
+        data: {"idQuestion":idQuestion},
         dataType: "html",
         success: function(resultat) {
             var selecteur = "#" + idConteneur;
