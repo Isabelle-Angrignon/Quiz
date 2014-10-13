@@ -19,9 +19,13 @@ function remplirListeQuestions($idCours, $idProprietaire, $triage = 'default')
 // Nom: getEnnonceDeQuestion
 // Par: Mathieu Dumoulin
 // Date: 13/10/2014
-// Description: Cette fonction
 function getQuestion($idQuestion) {
     return recupererElementsQuestion($idQuestion);
+}
+
+function getReponsesFromQuestion($idQuestion)
+{
+
 }
 
 ?>
