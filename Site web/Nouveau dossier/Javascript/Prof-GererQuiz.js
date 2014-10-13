@@ -41,5 +41,12 @@ function updateUlQuestion(idCours) {
             }
         });
     }
+}
+
+function ajouterNouvelleReponse() {
+    $.post('Vue/Prof-GererQuiz-AjoutElement.php', {"action":"nouveauCheckBox"}, function(resultat) {
+        $("#BTN_AjouterReponse").before(resultat);
+    }, 'html');
+    $("#Ul_Reponses li").sortable();
 
 }

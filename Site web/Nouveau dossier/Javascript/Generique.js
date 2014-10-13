@@ -99,7 +99,7 @@ function creeBaliseAvecClasse(baliseACreer, classe) {
 function creeFrameDynamique(idDivPrincipal, pathFichierPHP, idQuestion) {
 	var fondOmbrage = creeBaliseAvecClasse("div", "dFondOmbrage");
 	fondOmbrage.setAttribute("id", "dFondOmbrage");
-	fondOmbrage.onclick = function(event) { 
+	fondOmbrage.onmousedown = function(event) {
 		// detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
 		$(this).detach();
 	};
@@ -113,7 +113,7 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP, idQuestion) {
 	};*/
 	var divPrincipale =  creeBaliseAvecClasse("div", "dDivPrincipale");
 	// Nécessaire pour empecher l'événement onclick de son parent d'être activé lorsqu'on clic dessus ce div
-	divPrincipale.onclick = function(event) {  event.stopPropagation(); };
+	divPrincipale.onmousedown = function(event) {  event.stopPropagation(); };
     divPrincipale.setAttribute("id", idDivPrincipal);
 
 	document.body.appendChild(fondOmbrage);
@@ -158,7 +158,7 @@ function insererNouveauDiv(idDiv, idParent, classDiv) {
 // Extrant : Il n'y en a pas
 // Description : Cette méthode utilise AJAX pour inserer le contenu HTML du fichier PHP dans le Conteneur.
 function insererHTMLfromPHP(idConteneur, pathFichierPHP, idQuestion) {
-    alert(idQuestion);
+
     $.ajax({
         type: 'GET',
         url: pathFichierPHP,

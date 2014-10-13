@@ -10,7 +10,8 @@
 */
 function recupererElementsQuestion($idQuestion)
 {
-    $bdd = connecterEtudiant();
+
+    $bdd = getConnection("etudiant"); ////////////////// À modifier avec la session et le typeUsager de la session /////////////////////////////////////////
 
     if (isset($idQuestion))
     {

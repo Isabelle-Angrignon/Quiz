@@ -3,6 +3,10 @@
     include("../Controleur/cFonctionsProf-GererQuiz.php");
     include("../Modele/ModeleQuestions.php");
     include("../Modele/ModeleUtilisateurs.php");
+    include("../Modele/ModeleReponses.php");
+
+
+    session_start();
 
     if(!isset($_GET["idQuestion"]))
     {
@@ -11,12 +15,14 @@
     else if($_GET["idQuestion"] != null)
     {
         $maQuestion = getQuestion($_GET["idQuestion"]);
-        //$enonceQuestion = $maQuestion[0]["enonceQuestion"];
-        $typeQuestion = $maQuestion[0]["typeQuestion"];
+        $enonceQuestion = $maQuestion[0]["enonceQuestion"];
+        $_SESSION['typeQuestion'] = $maQuestion[0]["typeQuestion"];
     }
 
 ?>
-
+<script>
+    $("#Ul_Reponses li").sortable();
+</script>
 <div id="QuestionConteneur">
     <div id="EnonceQuestion" contenteditable="true">
         <?php
@@ -24,9 +30,12 @@
         ?>
     </div>
     <div id="reponseConteneur">
+        <ul id="Ul_Reponses">
         <?php
-
+            getReponsesFromQuestion($_GET["idQuestion"]);
         ?>
+        </ul>
+        <input type="button" id="BTN_AjouterReponse" onclick="ajouterNouvelleReponse()"  value="Ajouter une réponse">
     </div>
 </div>
 
