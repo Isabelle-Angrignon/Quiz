@@ -1,10 +1,10 @@
 <?php
 include("Utilitaires.php");
-include("../Modele/ModeleInscriptionsEtudiantCours.php");
+include("../Modele/ModeleEtudiants.php");
 include("../Modele/ModeleUtilisateurs.php");
 demarrerSession();
 redirigerSiNonConnecte();
-$result =  LireEtudiantDansUnCours($_POST['idCours'], $_SESSION['idUsager']);
+$result =  json_encode(LireEtudiant());
 
 echo $result;
 

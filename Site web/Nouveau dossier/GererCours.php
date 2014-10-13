@@ -35,7 +35,14 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    });
 	    $("#UlModifGroupe").sortable({
 	    	connectWith: "#UlEtudiants",
-	    	revert: 150
+	    	revert: 150,
+            receive: function(event,ui){
+                inscrireEtudiantCoursAjax($(ui.item).attr('id'),$(ui.item).text().split(" ")[1]
+                    ,$(ui.item).text().split(" ")[0],$("#QuizDropZone").find("li").attr("id"));
+            },
+            remove: function(event,ui){
+                desinscrireEtudiantCoursAjax($(ui.item).attr('id'),$("#QuizDropZone").find("li").attr("id"));
+            }
 	    });
 	    $("#UlEtudiants").sortable({
 	    	connectWith: "#UlModifGroupe",
@@ -109,19 +116,20 @@ Description: Cette interface représente l'interface principale d'un professeur 
              <?php ListerCoursDansUl("UlCours"); ?>
 
 			</ul>
-			<div id="ajouterQuiz"></div>
+            <div class="ListeDivElementStyle BoutonDiv">Ajouter un cours</div>
 		</div>
 		<div id="ListeModifGroupe" class="Liste ListeGererCours">
 			<div id="QuizDropZone" class="ListeDivElementStyle"></div>
 			<ul id="UlModifGroupe">
 
 			</ul>
+            <div class="ListeDivElementStyle BoutonDiv">Ajouter un CSV</div>
 		</div>
 		<div id="ListeGererEtudiants" class="Liste ListeGererCours">
 			<ul id="UlEtudiants">
             <?php InsererEleves(); ?>
 			</ul>
-			<div class="ListeDivElementStyle">Ajouter un étudiant</div>
+			<div  class="ListeDivElementStyle BoutonDiv">Ajouter un étudiant</div>
 		</div>
 	</div>
 	

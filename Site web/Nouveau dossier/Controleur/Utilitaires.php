@@ -1,13 +1,13 @@
-<!--
-Fonctions.php
-Auteur: Isabelle Angringnon
-Date: 23 septembre 2014
-But: Contient diverses fonctions génériques 
-
--->
-
-
 <?php
+//Fonctions.php
+//Auteur: Isabelle Angringnon
+//Date: 23 septembre 2014
+//But: Contient diverses fonctions génériques
+
+
+
+
+
 // L'équivalent du classique getInstance d'un singleton de session
 function demarrerSession()
 {
