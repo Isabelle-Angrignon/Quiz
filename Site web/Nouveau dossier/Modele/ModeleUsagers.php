@@ -83,7 +83,61 @@ function validerUsager()
 	unset($bdd);// fermer connection bd	
 }
 
+//recupererAdresseEmail
+// Fait par: Simon Bouchard
+// Intrant : L'id usager possédant le e-mail
+// Extrant : Le e-mail de l'usager même si il n'en a pas
+// Fonction permettant de trouver l'adresse e-mail d'un usager.
 
+function recupererAdresseEmail($idUsager){
+    $bdd = connecterAdmin();
+    $requete = $bdd->prepare("CALL recupererEmailUsager(?)");
+    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
+
+    $requete->execute();
+
+    $infoUsager = $requete->fetch();
+
+    return $infoUsager;
+}
+
+function ModifierAdresseEmail($idUsager, $NouveauEMail){
+    $bdd = connecterAdmin();
+    $requete = $bdd->prepare("CALL ModifierEmail(? , ?)");
+    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
+    $requete->bindparam(2, $NouveauEMail, PDO::PARAM_STR,255);
+
+    $requete->execute();
+
+    $infoUsager = $requete->fetch();
+
+    return $infoUsager;
+}
+
+function ModifierMotPasse($idUsager, $NouveauMotPasse){
+    $bdd = connecterAdmin();
+    $requete = $bdd->prepare("CALL ModifierMotDePasse(? , ?)");
+    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
+    $requete->bindparam(2, $NouveauMotPasse, PDO::PARAM_STR,16);
+
+    $requete->execute();
+
+    $infoUsager = $requete->fetch();
+
+    return $infoUsager;
+}
+
+function RecupererMotPasse($Pid){
+    $bdd = connecterAdmin();
+    $requete = $bdd->prepare("CALL recupererMotPasse(?)");
+    $requete->bindparam(1, $Pid, PDO::PARAM_STR,10);
+
+    $requete->execute();
+
+    $infoUsager = $requete->fetch();
+
+    return $infoUsager;
+}
 
 
 ?>

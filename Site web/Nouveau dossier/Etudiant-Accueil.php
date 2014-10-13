@@ -102,7 +102,7 @@ redirigerSiNonConnecte();
             {
                 foreach ($listeQuestions as $Questtion)
                 {
-                    echo 'idQuestion: '. $Questtion . ' ';
+                    echo 'idQuestion: '. $Questtion['idQuestion'] . ' ';
                 }
             }
             ?>

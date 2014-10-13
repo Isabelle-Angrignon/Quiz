@@ -213,9 +213,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-*.xml
-*.xml
+
 *.xml
 *.ids
-*.xml
-*.xml
+Site web/Nouveau dossier/.idea/
