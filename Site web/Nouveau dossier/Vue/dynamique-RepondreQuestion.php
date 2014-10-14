@@ -26,6 +26,21 @@ $infoQuestion = $_SESSION['infoQuestion'];
         $("#UlChoixReponse").click( function() {
             //appeler la fonction php pour changer la couleur;
         });
+
+        //bouton suivant...
+        $("#btnSuivant").click( function() {
+            //gérer question actuelle
+                //valider réponse
+                alert('Coucou!!!!');
+                //Update score page
+                // Update stats bd
+            //Load nouvelle question
+                //viderHTMLfromElement
+                //update infos question/réponse/liste...
+                //insererHtmlFromPhp
+        });
+
+
     });
 </script>
 
@@ -73,8 +88,8 @@ $infoQuestion = $_SESSION['infoQuestion'];
         </label>
     </div>
 
-    <div>
-        <ul id="UlChoixReponse" class="liste ">
+    <div id="divChoixReponse"  class="Liste zoneQuestion ">
+        <ul id="UlChoixReponse" >
             <!-- les choix de réponse apparaitront ici selon le type de question -->
             <?php
             genererChoixDeReponses( $infoQuestion[0]['idQuestion'] ,$infoQuestion[0]['typeQuestion'], $infoQuestion[0]['ordreReponsesAleatoire']); // no question et type question
@@ -82,7 +97,7 @@ $infoQuestion = $_SESSION['infoQuestion'];
         </ul>
     </div>
 
-    <div id="bouttonSuivant">
+    <div id="bouttonSuivant" class="zoneQuestion">
         <button type="button" id="btnSuivant">
             Valider/Suivant
         </button>
