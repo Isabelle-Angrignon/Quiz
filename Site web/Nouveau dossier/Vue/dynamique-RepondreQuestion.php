@@ -22,11 +22,9 @@ $infoQuestion = $_SESSION['infoQuestion'];
 
 <script>
     $(function() {
-
         $("#UlChoixReponse").selectable();
         $("#UlChoixReponse").click( function() {
             //appeler la fonction php pour changer la couleur;
-            this.submit = true;
         });
     });
 </script>
@@ -57,14 +55,10 @@ $infoQuestion = $_SESSION['infoQuestion'];
             <?php
             if (!empty($infoQuestion))
             {
-                foreach ($infoQuestion as $Questtion)
-                {
-                    echo 'Question de : '. $Questtion['idUsager_Proprietaire'] . '</br> ';
-                }
+                echo 'Question de : '. $infoQuestion[0]['idUsager_Proprietaire'] . '</br> ';
             }
             ?>
         </label>
-
     </div>
 
     <div id="labelEnonce" class="zoneQuestion" >
@@ -73,22 +67,28 @@ $infoQuestion = $_SESSION['infoQuestion'];
             <?php
             if (!empty($infoQuestion))
             {
-                foreach ($infoQuestion as $Questtion)
-                {
-                    echo $Questtion['enonceQuestion'] ;
-                }
+                echo $infoQuestion[0]['enonceQuestion'];
             }
             ?>
         </label>
     </div>
 
-    <ul id="UlChoixReponse" class="liste ">
-        <!-- les choix de réponse apparaitront ici selon le type de question -->
-        <?php
-        genererChoixDeReponses( $_SESSION['idCours'] ,$infoQuestion[0]['typeQuestion'], $infoQuestion[0]['ordreReponsesAleatoire']); // no question et type question
+    <div>
+        <ul id="UlChoixReponse" class="liste ">
+            <!-- les choix de réponse apparaitront ici selon le type de question -->
+            <?php
+            genererChoixDeReponses( $infoQuestion[0]['idQuestion'] ,$infoQuestion[0]['typeQuestion'], $infoQuestion[0]['ordreReponsesAleatoire']); // no question et type question
+            ?>
+        </ul>
+    </div>
 
-        ?>
-    </ul>
+    <div id="bouttonSuivant">
+        <button type="button" id="btnSuivant">
+            Valider/Suivant
+        </button>
+
+
+    </div>
 
 
 </div>

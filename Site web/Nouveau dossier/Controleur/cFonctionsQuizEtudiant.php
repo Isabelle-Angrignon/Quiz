@@ -31,7 +31,7 @@ function genererChoixDeReponses($idQuestion, $typeQuestion, $ordreReponse)
         case 'VRAI_FAUX':
             genererReponsesVF();
             break;
-        case 'CHOIX_MULTI_UNIQUE';
+        case 'CHOIX_MULTI_UNIQUE':
             genererReponsesCMU($idQuestion, $ordreReponse);
             break;
     }
@@ -54,32 +54,25 @@ function genererReponsesCMU($idQuestion, $ordreReponse)
 {
     //appeler une méthode qui récupère la liste des questions de la bd
     //si l'ordre des  $listeReponses = rréponses est aléatoire, shuffle les réponses
-
     $listeReponses = recupererReponsesAQuestion($idQuestion);
-
-    if (!empty($listeReponses))
-    {
-        foreach ($listeReponses as $Reponse)
-        {
-            echo $Reponse['enonceReponse'] . '</br> ';
-        }
-       // $_SESSION['listeReponses'] = $listeReponses;
-    }
-    else
-    {
-     //   unset($_SESSION['listeReponses']);
-    }
-
 
     if($ordreReponse == 1)
     {
         shuffle($listeReponses);
-        echo "Mélangé";
+        echo "Mélangé : ";
     }
 
-    foreach($listeReponses as $Row)
+    if (!empty($listeReponses))
     {
-        GenererLi('#UlChoixReponse',$Row['enonceReponse'], $Row['idReponse']);
+        echo "Il y a une liste! ";
+        foreach ($listeReponses as $Row)
+        {
+            GenererLi('UlChoixReponse', $Row['enonceReponse'], $Row['idReponse']);
+        }
+    }
+    else
+    {
+        unset($_SESSION['listeReponses']);
     }
 }
 

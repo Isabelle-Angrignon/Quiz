@@ -10,7 +10,7 @@
 */
 function LireCoursEtudiant($idEtudiant)
 {
-    $bdd = connecterEtudiant();
+    $bdd = connecterProf();
     $requete = $bdd->prepare("CALL listerCoursEtudiant( ? )");
     $requete->bindparam(1, $idEtudiant, PDO::PARAM_STR,10);
     $requete->execute();
