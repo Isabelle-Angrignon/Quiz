@@ -22,23 +22,19 @@ $infoQuestion = $_SESSION['infoQuestion'];
 
 <script>
     $(function() {
-        $("#UlChoixReponse").selectable();
-        $("#UlChoixReponse").click( function() {
-            //appeler la fonction php pour changer la couleur;
+        $("#UlChoixReponse").selectable({
+            selected: function( event, ui ) {
+               // alert(ui.selected.id);
+            }
         });
+
 
         //bouton suivant...
         $("#btnSuivant").click( function() {
             //gérer question actuelle
-                //valider réponse
-                alert('Coucou!!!!');
-                //Update score page
-                // Update stats bd
-            //Load nouvelle question
-                //viderHTMLfromElement
-                //update infos question/réponse/liste...
-                //insererHtmlFromPhp
+            gererQuestionRepondue();
         });
+
 
 
     });

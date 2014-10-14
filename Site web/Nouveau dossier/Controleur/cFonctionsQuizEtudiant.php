@@ -13,7 +13,7 @@ function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz)
     $Donnee = ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz );
     foreach($Donnee as $Row)
     {
-        GenererLi($idUl,$Row['titrequiz'], $Row['idQuiz']);
+        GenererLiSelect($idUl,$Row['titrequiz'], $Row['idQuiz']);
     }
 }
 
@@ -47,8 +47,8 @@ function genererChoixDeReponses($idQuestion, $typeQuestion, $ordreReponse)
 function genererReponsesVF()
 {
     //générer deux li, un vrai et un faux
-    GenererLi('UlChoixReponse', 'Vrai', '1' );
-    GenererLi('UlChoixReponse', 'Faux', '0' );
+    GenererLiSelect('UlChoixReponse', 'Vrai', '1' );
+    GenererLiSelect('UlChoixReponse', 'Faux', '0' );
 }
 function genererReponsesCMU($idQuestion, $ordreReponse)
 {
@@ -67,7 +67,7 @@ function genererReponsesCMU($idQuestion, $ordreReponse)
         echo "Il y a une liste! ";
         foreach ($listeReponses as $Row)
         {
-            GenererLi('UlChoixReponse', $Row['enonceReponse'], $Row['idReponse']);
+            GenererLiSelect('UlChoixReponse', $Row['enonceReponse'], $Row['idReponse']);
         }
     }
     else

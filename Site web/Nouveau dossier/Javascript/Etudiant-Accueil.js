@@ -1,7 +1,43 @@
-﻿// Prof-GererQuiz.js
-// Par Mathieu Dumoulin
-// Date : 17/09/2014
-// Description : Contient tout le code Javascript spécifique à la page Prof-GererQuiz.php
+﻿// Etudiant-Accueil.js
+// Par Isabelle Angrignon
+// Date : 14/10/2014
+// Description : Contient tout le code Javascript spécifique à la page Etudiant-Accueil.php
+
+
+
+function gererQuestionRepondue() {
+
+//Récupérer le id de la réponse cliquée
+    var idReponse;
+
+        $("#UlChoixReponse .ui-selected").each(function() {
+            idReponse = $(this).attr("id");
+        });
+    var resultat;
+
+//Valider cette réponse
+     $.ajax({
+        type:"POST",
+        url:"Controleur/FonctionQuizEtudiant/validerReponseAQuestion.php",
+        data: {"idReponse": idReponse},
+        datatype: "text",
+        success: function(resultat) {//resultat recu sera "1" ou "0"
+            "Ce que je veux faire avec le resultat"
+            alert(resultat + ' ca marche' + idReponse);
+            //Update score page
+            // Update stats bd
+            //Load nouvelle question
+            //viderHTMLfromElement
+            //update infos question/réponse/liste...
+            //insererHtmlFromPhp
+        },
+        error: function(resultat) {
+            alert('marche pas');
+        }
+    });
+}
+
+
 
 
 
@@ -28,3 +64,7 @@ function updateUlQuiz(idCours) {
     }
 
 }
+
+
+
+

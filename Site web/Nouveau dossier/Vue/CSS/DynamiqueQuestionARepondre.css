@@ -14,7 +14,7 @@
 /*format du texte de la barre d'info de suivi du quiz*/
 .suiviQuiz{
     text-align: center;
-    padding:10px;
+    padding: 2%;
     text-decoration:none;
 }
 
@@ -101,11 +101,11 @@ div.suiviQuiz {
 
 /*Div qui contient le ul - li -  des choix de réoponse*/
 #divChoixReponse{
-    margin: 0 auto;
+
+    margin-left: 7.5%;
+    margin-right: 7.5%;
     width:80%;
     margin-top: 20px;
-    display: inline-block;
-    text-align:center;
 }
 
 #UlChoixReponse{
@@ -117,4 +117,7 @@ div.suiviQuiz {
     /*border:solid black;*/
     border-radius:10px;
 }
+
+.ui-selecting { background: #FECA40; }
+.ui-selected { background: red; color: white; }
 
