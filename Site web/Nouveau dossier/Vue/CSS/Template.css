@@ -228,3 +228,18 @@ background-color:rgb(16,112,255); // Entete*/
 	margin:0 auto;
 	margin-top:600px;
 }
+
+/*Pour éléments de liste selectable Etudiant*/
+li .selectable {
+    border: 1px solid #c5dbec;
+    background: #d0e5f5 url("../../jquery-ui-1.11.1.custom/images/ui-bg_glass_85_d0e5f5_1x400.png") 50% 50% repeat-x;
+    font-weight: bold;
+    color: #2e6e9e;
+}
+
+li .selectable a,
+li .selectable a:link,
+li .selectable a:visited {
+    color: #2e6e9e;
+    text-decoration: none;
+}
