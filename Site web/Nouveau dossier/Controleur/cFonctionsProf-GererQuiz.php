@@ -25,17 +25,20 @@ function getQuestion($idQuestion) {
 
 function getReponsesFromQuestion($idQuestion)
 {
-    $reponses = recupererReponsesAQuestion($idQuestion);
-
-    foreach($reponses as $uneReponse)
+    if($idQuestion != null)
     {
-        creerCheckBoxReponse("reponses", $uneReponse["idReponse"], $uneReponse["enonceReponse"]);
+        $reponses = recupererReponsesAQuestion($idQuestion);
+
+        foreach($reponses as $uneReponse)
+        {
+            creerCheckBoxReponse("reponses", $uneReponse["idReponse"], $uneReponse["enonceReponse"]);
+        }
     }
 }
 
 function creerCheckBoxReponse($nomDuGroupe, $valeur, $textAffiche)
 {
-    echo "<li><input type='checkbox' name=".$nomDuGroupe." value=".$valeur."><div class='reponsesQuestion'>".$textAffiche."</div></li>";
+    echo "<li><input type='checkbox' name=".$nomDuGroupe." value=".$valeur."><div class='reponsesQuestion' contenteditable='true'>".$textAffiche."</div></li>";
 }
 
 ?>
