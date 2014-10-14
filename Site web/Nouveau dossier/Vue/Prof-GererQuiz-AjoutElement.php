@@ -12,5 +12,5 @@ if(isset($_POST['action']))
 }
 
 function nouveauCheckBox() {
-    echo "<li><input type='checkbox' name='reponses' value='0'><div class='reponsesQuestion' contenteditable='true'></div></li>";
+    echo "<li class='ui-sortable-handle ui-sortable'><input type='checkbox' name='reponses' value='0'><div class='reponsesQuestion'></div></li>";
 }

@@ -35,7 +35,7 @@ function getReponsesFromQuestion($idQuestion)
 
 function creerCheckBoxReponse($nomDuGroupe, $valeur, $textAffiche)
 {
-    echo "<li><input type='checkbox' name=".$nomDuGroupe." value=".$valeur."><div class='reponsesQuestion' contenteditable='true'>".$textAffiche."</div></li>";
+    echo "<li><input type='checkbox' name=".$nomDuGroupe." value=".$valeur."><div class='reponsesQuestion'>".$textAffiche."</div></li>";
 }
 
 ?>
