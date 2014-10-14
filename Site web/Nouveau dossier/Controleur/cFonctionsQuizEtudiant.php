@@ -1,5 +1,6 @@
 <?php
 
+
 /*
     Nom: ListerQuizDansUl
     Par: Isabelle Angrignon copié de Simon Bouchard
@@ -23,15 +24,15 @@ function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz)
     Date: 08/10/2014
     Description: Cette fonction appelle une seconde méthode pour générer l'affichage des réponses en fonction du type de question
 */
-function genererChoixDeReponses($idQuestion, $typeQuestion)
+function genererChoixDeReponses($idQuestion, $typeQuestion, $ordreReponse)
 {
     switch ($typeQuestion)
     {
         case 'VRAI_FAUX':
-            genererReponsesVF($idQuestion);
+            genererReponsesVF();
             break;
         case 'CHOIX_MULTI_UNIQUE';
-            genererReponsesCMU($idQuestion);
+            genererReponsesCMU($idQuestion, $ordreReponse);
             break;
     }
 }
@@ -43,18 +44,43 @@ function genererChoixDeReponses($idQuestion, $typeQuestion)
     Description: Cette fonction structure l'affichage des réponses de type vrai ou faux.
 */
 
-function genererReponsesVF($idQuestion)
+function genererReponsesVF()
 {
     //générer deux li, un vrai et un faux
     GenererLi('UlChoixReponse', 'Vrai', '1' );
     GenererLi('UlChoixReponse', 'Faux', '0' );
 }
-function genererReponsesCMU($idQuestion)
+function genererReponsesCMU($idQuestion, $ordreReponse)
 {
     //appeler une méthode qui récupère la liste des questions de la bd
-    //si l'ordre des réponses est aléatoire, shuffle les réponses
-    //mettre toutes les réponses dans des li différents
-   //   genre    ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF")
+    //si l'ordre des  $listeReponses = rréponses est aléatoire, shuffle les réponses
+
+    $listeReponses = recupererReponsesAQuestion($idQuestion);
+
+    if (!empty($listeReponses))
+    {
+        foreach ($listeReponses as $Reponse)
+        {
+            echo $Reponse['enonceReponse'] . '</br> ';
+        }
+       // $_SESSION['listeReponses'] = $listeReponses;
+    }
+    else
+    {
+     //   unset($_SESSION['listeReponses']);
+    }
+
+
+    if($ordreReponse == 1)
+    {
+        shuffle($listeReponses);
+        echo "Mélangé";
+    }
+
+    foreach($listeReponses as $Row)
+    {
+        GenererLi('#UlChoixReponse',$Row['enonceReponse'], $Row['idReponse']);
+    }
 }
 
 ?>

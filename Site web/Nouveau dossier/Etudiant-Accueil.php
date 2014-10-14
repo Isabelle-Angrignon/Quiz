@@ -28,13 +28,13 @@
                         type:"POST",
                         url: 'Controleur/FonctionQuizEtudiant/SetIdCoursSession.php',
                         data:{'selectCours':idCours},
-                        dataType:"text",
+                        dataType:"text" /*,
                         sucess: function() {
                             alert("Bravo! ");
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
-                        }
+                        }*/
                     });
                 }
             });
@@ -53,13 +53,13 @@
                         type:"POST",
                         url: 'Controleur/FonctionQuizEtudiant/unsetSessionListeQuestions.php',
                         data:{'aucun':null},
-                        dataType:"text",
+                        dataType:"text"/*,
                         sucess: function() {
                             alert("Bravo! ");
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
-                        }
+                        }*/
                     });
                 });
             });
@@ -90,7 +90,6 @@ if (isset($_POST['DDL_Cours']))
 $idQuestion = $_SESSION['listeQuestions'][0];
 //recupérer infos question
 $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion'] );
-//récupérer infos réponses
 
 //$_SESSION['listeReponses'] = recu
 
@@ -134,20 +133,6 @@ $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion'] 
             <ul id="UlQuizAleatoire">
                 <li class="ui-state-default" >Générer</li>
             </ul>
-            <?php
-
-          //  echo $_SESSION['idCours'];////////////////////////////////////////////////
-
-            $listeQuestions = $_SESSION['listeQuestions'];
-
-            if (!empty($listeQuestions))
-            {
-                foreach ($listeQuestions as $Questtion)
-                {
-                    echo 'idQuestion: '. $Questtion['idQuestion'] . '</br> ';
-                }
-            }
-            ?>
         </div>
     </form>
 </div>
