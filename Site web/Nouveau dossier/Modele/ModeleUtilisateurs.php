@@ -4,6 +4,28 @@ function getStringConnection()
     return 'mysql:host=172.17.104.99:8080;dbname=projetquiz';
 }
 
+// getConnection
+// Par: Mathieu Dumoulin
+// date: 13/10/2014
+// Description: Cette fonction reçoit un type d'usager en paramètre ("etudiant","prof","admin") et retourne la conexion correspondante
+function getConnection($typeUsager)
+{
+    switch($typeUsager)
+    {
+        case "etudiant":
+            $bdd = connecterEtudiant();
+            break;
+        case "prof":
+            $bdd = connecterProf();
+            break;
+        case "admin":
+            $bdd = connecterAdmin();
+            break;
+    }
+
+    return $bdd;
+}
+
 //pour les méthodes de connection:  crypter mdp????
 /*	Retourne une connection à la base de donnée en tant que professeur */
 function connecterProf()

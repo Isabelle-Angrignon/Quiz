@@ -14,14 +14,28 @@
     include("Modele/mFonctionsQuizEtudiant.php");
     include("Controleur/cFonctionsQuizEtudiant.php");
     include("Modele/ModeleQuestions.php");
+
     ?>
 
+    <script src="Javascript/Etudiant-Accueil.js"></script>
     <script>
         $(function() {
             $("#DDL_Cours").selectmenu({
                 select: function(event, ui) {
-                    var id = $("#DDL_Cours option:selected").attr("value");
-                    updateUlQuestion( id );
+                    var idCours = $("#DDL_Cours option:selected").attr("value");
+                     //updateUlQuiz( idCours );
+                    $.ajax({
+                        type:"POST",
+                        url: 'Controleur/FonctionQuizEtudiant/SetIdCoursSession.php',
+                        data:{'selectCours':idCours},
+                        dataType:"text" /*,
+                        sucess: function() {
+                            alert("Bravo! ");
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+                        }*/
+                    });
                 }
             });
 
@@ -35,8 +49,18 @@
                 //appeler la fonction php;
                 $("#quiz").submit();
                 $(".dFondOmbrage").click( function() {
-                    //appeler la fonction php;
-                    //PHP:    unset($_SESSION['listeQuestions']);
+                    $.ajax({
+                        type:"POST",
+                        url: 'Controleur/FonctionQuizEtudiant/unsetSessionListeQuestions.php',
+                        data:{'aucun':null},
+                        dataType:"text"/*,
+                        sucess: function() {
+                            alert("Bravo! ");
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+                        }*/
+                    });
                 });
             });
 
@@ -66,7 +90,6 @@ if (isset($_POST['DDL_Cours']))
 $idQuestion = $_SESSION['listeQuestions'][0];
 //recupérer infos question
 $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion'] );
-//récupérer infos réponses
 
 //$_SESSION['listeReponses'] = recu
 
@@ -110,26 +133,13 @@ $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion'] 
             <ul id="UlQuizAleatoire">
                 <li class="ui-state-default" >Générer</li>
             </ul>
-            <?php
-
-            echo $_SESSION['idCours'];
-
-            $listeQuestions = $_SESSION['listeQuestions'];
-
-            if (!empty($listeQuestions))
-            {
-                foreach ($listeQuestions as $Questtion)
-                {
-                    echo 'idQuestion: '. $Questtion['idQuestion'] . '</br> ';
-                }
-            }
-            ?>
         </div>
     </form>
 </div>
 
-<?php  include("Vue/Template/BasDePage.php");
+<?php
 
+include("Vue/Template/BasDePage.php");
 
 //gestion des question du quiz...
 if (isset($_SESSION["listeQuestions"]))

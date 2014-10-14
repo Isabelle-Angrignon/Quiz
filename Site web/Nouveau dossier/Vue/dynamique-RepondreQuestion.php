@@ -1,4 +1,4 @@
-<?php  session_start();/*récupérer les infos de la question*/
+<?php
 
 //include("Template/InclusionJQuery.php");
 include("..//Modele/ModeleUtilisateurs.php");
@@ -9,13 +9,14 @@ include("..//Modele/ModeleCours.php");
 include("..//Modele/mFonctionsQuizEtudiant.php");
 include("..//Controleur/cFonctionsQuizEtudiant.php");
 include("..//Modele/ModeleQuestions.php");
+include("..//Modele/ModeleReponses.php");
 
-//Retirer une question de la liste:
-//$idQuestion = array_pop($_SESSION['listeQuestions']);
+demarrerSession();
+redirigerSiNonConnecte();
+
 //recupérer infos question
 $infoQuestion = $_SESSION['infoQuestion'];
-
-//récupérer infos réponses
+//$listeReponses = $_SESSION['listeReponses'];
 
 ?>
 
@@ -84,7 +85,8 @@ $infoQuestion = $_SESSION['infoQuestion'];
     <ul id="UlChoixReponse" class="liste ">
         <!-- les choix de réponse apparaitront ici selon le type de question -->
         <?php
-        genererChoixDeReponses(4,'VRAI_FAUX'); // no question et type question
+        genererChoixDeReponses( $_SESSION['idCours'] ,$infoQuestion[0]['typeQuestion'], $infoQuestion[0]['ordreReponsesAleatoire']); // no question et type question
+
         ?>
     </ul>
 

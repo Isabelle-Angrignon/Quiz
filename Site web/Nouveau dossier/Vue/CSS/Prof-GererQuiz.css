@@ -129,12 +129,35 @@ fieldset {
 #reponseConteneur {
     background-color:blue;
     width:50%;
-    min-height:400px;
+    min-height:50px;
     font-family:"Comic Sans MS", cursive, sans-serif;
     border:solid black;
     border-radius:10px;
     margin-top:20px;
+    padding:10px;
+}
+
+#reponseConteneur ul li input[type=checkbox] {
+    width:20px;
+    height:20px;
+    vertical-align: middle;
+    margin-top:-3px;
 }
 .dDivPrincipale {
     padding:10px;
+}
+
+.reponsesQuestion {
+    background-color:#d3d3d3;
+    width:90%;
+    height:20px;
+    border:solid darkgray 1px;
+    display:inline-block;
+    vertical-align: top;
+    margin-bottom:20px;
+}
+
+#Ul_Reponses {
+    list-style: none;
+    padding-left:0;
 }
