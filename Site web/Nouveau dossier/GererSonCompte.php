@@ -16,7 +16,7 @@
 		redirigerSiNonConnecte();
 		include("Vue/Template/EnteteSite.php");
         //faire un if sur $_SESSION["typeUsager"]
-        if ($_SESSION['typeUsager'] == 'prof' || $_SESSION['typeUsager'] == 'admin' ) {
+        if ($_SESSION['typeUsager'] == 'Prof' || $_SESSION['typeUsager'] == 'Admin' ) {
             include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
         }
         else{
