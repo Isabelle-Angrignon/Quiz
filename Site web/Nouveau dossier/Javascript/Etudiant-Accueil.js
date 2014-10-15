@@ -13,7 +13,7 @@ function gererQuestionRepondue() {
         $("#UlChoixReponse .ui-selected").each(function() {
             idReponse = $(this).attr("id");
         });
-    var resultat;
+
 
 //Valider cette réponse
      $.ajax({
@@ -23,7 +23,8 @@ function gererQuestionRepondue() {
         datatype: "text",
         success: function(resultat) {//resultat recu sera "1" ou "0"
             "Ce que je veux faire avec le resultat"
-            alert(resultat + ' ca marche' + idReponse);
+            alert(resultat);
+            alert( ' ca marche ' + idReponse);//////////////////////affiche pas resultat
             //Update score page
             // Update stats bd
             //Load nouvelle question
@@ -31,7 +32,7 @@ function gererQuestionRepondue() {
             //update infos question/réponse/liste...
             //insererHtmlFromPhp
         },
-        error: function(resultat) {
+        error: function() {
             alert('marche pas');
         }
     });

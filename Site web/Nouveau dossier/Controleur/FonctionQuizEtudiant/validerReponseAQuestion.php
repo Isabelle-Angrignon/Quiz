@@ -4,12 +4,43 @@ include("..//Utilitaires.php");
 demarrerSession();
 redirigerSiNonConnecte();
 
-$idReponse =  1; //$_POST['idReponse'];
+$idReponse =  $_POST['idReponse'];
+$idQuestion = $_SESSION['infoQuestion']['idQuestion'];
 
-//$BonneRep = $_SESSION['listeReponses']['']//////////////foreach...
 
-//
+switch( $_SESSION['infoQuestion']['typeQuestion']){
+    case "VRAI-FAUX":
+        if($_SESSION['listeReponses']['reponseEstVrai'] == $idReponse)
+        {
+            return "1";
+        }
+        else
+        {
+            return "0";
+        }
+        break;
+    case "CHOIX_MULTI_UNIQUE":
 
-return  '"'. $idReponse . '"';
+        foreach($_SESSION['listeReponses'] as $reponse)
+        {
+            if($reponse['reponseEstValide']  == 1 )
+            {
+                $bonneRep = $reponse['idReponse'];
+            }
+        }
+        if($bonneRep == $idReponse)
+        {
+            return "1";
+        }
+        else
+        {
+            return "0";
+        }
+        break;
+    default:
+        return "x";
+        break;
+
+}
 
 ?>

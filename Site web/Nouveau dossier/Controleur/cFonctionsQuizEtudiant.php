@@ -29,7 +29,7 @@ function genererChoixDeReponses($idQuestion, $typeQuestion, $ordreReponse)
     switch ($typeQuestion)
     {
         case 'VRAI_FAUX':
-            genererReponsesVF();
+            genererReponsesVF($idQuestion);
             break;
         case 'CHOIX_MULTI_UNIQUE':
             genererReponsesCMU($idQuestion, $ordreReponse);
@@ -44,8 +44,18 @@ function genererChoixDeReponses($idQuestion, $typeQuestion, $ordreReponse)
     Description: Cette fonction structure l'affichage des réponses de type vrai ou faux.
 */
 
-function genererReponsesVF()
+function genererReponsesVF($idQuestion)
 {
+    $listeReponses = recupererReponsesVraiFaux($idQuestion);
+
+    if (!empty($listeReponses))
+    {
+        $_SESSION['listeReponses'] = $listeReponses;
+    }
+    else
+    {
+        unset($_SESSION['listeReponses']);
+    }
     //générer deux li, un vrai et un faux
     GenererLiSelect('UlChoixReponse', 'Vrai', '1' );
     GenererLiSelect('UlChoixReponse', 'Faux', '0' );
@@ -64,7 +74,8 @@ function genererReponsesCMU($idQuestion, $ordreReponse)
 
     if (!empty($listeReponses))
     {
-        echo "Il y a une liste! ";
+        $_SESSION['listeReponses'] = $listeReponses;
+
         foreach ($listeReponses as $Row)
         {
             GenererLiSelect('UlChoixReponse', $Row['enonceReponse'], $Row['idReponse']);
