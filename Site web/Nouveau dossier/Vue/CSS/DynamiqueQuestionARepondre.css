@@ -24,36 +24,37 @@ div.suiviQuiz {
     margin: 0 auto;
 }
 
-#divSuiviQuiz{
+#divSuiviQuiz {
     margin-top: 20px;
     font-size: 30px;
-
     -webkit-border-top-left-radius: 30px;
     -moz-border-radius-topleft: 30px;
     border-top-left-radius: 30px;
-}
-
-#divSuiviQuiz2{
-    text-align: right;
-    padding-top: 40px;
-
-    -webkit-border-bottom-right-radius: 30px;
-    -moz-border-radius-bottomright: 30px;
-    border-bottom-right-radius: 30px;
-
+    padding-top: 20px;
 }
 #labelCours {
-    float: left;
-    padding-left: 10px;
+
+}
+
+#divSuiviQuizCentre {
+    font-size: 25px;
+    padding-bottom: 0px;
 }
 
 #labelScore{
-    position: relative;
+    display: inline-block;
 }
 
 #labelTitre {
     float: right;
     padding-right: 10px;
+}
+
+#divSuiviQuiz2{
+    text-align: right;
+    -webkit-border-bottom-right-radius: 30px;
+    -moz-border-radius-bottomright: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 #labelProp {
@@ -93,7 +94,7 @@ div.suiviQuiz {
     background-color: rgba(79, 168, 255, 0.45);
     width:90%;
     min-height:70px;
-    max-height: 140px;
+    max-height: 100px;
     overflow-y: auto;
     border-radius:10px;
     padding:10px;

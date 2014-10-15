@@ -221,7 +221,7 @@ function insererHTMLfromPHP(idConteneur, pathFichierPHP) {
 // Date: 08/10/2014
 // Description : Cette fonction vide le html de l'élément correspondant à l'id passé en paramètre
 function viderHTMLfromElement(idElement) {
-    var selecteur = "#" + idConteneur;
+    var selecteur = "#" + idElement;
     $(selecteur).html("");
 }
 

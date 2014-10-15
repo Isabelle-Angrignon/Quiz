@@ -16,40 +16,46 @@ redirigerSiNonConnecte();
 
 //recupérer infos question
 $infoQuestion = $_SESSION['infoQuestion'];
-//$listeReponses = $_SESSION['listeReponses'];
+
 
 ?>
 
 <script>
     $(function() {
         $("#UlChoixReponse").selectable({
-            selected: function( event, ui ) {
-               // alert(ui.selected.id);
+            selected: function(event, ui) {
+                $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected").each(
+                    function(key,value){
+                        $(value).find('*').removeClass("ui-selected");
+                    }
+                );
             }
         });
-
 
         //bouton suivant...
         $("#btnSuivant").click( function() {
             //gérer question actuelle
+            //affichage score
             gererQuestionRepondue();
+            //génération div dynamique avec nouvelle question
+            chargerNouvelleQuestion();////////////////////////////////pas excuté?
         });
-
-
-
     });
 </script>
 
 
 <div id="divSuiviQuiz" class="suiviQuiz" >
-    <label id="labelCours" class="suiviQuiz">Nom Cours ici <?php /* nom du cours  */   ?>   </label>
+    <label id="labelCours" class="suiviQuiz"><?php echo getNomCours();   ?>   </label>
+</div>
+<div id="divSuiviQuizCentre" class="suiviQuiz" >
+    <label id="labelScore" class="suiviQuiz">
+        <?php  echo ($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']);  ?>
+    </label>
 
-    <label id="labelScore" class="suiviQuiz"> 4 / 10 <?php  /*méthode qui récupère les infos de la session*/?> </label>
-
-    <label id="labelTitre" class="suiviQuiz"> Aléatoire <?php  /*méthode qui récupère les infos de la session*/?> </label>
+    <label id="labelTitre" class="suiviQuiz"> Aléatoire <?php   ?> </label>
 </div>
 <div id="divSuiviQuiz2" class="suiviQuiz" >
-    <label id="labelProp" class="suiviQuiz"> Quiz de:    <?php          ?>     </label>
+    <label id="labelProp" class="suiviQuiz"> Cours de:    <?php    echo getNomProfDuCoursDeLEtudiant()  ?>     </label>
 </div>
 
 

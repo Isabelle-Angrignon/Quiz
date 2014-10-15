@@ -5,7 +5,7 @@ demarrerSession();
 redirigerSiNonConnecte();
 
 unset($_SESSION['listeQuestions']);
-//unset($_SESSION['infoQuestion']);
-//unset($_SESSION['listeReponses']);
+unset($_SESSION['infoQuestion']);
+unset($_SESSION['listeReponses']);
 
 ?>

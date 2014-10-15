@@ -9,14 +9,14 @@ $idQuestion = $_SESSION['infoQuestion'][0]['idQuestion'];////// pourrait prende 
 
 
 switch( $_SESSION['infoQuestion'][0]['typeQuestion']){
-    case "VRAI-FAUX":
-        if($_SESSION['listeReponses']['reponseEstVrai'] == $idReponse)
+    case "VRAI_FAUX":
+        if($_SESSION['listeReponses'][0]['reponseEstVrai'] == $idReponse)
         {
-            return "1";
+            echo "1";
         }
         else
         {
-            return "0";
+            echo "0";
         }
         break;
     case "CHOIX_MULTI_UNIQUE":
@@ -30,15 +30,15 @@ switch( $_SESSION['infoQuestion'][0]['typeQuestion']){
         }
         if($bonneRep == $idReponse)
         {
-            return "1";
+            echo "1";
         }
         else
         {
-            return "0";
+            echo "0";
         }
         break;
     default:
-        return "x";
+        echo "x";
         break;
 
 }
