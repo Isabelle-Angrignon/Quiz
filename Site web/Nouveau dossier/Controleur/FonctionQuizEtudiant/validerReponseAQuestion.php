@@ -5,10 +5,10 @@ demarrerSession();
 redirigerSiNonConnecte();
 
 $idReponse =  $_POST['idReponse'];
-$idQuestion = $_SESSION['infoQuestion']['idQuestion'];
+$idQuestion = $_SESSION['infoQuestion'][0]['idQuestion'];////// pourrait prende  [0]  au milieu
 
 
-switch( $_SESSION['infoQuestion']['typeQuestion']){
+switch( $_SESSION['infoQuestion'][0]['typeQuestion']){
     case "VRAI-FAUX":
         if($_SESSION['listeReponses']['reponseEstVrai'] == $idReponse)
         {

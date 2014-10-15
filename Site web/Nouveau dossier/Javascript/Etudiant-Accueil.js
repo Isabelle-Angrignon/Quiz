@@ -10,10 +10,9 @@ function gererQuestionRepondue() {
 //Récupérer le id de la réponse cliquée
     var idReponse;
 
-        $("#UlChoixReponse .ui-selected").each(function() {
-            idReponse = $(this).attr("id");
-        });
-
+    $("#UlChoixReponse .ui-selected").each(function() {
+        idReponse = $(this).attr("id");
+    });
 
 //Valider cette réponse
      $.ajax({
@@ -23,8 +22,24 @@ function gererQuestionRepondue() {
         datatype: "text",
         success: function(resultat) {//resultat recu sera "1" ou "0"
             "Ce que je veux faire avec le resultat"
-            alert(resultat);
-            alert( ' ca marche ' + idReponse);//////////////////////affiche pas resultat
+
+            alert( ' no reponse =  ' + idReponse);//////////////////////affiche pas resultat
+            if(resultat == 1)
+            {
+                alert( ' Bonne réponse' );
+            }
+            else if(resultat == 0)
+            {
+                alert( ' Mauvaise réponse' );
+            }
+            else if(resultat == 'X')
+            {
+                alert( ' pas bon type de question' );
+            }
+            else
+            {
+                alert( ' pas eu de retour de validation... :((( ' );
+            }
             //Update score page
             // Update stats bd
             //Load nouvelle question
