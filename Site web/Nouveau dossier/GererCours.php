@@ -62,6 +62,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 remplirUIModifGroupeAjax($(ui.item).attr('id'));
                 remplirUIEtudiantCoursAjax($(ui.item).attr('id'));
                 $('#BTN_CSV').show();
+                $('#BTN_Cours').hide();
             },
             remove: function(event,ui){
                 $("#UlCours").sortable("option","connectWith","#QuizDropZone");
@@ -70,6 +71,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 $('#UlEtudiants').empty();
                 ListerEtudiantAjax();
                 $('#BTN_CSV').hide();
+                $('#BTN_Cours').show();
             }
 
 	    });

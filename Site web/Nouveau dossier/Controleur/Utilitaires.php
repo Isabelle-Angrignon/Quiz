@@ -92,7 +92,7 @@ function GenererOption($IdSelect, $valeur, $idOption)
 
 function GenererLi($idUi , $valeur , $idLi)
 {
-    echo "<script>ajouterLi_ToUl_V2( '". $idUi . "' , '".$valeur."' ,'".$idLi."', true);</script>";
+    echo '<script>ajouterLi_ToUl_V2( "'. $idUi . '" , "'.$valeur.'" ,"'.$idLi.'", true);</script>';
 }
 
 

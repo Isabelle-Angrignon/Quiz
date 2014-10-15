@@ -16,7 +16,7 @@
               enctype="multipart/form-data">
             <input type="hidden" id="coursPost" name="cours"></input>
             <label for="file">nom du fichier:</label>
-            <input type="file" name="file" id="file"><br>
+            <input type="file" name="file" id="file" accept=".csv"><br>
             <div id="soumettre" class="ListeDivElementStyle BoutonDiv">Ajouter le cours</div>
         </form>
     </div>

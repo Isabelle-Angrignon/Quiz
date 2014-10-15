@@ -117,3 +117,38 @@ function creerEtudiantCoursAjax(idEleve,nom,prenom) {
     });
 }
 
+function ajouterCoursAjax(nom,code) {
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/AjouterCours.php",
+        data: {"nom" :nom, "code" :code},
+        dataType: "html",
+        success: function(resultat) {alert(resultat);},
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function ListerCoursAjax() {
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/ListerCours.php",
+        dataType: "json",
+        success: function(resultat) {
+            var idCours;
+            var codeCours;
+            var nomCours;
+            for(var i = 0; i < resultat.length; ++i) {
+                idCours = resultat[i].idCours;
+                codeCours = resultat[i].codeCours;
+                nomCours = resultat[i].nomCours;
+
+                ajouterLi_ToUl_V2("UlCours",codeCours + " " + nomCours, idCours, true);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}

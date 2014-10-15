@@ -21,9 +21,22 @@
 </div>
 
 <script>
+    function estValide(){
+        temp = true;
+        temp = ($('#TB_Nom').val() != "" && $('#TB_Code').val() != "" );
+        if (temp == false){alert('Certain champs sont vide');}
+        temp = ($('#TB_Nom').val().length <= 200 && $('#TB_Code').val().length <= 10 );
+        if (temp == false){alert('Certain champs sont trop long');}
+        return temp;
+    }
     $('#soumettre').click(function(){
-        $('#dFondOmbrage').remove();
-        $('#DivDynamique').remove();
+        if (estValide()) {
+            ajouterCoursAjax($('#TB_Nom').val(), $('#TB_Code').val())
+            $('#UlCours').empty();
+            ListerCoursAjax();
+            $('#dFondOmbrage').remove();
+            $('#DivDynamique').remove();
+        }
     });
 
 </script>
