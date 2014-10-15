@@ -66,20 +66,52 @@ function ajouterNouvelleReponse() {
     }, 'html');
 }
 
+// cocherCheckBoxCoursSelonQuestion
+// Par Mathieu Dumoulin
+// Date: 14/10/2014
+// Description: Cette fonction communique avec Vue/Prof-GererQuiz-AjoutElement.php en lui passant l'action qu'il veut commettre.
+//              Cette page lui renvoie la liste des cours qui comporte la question passée en paramètre sous forme JSON.
+//              Par la suite, dans l'attribut success, je coche chacune des CheckBox qui correspondent aux cours renvoyés.
 function cocherCheckBoxCoursSelonQuestion(idQuestion) {
     $.ajax({
         type:"POST",
-        url:'Prof-GererQuiz-AjoutElement.php',
+        url:'Vue/Prof-GererQuiz-AjoutElement.php',
         data: {"action":"listeCoursSelonQuestion", "idQuestion": idQuestion },
-        datatype: "json",
+        dataType: "json",
         success: function(resultat){
-            alert("allo");
             for(var i = 0; i < resultat.length; ++i) {
-                alert(resultat[i].idCours);
+                $("#listeAjoutCours input[type=checkbox]").each(function(){
+                    if($(this).attr("value") == resultat[i].idCours) {
+                        $(this).prop('checked', true);
+                    }
+                });
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function cocherTypeQuestionSelonQuestion(typeQuestion) {
+
+    $("#TypeQuestion input[type=radio]").each(function() {
+       if($(this).attr("value") == typeQuestion) {
+           $(this).prop('checked', true);
+       }
+    });
+}
+
+// cocherTypeQuizAssocieSelonQuestion
+// Par Mathieu Dumoulin
+// Date: 14/10/2014
+// Intrant : typeQuiz = Un JSON comportant représentant tous les types (attribut typeQuiz) de quiz associés à la question
+function cocherTypeQuizAssocieSelonQuestion(typeQuiz) {
+    $("#TypeQuizAssocie input[type=checkbox]").each(function() {
+        for(var i = 0; i < typeQuiz.length; ++i) {
+            if($(this).attr("value") == typeQuiz[i].typeQuiz) {
+                $(this).prop('checked', true);
+            }
         }
     });
 }
