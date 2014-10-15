@@ -4,7 +4,10 @@
     include("../Modele/ModeleQuestions.php");
     include("../Modele/ModeleUtilisateurs.php");
     include("../Modele/ModeleReponses.php");
-
+    include("../Modele/ModeleAssociationQuestionCours.php");
+    include("../Modele/ModeleTypesQuestion.php");
+    include("../Modele/ModeleTypesQuiz.php");
+    include("../Modele/ModeleAssociationTypesQuizQuestion.php");
 
     session_start();
 
@@ -16,7 +19,7 @@
     {
         $maQuestion = getQuestion($_SESSION["idQuestion"]);
         $enonceQuestion = $maQuestion[0]["enonceQuestion"];
-        $_SESSION['typeQuestion'] = $maQuestion[0]["typeQuestion"];
+        $typeQuestion = $maQuestion[0]["typeQuestion"];
     }
 
 ?>
@@ -38,7 +41,7 @@
 
 
     $("#parametresQuestion").accordion({
-        heightStyle:"fill"
+        heightStyle:"content"
     }).disableSelection();
 
 
@@ -54,9 +57,17 @@
        }
     });
 
+ /*   $("#EnonceQuestion").ready(function () {
+
+        alert($(this).html().length.toString());
+       /*if($(this).text() == ) {
+           alert($("#EnonceQuestion").text());
+       }
+    });*/
+
 </script>
 <div id="QuestionConteneur">
-    <div id="EnonceQuestion" contenteditable="true">
+    <div id="EnonceQuestion" contenteditable="true" placeholder="Enter text here..." >
         <?php
             echo isset($enonceQuestion)?$enonceQuestion:"";
         ?>
@@ -80,29 +91,35 @@
             <?php
                 if($_SESSION["etat"] == "modifierQuestion")
                 {
-                    echo "<script>cocherCheckBoxCoursSelonQuestion(". $_SESSION['idQuestion']."</script>";
+                    echo "<script>cocherCheckBoxCoursSelonQuestion(". $_SESSION['idQuestion'].");</script>";
                 }
             ?>
         </ul>
     </div>
-    <h3>Alexis</h3>
+    <h3>Type de question</h3>
     <div>
-        <ul id="Type de question">
-            <li><input type="checkbox">Un cours</input></li>
-            <li><input type="checkbox">Un cours</input></li>
-            <li><input type="checkbox">Un cours</input></li>
+        <ul id="TypeQuestion">
+            <?php
+                afficherTypesQuestions();
+                if($_SESSION["etat"] == "modifierQuestion")
+                {
+                    echo "<script>cocherTypeQuestionSelonQuestion('".$typeQuestion."');</script>";
+                }
+            ?>
         </ul>
     </div>
-    <h3>Mathieu</h3>
+    <h3>Type de quiz associé</h3>
     <div>
-        <ul id="listeAjoutCours">
-            <li><input type="checkbox">Un cours</input></li>
-            <li><input type="checkbox">Un cours</input></li>
-            <li><input type="checkbox">Un cours</input></li>
+        <ul id="TypeQuizAssocie">
+            <?php
+                afficherTypesQuiz();
+            if($_SESSION["etat"] == "modifierQuestion")
+            {
+                $typeQuiz = prendreTypeQuizAssocie($_SESSION['idQuestion']);
+                echo "<script>cocherTypeQuizAssocieSelonQuestion(".json_encode($typeQuiz).");</script>";
+            }
+
+            ?>
         </ul>
     </div>
 </div>
-
-<?php
-
-?>

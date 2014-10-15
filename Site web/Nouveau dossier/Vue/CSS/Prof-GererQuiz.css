@@ -130,6 +130,10 @@ fieldset {
     display:inline-block;
     outline: none;
 }
+
+/*#EnonceQuestion[contenteditable=true]:empty:before{
+    content: attr(placeholder);
+}*/
 #reponseConteneur {
     background-color:blue;
     min-height:50px;
