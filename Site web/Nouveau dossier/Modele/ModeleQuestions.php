@@ -58,4 +58,42 @@ function trieParDefaultQuestions($idCours, $idProprietaire)
     return json_encode($resultat);
 }
 
+// Nom: ajouterQuestion
+// Par: Mathieu Dumoulin
+// Date: 15/10/2014
+// Description: Cette fonction ajoute une question dans la base de données. Si la connexion passée en paramètre est null, cette fonction va créer et fermer sa propre connexion.
+function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $ordreReponsesAleatoire, $typeQuestion, $idProprietaire, $referenceWeb)
+{
+    if(isset($connexion))
+    {
+        $bdd = connecterProf();
+    }
+    else
+    {
+        $bdd = $connexion;
+    }
+
+    $requete = $bdd->prepare("CALL ajouterQuestion(?,?,?,?,?,?,?)");
+
+    $requete->bindParam(1, $enonceQuestion, PDO::PARAM_STR);
+    $requete->bindParam(2, $lienImage, PDO::PARAM_STR, 100);
+    $requete->bindParam(3, $difficulte, PDO::PARAM_STR, 20);
+    $requete->bindParam(4, $ordreReponsesAleatoire, PDO::PARAM_INT,1);
+    $requete->bindParam(5, $typeQuestion, PDO::PARAM_STR, 30);
+    $requete->bindParam(6, $idProprietaire, PDO::PARAM_STR, 10);
+    $requete->bindParam(7, $referenceWeb, PDO::PARAM_STR);
+
+    $requete->execute();
+    $resultat = $requete->fetchAll();
+
+    $requete->closeCursor();
+
+    if(!isset($connexion))
+    {
+        unset($bdd);
+    }
+
+    return $resultat;
+}
+
 ?>

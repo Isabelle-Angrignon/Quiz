@@ -19,3 +19,32 @@ function listerCoursSelonQuestion($idQuestion)
 
     return json_encode($resultat);
 }
+
+function associerQuestionACours($connexion, $idQuestion, $idCours) {
+
+    if(isset($connexion))
+    {
+        $bdd = connecterProf();
+    }
+    else
+    {
+        $bdd = $connexion;
+    }
+
+    $requete = $bdd->prepare("CALL associerQuestionCours(?,?)");
+
+    $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
+    $requete->bindParam(2, $idCours, PDO::PARAM_INT);
+
+    $requete->execute();
+    $resultat = $requete->fetchAll();
+
+    $requete->closeCursor();
+
+    if(!isset($connexion))
+    {
+        unset($bdd);
+    }
+
+    return $resultat;
+}

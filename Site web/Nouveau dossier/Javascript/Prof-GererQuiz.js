@@ -94,10 +94,10 @@ function cocherCheckBoxCoursSelonQuestion(idQuestion) {
 }
 
 function cocherTypeQuestionSelonQuestion(typeQuestion) {
-
     $("#TypeQuestion input[type=radio]").each(function() {
        if($(this).attr("value") == typeQuestion) {
-           $(this).prop('checked', true);
+     //   $(this).attr('checked', true);
+          $(this).prop('checked', true);
        }
     });
 }
@@ -114,4 +114,12 @@ function cocherTypeQuizAssocieSelonQuestion(typeQuiz) {
             }
         }
     });
+}
+
+function ajouterQuestion() {
+
+}
+
+function modifierQuestion() {
+    alert("Modifier!");
 }

@@ -50,6 +50,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
 
                 $("#DDL_Cours").selectmenu({
+                    width:400,
                     select: function(event, ui) {
                          var id = $("#DDL_Cours option:selected").attr("value");
                          updateUlQuestion( id );
