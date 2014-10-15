@@ -17,7 +17,10 @@ fieldset {
 #DDL_Cours {
 	width:100%;
 }
-
+#soumettre{
+    width:50%;
+    display: inline-block;
+}
 
 /* CSS propre aux listes principales */
 #ListeCours {
