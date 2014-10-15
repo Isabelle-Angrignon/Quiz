@@ -74,6 +74,25 @@ function ajouterLi_ToUl_V2(idUl, element,idElement, estThemeJqueryUI) {
     document.getElementById(idUl).appendChild(liTag);
 }
 
+// Nom : ajouterLi_ToUl
+// Par : Mathieu Dumoulin
+// Date : 19/09/2014
+// Intrant(s) : String idUl, String element,String idElement , bool estThemeJqueryUI
+// Extrant(s) : Il n'y a pas d'extrant
+// Description : Cette fonction prend l'id d'une balise Ul et lui ajoute un Li créé dynamiquement comportant le texte (element) passer en paramêtre
+//				 en donnant les classe pour le thême d'un sortable au Li si estThemeJqueryUI est à true
+function ajouterLi_ToUl_Selectable(idUl, element,idElement, estThemeJqueryUI) {
+    // Initialisation du li
+    var liTag = document.createElement("li");
+    liTag.Value = element;
+    liTag.setAttribute("id",idElement);
+    if(estThemeJqueryUI) {
+        liTag.setAttribute("class", "selectable");
+    }
+    liTag.appendChild(document.createTextNode(element));
+    document.getElementById(idUl).appendChild(liTag);
+}
+
 
 // creeBaliseAvecClasse(baliseACreer, classe)
 // Par Mathieu Dumoulin
@@ -96,7 +115,7 @@ function creeBaliseAvecClasse(baliseACreer, classe) {
 //              idQuestion = La question selon laquelle le frame dynamique est relié
 // Extrant(s) : Le div représentant la page de base du "pop up"
 // Description : Cette fonction créée, à l'aide de balises div, un squelette de fenêtre "pop up" avec un fond en ombragé
-function creeFrameDynamique(idDivPrincipal, pathFichierPHP, idQuestion) {
+function creeFrameDynamique(idDivPrincipal, pathFichierPHP) {
 	var fondOmbrage = creeBaliseAvecClasse("div", "dFondOmbrage");
 	fondOmbrage.setAttribute("id", "dFondOmbrage");
 	fondOmbrage.onmousedown = function(event) {
@@ -120,7 +139,7 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP, idQuestion) {
 	fondOmbrage.appendChild(divPrincipale);
 
     if(pathFichierPHP != null) {
-        insererHTMLfromPHP(idDivPrincipal, pathFichierPHP, idQuestion);
+        insererHTMLfromPHP(idDivPrincipal, pathFichierPHP);
     }
 	
 	return divPrincipale;
@@ -147,6 +166,31 @@ function insererNouveauDiv(idDiv, idParent, classDiv) {
     parent.appendChild(nouveauDiv);
 }
 
+// creerNouveauCheckBox
+// Par Mathieu Dumoulin
+// Date: 14/10/2014
+// Intrants: idParent = l'identifiant du parent
+//           name = le groupe dont le checkbox appartient (correspond à son attribut "name")
+//           value = la valeur que le checkbox contient (correspond à son attribut "value")
+//           text = le texte que le checkbox va afficher à l'interface
+// Description: Cette fonction créée un nouveau CheckBox en limitant son nombre de caractères
+//              pour qu'il soit d'une taille raisonnable pour son parent
+function creerNouveauCheckBox(idParent, name, value, text, tailleDuTexte) {
+    var li = document.createElement("li");
+
+    var checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("name", name);
+    checkbox.setAttribute("value", value);
+
+    li.appendChild(checkbox);
+    if(tailleDuTexte != null && text.length > tailleDuTexte) {
+        text = text.substr(0,tailleDuTexte) + "...";
+    }
+
+    li.appendChild(document.createTextNode(text));
+    document.getElementById(idParent).appendChild(li);
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////     FONCTIONS POUR PEUPLER/VIDER     ////////////////////////////////////////////////////////////////////////
@@ -157,19 +201,17 @@ function insererNouveauDiv(idDiv, idParent, classDiv) {
 // Intrants : idConteneur = l'identifiant du conteneur
 // Extrant : Il n'y en a pas
 // Description : Cette méthode utilise AJAX pour inserer le contenu HTML du fichier PHP dans le Conteneur.
-function insererHTMLfromPHP(idConteneur, pathFichierPHP, idQuestion) {
-
+function insererHTMLfromPHP(idConteneur, pathFichierPHP) {
     $.ajax({
         type: 'GET',
         url: pathFichierPHP,
-        data: {"idQuestion":idQuestion},
         dataType: "html",
         success: function(resultat) {
             var selecteur = "#" + idConteneur;
             $(selecteur).html(resultat);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
         }
     });
 }

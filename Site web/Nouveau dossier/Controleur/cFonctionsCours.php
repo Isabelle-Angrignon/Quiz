@@ -12,11 +12,11 @@ function ListerCoursDansSelect($IdSelect, $tousMesCours)
 {
     if($tousMesCours)
     {
-        $Donnee = LireCoursEtudiant( $_SESSION['idUsager'] );
+        $Donnee1 = LireCoursEtudiant( $_SESSION['idUsager'] );
 
-        GenererOption($IdSelect, 'Tous mes cours', '0');
-
-        foreach($Donnee as $Row)
+        $_SESSION['listeCours'] = $Donnee1;
+        GenererOption("DDL_Cours", "Tous mes cours", "0");
+        foreach($Donnee1 as $Row)
         {
             GenererOption($IdSelect, $Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
         }
@@ -24,9 +24,11 @@ function ListerCoursDansSelect($IdSelect, $tousMesCours)
     else
     {
         $Donnee = LireCours();
+
+        $_SESSION['listeCours'] = $Donnee;
         foreach($Donnee as $Row)
         {
-            GenererOption($IdSelect,$Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
+            GenererOption($IdSelect, $Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
         }
     }
 }

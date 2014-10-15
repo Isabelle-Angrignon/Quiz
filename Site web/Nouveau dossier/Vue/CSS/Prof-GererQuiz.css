@@ -111,6 +111,10 @@ fieldset {
 	margin-right:5%;
 }
 
+#QuestionConteneur {
+    display:inline-block;
+    width:50%;
+}
 
 #EnonceQuestion {
     background-color:red;
@@ -126,9 +130,12 @@ fieldset {
     display:inline-block;
     outline: none;
 }
+
+/*#EnonceQuestion[contenteditable=true]:empty:before{
+    content: attr(placeholder);
+}*/
 #reponseConteneur {
     background-color:blue;
-    width:50%;
     min-height:50px;
     font-family:"Comic Sans MS", cursive, sans-serif;
     border:solid black;
@@ -150,7 +157,7 @@ fieldset {
 .reponsesQuestion {
     background-color:#d3d3d3;
     width:90%;
-    height:20px;
+    min-height:20px;
     border:solid darkgray 1px;
     display:inline-block;
     vertical-align: top;
@@ -160,4 +167,30 @@ fieldset {
 #Ul_Reponses {
     list-style: none;
     padding-left:0;
+}
+
+#parametresQuestion {
+    width: 35%;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10%;
+    height:500px;
+}
+
+#parametresQuestion .ui-widget-content {
+    background:#d3d3d3;
+    padding-left:0;
+    padding-top:3px;
+    line-height:20px;
+}
+
+#parametresQuestion div ul {
+    margin:0;
+    padding:0;
+    font-size:12px;
+}
+
+#listeAjoutCours {
+    list-style: none;
+    cursor:default;
 }

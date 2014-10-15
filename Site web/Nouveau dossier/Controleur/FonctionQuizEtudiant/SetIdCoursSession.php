@@ -6,4 +6,3 @@ redirigerSiNonConnecte();
 
 $_SESSION['idCours'] = $_POST['selectCours'];
 
-?>

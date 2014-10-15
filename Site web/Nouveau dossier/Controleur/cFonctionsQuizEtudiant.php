@@ -13,7 +13,7 @@ function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz)
     $Donnee = ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz );
     foreach($Donnee as $Row)
     {
-        GenererLi($idUl,$Row['titrequiz'], $Row['idQuiz']);
+        GenererLiSelect($idUl,$Row['titrequiz'], $Row['idQuiz']);
     }
 }
 
@@ -29,9 +29,9 @@ function genererChoixDeReponses($idQuestion, $typeQuestion, $ordreReponse)
     switch ($typeQuestion)
     {
         case 'VRAI_FAUX':
-            genererReponsesVF();
+            genererReponsesVF($idQuestion);
             break;
-        case 'CHOIX_MULTI_UNIQUE';
+        case 'CHOIX_MULTI_UNIQUE':
             genererReponsesCMU($idQuestion, $ordreReponse);
             break;
     }
@@ -44,42 +44,46 @@ function genererChoixDeReponses($idQuestion, $typeQuestion, $ordreReponse)
     Description: Cette fonction structure l'affichage des réponses de type vrai ou faux.
 */
 
-function genererReponsesVF()
+function genererReponsesVF($idQuestion)
 {
+    $listeReponses = recupererReponsesVraiFaux($idQuestion);
+
+    if (!empty($listeReponses))
+    {
+        $_SESSION['listeReponses'] = $listeReponses;
+    }
+    else
+    {
+        unset($_SESSION['listeReponses']);
+    }
     //générer deux li, un vrai et un faux
-    GenererLi('UlChoixReponse', 'Vrai', '1' );
-    GenererLi('UlChoixReponse', 'Faux', '0' );
+    GenererLiSelect('UlChoixReponse', 'Vrai', '1' );
+    GenererLiSelect('UlChoixReponse', 'Faux', '0' );
 }
 function genererReponsesCMU($idQuestion, $ordreReponse)
 {
     //appeler une méthode qui récupère la liste des questions de la bd
     //si l'ordre des  $listeReponses = rréponses est aléatoire, shuffle les réponses
-
     $listeReponses = recupererReponsesAQuestion($idQuestion);
-
-    if (!empty($listeReponses))
-    {
-        foreach ($listeReponses as $Reponse)
-        {
-            echo $Reponse['enonceReponse'] . '</br> ';
-        }
-       // $_SESSION['listeReponses'] = $listeReponses;
-    }
-    else
-    {
-     //   unset($_SESSION['listeReponses']);
-    }
-
 
     if($ordreReponse == 1)
     {
         shuffle($listeReponses);
-        echo "Mélangé";
+        echo "Mélangé : ";
     }
 
-    foreach($listeReponses as $Row)
+    if (!empty($listeReponses))
     {
-        GenererLi('#UlChoixReponse',$Row['enonceReponse'], $Row['idReponse']);
+        $_SESSION['listeReponses'] = $listeReponses;
+
+        foreach ($listeReponses as $Row)
+        {
+            GenererLiSelect('UlChoixReponse', $Row['enonceReponse'], $Row['idReponse']);
+        }
+    }
+    else
+    {
+        unset($_SESSION['listeReponses']);
     }
 }
 

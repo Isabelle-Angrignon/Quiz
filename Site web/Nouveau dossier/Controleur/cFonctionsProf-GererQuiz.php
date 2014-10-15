@@ -25,17 +25,51 @@ function getQuestion($idQuestion) {
 
 function getReponsesFromQuestion($idQuestion)
 {
-    $reponses = recupererReponsesAQuestion($idQuestion);
-
-    foreach($reponses as $uneReponse)
+    if($idQuestion != null)
     {
-        creerCheckBoxReponse("reponses", $uneReponse["idReponse"], $uneReponse["enonceReponse"]);
+        $reponses = recupererReponsesAQuestion($idQuestion);
+
+        foreach($reponses as $uneReponse)
+        {
+            creerCheckBoxReponse("reponses", $uneReponse["idReponse"], $uneReponse["enonceReponse"]);
+        }
     }
+}
+
+function afficherTypesQuestions()
+{
+    $Types = listerTypesQuestions();
+
+    foreach($Types as $unType)
+    {
+        creerInputGenerique("radio","typesQuestion", $unType["typeQuestion"], str_replace('_', ' ', $unType["typeQuestion"]));
+    }
+}
+
+function afficherTypesQuiz()
+{
+    $Types = listerTypesQuiz();
+
+    foreach($Types as $unType)
+    {
+        creerInputGenerique("checkbox","typesQuestion", $unType["typeQuiz"], $unType["typeQuiz"]);
+    }
+}
+
+function prendreTypeQuizAssocie($idQuestion)
+{
+    $Types = listerTypesQuizAssocie($idQuestion);
+    return $Types;
 }
 
 function creerCheckBoxReponse($nomDuGroupe, $valeur, $textAffiche)
 {
-    echo "<li><input type='checkbox' name=".$nomDuGroupe." value=".$valeur."><div class='reponsesQuestion'>".$textAffiche."</div></li>";
+    echo "<li><input type='checkbox' name=".$nomDuGroupe." value=".$valeur."><div class='reponsesQuestion' contenteditable='true'>".$textAffiche."</div></li>";
+}
+
+function creerInputGenerique($typeInput, $nomDuGroupe,$valeur,$textAffiche)
+{
+    echo "<li><input type='".$typeInput."' name=".$nomDuGroupe." value=".$valeur.">".$textAffiche."</li>";
 }
 
 ?>
