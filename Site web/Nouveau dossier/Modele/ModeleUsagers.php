@@ -1,11 +1,3 @@
-<!--
-Fonctions.php
-Auteur: Isabelle Angringnon
-Date: 23 septembre 2014
-But: Contient diverses fonctions d'accès à la BD 
-
--->
-
 <?php
 //AjouterUsager
 //Intrant : Id = Le numero de de DA de l'usager , prenom= prenom de l'usager , nom = nom de l'usager

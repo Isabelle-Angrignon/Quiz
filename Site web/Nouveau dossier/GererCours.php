@@ -8,14 +8,16 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
 <head>
 	<link rel="stylesheet" href="Vue/CSS/GererCours.css" type="text/css" media="screen" >
+    <link rel="stylesheet" href="Vue/CSS/GererSonCompte.css" type="text/css" media="screen" >
 	
 	<?php
+
 		include("Vue/Template/InclusionJQuery.php");
         include("Vue/Template/InclusionTemplate.php");
         include("Modele/ModeleCours.php");
         include("Modele/ModeleEtudiants.php");
         include("Controleur/cFonctionsCours.php");
-
+        demarrerSession();
     ?>
 	
   	<script src="Javascript/Generique.js"></script>
@@ -59,6 +61,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 $('#UlEtudiants').empty();
                 remplirUIModifGroupeAjax($(ui.item).attr('id'));
                 remplirUIEtudiantCoursAjax($(ui.item).attr('id'));
+                $('#BTN_CSV').show();
             },
             remove: function(event,ui){
                 $("#UlCours").sortable("option","connectWith","#QuizDropZone");
@@ -66,6 +69,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 $('#UlModifGroupe').empty();
                 $('#UlEtudiants').empty();
                 ListerEtudiantAjax();
+                $('#BTN_CSV').hide();
             }
 
 	    });
@@ -93,13 +97,14 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    		return $(this).children("li").length == 0;
 	    	}*/
 
+
 	</script>
 </head>
 
 <body>
 
 	<?php
-        demarrerSession();
+
         redirigerSiNonConnecte();
 		include("Vue/Template/EnteteSite.php");
 		include("Vue/Template/MenuProf.php");
@@ -116,26 +121,38 @@ Description: Cette interface représente l'interface principale d'un professeur 
              <?php ListerCoursDansUl("UlCours"); ?>
 
 			</ul>
-            <div class="ListeDivElementStyle BoutonDiv">Ajouter un cours</div>
+            <div id="BTN_Cours" class="ListeDivElementStyle BoutonDiv">Ajouter un cours</div>
 		</div>
 		<div id="ListeModifGroupe" class="Liste ListeGererCours">
 			<div id="QuizDropZone" class="ListeDivElementStyle"></div>
 			<ul id="UlModifGroupe">
 
 			</ul>
-            <div class="ListeDivElementStyle BoutonDiv">Ajouter un CSV</div>
+            <div id="BTN_CSV"class="ListeDivElementStyle BoutonDiv">Ajouter un CSV</div>
 		</div>
 		<div id="ListeGererEtudiants" class="Liste ListeGererCours">
 			<ul id="UlEtudiants">
             <?php InsererEleves(); ?>
 			</ul>
-			<div  class="ListeDivElementStyle BoutonDiv">Ajouter un étudiant</div>
+			<div id="BTN_Eleve" class="ListeDivElementStyle BoutonDiv">Ajouter un étudiant</div>
 		</div>
 	</div>
 	
 	<?php
 		include("Vue/Template/BasDePage.php");
 	?>
+ <script>
+     $('#BTN_CSV').hide();
+     $( "#BTN_Cours" ).click(function() {
+         creeFrameDynamique('DivDynamique','Vue/dynamique-CreerCours.php');
+     });
+     $( "#BTN_CSV" ).click(function() {
+         creeFrameDynamique('DivDynamique','Vue/dynamique-CSV.php');
+     });
+     $( "#BTN_Eleve" ).click(function() {
+         creeFrameDynamique('DivDynamique','Vue/dynamique-CreerEtudiants.php');
+     });
+ </script>
 
 </body>
 

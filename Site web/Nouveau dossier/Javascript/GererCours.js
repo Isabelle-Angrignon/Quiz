@@ -18,7 +18,7 @@ function remplirUIModifGroupeAjax(Cours) {
                 nom = resultat[i].nom;
                 prenom = resultat[i].prenom;
 
-                ajouterLi_ToUl_V2("UlModifGroupe",prenom + " " + nom, idUsager, true);
+                ajouterLi_ToUl_V2("UlModifGroupe",nom + " " + prenom, idUsager, true);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -42,7 +42,7 @@ function remplirUIEtudiantCoursAjax(Cours) {
                 nom = resultat[i].nom;
                 prenom = resultat[i].prenom;
 
-                ajouterLi_ToUl_V2("UlEtudiants",prenom + " " + nom, idUsager, true);
+                ajouterLi_ToUl_V2("UlEtudiants",nom + " " + prenom, idUsager, true);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -65,7 +65,7 @@ function ListerEtudiantAjax() {
                 nom = resultat[i].nom;
                 prenom = resultat[i].prenom;
 
-                ajouterLi_ToUl_V2("UlEtudiants",prenom + " " + nom, idUsager, true);
+                ajouterLi_ToUl_V2("UlEtudiants",nom + " " + prenom, idUsager, true);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -103,3 +103,17 @@ function desinscrireEtudiantCoursAjax(idEleve,Cours) {
         }
     });
 }
+
+function creerEtudiantCoursAjax(idEleve,nom,prenom) {
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/AjouterUsager.php",
+        data: {"idUsager" :idEleve, "nom" :nom, "prenom" :prenom},
+        dataType: "text",
+        success: function(resultat) {},
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
