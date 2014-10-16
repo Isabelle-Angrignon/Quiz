@@ -65,6 +65,8 @@
        }
     });*/
 
+    $("#BTN_ConfirmerQuestion").button();
+
 </script>
 <div id="QuestionConteneur">
     <div id="EnonceQuestion" contenteditable="true" placeholder="Enter text here..." >
@@ -118,8 +120,21 @@
                 $typeQuiz = prendreTypeQuizAssocie($_SESSION['idQuestion']);
                 echo "<script>cocherTypeQuizAssocieSelonQuestion(".json_encode($typeQuiz).");</script>";
             }
-
             ?>
         </ul>
     </div>
+</div>
+<div id="ActionQuestion">
+    <input type="button" id="BTN_ConfirmerQuestion" value=
+    <?php
+        if($_SESSION["etat"] == "modifierQuestion")
+        {
+            echo "Modifier onclick='modifierQuestion()'";
+        }
+        elseif( $_SESSION["etat"] == "nouvelleQuestion")
+        {
+            echo "Ajouter onclick='ajouterQuestion()'";
+        }
+    ?>
+        >
 </div>

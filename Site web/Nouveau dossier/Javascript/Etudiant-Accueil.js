@@ -3,13 +3,26 @@
 // Date : 14/10/2014
 // Description : Contient tout le code Javascript spécifique à la page Etudiant-Accueil.php
 
+function genererQuestionsAleatoires()
+{
+    $.ajax({
+        type:"POST",
+        url:"GenererQuestionsAleatoires.php",
+        success: function() {
+            alert('Quiz généré, bonne chance');
+
+        },
+        error: function() {
+            alert('Ajax ne marche pas');
+        }
+    });
+}
 
 
 function gererQuestionRepondue() {
 
 //Récupérer le id de la réponse cliquée
     var idReponse;
-
     $("#UlChoixReponse .ui-selected").each(function() {
         idReponse = $(this).attr("id");
     });
@@ -20,32 +33,47 @@ function gererQuestionRepondue() {
         url:"Controleur/FonctionQuizEtudiant/validerReponseAQuestion.php",
         data: {"idReponse": idReponse},
         datatype: "text",
-        success: function(resultat) {//resultat recu sera "1" ou "0"
-            "Ce que je veux faire avec le resultat"
+        success: function(resultat) {
 
-            alert( ' no reponse =  ' + idReponse);//////////////////////affiche pas resultat
+            if (resultat == 1 || resultat == 0)
+            {
+                updateScoreAffiche(resultat);
+                // Update stats bd
+                // to do///////
+            }
+            //serie de if pour débuggage a remplacer par des sweetAlert.
             if(resultat == 1)
             {
                 alert( ' Bonne réponse' );
             }
             else if(resultat == 0)
             {
-                alert( ' Mauvaise réponse' );
+                alert( ' Mauvaise réponse ' );
+                // ajouter un ajax pour récupérer le lien hypertext de la question si il y en a une.
             }
             else if(resultat == 'X')
             {
-                alert( ' pas bon type de question' );
+                alert( ' Erreur au niveau de la validation' );
             }
             else
             {
-                alert( ' pas eu de retour de validation... :((( ' );
+                alert( ' Vous devez choisir une répone. ' );
             }
-            //Update score page
-            // Update stats bd
-            //Load nouvelle question
-            //viderHTMLfromElement
-            //update infos question/réponse/liste...
-            //insererHtmlFromPhp
+        },
+        error: function() {
+            alert('Ajax pour gerer la question répondue ne marche pas');
+        }
+    });
+}
+
+function updateScoreAffiche(resultat){
+    $.ajax({
+        type:"POST",
+        url:"Controleur/FonctionQuizEtudiant/updateScoreAffiche.php",
+        data: {"resultat": resultat},
+        datatype: "text",
+        success: function(score) {
+            $('#labelScore').text(score);
         },
         error: function() {
             alert('marche pas');
@@ -53,11 +81,34 @@ function gererQuestionRepondue() {
     });
 }
 
+function chargerNouvelleQuestion(){
+
+   // viderHTMLfromElement('QuestionAleatoire');
+    viderHTMLfromElement('QuestionAleatoire');
+  //  $('#QuestionAleatoire').html("");
+
+    $.ajax({
+        type:"POST",
+        url:"Controleur/FonctionQuizEtudiant/chargerNouvelleQuestion.php",
+        success: function(msg) {
+            if (msg != null && msg != "" )
+            {
+                alert (msg);
+            }
+            alert ('succes ajax charger nouvelle question');
+        },
+        error: function() {
+            alert('Ajax pour charger nouvelle question ne marche pas');
+        }
+    });
+    //recharger le div dynamique
+    insererHTMLfromPHP("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php")
+}
 
 
 
 
-
+////////////////////////////////////////////////////
 ////////  A adapter pour mettre a jour la liste des quiz formatifs selon le id du cours.
 function updateUlQuiz(idCours) {
     if(idCours != "") {
@@ -78,7 +129,6 @@ function updateUlQuiz(idCours) {
             }
         });
     }
-
 }
 
 

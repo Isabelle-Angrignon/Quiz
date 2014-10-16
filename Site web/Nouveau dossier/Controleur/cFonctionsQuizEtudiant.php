@@ -87,4 +87,42 @@ function genererReponsesCMU($idQuestion, $ordreReponse)
     }
 }
 
+
+function resetVarSessionQuiz()
+{
+    unset($_SESSION['listeQuestions'] );
+    unset($_SESSION['listeReponses'] );
+    unset($_SESSION['infoQuestion'] );
+    unset($_SESSION['idQuestion'] );
+    $_SESSION['questionsRepondues'] = 0;
+    $_SESSION['bonnesReponses'] = 0;
+}
+
+function getNomCours()
+{
+    $nomCours = "Nom du cours ?";
+    foreach($_SESSION['listeCours'] as $cours)
+    {
+        if ($cours['idCours'] == $_SESSION['idCours'])
+        {
+            $nomCours = $cours['codeCours'] . ' ' . $cours['nomCours'];
+        }
+    }
+    return $nomCours;
+}
+
+function getNomProfDuCoursDeLEtudiant()
+{
+    $nomProf = "Nom du prof ?";
+    foreach($_SESSION['listeCours'] as $cours)
+    {
+        if ($cours['idCours'] == $_SESSION['idCours'])
+        {
+            $nomProf = $cours['prenom'] . ' ' . $cours['nom'];
+        }
+    }
+    return $nomProf;
+}
+
+
 ?>

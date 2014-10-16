@@ -8,7 +8,6 @@
 /* CSS propre au drop down list des cours */
 fieldset {
 	border:0;
-	width:25%;
 	margin-top:30px;
 	margin-left:3%;
 	padding:0;
@@ -193,4 +192,12 @@ fieldset {
 #listeAjoutCours {
     list-style: none;
     cursor:default;
+}
+
+#ActionQuestion {
+    width:100%;
+}
+#BTN_ConfirmerQuestion {
+    float:right;
+    margin-right:100px;
 }

@@ -1,9 +1,17 @@
 <?php
+
+/*ModeleUsagers.php
+Auteur: Isabelle Angringnon
+Date: 23 septembre 2014
+But: Contient diverses fonctions d'accès à la table usager
+*/
+
 //AjouterUsager
 //Intrant : Id = Le numero de de DA de l'usager , prenom= prenom de l'usager , nom = nom de l'usager
 //Extrant : Retourne le nom de lignes affecté
 //Permet d'ajouter un usager de base qu'il soit prof ou non. Le numero de commence par 420 dans le cas d'un prof
 //
+
 function ajouterUsager($id, $prenom, $nom)
 {
 	// a retirer et mettre connecterProf
