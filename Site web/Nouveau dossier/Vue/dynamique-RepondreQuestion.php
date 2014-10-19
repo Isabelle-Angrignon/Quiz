@@ -17,7 +17,6 @@ redirigerSiNonConnecte();
 //recupérer infos question
 $infoQuestion = $_SESSION['infoQuestion'];
 
-
 ?>
 
 <script>
@@ -34,11 +33,19 @@ $infoQuestion = $_SESSION['infoQuestion'];
 
         //bouton suivant...
         $("#btnSuivant").click( function() {
-            //gérer question actuelle
-            //affichage score
-            gererQuestionRepondue();
-            //génération div dynamique avec nouvelle question
-            chargerNouvelleQuestion();////////////////////////////////pas excuté?
+            if(gererQuestionRepondue() == 1 )///// recoit tjs false mais affiche true/////////////////////////////////////////gere quiz terminé ailleurs...
+            {
+                var estTermine = quizTermine();
+                if (estTermine == 1)///// recoit tjs false mais affiche true/////////////////////////////////////////gere quiz terminé ailleurs...
+                {
+                    afficherScoreFinal();
+                    $('#dFondOmbrage').remove();
+                }
+                else {
+                    //génération div dynamique avec nouvelle question
+                    chargerNouvelleQuestion();
+                }
+            }
         });
     });
 </script>

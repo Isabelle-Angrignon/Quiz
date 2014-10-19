@@ -1,20 +1,15 @@
-
-
-
 <?php
-include("Vue/Template/InclusionTemplate.php");
-include("Modele/mFonctionsQuizEtudiant.php");
-include("Controleur/cFonctionsQuizEtudiant.php");
-include("Modele/ModeleQuestions.php");
+include("..//Utilitaires.php");
+include("..//..//Modele/ModeleUtilisateurs.php");
+include("..//..//Modele/ModeleUsagers.php");
+include("..//..//Modele/mFonctionsQuizEtudiant.php");
+include("..//cFonctionsQuizEtudiant.php");
+include("..//..//Modele/ModeleQuestions.php");
+
 demarrerSession();
 redirigerSiNonConnecte();
 
 $cours = $_SESSION['idCours'];
-
-if($cours == '0')
-{
-    echo '<script>alert ("Choisir un cours")</script>';
-}
 
 //devra fair un switch case selon le type de quiz...
 $Liste = genererQuestionsAleatoires($cours);
@@ -29,11 +24,13 @@ if (isset($Liste) && !empty($Liste))
     //recupérer infos question
     $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion']);
     array_shift($_SESSION['listeQuestions']);
+    echo '1';
+    echo '</br> '. print_r($_SESSION['infoQuestion']);
 }
-
-
-
-
+else
+{
+    echo '0' ;
+}
 
 ?>
 

@@ -30,6 +30,9 @@ div.suiviQuiz {
     -webkit-border-top-left-radius: 30px;
     -moz-border-radius-topleft: 30px;
     border-top-left-radius: 30px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
     padding-top: 20px;
 }
 #labelCours {
@@ -55,6 +58,9 @@ div.suiviQuiz {
     -webkit-border-bottom-right-radius: 30px;
     -moz-border-radius-bottomright: 30px;
     border-bottom-right-radius: 30px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 #labelProp {
@@ -64,7 +70,7 @@ div.suiviQuiz {
 /* mettre une classe pour les éléments de laquestion ici au besoin*/
 
 .zoneQuestion {
-
+    border-radius: 5px;
 }
 
 .zoneReference {
@@ -103,9 +109,9 @@ div.suiviQuiz {
 /*Div qui contient le ul - li -  des choix de réoponse*/
 #divChoixReponse{
 
-    margin-left: 7.5%;
-    margin-right: 7.5%;
-    width:80%;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    width:70%;
     margin-top: 20px;
 }
 

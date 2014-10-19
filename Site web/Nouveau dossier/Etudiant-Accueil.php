@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="Vue/CSS/Etudiant-Accueil.css" type="text/css" media="screen" >
     <link rel="stylesheet" href="Vue/CSS/DynamiqueQuestionARepondre.css" type="text/css" media="screen" >
 
+    <!--   Pour Sweet Alert -->
+    <script src="sweetalert-master/lib/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="sweetalert-master/lib/sweet-alert.css">
+
     <?php
     include("Vue/Template/InclusionJQuery.php");
     include("Vue/Template/InclusionTemplate.php");
@@ -30,23 +34,23 @@
             });
 
             $("#UlQuizAleatoire").click( function() {
-                var idCours = $("#DDL_Cours option:selected").attr("value");
 
-                // Sur click quiz aléatoire, reécupere le id du cours et le met dans session
-                $.ajax({
-                    type:"POST",
-                    url: 'Controleur/FonctionQuizEtudiant/SetIdCoursSession.php',
-                    data:{'selectCours':idCours},
-                    dataType:"text",
-                    success: function(resultat) {
-
-                    },
-                    error: function() {
-                        alert("Erreur");
+                if (SetIdCoursSession())
+                {
+                    if (genererQuestionsAleatoires())
+                    {
+                        alert('Quiz aléatoire généré, bonne chance');
+                        creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
                     }
-                });
-                genererQuestionsAleatoires();
-                creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
+                    else
+                    {
+                        alert ("Il n'y a aucune question aléatoire de créée pour ce cours.");
+                    }
+                }
+                else
+                {
+                    alert ("Vous devez sélectionner un cours spécifique pour générer un quiz aléatoire");
+                }
             });
         });
     </script>
@@ -69,25 +73,10 @@ if(!isset($_SESSION['bonnesReponses']))
     $_SESSION['bonnesReponses'] = 0;
 }
 
-/*
-//////////click next/////////////////////
-//Retirer une question de la liste:
-if (isset($_SESSION['listeQuestions']) && !empty($_SESSION['listeQuestions']) )
-{
-    $idQuestion = $_SESSION['listeQuestions'][0];
-    //recupérer infos question
-    $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion']);
-    //$_SESSION['listeReponses'] = recuperer.
-    ///////////////////////////////////////////
-}
-///////////////////// fin click next ///////////////////////////
-
-*/
-
 ?>
 
 <div class="contenu">
-    <form id="quiz" action=GenererQuestionsAleatoires.php method="post">
+    <form id="quiz" action=Controleur/FonctionQuizEtudiant/GenererQuestionsAleatoires.php method="post">
         <!-- Liste déroulante pour choisir un cours -->
         <fieldset><select id="DDL_Cours" name="DDL_Cours">
                 <?php

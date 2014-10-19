@@ -1,7 +1,7 @@
 <?php
 include("..//Utilitaires.php");
 include("..//..//Modele/ModeleUtilisateurs.php");
-include "..//..//Modele/ModeleUsagers.php";
+include("..//..//Modele/ModeleUsagers.php");
 include("..//cFonctionsQuizEtudiant.php");
 include("..//..//Modele/ModeleQuestions.php");
 demarrerSession();
@@ -18,13 +18,15 @@ if (isset($_SESSION['listeQuestions']) )
     }
     else
     {
-        echo "Quiz terminé.  Score final: " . $_SESSION['bonnesReponses'] . " / " . $_SESSION['questionsRepondues'];
         resetVarSessionQuiz();
     }
+    // rien a dire
+    echo '0';
 }
 else
 {
-    echo "Il n'y a aucune question aléatoire de créée pour ce cours.";
+    // affiche le message de ton choix
+    echo '1';
 }
 
 
