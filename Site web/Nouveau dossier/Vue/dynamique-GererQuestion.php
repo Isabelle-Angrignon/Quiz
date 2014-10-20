@@ -69,7 +69,7 @@
 
 </script>
 <div id="QuestionConteneur">
-    <div id="EnonceQuestion" contenteditable="true" placeholder="Enter text here..." >
+    <div id="EnonceQuestion" contenteditable="true">
         <?php
             echo isset($enonceQuestion)?$enonceQuestion:"";
         ?>

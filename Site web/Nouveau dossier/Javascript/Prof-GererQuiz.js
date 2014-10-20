@@ -58,7 +58,15 @@ function updateUlQuestion(idCours) {
 // Extrant: Il n'y a pas d'extrant
 // Description: Cette fonction envoi, à l'aide de AJAX, les variables passées en paramètre dans la session
 function ajouterVariableSession(idQuestion, etat) {
-    $.post('Vue/Prof-GererQuiz-AjoutElement.php', {"session":true, "idQuestion":idQuestion, "etat":etat});
+    $.ajax({
+        type: "post",
+        url: 'Vue/Prof-GererQuiz-AjoutElement.php',
+        async:false,
+        data:  {"session":true, "idQuestion":idQuestion, "etat":etat},
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
 }
 function ajouterNouvelleReponse() {
     $.post('Vue/Prof-GererQuiz-AjoutElement.php', {"action":"nouveauCheckBox"}, function(resultat) {
@@ -116,10 +124,49 @@ function cocherTypeQuizAssocieSelonQuestion(typeQuiz) {
     });
 }
 
-function ajouterQuestion() {
-
-}
-
+//function ajouterQuestion() {
 function modifierQuestion() {
-    alert("Modifier!");
+    // Pour commencer, je prend l'énoncé des réponses ainsi que leur état (cochée ou non)
+    // reponsesEnString représente un string ayant la structure JSON pour facilement le convertir après en JSON.
+    // Ouverture du string de format JSON
+    var reponsesEnString = '{"reponses":[';
+
+    // Pour chacune de mes réponses, je vérifie si elles sont cochées ou non et je prend leur énoncé.
+    // Par la suite, j'ajoute ma réponse sous forme d'une rangée dans mon string de format JSON
+    $("#Ul_Reponses li").each( function() {
+        var estCoche = false;
+        if($(this).children("input[type=checkbox]").prop("checked") == true) {
+            estCoche = true;
+        }
+        reponsesEnString += '{"enonce":"'+$(this).children("div").text()+'", "estBonneReponse":"' + estCoche + '"},';
+    });
+    // J'enlève la dernière virgule de mon string car, en JSON, le dernier élément ne prend pas de virgule
+    // et je ferme par la suite mon string de format JSON.
+    reponsesEnString = reponsesEnString.substr(0,reponsesEnString.length -1) + "]}";
+    // Je transforme mon string de format JSON en objet JSON
+    var jsonReponses = JSON.parse(reponsesEnString);
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    var jsonQuestion = {
+        "enonceQuestion" : document.getElementById("EnonceQuestion").textContent
+    };
+
+    $.ajax({
+        type:"POST",
+        url:'Controleur/AJAX_AjouterQuestion.php',
+        async : false,
+        data: {},
+        //dataType: "text",
+        success: function(resultat){
+            alert(resultat);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
 }
+
+/*function modifierQuestion() {
+    alert("Modifier!");
+}*/

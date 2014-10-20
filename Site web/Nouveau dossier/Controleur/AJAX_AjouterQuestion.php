@@ -7,22 +7,22 @@
 
 if(!isset($_POST['tableauQuestion']))
 {
-    echo "<script> alert('tableauQuestion du post nest pas set);</script>";
+    echo "tableauQuestion du post nest pas set";
     exit();
 }
 if(!isset($_POST['tableauReponses']))
 {
-    echo "<script> alert('tableauReponses du post nest pas set);</script>";
+    echo "tableauReponses du post nest pas set";
     exit();
 }
 if(!isset($_POST['typeQuestion']))
 {
-    echo "<script> alert('typeQuestion du post nest pas set);</script>";
+    echo "typeQuestion du post nest pas set";
     exit();
 }
 if(!isset($_POST['tableauTypeQuizAssocie']))
 {
-    echo "<script> alert('tableauTypeQuizAssocie du post nest pas set);</script>";
+    echo "tableauTypeQuizAssocie du post nest pas set";
     exit();
 }
 
@@ -31,3 +31,9 @@ $tableauReponses = json_decode($_POST['tableauReponses']);
 $tableauCours = json_decode($_POST['tableauCours']);
 $typeQuestion = $_POST['typeQuestion'];
 $tableauTypeQuizAssocie = json_decode($_POST['tableauTypeQuizAssocie']);
+
+echo "tableauQuestion = ".$tableauQuestion;
+echo "tableauReponses = ".$tableauReponses;
+echo "tableauCours = ".$tableauCours;
+echo "typeQuestion = ".$typeQuestion;
+echo "tableauTypeQuizAssocie = ".$tableauTypeQuizAssocie;

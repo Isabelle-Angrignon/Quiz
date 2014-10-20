@@ -205,6 +205,7 @@ function insererHTMLfromPHP(idConteneur, pathFichierPHP) {
     $.ajax({
         type: 'GET',
         url: pathFichierPHP,
+        async: false,
         dataType: "html",
         success: function(resultat) {
             var selecteur = "#" + idConteneur;
