@@ -83,7 +83,7 @@ function creerInputGenerique($typeInput, $nomDuGroupe,$valeur,$textAffiche)
 //           $tableauTypeQuizAssocie = Un tableau comportant le/les identifiant(s) du/des type(s) de quiz associé(s) à la question
 // Description: Cette fonction ajoute une question ainsi que toutes ses attributs dans la BD, le tout enveloppé dans une transaction qui cancelle
 //              les ajouts s'il y a des erreures de déclanchées.
-function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours, $tableauTypeQuizAssocie)
+function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours, $typeQuestion, $tableauTypeQuizAssocie)
 {
     try
     {
@@ -91,16 +91,19 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
 
         $bdd->beginTransaction();
 
-        // Ajouter la question dans la base de données
-        $idQuestion = ajouterQuestion($bdd, $tableauDeQuestion['enonceQuestion'], $tableauDeQuestion['imageQuestion'],
-            $tableauDeQuestion['difficulte'], $tableauDeQuestion['ordreReponsesAleatoire'],
-            $tableauDeQuestion['typeQuestion'], $tableauDeQuestion['idUsager_Proprietaire'], $tableauDeQuestion['referenceWeb']);
+        $tableauDeQuestion = json_decode($tableauDeQuestion, true);
 
-        echo "<script> alert(". $idQuestion .");</script>";
+        // Ajouter la question dans la base de données
+      //  $idQuestion = ajouterQuestion($bdd, $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
+     //               /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
+     //               $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null);
+
         // Ajouter les réponses de cette question dans la base de données
 
-        // Reste à faire /////////////////////////////////////////////////////////////////////////
-
+        $tableauReponses = json_decode($tableauReponses, true);
+        //////////////////////////////////////Reponses ne devraient p-t pas etre un JSON ??? //////////////////////////////////////////////////
+        echo $tableauReponses.reponses['enonce'] . " /// estBonneReponse: " . $tableauDeQuestion{'reponses'}[0]['estBonneReponse'];
+/*
         // Associer la question à un/plusieurs cours
         echo "<script> alert('Tableau de cours : ' + ". $tableauCours .");</script>";
         foreach($tableauCours as $Cours)
@@ -109,6 +112,8 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
             associerQuestionACours($bdd, $idQuestion, $Cours['idCours']);
         }
 
+        // Associer la question à un type de question
+
         // Associer la question à un/des type(s) de quiz
         echo "<script> alert('Tableau de typeQuiz associés : ' + ". $tableauTypeQuizAssocie .");</script>";
         foreach($tableauTypeQuizAssocie as $typeQuiz)
@@ -116,6 +121,8 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
             echo "<script> alert('Chaque typeQuiz associé : ' + ". $typeQuiz .");</script>";
             associerTypeQuizQuestion($bdd, $idQuestion, $typeQuiz);
         }
+*/
+        $bdd->commit();
         unset($bdd);
     }
     catch(Exception $e)

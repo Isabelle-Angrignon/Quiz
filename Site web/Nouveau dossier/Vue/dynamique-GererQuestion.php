@@ -49,9 +49,8 @@
         creerNouveauCheckBox("listeAjoutCours", "cours", $(this).attr("value"), $(this).text(), 40);
        // Coche la checkbox des cours qui sont déjà lié à la question
     });
-
-    $("#listeAjoutCours input[type=checkbox").click(function() {
-       if($("input:checkbox:checked").length == 0) {
+    $("#listeAjoutCours input[type=checkbox]").click(function() {
+       if($("#listeAjoutCours input:checkbox:checked").length == 0) {
            $(this).prop('checked', true);
            alert("Une question doit absolument être liée à un cours.");
        }
@@ -69,7 +68,7 @@
 
 </script>
 <div id="QuestionConteneur">
-    <div id="EnonceQuestion" contenteditable="true">
+    <div id="EnonceQuestion" contenteditable="plaintext-only">
         <?php
             echo isset($enonceQuestion)?$enonceQuestion:"";
         ?>

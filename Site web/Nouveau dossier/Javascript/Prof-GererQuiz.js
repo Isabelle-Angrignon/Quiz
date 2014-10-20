@@ -124,8 +124,13 @@ function cocherTypeQuizAssocieSelonQuestion(typeQuiz) {
     });
 }
 
-//function ajouterQuestion() {
-function modifierQuestion() {
+
+// jsonifierReponsesQuestionCourante
+// Par Mathieu Dumoulin
+// Date: 20/10/2014
+// Description: Cette fonction prend les réponses ouvertes en ce moment et construit un JSON les contenant.
+//              Les réponses sont contenues dans leNomDeLaVariable.reponses[]
+function jsonifierReponsesQuestionCourante() {
     // Pour commencer, je prend l'énoncé des réponses ainsi que leur état (cochée ou non)
     // reponsesEnString représente un string ayant la structure JSON pour facilement le convertir après en JSON.
     // Ouverture du string de format JSON
@@ -140,29 +145,103 @@ function modifierQuestion() {
         }
         reponsesEnString += '{"enonce":"'+$(this).children("div").text()+'", "estBonneReponse":"' + estCoche + '"},';
     });
+
     // J'enlève la dernière virgule de mon string car, en JSON, le dernier élément ne prend pas de virgule
-    // et je ferme par la suite mon string de format JSON.
-    reponsesEnString = reponsesEnString.substr(0,reponsesEnString.length -1) + "]}";
+    if($("#Ul_Reponses li").length > 0) {
+        reponsesEnString = reponsesEnString.substr(0,reponsesEnString.length -1);
+    }
+    // Je ferme par la suite mon string de format JSON
+    reponsesEnString += "]}";
+
     // Je transforme mon string de format JSON en objet JSON
     var jsonReponses = JSON.parse(reponsesEnString);
 
+    return jsonReponses;
+}
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    var jsonQuestion = {
-        "enonceQuestion" : document.getElementById("EnonceQuestion").textContent
-    };
+function jsonifierCoursQuestionCourante() {
+
+    // Ouverture du string de format JSON
+    var coursEnString = '{"cours":[';
+
+    // Pour chacun de mes cours, je vérifie lesquels sont cochés et je prend leur énoncé.
+    // Par la suite, j'ajoute mon cours sous forme d'une rangée dans mon string de format JSON
+    $("#listeAjoutCours li").each( function() {
+        if($(this).children("input[type=checkbox]").prop("checked") == true) {
+            coursEnString += '{"nomCours":"'+$(this).text()+'", "idCours":"'+ $(this).children("input[type=checkbox]").attr("value") + '"},';
+        }
+    });
+    // J'enlève la dernière virgule de mon string car, en JSON, le dernier élément ne prend pas de virgule
+    if($("#listeAjoutCours li input:checkbox:checked").length > 0) {
+        coursEnString = coursEnString.substr(0,coursEnString.length -1);
+    }
+    // Je ferme par la suite mon string de format JSON
+    coursEnString += "]}";
+
+    // Je transforme mon string de format JSON en objet JSON
+    var jsonCours = JSON.parse(coursEnString);
+
+    return jsonCours;
+}
+
+
+function jsonifierTypeQuizAssQuestionCourante() {
+
+    // Ouverture du string de format JSON
+    var typeQuizAssEnString = '{"typeQuizAss":[';
+
+    // Pour chacun de mes typeQuizAss, je vérifie lesquels sont cochés et je prend leur nom.
+    // Par la suite, j'ajoute mon typeQuizAss sous forme d'une rangée dans mon string de format JSON
+    $("#TypeQuizAssocie li").each( function() {
+        if($(this).children("input[type=checkbox]").prop("checked") == true) {
+            typeQuizAssEnString += '{"nom":"'+$(this).text()+'", "id":"'+ $(this).children("input[type=checkbox]").attr("value") + '"},';
+        }
+    });
+
+    // J'enlève la dernière virgule de mon string car, en JSON, le dernier élément ne prend pas de virgule
+    if($("#TypeQuizAssocie li input:checkbox:checked").length > 0) {
+        typeQuizAssEnString = typeQuizAssEnString.substr(0,typeQuizAssEnString.length -1);
+    }
+    // Je ferme par la suite mon string de format JSON
+    typeQuizAssEnString += "]}";
+
+
+    // Je transforme mon string de format JSON en objet JSON
+    var jsonTypeQuizAss = JSON.parse(typeQuizAssEnString);
+
+    return jsonTypeQuizAss;
+}
+
+//function ajouterQuestion() {
+function modifierQuestion() {
+
+    var enonce = document.getElementById("EnonceQuestion").textContent;
+    // Par défaut, les furteurs tels que chrome et firefox ajoutent 9 caractères au début du texte d'un contentEditable élément.
+    enonce = enonce.substring(9, enonce.length);
+    var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"420jean"}';
+
+    jsonQuestion = JSON.parse(jsonQuestion);
+
+    var jsonReponses = jsonifierReponsesQuestionCourante();
+
+    var jsonCours = jsonifierCoursQuestionCourante();
+
+    var typeQuestion = $("#TypeQuestion li input[type=radio]:checked").attr("value");
+
+    var jsonTypeQuizAss = jsonifierTypeQuizAssQuestionCourante();
 
     $.ajax({
         type:"POST",
         url:'Controleur/AJAX_AjouterQuestion.php',
         async : false,
-        data: {},
-        //dataType: "text",
+        data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
+                "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
+        dataType: "html",
         success: function(resultat){
             alert(resultat);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
         }
     });
 }
