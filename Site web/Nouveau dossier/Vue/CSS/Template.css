@@ -75,6 +75,7 @@ div#enteteSite{
 	min-height:550px;
 	overflow:hidden;
 	padding-top:100px;
+    padding-bottom: 3%;
 	border-left:inset;
 	border-right:outset;
 }
