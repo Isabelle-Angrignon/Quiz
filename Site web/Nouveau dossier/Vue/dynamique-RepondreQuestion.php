@@ -12,7 +12,7 @@ include("..//Modele/ModeleQuestions.php");
 include("..//Modele/ModeleReponses.php");
 
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Etudiant');
 
 //recupérer infos question
 $infoQuestion = $_SESSION['infoQuestion'];

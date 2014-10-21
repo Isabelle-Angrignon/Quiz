@@ -7,7 +7,7 @@ include("..//cFonctionsQuizEtudiant.php");
 include("..//..//Modele/ModeleQuestions.php");
 
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Etudiant');
 
 $cours = $_SESSION['idCours'];
 

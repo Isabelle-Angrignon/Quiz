@@ -2,7 +2,7 @@
 
 include("..//Utilitaires.php");
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Etudiant');
 
 if (!empty($_SESSION['listeQuestions']))
 {

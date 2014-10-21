@@ -20,7 +20,7 @@
     include("Modele/ModeleInscriptionsEtudiantCours.php");
 
     demarrerSession();
-    redirigerSiNonConnecte();
+    redirigerSiNonConnecte('Etudiant');
     ?>
 
     <script src="Javascript/Etudiant-Accueil.js"></script>
