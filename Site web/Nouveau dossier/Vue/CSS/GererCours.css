@@ -93,6 +93,8 @@ fieldset {
 	border-radius:10px;
 	cursor:pointer;
 	text-align: center;
+    margin-bottom: 20px;
+    margin-top: 5px;
 }
 
 /* Label pour les listes principales */
