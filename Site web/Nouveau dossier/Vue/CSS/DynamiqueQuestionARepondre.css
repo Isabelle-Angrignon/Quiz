@@ -18,6 +18,8 @@
     text-decoration:none;
 }
 
+
+
 div.suiviQuiz {
     width:90%;
     background-color: #FDA068;
@@ -123,8 +125,9 @@ div.suiviQuiz {
     font-family:"Comic Sans MS", cursive, sans-serif;
     /*border:solid black;*/
     border-radius:10px;
+    background-color: rgba(79, 168, 255, 0.45);
 }
 
-.ui-selecting { background: #FECA40; }
-.ui-selected { background: red; color: white; }
+.ui-selecting { background: #fec71b; }
+.ui-selected { background-color: #FDA068; color: #000000; }
 
