@@ -84,7 +84,7 @@ function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $
     $requete->bindParam(7, $referenceWeb, PDO::PARAM_STR);
 
     $requete->execute();
-    $resultat = $requete->fetchAll();
+    $resultat = $requete->fetch();
 
     $requete->closeCursor();
 
