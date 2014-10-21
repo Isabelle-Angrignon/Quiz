@@ -143,7 +143,8 @@ function jsonifierReponsesQuestionCourante() {
         if($(this).children("input[type=checkbox]").prop("checked") == true) {
             estCoche = true;
         }
-        reponsesEnString += '{"enonce":"'+$(this).children("div").text()+'", "estBonneReponse":"' + estCoche + '"},';
+        // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
+        reponsesEnString += '{"enonce":"'+$(this).children("div").text().replace(/[\"]/g, '\\"')+'", "estBonneReponse":"' + estCoche + '"},';
     });
 
     // J'enlève la dernière virgule de mon string car, en JSON, le dernier élément ne prend pas de virgule
@@ -152,6 +153,7 @@ function jsonifierReponsesQuestionCourante() {
     }
     // Je ferme par la suite mon string de format JSON
     reponsesEnString += "]}";
+
 
     // Je transforme mon string de format JSON en objet JSON
     var jsonReponses = JSON.parse(reponsesEnString);
@@ -168,7 +170,8 @@ function jsonifierCoursQuestionCourante() {
     // Par la suite, j'ajoute mon cours sous forme d'une rangée dans mon string de format JSON
     $("#listeAjoutCours li").each( function() {
         if($(this).children("input[type=checkbox]").prop("checked") == true) {
-            coursEnString += '{"nomCours":"'+$(this).text()+'", "idCours":"'+ $(this).children("input[type=checkbox]").attr("value") + '"},';
+            // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
+            coursEnString += '{"nomCours":"'+$(this).text().replace(/[\"]/g, '\\"')+'", "idCours":"'+ $(this).children("input[type=checkbox]").attr("value") + '"},';
         }
     });
     // J'enlève la dernière virgule de mon string car, en JSON, le dernier élément ne prend pas de virgule
@@ -177,7 +180,6 @@ function jsonifierCoursQuestionCourante() {
     }
     // Je ferme par la suite mon string de format JSON
     coursEnString += "]}";
-
     // Je transforme mon string de format JSON en objet JSON
     var jsonCours = JSON.parse(coursEnString);
 
@@ -204,8 +206,6 @@ function jsonifierTypeQuizAssQuestionCourante() {
     }
     // Je ferme par la suite mon string de format JSON
     typeQuizAssEnString += "]}";
-
-
     // Je transforme mon string de format JSON en objet JSON
     var jsonTypeQuizAss = JSON.parse(typeQuizAssEnString);
 
@@ -216,8 +216,11 @@ function jsonifierTypeQuizAssQuestionCourante() {
 function modifierQuestion() {
 
     var enonce = document.getElementById("EnonceQuestion").textContent;
-    // Par défaut, les furteurs tels que chrome et firefox ajoutent 9 caractères au début du texte d'un contentEditable élément.
-    enonce = enonce.substring(9, enonce.length);
+
+    // Par défaut, les furteurs tels que chrome et firefox ajoutent 13 caractères au début du texte d'un contentEditable élément.
+    enonce = enonce.replace(/[\s]*/, "");
+    // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
+    enonce = enonce.replace(/[\"]/g, '\\"');
     var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"420jean"}';
 
     jsonQuestion = JSON.parse(jsonQuestion);

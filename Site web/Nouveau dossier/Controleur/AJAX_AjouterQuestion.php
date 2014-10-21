@@ -5,9 +5,10 @@
  *  Description : Ce fichier effectue le contrôle entre la BD et la vue en ce qui à trait d'un ajout de question à l'aide d'AJAX
  */
 $doitArreter = false;
-if(!isset($_POST['tableauQuestion']))
+$question = $_POST['tableauQuestion'];
+if($question['enonceQuestion'] == "")
 {
-    echo "tableauQuestion du post n'est pas set.   ";
+    echo "Vous devez entrer un énoncé à votre question.   ";
     $doitArreter = true;
 }
 if(!isset($_POST['tableauReponses']))
@@ -17,17 +18,17 @@ if(!isset($_POST['tableauReponses']))
 }
 if(!isset($_POST['tableauCours']))
 {
-    echo "tableauCours du post n'est pas set.   ";
+    echo "Vous devez associer votre question à au moins un cours.   ";
     $doitArreter = true;
 }
 if(!isset($_POST['typeQuestion']))
 {
-    echo "typeQuestion du post n'est pas set.   ";
+    echo "Vous devez lier la question à un type de question.   ";
     $doitArreter = true;
 }
 if(!isset($_POST['tableauTypeQuizAssocie']))
 {
-    echo "tableauTypeQuizAssocie du post n'est pas set";                                            //A DEMANDER A ISA POUR SAVOIR SI ÇA PEUT ÊTRE NULL
+    echo "Vous devez lier la question à un type de quiz.   ";
     $doitArreter = true;
 }
 
@@ -39,17 +40,29 @@ if($doitArreter)
 include("cFonctionsProf-GererQuiz.php");
 include("../Modele/ModeleUtilisateurs.php");
 include("../Modele/ModeleQuestions.php");
+include("../Modele/ModeleReponses.php");
+include("../Modele/ModeleAssociationQuestionCours.php");
+include("../Modele/ModeleAssociationTypesQuizQuestion.php");
+include("Utilitaires.php");
 
-$tableauQuestion = json_encode($_POST['tableauQuestion']);
-$tableauReponses = json_encode($_POST['tableauReponses']);
-$tableauCours = json_encode($_POST['tableauCours']);
+$tableauQuestion = $_POST['tableauQuestion'];
+$tableauReponses = $_POST['tableauReponses'];
+$tableauCours = $_POST['tableauCours'];
 $typeQuestion = $_POST['typeQuestion'];
-$tableauTypeQuizAssocie = json_encode($_POST['tableauTypeQuizAssocie']);
+$tableauTypeQuizAssocie = $_POST['tableauTypeQuizAssocie'];
 
-/*echo "tableauQuestion = ".$tableauQuestion;
-echo "tableauReponses = ".$tableauReponses;
-echo "tableauCours = ".$tableauCours;
-echo "typeQuestion = ".$typeQuestion;
-echo "tableauTypeQuizAssocie = ".$tableauTypeQuizAssocie;*/
+/*echo $tableauQuestion['enonceQuestion']."         ";
+foreach($tableauReponses['reponses'] as $reponses)
+{
+    echo $reponses['enonce']."       ";
+}
+foreach($tableauCours['cours'] as $cours)
+{
+    echo $cours['nomCours']."         ";
+}
+
+echo $typeQuestion."        ";
+echo $tableauTypeQuizAssocie."        ";*/
+
 
 ajouterUneQuestion($tableauQuestion, $tableauReponses, $tableauCours, $typeQuestion, $tableauTypeQuizAssocie);

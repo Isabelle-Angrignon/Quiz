@@ -88,53 +88,57 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
     try
     {
         $bdd = connecterProf();
-
+        $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
         $bdd->beginTransaction();
 
-        $tableauDeQuestion = json_decode($tableauDeQuestion, true);
-
         // Ajouter la question dans la base de données
-      //  $idQuestion = ajouterQuestion($bdd, $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
-     //               /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
-     //               $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null);
+        $idQuestion = ajouterQuestion($bdd, $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
+                    /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
+                    $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null);
 
         // Ajouter les réponses de cette question dans la base de données
-
-        $tableauReponses = json_decode($tableauReponses, true);
-        //////////////////////////////////////Reponses ne devraient p-t pas etre un JSON ??? //////////////////////////////////////////////////
-        echo $tableauReponses.reponses['enonce'] . " /// estBonneReponse: " . $tableauDeQuestion{'reponses'}[0]['estBonneReponse'];
-/*
-        // Associer la question à un/plusieurs cours
-        echo "<script> alert('Tableau de cours : ' + ". $tableauCours .");</script>";
-        foreach($tableauCours as $Cours)
+        $positionReponse = 1;
+        foreach($tableauReponses['reponses'] as $reponse)
         {
-            echo "<script> alert('Chaque cours : ' + ". $Cours .");</script>";
-            associerQuestionACours($bdd, $idQuestion, $Cours['idCours']);
+            $estBon = 0;
+            if($reponse['estBonneReponse'] == 'true')
+            {
+                $estBon = 1;
+            }
+            ajouterReponse($bdd, $reponse['enonce'], null, 100, $estBon, ++$positionReponse);
         }
 
-        // Associer la question à un type de question
+
+        // Associer la question à un/plusieurs cours
+        foreach($tableauCours['cours'] as $Cours)
+        {
+            associerQuestionACours($bdd, $idQuestion[0], $Cours['idCours']);
+        }
 
         // Associer la question à un/des type(s) de quiz
-        echo "<script> alert('Tableau de typeQuiz associés : ' + ". $tableauTypeQuizAssocie .");</script>";
-        foreach($tableauTypeQuizAssocie as $typeQuiz)
-        {
-            echo "<script> alert('Chaque typeQuiz associé : ' + ". $typeQuiz .");</script>";
-            associerTypeQuizQuestion($bdd, $idQuestion, $typeQuiz);
-        }
-*/
-        $bdd->commit();
-        unset($bdd);
-    }
-    catch(Exception $e)
-    {
-        //on annule la transation
-        $bdd->rollback();
 
-        //on affiche un message d'erreur ainsi que les erreurs
-        echo 'Tout ne s\'est pas bien passé, voir les erreurs ci-dessous<br />';
-        echo 'Erreur : '.$e->getMessage().'<br />';
-        echo 'N° : '.$e->getCode();
+        foreach($tableauTypeQuizAssocie['typeQuizAss'] as $typeQuiz)
+        {
+            associerTypeQuizQuestion($bdd, $idQuestion[0], $typeQuiz['id']);
+        }
+        echo $idQuestion[0];
+        $bdd->commit();
     }
+    catch(PDOException $e)
+    {
+        try
+        {
+            //on annule la transation
+            $bdd->rollback();
+
+            //on affiche un message d'erreur ainsi que les erreurs
+            echo 'Tout ne s\'est pas bien passé, voir les erreurs ci-dessous<br />';
+            echo 'Erreur : '.$e->getMessage().'<br />';
+            echo 'N° : '.$e->getCode();
+        }
+        catch (PDOException $e){}
+    }
+    unset($bdd);
 
 }
 
