@@ -24,10 +24,10 @@
     function estValide(){
         temp = true;
         temp = ($('#TB_Nom').val() != "" && $('#TB_Code').val() != "" );
-        if (temp == false){alert('Certain champs sont vide');}
+        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont vide"});}
         else{
         temp = ($('#TB_Nom').val().length <= 200 && $('#TB_Code').val().length <= 10 );
-        if (temp == false){alert('Certain champs sont trop long');}}
+        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont trop long"});}}
         return temp;
     }
     $('#soumettre').click(function(){

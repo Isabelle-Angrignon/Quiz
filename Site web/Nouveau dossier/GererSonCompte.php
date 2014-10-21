@@ -90,7 +90,7 @@
 
 
         <?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur']))) {
-            echo ' <script>$(document).ready(function(){ swal({title:"Érreur" ,type:"warning", text:"'. $_SESSION['erreur'] .'"});});</script>';
+            echo ' <script>$(document).ready(function(){ swal({title:"Erreur" ,type:"warning", text:"'. $_SESSION['erreur'] .'"});});</script>';
         }
         ?>
 
