@@ -3,8 +3,9 @@
 
 <head>
     <?php
-    include("Vue/Template/InclusionJQuery.php");
     include("Vue/Template/InclusionTemplate.php");
+    include("Vue/Template/InclusionJQuery.php");
+
     demarrerSession();
     ?>
 </head>

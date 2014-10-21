@@ -4,7 +4,11 @@
 <head>
 	<?php
         include("Vue/Template/InclusionJQuery.php");
-		include("Vue/Template/InclusionTemplate.php");
+        include("Vue/Template/InclusionTemplate.php");
+
+
+
+
 	?>
     <link rel="stylesheet" href="Vue/CSS/GererSonCompte.css" type="text/css" media="screen" >
 </head>
@@ -28,14 +32,7 @@
 	<div class="contenu">
 
 
-            <?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur']))) {
-                echo '
-                <div id="alerte" class="Alerte">
-                '. $_SESSION['erreur'] .'
-                </div>
-                ';
-            }
-            ?>
+
 
 
         <div id="login">
@@ -92,7 +89,10 @@
 
 
 
-
+        <?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur']))) {
+            echo ' <script>$(document).ready(function(){ swal({title:"Érreur" ,type:"warning", text:"'. $_SESSION['erreur'] .'"});});</script>';
+        }
+        ?>
 
 
 
