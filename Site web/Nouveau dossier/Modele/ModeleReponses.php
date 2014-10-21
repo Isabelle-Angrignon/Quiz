@@ -44,3 +44,37 @@ function recupererReponsesVraiFaux($idQuestion)
     unset($bdd);// fermer connection bd
     return $reponses;
 }
+
+// ajouterReponse
+// Par: Mathieu Dumoulin
+// Date: 21/10/2014
+// Description: Cette fonction ajoute une réponse dans la base de données
+function ajouterReponse($connexion, $enonceReponse, $imageReponse,$idQuestion, $estValide, $positionReponse)
+{
+    if(isset($connexion))
+    {
+        $bdd = connecterProf();
+    }
+    else
+    {
+        $bdd = $connexion;
+    }
+
+    $requete = $bdd->prepare("CALL ajouterReponse(?,?,?,?,?,?, ?)");
+
+    $requete->bindParam(1, $enonceReponse, PDO::PARAM_INT);
+    $requete->bindParam(2, $imageReponse, PDO::PARAM_STR, 100);
+    $requete->bindParam(3, $idQuestion, PDO::PARAM_INT);
+    $requete->bindParam(4, $estValide, PDO::PARAM_INT);
+    $requete->bindParam(5, $positionReponse, PDO::PARAM_INT);
+
+
+    $requete->execute();
+
+    $requete->closeCursor();
+
+    if(!isset($connexion))
+    {
+        unset($bdd);
+    }
+}

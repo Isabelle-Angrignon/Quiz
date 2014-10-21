@@ -68,7 +68,7 @@
 
 </script>
 <div id="QuestionConteneur">
-    <div id="EnonceQuestion" contenteditable="plaintext-only">
+    <div id="EnonceQuestion" contenteditable="true">
         <?php
             echo isset($enonceQuestion)?$enonceQuestion:"";
         ?>

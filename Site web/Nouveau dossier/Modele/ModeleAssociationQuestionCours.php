@@ -37,7 +37,6 @@ function associerQuestionACours($connexion, $idQuestion, $idCours) {
     $requete->bindParam(2, $idCours, PDO::PARAM_INT);
 
     $requete->execute();
-    $resultat = $requete->fetchAll();
 
     $requete->closeCursor();
 
@@ -45,6 +44,4 @@ function associerQuestionACours($connexion, $idQuestion, $idCours) {
     {
         unset($bdd);
     }
-
-    return $resultat;
 }
