@@ -67,7 +67,7 @@ function gererQuestionRepondue() {
             //serie de if pour débuggage a remplacer par des sweetAlert.
             if(resultat == 1)
             {
-                swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",   confirmButtonText: "Dac!" });
+             //   swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",   confirmButtonText: "Dac!" });
             }
             else if(resultat == 0)
             {
@@ -159,7 +159,7 @@ function afficherScoreFinal()
         url:"Controleur/FonctionQuizEtudiant/afficherScoreFinal.php",
         async : !1,
         success: function(msg) {
-            swal({   title: "Quiz terminé!",   text: msg,   type: "success",   confirmButtonText: "Dac!" });
+            swal({title: "Quiz terminé!", text: msg, type: "success", confirmButtonText: "Dac!"});
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
