@@ -3,7 +3,7 @@ include("Utilitaires.php");
 include("../Modele/ModeleUsagers.php");
 include("../Modele/ModeleUtilisateurs.php");
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Usager');
 
 ChangerEmail($_POST['Email'],$_POST['ConfirmationEmail']);
 

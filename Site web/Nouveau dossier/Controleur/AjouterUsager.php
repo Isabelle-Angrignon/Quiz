@@ -3,11 +3,11 @@ include("Utilitaires.php");
 include("../Modele/ModeleUsagers.php");
 include("../Modele/ModeleUtilisateurs.php");
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Prof');
 
-CreerEtudiant($_POST['idUsager'], $_POST['nom'],$_POST['prenom']);
+CreerUsager($_POST['idUsager'], $_POST['nom'],$_POST['prenom']);
 
-function CreerEtudiant($idEleve,$nom,$prenom)
+function CreerUsager($idEleve,$nom,$prenom)
 {
     ajouterUsager($idEleve,$nom,$prenom);
 }

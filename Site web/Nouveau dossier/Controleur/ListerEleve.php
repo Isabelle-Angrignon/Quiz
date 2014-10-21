@@ -3,7 +3,7 @@ include("Utilitaires.php");
 include("../Modele/ModeleEtudiants.php");
 include("../Modele/ModeleUtilisateurs.php");
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Prof');
 $result =  json_encode(LireEtudiant());
 
 echo $result;
