@@ -28,11 +28,29 @@ function redirigerSiDejaConnecte()
 //Utiliser à chaque page.
 //Vérifie si on a une session connecté.  Si non, nous redirige
 //vers la page d'index.
-function redirigerSiNonConnecte()
+function redirigerSiNonConnecte($typeUsager)
 {
     if (!isset($_SESSION['idUsager']))
     {
         header('Location: Index.php');
+    }
+    if ( $typeUsager == 'Prof')
+    {
+        if($_SESSION['typeUsager'] != 'Prof' && $_SESSION['typeUsager'] != 'Admin'){
+            header('Location: Index.php');
+        }
+    }
+    else if ( $typeUsager == 'Admin')
+    {
+        if($_SESSION['typeUsager'] != 'Admin'){
+            header('Location: Index.php');
+        }
+    }
+     else if ( $typeUsager == 'Etudiant')
+    {
+        if($_SESSION['typeUsager'] != 'Etudiant'){
+            header('Location: Index.php');
+        }
     }
 }
 
