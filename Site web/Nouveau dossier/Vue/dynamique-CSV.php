@@ -8,7 +8,7 @@
     //$('#coursPost').hide();
 </script>
 
-<div id="login">
+
     <p class="titre">Insérer votre fichier csv</p>
     <hr>
     <div class="conteneur" >
@@ -19,7 +19,7 @@
             <input type="file" name="file" id="file" accept=".csv"><br>
             <div id="soumettre" class="ListeDivElementStyle BoutonDiv">Ajouter le cours</div>
         </form>
-    </div>
+
 
 
 </div>

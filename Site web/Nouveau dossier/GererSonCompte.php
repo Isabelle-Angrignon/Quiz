@@ -35,7 +35,7 @@
 
 
 
-        <div id="login">
+        <div id="general">
             <p class="titre">Mon Compte</p>
             <hr>
             <div class="conteneur" >
@@ -91,6 +91,7 @@
 
         <?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur']))) {
             echo ' <script>$(document).ready(function(){ swal({title:"Erreur" ,type:"warning", text:"'. $_SESSION['erreur'] .'"});});</script>';
+            unset($_SESSION['erreur']);
         }
         ?>
 

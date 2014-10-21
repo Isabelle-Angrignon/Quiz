@@ -3,7 +3,7 @@
 <?php
 ?>
 
-<div id="login">
+
     <p class="titre">Nouvel étudiant</p>
     <hr>
     <div class="conteneur" >
@@ -21,7 +21,7 @@
     </div>
     <div id="soumettre" class="ListeDivElementStyle BoutonDiv">Ajouter le cours</div>
 
-</div>
+
 
 <script>
     function estValide(){
