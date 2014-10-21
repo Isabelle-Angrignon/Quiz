@@ -108,7 +108,6 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
             ajouterReponse($bdd, $reponse['enonce'], null, 100, $estBon, ++$positionReponse);
         }
 
-
         // Associer la question à un/plusieurs cours
         foreach($tableauCours['cours'] as $Cours)
         {
