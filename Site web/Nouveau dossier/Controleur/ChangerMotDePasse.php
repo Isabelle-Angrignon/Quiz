@@ -4,7 +4,7 @@ include("Utilitaires.php");
 include("../Modele/ModeleUsagers.php");
 include("../Modele/ModeleUtilisateurs.php");
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Usager');
 
 ChangerMotPasse($_POST['AncienMotPasse'],$_POST['NouveauMotPasse'],$_POST['ConfNouveauMotPasse']);
 
