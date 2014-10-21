@@ -35,9 +35,9 @@
 
             $("#UlQuizAleatoire").click( function() {
 
-                if (SetIdCoursSession())
+                if (SetIdCoursSession()==1)
                 {
-                    if (genererQuestionsAleatoires())
+                    if (genererQuestionsAleatoires()==1)
                     {
                         alert('Quiz aléatoire généré, bonne chance');
                         creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
