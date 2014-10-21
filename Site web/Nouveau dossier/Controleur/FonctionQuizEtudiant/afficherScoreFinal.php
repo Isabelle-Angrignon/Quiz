@@ -10,14 +10,13 @@ $resultat = $_SESSION['bonnesReponses'] . " / " . $_SESSION['questionsRepondues'
 
 if ( $score == 100)
 {
-    echo "Quiz terminé.  Bravo! Score parfait! " . $resultat ;
+    echo "Bravo! Score parfait! " . $resultat ;
 }
 elseif ($score <= 60)
 {
-    echo "Quiz terminé.  Ouf! une révision est nécessaire! " . $resultat;
+    echo "Ouf! une révision est nécessaire! " . $resultat;
 }
 else
 {
-    echo "Quiz terminé.  Score final: " . $resultat;
-
+    echo "Score final: " . $resultat;
 }
