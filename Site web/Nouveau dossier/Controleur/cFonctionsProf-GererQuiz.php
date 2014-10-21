@@ -102,7 +102,7 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
 
         $tableauReponses = json_decode($tableauReponses, true);
         //////////////////////////////////////Reponses ne devraient p-t pas etre un JSON ??? //////////////////////////////////////////////////
-        echo $tableauReponses.reponses['enonce'] . " /// estBonneReponse: " . $tableauDeQuestion{'reponses'}[0]['estBonneReponse'];
+       // echo $tableauReponses.reponses['enonce'] . " /// estBonneReponse: " . $tableauDeQuestion{'reponses'}[0]['estBonneReponse'];
 /*
         // Associer la question à un/plusieurs cours
         echo "<script> alert('Tableau de cours : ' + ". $tableauCours .");</script>";

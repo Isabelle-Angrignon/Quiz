@@ -42,7 +42,6 @@
                 </div>
 
                 <div id="loginTextFields">
-                    <p></p>
                     <input type="text" id="TBNomUsager" name="nomUsager" />
                     <input type="password" id="TBMotDePasse" name="motDePasse" />
                 </div>
