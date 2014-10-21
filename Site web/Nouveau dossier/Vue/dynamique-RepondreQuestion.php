@@ -35,8 +35,8 @@ $infoQuestion = $_SESSION['infoQuestion'];
         $("#btnSuivant").click( function() {
             if(gererQuestionRepondue() == 1 )
             {
-                var estTermine = quizTermine();
-                if (estTermine == 1)
+                if (quizTermine() == 1)
+
                 {
                     afficherScoreFinal();
                     $('#dFondOmbrage').remove();
