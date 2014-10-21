@@ -25,7 +25,6 @@ if (isset($Liste) && !empty($Liste))
     $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion']);
     array_shift($_SESSION['listeQuestions']);
     echo '1';
-    echo '</br> '. print_r($_SESSION['infoQuestion']);
 }
 else
 {

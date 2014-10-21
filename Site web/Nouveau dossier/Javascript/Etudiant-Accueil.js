@@ -159,7 +159,6 @@ function afficherScoreFinal()
         url:"Controleur/FonctionQuizEtudiant/afficherScoreFinal.php",
         async : !1,
         success: function(msg) {
-            alert(msg);
             swal({   title: "Quiz terminé!",   text: msg,   type: "success",   confirmButtonText: "Dac!" });
         },
         error: function(jqXHR, textStatus, errorThrown) {
