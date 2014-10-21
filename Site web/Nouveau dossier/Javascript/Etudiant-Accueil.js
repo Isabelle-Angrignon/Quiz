@@ -67,7 +67,7 @@ function gererQuestionRepondue() {
             //serie de if pour débuggage a remplacer par des sweetAlert.
             if(resultat == 1)
             {
-                swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",   confirmButtonText: "Dac!" });
+             //   swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",   confirmButtonText: "Dac!" });
             }
             else if(resultat == 0)
             {
@@ -76,11 +76,11 @@ function gererQuestionRepondue() {
             }
             else if(resultat == 'X')
             {
-                alert( ' Erreur au niveau de la validation' );
+                swal({   title: "Oh la la!",   text: " Une erreur s'est produite au moment de la validation. ",   type: "warning",   confirmButtonText: "Dac!" });
             }
             else
             {
-                alert( ' Vous devez choisir une répone. ' );
+                swal({   title: "Oups!",   text: "Répondez d'abord à la question!",   type: "error",   confirmButtonText: "Dac!" });
             }
             //retour de validation si question répondue...
             if (resultat == 1 || resultat == 0)
@@ -159,7 +159,7 @@ function afficherScoreFinal()
         url:"Controleur/FonctionQuizEtudiant/afficherScoreFinal.php",
         async : !1,
         success: function(msg) {
-            alert(msg);
+            swal({title: "Quiz terminé!", text: msg, type: "success", confirmButtonText: "Dac!"});
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);

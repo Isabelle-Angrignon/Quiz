@@ -3,7 +3,7 @@
 include("..//Utilitaires.php");
 include("..//cFonctionsQuizEtudiant.php");
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Etudiant');
 
 //on aura besoin du id de cours dans la gestion du quiz...
 $_SESSION['idCours'] = $_POST['selectCours'];

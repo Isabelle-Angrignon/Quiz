@@ -3,7 +3,7 @@ include("Utilitaires.php");
 include("../Modele/ModeleUsagers.php");
 include("../Modele/ModeleUtilisateurs.php");
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Usager');
 
 ChangerEmail($_POST['Email'],$_POST['ConfirmationEmail']);
 
@@ -28,7 +28,7 @@ function ChangerEmail($ChainePremier , $ChaineDeuxieme)
         if(filter_var($ChainePremier, FILTER_VALIDATE_EMAIL))
         {
             ModifierAdresseEmail($_SESSION['idUsager'], $ChainePremier);
-            $_SESSION['erreur'] = 'adresse e-mail changer avec succes';
+            unset($_SESSION['erreur']);
             header('Location: ../GererSonCompte.php');
             //redirigerSiDejaConnecte();
         }

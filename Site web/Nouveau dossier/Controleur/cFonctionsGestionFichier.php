@@ -6,7 +6,7 @@
 	include("../Modele/ModeleInscriptionsEtudiantCours.php");
     include("../Modele/ModeleUtilisateurs.php");
     demarrerSession();
-    redirigerSiNonConnecte();
+    redirigerSiNonConnecte('Prof');
 
 	$nomFichier = UploadFile();
 	LireCSV($nomFichier);

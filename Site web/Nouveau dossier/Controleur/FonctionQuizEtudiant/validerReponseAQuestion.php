@@ -2,7 +2,7 @@
 
 include("..//Utilitaires.php");
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Etudiant');
 
 $idReponse =  $_POST['idReponse'];
 $idQuestion = $_SESSION['infoQuestion'][0]['idQuestion'];////// pourrait prende  [0]  au milieu

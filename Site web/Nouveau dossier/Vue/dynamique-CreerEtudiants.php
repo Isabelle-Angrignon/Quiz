@@ -27,10 +27,10 @@
     function estValide(){
         temp = true;
         temp = ($('#TB_NumeroDA').val() != "" && $('#TB_Nom').val() != "" && $('#TB_Prenom').val() != "");
-        if (temp == false){alert('Certain champs sont vide');}
+        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont vide"});}
         if(temp ==true){
         temp = ($('#TB_NumeroDA').val().length <= 10 && $('#TB_Nom').val().length <= 50 && $('#TB_Prenom').val().length <= 30);
-        if (temp == false){alert('Certain champs sont trop long');}}
+        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont trop long"});}}
         return temp;
     }
     $('#soumettre').click(function(){

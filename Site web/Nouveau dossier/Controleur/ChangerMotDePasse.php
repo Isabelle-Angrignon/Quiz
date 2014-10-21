@@ -4,7 +4,7 @@ include("Utilitaires.php");
 include("../Modele/ModeleUsagers.php");
 include("../Modele/ModeleUtilisateurs.php");
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Usager');
 
 ChangerMotPasse($_POST['AncienMotPasse'],$_POST['NouveauMotPasse'],$_POST['ConfNouveauMotPasse']);
 
@@ -28,7 +28,7 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
         if ($NouvMotPasse == $ConfNouvMotPasse)
         {
             ModifierMotPasse($_SESSION['idUsager'],$NouvMotPasse);
-            $_SESSION['erreur'] = 'mot de passe changer avec succes';
+            unset($_SESSION['erreur']);
             header('Location: ../GererSonCompte.php');
         }
         else

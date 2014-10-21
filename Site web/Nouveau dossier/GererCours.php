@@ -18,6 +18,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
         include("Modele/ModeleEtudiants.php");
         include("Controleur/cFonctionsCours.php");
         demarrerSession();
+        redirigerSiNonConnecte('Prof');
     ?>
 	
   	<script src="Javascript/Generique.js"></script>
@@ -107,7 +108,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
 	<?php
 
-        redirigerSiNonConnecte();
+
 		include("Vue/Template/EnteteSite.php");
 		include("Vue/Template/MenuProf.php");
 	?>

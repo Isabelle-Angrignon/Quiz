@@ -7,7 +7,7 @@ include("..//cFonctionsQuizEtudiant.php");
 include("..//..//Modele/ModeleQuestions.php");
 
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Etudiant');
 
 $cours = $_SESSION['idCours'];
 
@@ -25,7 +25,6 @@ if (isset($Liste) && !empty($Liste))
     $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion']);
     array_shift($_SESSION['listeQuestions']);
     echo '1';
-    echo '</br> '. print_r($_SESSION['infoQuestion']);
 }
 else
 {

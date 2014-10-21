@@ -12,7 +12,7 @@ include("..//Modele/ModeleQuestions.php");
 include("..//Modele/ModeleReponses.php");
 
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Etudiant');
 
 //recupérer infos question
 $infoQuestion = $_SESSION['infoQuestion'];
@@ -33,17 +33,16 @@ $infoQuestion = $_SESSION['infoQuestion'];
 
         //bouton suivant...
         $("#btnSuivant").click( function() {
-            if(gererQuestionRepondue() == 1 )///// recoit tjs false mais affiche true/////////////////////////////////////////gere quiz terminé ailleurs...
+            if(gererQuestionRepondue() == 1 )
             {
-                var estTermine = quizTermine();
-                if (estTermine == 1)///// recoit tjs false mais affiche true/////////////////////////////////////////gere quiz terminé ailleurs...
+                if (quizTermine() == 1)
+
                 {
-                    afficherScoreFinal();
+                    $(document).ready(function() { afficherScoreFinal(););
                     $('#dFondOmbrage').remove();
                 }
                 else {
-                    //génération div dynamique avec nouvelle question
-                    chargerNouvelleQuestion();
+                    chargerNouvelleQuestion();//dans la session
                 }
             }
         });

@@ -18,6 +18,34 @@ div#enteteSite{
 	margin-right:0px;
 }
 
+#NomUsager{
+    vertical-align: top;
+    float:left;
+    font-family: Arial;
+    font-size:medium;
+    margin:3px;
+}
+#EspaceDeconnexion{
+    display: inline-block;
+    float:right;
+    padding:13px;
+
+}
+#BTN_Deconnecter{
+    vertical-align: top;
+    float:right;;
+    background-color: #eceef0;
+    padding-left: 5px;
+    border: solid black 3px;
+    border-radius:3px;
+    margin:1px;
+    cursor:pointer;
+}
+#BTN_Deconnecter:hover{
+    background-color: #FD8740;
+    color:#eceef0;
+    cursor:pointer;
+}
 
 
 .logo{
@@ -44,9 +72,10 @@ div#enteteSite{
 	margin:0 auto;
 	background-color:rgb(253,254,255);
 	display:block;
-	min-height:750px;
+	min-height:550px;
 	overflow:hidden;
 	padding-top:100px;
+    padding-bottom: 3%;
 	border-left:inset;
 	border-right:outset;
 }

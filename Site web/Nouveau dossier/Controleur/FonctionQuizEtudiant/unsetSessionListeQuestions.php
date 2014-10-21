@@ -2,7 +2,7 @@
 
 include("..//Utilitaires.php");
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Etudiant');
 
 unset($_SESSION['listeQuestions']);
 unset($_SESSION['infoQuestion']);

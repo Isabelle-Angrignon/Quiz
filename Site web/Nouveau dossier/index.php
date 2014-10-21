@@ -20,18 +20,11 @@
 	?>
 	
 	<div class="contenu">
-
-        <div id="alerte" class="Alerte">
             <?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur'])))
             {
-                echo $_SESSION['erreur'];
-            }
-            else
-            {
-                echo 'Veuillez vous connecter';
+                echo ' <script>$(document).ready(function(){ swal({title:"Erreur" ,type:"warning", text:"'. $_SESSION['erreur'] .'"});});</script>';
             }
             ?>
-        </div>
         <div id="login">
             <p id="titreConnexion">Connexion</p>
 
@@ -42,7 +35,6 @@
                 </div>
 
                 <div id="loginTextFields">
-                    <p></p>
                     <input type="text" id="TBNomUsager" name="nomUsager" />
                     <input type="password" id="TBMotDePasse" name="motDePasse" />
                 </div>

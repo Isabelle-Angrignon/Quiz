@@ -5,7 +5,7 @@ include("..//..//Modele/ModeleUsagers.php");
 include("..//cFonctionsQuizEtudiant.php");
 include("..//..//Modele/ModeleQuestions.php");
 demarrerSession();
-redirigerSiNonConnecte();
+redirigerSiNonConnecte('Etudiant');
 
 if (isset($_SESSION['listeQuestions']) )
 {
