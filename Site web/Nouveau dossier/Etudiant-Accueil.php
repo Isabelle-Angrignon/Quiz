@@ -5,9 +5,9 @@
     <link rel="stylesheet" href="Vue/CSS/Etudiant-Accueil.css" type="text/css" media="screen" >
     <link rel="stylesheet" href="Vue/CSS/DynamiqueQuestionARepondre.css" type="text/css" media="screen" >
 
-    <!--   Pour Sweet Alert -->
+    <!--   Pour Sweet Alert
     <script src="sweetalert-master/lib/sweet-alert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="sweetalert-master/lib/sweet-alert.css">
+    <link rel="stylesheet" type="text/css" href="sweetalert-master/lib/sweet-alert.css"> -->
 
     <?php
     include("Vue/Template/InclusionJQuery.php");
@@ -30,7 +30,6 @@
 
             $("#UlQuizFormatif").click( function() {
                 //appeler la fonction php qui génere une liste de questions pour un idQuiz spécifique...;
-                $("#quiz").submit();
             });
 
             $("#UlQuizAleatoire").click( function() {
@@ -40,7 +39,7 @@
                     if (genererQuestionsAleatoires()==1)
                     {
 
-                        swal({ title: "Quiz aléatoire généré!",   text: "Bonne chance!",   type: "success",   confirmButtonText: "Dac!" });
+                     //   swal({ title: "Quiz aléatoire généré!",   text: "Bonne chance!",   type: "success",   confirmButtonText: "Dac!" });
 
                         creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
                     }
