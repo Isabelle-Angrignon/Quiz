@@ -5,6 +5,10 @@
 	Description : Contient le css qui est spécifique au HTML de la page Prof-GererQuiz.php 
 */
 
+#quiz{
+    padding-bottom: 2%;
+}
+
 /* CSS propre au drop down list des cours */
 fieldset {
     border:0;
@@ -36,7 +40,7 @@ fieldset {
 
 .ListeGererQuiz {
     width:20%;
-    height:500px;
+    height:400px;
     display:inline-block;
 }
 
