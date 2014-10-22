@@ -2,10 +2,9 @@
 <html>
 
 <head>
-	<?php 
-		include("Vue/Template/InclusionTemplate.php");
+	<?php
 		include("Vue/Template/InclusionJQuery.php");
-
+        include("Vue/Template/InclusionTemplate.php");
 	?>
 	<link rel="stylesheet" href="Vue/CSS/Login.css" type="text/css" media="screen" >
 </head>
@@ -29,7 +28,7 @@
         <div id="login">
             <p id="titreConnexion">Connexion</p>
             <hr>
-            <form id="login_Form" method="post" action="../index.php">
+            <form id="login_Form" method="post" action="index.php">
                 <div id="loginLabels">
                     <p >Nom d'usager </p>
                     <p >Mot de passe </p>

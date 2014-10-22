@@ -25,10 +25,10 @@ function ajouterUsager($id, $prenom, $nom)
 	       
 	    $requete->execute();
 	    
-	    $ligneAffectee = $requete->fetch(); 
+
 	    $requete->closeCursor();
         unset($bdd);
-	    return $ligneAffectee;
+
 	}
     else
     {
@@ -109,9 +109,9 @@ function ModifierAdresseEmail($idUsager, $NouveauEMail){
 
     $requete->execute();
 
-    $infoUsager = $requete->fetch();
 
-    return $infoUsager;
+
+
 }
 
 function ModifierMotPasse($idUsager, $NouveauMotPasse){
@@ -122,9 +122,9 @@ function ModifierMotPasse($idUsager, $NouveauMotPasse){
 
     $requete->execute();
 
-    $infoUsager = $requete->fetch();
 
-    return $infoUsager;
+
+
 }
 
 function RecupererMotPasse($Pid){

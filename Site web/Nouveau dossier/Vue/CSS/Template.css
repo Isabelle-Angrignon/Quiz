@@ -10,7 +10,7 @@ a{
 
 }
 a:hover{
-    color:orange;
+    color:#e69700;
 }
 .fixed {
 	position:fixed;
@@ -54,7 +54,7 @@ div#enteteSite{
     cursor:pointer;
 }
 #BTN_Deconnecter:hover{
-    background-color: #FD8740;
+    background-color: #e69700;
     color:#eceef0;
     cursor:pointer;
 }
