@@ -47,6 +47,8 @@ $infoQuestion = $_SESSION['infoQuestion'];
                 }
             }
         });
+
+
     });
 </script>
 

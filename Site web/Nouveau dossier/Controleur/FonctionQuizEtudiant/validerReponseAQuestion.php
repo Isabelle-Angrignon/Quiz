@@ -20,7 +20,7 @@ switch( $_SESSION['infoQuestion'][0]['typeQuestion']){
         }
         break;
     case "CHOIX_MULTI_UNIQUE":
-
+        //trouver la bonne réponse...
         foreach($_SESSION['listeReponses'] as $reponse)
         {
             if($reponse['reponseEstValide']  == 1 )
@@ -28,6 +28,8 @@ switch( $_SESSION['infoQuestion'][0]['typeQuestion']){
                 $bonneRep = $reponse['idReponse'];
             }
         }
+
+
         if($bonneRep == $idReponse)
         {
             echo "1";

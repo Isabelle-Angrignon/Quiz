@@ -10,7 +10,7 @@ a{
 
 }
 a:hover{
-    color:#e69700;
+    color:#000000;
 }
 .fixed {
 	position:fixed;
@@ -250,6 +250,7 @@ background: -o-linear-gradient(top, #aad4ff 0%,#aad1f7 42%,#3d95ed 100%);
 background: -ms-linear-gradient(top, #aad4ff 0%,#aad1f7 42%,#3d95ed 100%);
 background: linear-gradient(to bottom, #aad4ff 0%,#aad1f7 42%,#3d95ed 100%);
 background-color:rgb(203,221,247);
+      color:black;
 }
 
 /*

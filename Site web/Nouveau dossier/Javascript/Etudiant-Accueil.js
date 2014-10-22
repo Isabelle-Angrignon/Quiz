@@ -125,7 +125,7 @@ function chargerNouvelleQuestion(){
         success: function(msg) {
 
                 //recharger le div dynamique
-                insererHTMLfromPHP("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
+                insererHTMLfromPHP("divDynamique", "Vue/dynamique-RepondreQuestion.php");
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
