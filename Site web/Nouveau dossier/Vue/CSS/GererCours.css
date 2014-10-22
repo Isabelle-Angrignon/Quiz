@@ -99,7 +99,6 @@ fieldset {
 
 /* Label pour les listes principales */
 #LBL_ListesGererCours {
-	margin-left:5%;
 	width:90%;
 	text-align:center;
 	padding:10px;
@@ -108,13 +107,14 @@ fieldset {
 
 #GererCours {
 	float:left;
-	margin-left:6%;
+    margin-left:6%;
 }
 #ModifierGroupe{
-	margin-left:2%;
+    
 }
 #GererEtudiants {
 	float:right;
-	margin-right:5%;
+    margin-right: 2%;
+
 }
 
