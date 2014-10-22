@@ -66,7 +66,7 @@
                             <input type="text" id="TBMotDePasse" name="ConfirmationEmail" />
                         </div>
                         <br>
-                        <button type="submit" >Changer son courriel</button>
+                        <button type="submit" class="JquerryButton" >Changer son courriel</button>
                     </form>
                 <p class="titre">Mot de passe</p>
                 <hr>
@@ -83,7 +83,7 @@
                     <input type="password" id="TBMotDePasse" name="ConfNouveauMotPasse" />
                 </div>
                 <br>
-                <button type="submit" >Changer son mot de passe</button>
+                <button type="submit" class="JquerryButton" >Changer son mot de passe</button>
             </form>
         </div>
 
@@ -103,6 +103,8 @@
 	<?php
 		include("Vue/Template/BasDePage.php");
 	?>
+
+<script>$(".JquerryButton").button();</script>
 
 </body>
 

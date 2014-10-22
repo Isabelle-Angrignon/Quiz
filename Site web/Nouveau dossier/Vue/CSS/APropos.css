@@ -1,0 +1,12 @@
+#logo{
+    width: 400px;
+    height: 400px;
+}
+.centrer{
+    text-align: center;
+}
+
+p.centrer{
+    width: 70%;
+    margin-left: 15%;
+}

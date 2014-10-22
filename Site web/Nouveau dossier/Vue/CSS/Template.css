@@ -117,7 +117,7 @@ div#enteteSite{
 /*------------------------------------------------ Objets fréquemment utilisés ---------------------------------------*/
 /* Style de base pour les listes de QuizInfo */
 .Liste {
-	background-color: dimgray;
+	background-color: #eeeeee;
 	padding:20px;
 	margin:0;
 	border-radius:30px;
