@@ -137,3 +137,7 @@ div.suiviQuiz {
     overflow-y: auto;
     margin-bottom: 2px;
 }
+
+#btnSuivant{
+    margin: 20px;
+}

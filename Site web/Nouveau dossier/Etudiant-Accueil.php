@@ -34,7 +34,7 @@
                 {
                     if (genererQuestionsAleatoires()==1)
                     {
-                        creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
+                        creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php");
                     }
                     else
                     {
@@ -116,21 +116,7 @@ if(!isset($_SESSION['bonnesReponses']))
 
 include("Vue/Template/BasDePage.php");
 
-/*
-//gestion des question du quiz...
-if (isset($_SESSION["listeQuestions"]))
-{
-    if (!empty($_SESSION["listeQuestions"])) {
-        echo ' <script>creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php")</script> ';
-        //retirer la première question de la liste, elle est récupérée au début de la page
-        array_shift($_SESSION['listeQuestions']);/////////////////////next
-    }
-    else
-    {
-        resetVarSessionQuiz();
-    }
-}
-*/
+
 ?>
 
 
