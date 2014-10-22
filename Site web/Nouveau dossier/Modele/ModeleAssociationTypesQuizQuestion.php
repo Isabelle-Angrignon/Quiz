@@ -19,7 +19,7 @@ function listerTypesQuizAssocie($idQuestion)
 
 function associerTypeQuizQuestion($connexion, $idQuestion, $typeQuiz)
 {
-    if(isset($connexion))
+    if(!isset($connexion))
     {
         $bdd = connecterProf();
     }
@@ -33,7 +33,15 @@ function associerTypeQuizQuestion($connexion, $idQuestion, $typeQuiz)
     $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
     $requete->bindParam(2, $typeQuiz, PDO::PARAM_STR, 20);
 
-    $requete->execute();
+
+    try
+    {
+        $requete->execute();
+    }
+    catch(PDOException $e)
+    {
+        throw new ErrorException("Erreur dans la liaison de la question avec le type de quiz : " .$typeQuiz );
+    }
 
     $requete->closeCursor();
 

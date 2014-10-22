@@ -19,7 +19,7 @@
 }
 div.suiviQuiz {
     width:90%;
-    background-color: #FDA068;
+    background-color: rgba(230, 151, 0, 0.67);
     margin: 0 auto;
 }
 
@@ -33,6 +33,9 @@ div.suiviQuiz {
     -moz-border-radius-topright: 5px;
     border-top-right-radius: 5px;
     padding-top: 20px;
+    border-right :solid rgba(51, 51, 51, 0.77) 1px;
+    border-left :solid rgba(51, 51, 51, 0.77) 1px;
+    border-top :solid rgba(51, 51, 51, 0.77) 1px;
 }
 #labelCours {
 
@@ -41,6 +44,8 @@ div.suiviQuiz {
 #divSuiviQuizCentre {
     font-size: 25px;
     padding-bottom: 0px;
+    border-right :solid rgba(51, 51, 51, 0.77) 1px;
+    border-left :solid rgba(51, 51, 51, 0.77) 1px;
 }
 
 #labelScore{
@@ -60,6 +65,9 @@ div.suiviQuiz {
     -webkit-border-bottom-left-radius: 5px;
     -moz-border-radius-bottomleft: 5px;
     border-bottom-left-radius: 5px;
+    border-bottom :solid rgba(51, 51, 51, 0.77) 1px;
+    border-right :solid rgba(51, 51, 51, 0.77) 1px;
+    border-left :solid rgba(51, 51, 51, 0.77) 1px;
 }
 
 #labelProp {
@@ -92,18 +100,20 @@ div.suiviQuiz {
     background-color: #ffffff;
     font-size:large;
     font-family:"Comic Sans MS", cursive, sans-serif;
+    border:solid rgba(51, 51, 51, 0.77) 1px;
 }
 
 #labelEnonce{
     margin: 0 auto;
     margin-top: 20px;
-    background-color: rgba(79, 168, 255, 0.45);
+    background-color: rgba(125, 171, 211, 1);
     width:90%;
-    min-height:70px;
+  /*  min-height:70px;*/
     max-height: 100px;
     overflow-y: auto;
     border-radius:10px;
     padding:20px;
+    border:solid rgba(51, 51, 51, 0.77) 1px;
 }
 
 /*Div qui contient le ul - li -  des choix de réoponse*/
@@ -136,4 +146,8 @@ div.suiviQuiz {
     max-height: 70px;
     overflow-y: auto;
     margin-bottom: 2px;
+}
+
+#btnSuivant{
+    margin: 20px;
 }

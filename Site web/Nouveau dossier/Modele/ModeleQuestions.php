@@ -64,7 +64,7 @@ function trieParDefaultQuestions($idCours, $idProprietaire)
 // Description: Cette fonction ajoute une question dans la base de données. Si la connexion passée en paramètre est null, cette fonction va créer et fermer sa propre connexion.
 function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $ordreReponsesAleatoire, $typeQuestion, $idProprietaire, $referenceWeb)
 {
-    if(isset($connexion))
+    if(!isset($connexion))
     {
         $bdd = connecterProf();
     }
@@ -83,8 +83,16 @@ function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $
     $requete->bindParam(6, $idProprietaire, PDO::PARAM_STR, 10);
     $requete->bindParam(7, $referenceWeb, PDO::PARAM_STR);
 
-    $requete->execute();
-    $resultat = $requete->fetch();
+    try
+    {
+        $requete->execute();
+
+        $resultat = $requete->fetch();
+    }
+    catch(PDOException $e)
+    {
+        throw new ErrorException("Erreur dans l'ajout de la question ayant comme énoncé : " . $enonceQuestion);
+    }
 
     $requete->closeCursor();
 
@@ -94,6 +102,42 @@ function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $
     }
 
     return $resultat;
+}
+
+
+function modifierQuestion($connexion, $idQuestion,$enonceQuestion, $lienImage, $difficulte, $ordreReponsesAleatoire, $typeQuestion, $idProprietaire, $referenceWeb)
+{
+    if(isset($connexion))
+    {
+        $bdd = connecterProf();
+    }
+    else
+    {
+        $bdd = $connexion;
+    }
+
+    $requete = $bdd->prepare("CALL modifierQuestion(?,?,?,?,?,?,?,?)");
+
+    $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
+    $requete->bindParam(2, $enonceQuestion, PDO::PARAM_STR);
+    $requete->bindParam(3, $lienImage, PDO::PARAM_STR, 100);
+    $requete->bindParam(4, $difficulte, PDO::PARAM_STR, 20);
+    $requete->bindParam(5, $ordreReponsesAleatoire, PDO::PARAM_INT,1);
+    $requete->bindParam(6, $typeQuestion, PDO::PARAM_STR, 30);
+    $requete->bindParam(7, $idProprietaire, PDO::PARAM_STR, 10);
+    $requete->bindParam(8, $referenceWeb, PDO::PARAM_STR);
+
+    if(!$requete->execute())
+    {
+        throw new ErrorException("Erreur dans la modification de la question ayant comme énoncé : " . $enonceQuestion);
+    }
+
+    $requete->closeCursor();
+
+    if(!isset($connexion))
+    {
+        unset($bdd);
+    }
 }
 
 ?>

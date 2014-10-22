@@ -88,8 +88,10 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
     try
     {
         $bdd = connecterProf();
-        $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        set_error_handler('useless_error_handler');
         $bdd->beginTransaction();
+
 
         // Ajouter la question dans la base de données
         $idQuestion = ajouterQuestion($bdd, $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
@@ -97,7 +99,7 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
                     $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null);
 
         // Ajouter les réponses de cette question dans la base de données
-        $positionReponse = 1;
+        $positionReponse = 0;
         foreach($tableauReponses['reponses'] as $reponse)
         {
             $estBon = 0;
@@ -105,7 +107,68 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
             {
                 $estBon = 1;
             }
-            ajouterReponse($bdd, $reponse['enonce'], null, 100, $estBon, ++$positionReponse);
+            ajouterReponse($bdd, $reponse['enonce'], "", $idQuestion[0], $estBon, ++$positionReponse);
+        }
+        $positionCours = 0;
+        // Associer la question à un/plusieurs cours
+        foreach($tableauCours['cours'] as $Cours)
+        {
+            associerQuestionACours($bdd, $idQuestion[0], $Cours['idCours']);
+        }
+
+        // Associer la question à un/des type(s) de quiz
+        foreach($tableauTypeQuizAssocie['typeQuizAss'] as $typeQuiz)
+        {
+            associerTypeQuizQuestion($bdd, 200, $typeQuiz['id']);
+        }
+
+        echo $idQuestion[0];
+        $bdd->commit();
+    }
+    //catch(PDOException $e){}
+    catch(ErrorException $e)
+    {
+        try
+        {
+            //on annule la transation
+            $bdd->rollback();
+
+            //on affiche un message d'erreur ainsi que les erreurs
+            echo 'Tout ne s\'est pas bien passé, voir les erreurs ci-dessous<br />';
+            echo 'Erreur : '.$e->getMessage().'<br />';
+            echo 'N° : '.$e->getCode();
+        }
+        catch (PDOException $e){echo "Erreur dans le rollback";}
+    }
+
+    restore_error_handler();
+    unset($bdd);
+}
+
+function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours, $typeQuestion, $tableauTypeQuizAssocie)
+{
+    try
+    {
+        $bdd = connecterProf();
+        set_error_handler('useless_error_handler');
+        $bdd->beginTransaction();
+
+
+        // Ajouter la question dans la base de données
+        $idQuestion = modifierQuestion($bdd, $tableauDeQuestion['idQuestion'], $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
+            /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
+            $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null);
+
+        /*// Ajouter les réponses de cette question dans la base de données
+        $positionReponse = 0;
+        foreach($tableauReponses['reponses'] as $reponse)
+        {
+            $estBon = 0;
+            if($reponse['estBonneReponse'] == 'true')
+            {
+                $estBon = 1;
+            }
+            ajouterReponse($bdd, $reponse['enonce'], null, $idQuestion, $estBon, ++$positionReponse);
         }
 
         // Associer la question à un/plusieurs cours
@@ -120,10 +183,10 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
         {
             associerTypeQuizQuestion($bdd, $idQuestion[0], $typeQuiz['id']);
         }
-        echo $idQuestion[0];
+        echo $idQuestion[0];*/
         $bdd->commit();
     }
-    catch(PDOException $e)
+    catch(ErrorException $e)
     {
         try
         {
@@ -135,11 +198,33 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
             echo 'Erreur : '.$e->getMessage().'<br />';
             echo 'N° : '.$e->getCode();
         }
-        catch (PDOException $e){}
+        catch (PDOException $e){echo "Erreur dans le rollback";}
     }
+    restore_error_handler();
     unset($bdd);
 
 }
+
+function useless_error_handler($no, $str, $file, $line){
+    switch($no){
+        // Erreur fatale
+        case E_USER_ERROR:
+            break;
+
+        // Avertissement
+        case E_USER_WARNING:
+            break;
+
+        // Note
+        case E_USER_NOTICE:
+            break;
+
+        // Erreur générée par PHP
+        default:
+            break;
+    }
+}
+
 
 ?>
 
