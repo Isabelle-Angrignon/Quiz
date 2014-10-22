@@ -32,13 +32,14 @@ $infoQuestion = $_SESSION['infoQuestion'];
         });
 
         //bouton suivant...
+        $("#btnSuivant").button(); // attache le theme JQueryUI au bouton
         $("#btnSuivant").click( function() {
             if(gererQuestionRepondue() == 1 )
             {
                 if (quizTermine() == 1)
 
                 {
-                   /* $(document).ready(function() {*/ afficherScoreFinal();/*);*/
+                    afficherScoreFinal();
                     $('#dFondOmbrage').remove();
                 }
                 else {

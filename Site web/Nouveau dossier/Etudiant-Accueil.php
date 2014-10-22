@@ -5,10 +5,6 @@
     <link rel="stylesheet" href="Vue/CSS/Etudiant-Accueil.css" type="text/css" media="screen" >
     <link rel="stylesheet" href="Vue/CSS/DynamiqueQuestionARepondre.css" type="text/css" media="screen" >
 
-    <!--   Pour Sweet Alert
-    <script src="sweetalert-master/lib/sweet-alert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="sweetalert-master/lib/sweet-alert.css"> -->
-
     <?php
     include("Vue/Template/InclusionJQuery.php");
     include("Vue/Template/InclusionTemplate.php");
@@ -38,9 +34,6 @@
                 {
                     if (genererQuestionsAleatoires()==1)
                     {
-
-                     //   swal({ title: "Quiz aléatoire généré!",   text: "Bonne chance!",   type: "success",   confirmButtonText: "Dac!" });
-
                         creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php");
                     }
                     else
