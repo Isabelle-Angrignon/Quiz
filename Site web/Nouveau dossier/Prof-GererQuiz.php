@@ -42,7 +42,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     helper : 'clone'
                 }).disableSelection();
                 $("#UlQuestion").sortable({
-                    connectWith: "#UlModifQuiz",
                     revert: 150,
                     helper : 'clone'
                 }).disableSelection();
@@ -97,9 +96,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
     </div>
     <div id="ListeQuiz"class="Liste ListeGererQuiz">
         <ul id="UlQuiz">
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz mi-session</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz méchant</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz sur les singes</li>
+            <li class="ui-state-default">Quiz mi-session</li>
+            <li class="ui-state-default">Quiz méchant</li>
+            <li class="ui-state-default">Quiz sur les singes</li>
         </ul>
         <div id="ajouterQuiz"></div>
     </div>
