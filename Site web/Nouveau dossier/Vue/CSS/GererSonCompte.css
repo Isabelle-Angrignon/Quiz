@@ -11,7 +11,16 @@
     text-align:center;
     margin-bottom: 75px;
 }
-
+#divDynamique {
+    border: 2px black solid;
+    border-radius: 15px;
+    /*background:rgba(79, 168, 255, 1);*/
+    background: #eeeeee /*url("../../jquery-ui-1.11.2.custom/images/ui-bg_highlight-hard_100_eeeeee_1x100.png") 50% top repeat-x*/;
+    width: 40%;
+    min-height: 0;
+    position: relative;
+    text-align: center;
+}
 
 #login div {
     position:relative;

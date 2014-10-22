@@ -184,25 +184,21 @@ div#enteteSite{
 .dDivPrincipale {
 	width:1000px;
 	min-height: 600px;
-	background-color:white;
+	/*background-color:white;*/
 	margin:auto;
 	margin-top:10%;
 	margin-bottom:150px;
 	z-index:40;
 	overflow-x:hidden;
-	border-radius:5px;
-}
+	/*border-radius:5px;*/
 
-#divDynamique {
     border: 2px black solid;
     border-radius: 15px;
     /*background:rgba(79, 168, 255, 1);*/
     background: #eeeeee /*url("../../jquery-ui-1.11.2.custom/images/ui-bg_highlight-hard_100_eeeeee_1x100.png") 50% top repeat-x*/;
-    width: 40%;
-    min-height: 0;
-    position: relative;
-    text-align: center;
 }
+
+
 
 
 /*------------------------------------------------ Menu de navigation ------------------------------------------------*/
