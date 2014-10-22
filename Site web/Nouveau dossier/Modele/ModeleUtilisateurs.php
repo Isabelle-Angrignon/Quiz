@@ -1,7 +1,7 @@
 <?php
 function getStringConnection()
 {
-    return 'mysql:host=172.17.104.99:8080;dbname=projetquiz';/////////////////////////////
+    return 'mysql:host=172.17.104.99:8080;dbname=projetquiz';
 }
 
 // getConnection
