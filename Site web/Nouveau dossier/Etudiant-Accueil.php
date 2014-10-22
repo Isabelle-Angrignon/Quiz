@@ -89,7 +89,13 @@ if(!isset($_SESSION['bonnesReponses']))
         <div id="ListeQuiz"class="Liste ListeGererQuiz">
             <label>Formatif</label>
             <ul id="UlQuizFormatif">
-                <!-- les items de quiz apparaîtront ici -->
+                <!-- les items de quiz apparaîtront ici Bidon en attendant-->
+                <li class="ui-state-default">Quiz semaine 3</li>
+                <li class="ui-state-default">Quiz semaine 6</li>
+                <li class="ui-state-default">Quiz semaine 9</li>
+                <li class="ui-state-default">Quiz mi-session</li>
+                <li class="ui-state-default">Un autre quiz...</li>
+                <!-- les items de quiz apparaîtront ici Bidon en attendant-->
                 <?php
                 ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF")
                 ?>
