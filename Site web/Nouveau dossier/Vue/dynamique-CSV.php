@@ -17,7 +17,7 @@
             <input type="hidden" id="coursPost" name="cours"></input>
             <label for="file">nom du fichier:</label>
             <input type="file" name="file" id="file" accept=".csv"><br>
-            <div id="soumettre" class="ListeDivElementStyle BoutonDiv">Ajouter le cours</div>
+            <div id="soumettre" class="ListeDivElementStyle JquerryButton">Ajouter le groupe</div>
         </form>
 
 
@@ -25,6 +25,7 @@
 </div>
 
 <script>
+    $('#soumettre').button();
     $('#soumettre').click(function(){
         $('#Form_CSV').submit();
     });
