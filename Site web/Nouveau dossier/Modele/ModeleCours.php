@@ -25,12 +25,9 @@ function AjouterCours($nomCours, $CodeCours)
     $requete->bindparam(1, $nomCours, PDO::PARAM_STR,200);
     $requete->bindparam(2, $CodeCours, PDO::PARAM_STR,10);
     $requete->execute();
-    $resultat = $requete->fetch();
 
     $requete->closeCursor();
     unset($bdd);
-
-    return $resultat;
 }
 
 
