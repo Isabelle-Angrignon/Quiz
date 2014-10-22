@@ -128,7 +128,7 @@
     <?php
         if($_SESSION["etat"] == "modifierQuestion")
         {
-            echo "Modifier onclick='modifierQuestion()'";
+            echo "Modifier onclick='modifierQuestion(\"".$_SESSION['idQuestion']."\")'";
         }
         elseif( $_SESSION["etat"] == "nouvelleQuestion")
         {

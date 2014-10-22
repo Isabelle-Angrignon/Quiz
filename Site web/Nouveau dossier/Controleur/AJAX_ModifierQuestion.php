@@ -1,8 +1,8 @@
 <?php
-/*  AJAX_AjouterQuestion
+/*  AJAX_ModifierQuestion
  *  Par: Mathieu Dumoulin
  *  Date: 15/10/2014
- *  Description : Ce fichier effectue le contrôle entre la BD et la vue en ce qui à trait d'un ajout de question à l'aide d'AJAX
+ *  Description : Ce fichier effectue le contrôle entre la BD et la vue en ce qui à trait de la modification d'une question à l'aide d'AJAX
  */
 $doitArreter = false;
 $question = $_POST['tableauQuestion'];
@@ -13,7 +13,7 @@ if($question['enonceQuestion'] == "")
 }
 if(!isset($_POST['tableauReponses']))
 {
-    echo "Ajout de la question ne s'est pas fait car elle ne contient aucune réponse.   ";
+    echo "Modification de la question ne s'est pas fait car elle doit contenir au moins une réponse.   ";
     $doitArreter = true;
 }
 if(!isset($_POST['tableauCours']))
@@ -51,18 +51,4 @@ $tableauCours = $_POST['tableauCours'];
 $typeQuestion = $_POST['typeQuestion'];
 $tableauTypeQuizAssocie = $_POST['tableauTypeQuizAssocie'];
 
-/*echo $tableauQuestion['enonceQuestion']."         ";
-foreach($tableauReponses['reponses'] as $reponses)
-{
-    echo $reponses['enonce']."       ";
-}
-foreach($tableauCours['cours'] as $cours)
-{
-    echo $cours['nomCours']."         ";
-}
-
-echo $typeQuestion."        ";
-echo $tableauTypeQuizAssocie."        ";*/
-
-
-ajouterUneQuestion($tableauQuestion, $tableauReponses, $tableauCours, $typeQuestion, $tableauTypeQuizAssocie);
+modifierUneQuestion($tableauQuestion, $tableauReponses, $tableauCours, $typeQuestion, $tableauTypeQuizAssocie);

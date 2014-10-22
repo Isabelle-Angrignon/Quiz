@@ -21,8 +21,7 @@ function listerCoursSelonQuestion($idQuestion)
 }
 
 function associerQuestionACours($connexion, $idQuestion, $idCours) {
-
-    if(isset($connexion))
+    if(!isset($connexion))
     {
         $bdd = connecterProf();
     }
@@ -36,7 +35,14 @@ function associerQuestionACours($connexion, $idQuestion, $idCours) {
     $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
     $requete->bindParam(2, $idCours, PDO::PARAM_INT);
 
-    $requete->execute();
+    try
+    {
+        $requete->execute();
+    }
+    catch(PDOException $e)
+    {
+        throw new ErrorException("Erreur dans la liaison de la question avec le cours : " . $idCours);
+    }
 
     $requete->closeCursor();
 

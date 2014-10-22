@@ -51,7 +51,7 @@ function recupererReponsesVraiFaux($idQuestion)
 // Description: Cette fonction ajoute une réponse dans la base de données
 function ajouterReponse($connexion, $enonceReponse, $imageReponse,$idQuestion, $estValide, $positionReponse)
 {
-    if(isset($connexion))
+    if(!isset($connexion))
     {
         $bdd = connecterProf();
     }
@@ -60,16 +60,24 @@ function ajouterReponse($connexion, $enonceReponse, $imageReponse,$idQuestion, $
         $bdd = $connexion;
     }
 
-    $requete = $bdd->prepare("CALL ajouterReponse(?,?,?,?,?,?, ?)");
+    $requete = $bdd->prepare("CALL ajouterReponse(?,?,?,?,?)");
 
-    $requete->bindParam(1, $enonceReponse, PDO::PARAM_INT);
+    $requete->bindParam(1, $enonceReponse, PDO::PARAM_STR);
     $requete->bindParam(2, $imageReponse, PDO::PARAM_STR, 100);
     $requete->bindParam(3, $idQuestion, PDO::PARAM_INT);
     $requete->bindParam(4, $estValide, PDO::PARAM_INT);
     $requete->bindParam(5, $positionReponse, PDO::PARAM_INT);
 
 
-    $requete->execute();
+
+    try
+    {
+        $requete->execute();
+    }
+    catch(PDOException $e)
+    {
+        throw new ErrorException("Erreur dans l'ajout de la réponse ayant comme énoncé : " . $enonceReponse);
+    }
 
     $requete->closeCursor();
 

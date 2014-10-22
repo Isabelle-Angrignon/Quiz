@@ -144,7 +144,8 @@ function jsonifierReponsesQuestionCourante() {
             estCoche = true;
         }
         // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
-        reponsesEnString += '{"enonce":"'+$(this).children("div").text().replace(/[\"]/g, '\\"')+'", "estBonneReponse":"' + estCoche + '"},';
+        reponsesEnString += '{"enonce":"'+$(this).children("div").text().replace(/[\"]/g, '\\"')+'", "estBonneReponse":"' + estCoche + '",' +
+                            '"idReponse":"' + $(this).children("input[type=checkbox]").attr("value") + '"},';
     });
 
     // J'enlève la dernière virgule de mon string car, en JSON, le dernier élément ne prend pas de virgule
@@ -212,18 +213,26 @@ function jsonifierTypeQuizAssQuestionCourante() {
     return jsonTypeQuizAss;
 }
 
-//function ajouterQuestion() {
-function modifierQuestion() {
-
+function getJSONEnonceQuestion(idQuestion) {
     var enonce = document.getElementById("EnonceQuestion").textContent;
 
     // Par défaut, les furteurs tels que chrome et firefox ajoutent 13 caractères au début du texte d'un contentEditable élément.
     enonce = enonce.replace(/[\s]*/, "");
     // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
     enonce = enonce.replace(/[\"]/g, '\\"');
-    var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"420jean"}';
-
+    var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"420jean"';
+    if(idQuestion != null) {
+        jsonQuestion +=', "idQuestion":"'+ idQuestion+'"';
+    }
+    jsonQuestion += '}';
     jsonQuestion = JSON.parse(jsonQuestion);
+
+    return jsonQuestion;
+}
+
+function ajouterQuestion() {
+
+    var jsonQuestion = getJSONEnonceQuestion();
 
     var jsonReponses = jsonifierReponsesQuestionCourante();
 
@@ -239,7 +248,7 @@ function modifierQuestion() {
         async : false,
         data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
                 "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
-        dataType: "html",
+        dataType: "text",
         success: function(resultat){
             alert(resultat);
         },
@@ -249,6 +258,30 @@ function modifierQuestion() {
     });
 }
 
-/*function modifierQuestion() {
-    alert("Modifier!");
-}*/
+function modifierQuestion(idQuestion) {
+    alert(idQuestion);
+    var jsonQuestion = getJSONEnonceQuestion(idQuestion);
+
+    var jsonReponses = jsonifierReponsesQuestionCourante();
+
+    var jsonCours = jsonifierCoursQuestionCourante();
+
+    var typeQuestion = $("#TypeQuestion li input[type=radio]:checked").attr("value");
+
+    var jsonTypeQuizAss = jsonifierTypeQuizAssQuestionCourante();
+
+    $.ajax({
+        type:"POST",
+        url:'Controleur/AJAX_ModifierQuestion.php',
+        async : false,
+        data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
+            "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
+        dataType: "text",
+        success: function(resultat){
+            alert(resultat);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
+        }
+    });
+}
