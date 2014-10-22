@@ -114,7 +114,6 @@ function GenererLi($idUi , $valeur , $idLi)
 }
 
 
-
 function GenererLiSelect($idUl , $valeur , $idLi)
 {
     echo "<script>ajouterLi_ToUl_Selectable( '". $idUl . "' , '". str_replace("'", " \'" , $valeur) . "','".$idLi."', true);</script>";

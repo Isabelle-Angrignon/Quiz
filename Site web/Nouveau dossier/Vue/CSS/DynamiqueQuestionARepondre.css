@@ -14,13 +14,12 @@
 /*format du texte de la barre d'info de suivi du quiz*/
 .suiviQuiz{
     text-align: center;
-    padding: 2%;
+    padding: 2px;
     text-decoration:none;
 }
-
 div.suiviQuiz {
     width:90%;
-    background-color: #FDA068;
+    background-color: rgba(230, 151, 0, 0.67);
     margin: 0 auto;
 }
 
@@ -34,6 +33,9 @@ div.suiviQuiz {
     -moz-border-radius-topright: 5px;
     border-top-right-radius: 5px;
     padding-top: 20px;
+    border-right :solid rgba(51, 51, 51, 0.77) 1px;
+    border-left :solid rgba(51, 51, 51, 0.77) 1px;
+    border-top :solid rgba(51, 51, 51, 0.77) 1px;
 }
 #labelCours {
 
@@ -42,6 +44,8 @@ div.suiviQuiz {
 #divSuiviQuizCentre {
     font-size: 25px;
     padding-bottom: 0px;
+    border-right :solid rgba(51, 51, 51, 0.77) 1px;
+    border-left :solid rgba(51, 51, 51, 0.77) 1px;
 }
 
 #labelScore{
@@ -61,13 +65,16 @@ div.suiviQuiz {
     -webkit-border-bottom-left-radius: 5px;
     -moz-border-radius-bottomleft: 5px;
     border-bottom-left-radius: 5px;
+    border-bottom :solid rgba(51, 51, 51, 0.77) 1px;
+    border-right :solid rgba(51, 51, 51, 0.77) 1px;
+    border-left :solid rgba(51, 51, 51, 0.77) 1px;
 }
 
 #labelProp {
     padding-right: 10px;
 }
 
-/* mettre une classe pour les éléments de laquestion ici au besoin*/
+/* mettre une classe pour les éléments de la question ici au besoin*/
 
 .zoneQuestion {
     border-radius: 5px;
@@ -75,7 +82,7 @@ div.suiviQuiz {
 
 .zoneReference {
     font-size: small;
-    padding: 20px;
+    padding: 10px;
 }
 
 #idQuestion{
@@ -89,26 +96,28 @@ div.suiviQuiz {
     width:90%;
     margin: 0 auto;
     margin-top: 20px;
+    margin-bottom: 20px;
     background-color: #ffffff;
     font-size:large;
     font-family:"Comic Sans MS", cursive, sans-serif;
+    border:solid rgba(51, 51, 51, 0.77) 1px;
 }
 
 #labelEnonce{
     margin: 0 auto;
     margin-top: 20px;
-    background-color: rgba(79, 168, 255, 0.45);
+    background-color: rgba(125, 171, 211, 1);
     width:90%;
-    min-height:70px;
+  /*  min-height:70px;*/
     max-height: 100px;
     overflow-y: auto;
     border-radius:10px;
-    padding:10px;
+    padding:20px;
+    border:solid rgba(51, 51, 51, 0.77) 1px;
 }
 
 /*Div qui contient le ul - li -  des choix de réoponse*/
 #divChoixReponse{
-
     margin-left: 12.5%;
     margin-right: 12.5%;
     width:70%;
@@ -117,14 +126,28 @@ div.suiviQuiz {
 
 #UlChoixReponse{
     margin: 0 auto;
-    margin-top:20px;
     width:90%;
-    min-height:400px;
     font-family:"Comic Sans MS", cursive, sans-serif;
-    /*border:solid black;*/
     border-radius:10px;
 }
 
-.ui-selecting { background: #FECA40; }
-.ui-selected { background: red; color: white; }
+#UlChoixReponse .ui-selecting { background: #fec71b; }
+#UlChoixReponse .ui-selected {
+    border: 1px solid #bebdbd;
+    background: #f9f9f9 url("../../jquery-ui-1.11.2.custom/images/ui-bg_highlight-hard_100_f9f9f9_1x100.png") 50% 50% repeat-x;
+    color: #e69700;
+    font-weight: bold;
+}
 
+#UlChoixReponse li {
+    background-color: rgba(79, 168, 255, 0.45);
+    height: auto;
+    min-height: 43px;
+    max-height: 70px;
+    overflow-y: auto;
+    margin-bottom: 2px;
+}
+
+#btnSuivant{
+    margin: 20px;
+}

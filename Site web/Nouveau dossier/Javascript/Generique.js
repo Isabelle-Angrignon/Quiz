@@ -46,8 +46,8 @@ function ajouterLi_ToUl(idUl, element, estThemeJqueryUI) {
 		liTag.setAttribute("class", "ui-state-default");
 		// Initialisation du span contenu dans le li (nécéssaire pour les sortables)
 		var spanTag = document.createElement("span");
-		spanTag .setAttribute("class", "ui-icon ui-icon-arrowthick-2-n-s");
-		liTag.appendChild(spanTag);
+	/*	spanTag .setAttribute("class", "ui-icon ui-icon-arrowthick-2-n-s");
+		liTag.appendChild(spanTag);*/
 	}
 	liTag.appendChild(document.createTextNode(element));
 	document.getElementById(idUl).appendChild(liTag);
@@ -68,9 +68,9 @@ function ajouterLi_ToUl_V2(idUl, element,idElement, estThemeJqueryUI) {
     if(estThemeJqueryUI) {
         liTag.setAttribute("class", "ui-state-default");
         // Initialisation du span contenu dans le li (nécéssaire pour les sortables)
-        var spanTag = document.createElement("span");
-        spanTag .setAttribute("class", "ui-icon ui-icon-arrowthick-2-n-s");
-        liTag.appendChild(spanTag);
+        /*    var spanTag = document.createElement("span");
+       spanTag .setAttribute("class", "ui-icon ui-icon-arrowthick-2-n-s");
+        liTag.appendChild(spanTag);*/
     }
     liTag.appendChild(document.createTextNode(element));
     document.getElementById(idUl).appendChild(liTag);
@@ -89,7 +89,8 @@ function ajouterLi_ToUl_Selectable(idUl, element,idElement, estThemeJqueryUI) {
     liTag.Value = element;
     liTag.setAttribute("id",idElement);
     if(estThemeJqueryUI) {
-        liTag.setAttribute("class", "selectable");
+        liTag.setAttribute("class", "ui-state-default selectable");
+
     }
     liTag.appendChild(document.createTextNode(element));
     document.getElementById(idUl).appendChild(liTag);

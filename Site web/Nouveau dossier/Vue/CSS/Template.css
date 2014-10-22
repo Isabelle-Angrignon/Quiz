@@ -1,14 +1,26 @@
 ﻿body{
-	background-color: #EAEAEA;
+	background-color: #A8C1D7;
 }
 html,body{
 	width:100%;
 	margin:0;
 }
+a{
+    color:#ffffff;
 
+}
+a:hover{
+    color:orange;
+}
 .fixed {
 	position:fixed;
 	z-index:30;
+}
+
+.JquerryButton{
+    width:250px;
+    height:40px;
+    font-size:15px;
 }
 div#enteteSite{
 	height:50px;
@@ -86,7 +98,7 @@ div#enteteSite{
 	height: 50px;
 	margin: 0 auto;
 	position: relative;
-	background-color: #0066CC;
+    background-color:rgb(73,128,209);
 	border: 2px black solid;
 	text-align: center;
 }
@@ -117,7 +129,7 @@ div#enteteSite{
 /*------------------------------------------------ Objets fréquemment utilisés ---------------------------------------*/
 /* Style de base pour les listes de QuizInfo */
 .Liste {
-	background-color:gray;
+	background-color: #eeeeee;
 	padding:20px;
 	margin:0;
 	border-radius:30px;
@@ -172,14 +184,21 @@ div#enteteSite{
 .dDivPrincipale {
 	width:1000px;
 	min-height: 600px;
-	background-color:white;
+	/*background-color:white;*/
 	margin:auto;
 	margin-top:10%;
 	margin-bottom:150px;
 	z-index:40;
 	overflow-x:hidden;
-	border-radius:5px;
+	/*border-radius:5px;*/
+
+    border: 2px black solid;
+    border-radius: 15px;
+    /*background:rgba(79, 168, 255, 1);*/
+    background: #eeeeee /*url("../../jquery-ui-1.11.2.custom/images/ui-bg_highlight-hard_100_eeeeee_1x100.png") 50% top repeat-x*/;
 }
+
+
 
 
 /*------------------------------------------------ Menu de navigation ------------------------------------------------*/

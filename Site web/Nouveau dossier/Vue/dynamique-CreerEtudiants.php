@@ -3,7 +3,7 @@
 <?php
 ?>
 
-<div id="login">
+
     <p class="titre">Nouvel étudiant</p>
     <hr>
     <div class="conteneur" >
@@ -19,9 +19,9 @@
             <input type="text" id="TB_Prenom"  />
         </div>
     </div>
-    <div id="soumettre" class="ListeDivElementStyle BoutonDiv">Ajouter le cours</div>
+    <div id="soumettre" class="ListeDivElementStyle JquerryButton">Ajouter l'étudiant</div>
 
-</div>
+
 
 <script>
     function estValide(){
@@ -33,6 +33,7 @@
         if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont trop long"});}}
         return temp;
     }
+    $('#soumettre').button();
     $('#soumettre').click(function(){
         if(estValide()) {
             creerEtudiantCoursAjax($('#TB_NumeroDA').val(), $('#TB_Nom').val(), $('#TB_Prenom').val())

@@ -127,7 +127,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
             <div id="BTN_Cours" class="ListeDivElementStyle BoutonDiv">Ajouter un cours</div>
 		</div>
 		<div id="ListeModifGroupe" class="Liste ListeGererCours">
-			<div id="QuizDropZone" class="ListeDivElementStyle"></div>
+			<div id="QuizDropZone" class="ListeDivElementStyle"> </div>
 			<ul id="UlModifGroupe">
 
 			</ul>
@@ -147,13 +147,13 @@ Description: Cette interface représente l'interface principale d'un professeur 
  <script>
      $('#BTN_CSV').hide();
      $( "#BTN_Cours" ).click(function() {
-         creeFrameDynamique('DivDynamique','Vue/dynamique-CreerCours.php');
+         creeFrameDynamique('divDynamique','Vue/dynamique-CreerCours.php');
      });
      $( "#BTN_CSV" ).click(function() {
-         creeFrameDynamique('DivDynamique','Vue/dynamique-CSV.php');
+         creeFrameDynamique('divDynamique','Vue/dynamique-CSV.php');
      });
      $( "#BTN_Eleve" ).click(function() {
-         creeFrameDynamique('DivDynamique','Vue/dynamique-CreerEtudiants.php');
+         creeFrameDynamique('divDynamique','Vue/dynamique-CreerEtudiants.php');
      });
  </script>
 

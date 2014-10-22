@@ -35,7 +35,7 @@
 
 
 
-        <div id="login">
+        <div id="general">
             <p class="titre">Mon Compte</p>
             <hr>
             <div class="conteneur" >
@@ -66,7 +66,7 @@
                             <input type="text" id="TBMotDePasse" name="ConfirmationEmail" />
                         </div>
                         <br>
-                        <button type="submit" >Changer son courriel</button>
+                        <button type="submit" class="JquerryButton" >Changer son courriel</button>
                     </form>
                 <p class="titre">Mot de passe</p>
                 <hr>
@@ -83,14 +83,15 @@
                     <input type="password" id="TBMotDePasse" name="ConfNouveauMotPasse" />
                 </div>
                 <br>
-                <button type="submit" >Changer son mot de passe</button>
+                <button type="submit" class="JquerryButton" >Changer son mot de passe</button>
             </form>
         </div>
 
-
+        <script>$(".JquerryButton").button();</script>
 
         <?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur']))) {
             echo ' <script>$(document).ready(function(){ swal({title:"Erreur" ,type:"warning", text:"'. $_SESSION['erreur'] .'"});});</script>';
+            unset($_SESSION['erreur']);
         }
         ?>
 
@@ -102,6 +103,8 @@
 	<?php
 		include("Vue/Template/BasDePage.php");
 	?>
+
+
 
 </body>
 
