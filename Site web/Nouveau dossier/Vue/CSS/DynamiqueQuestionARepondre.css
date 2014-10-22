@@ -119,17 +119,18 @@ div.suiviQuiz {
 
 #UlChoixReponse{
     margin: 0 auto;
-    m
     width:90%;
     font-family:"Comic Sans MS", cursive, sans-serif;
     border-radius:10px;
 }
 
-#UlChoixReponse li {
-    background-color: rgba(79, 168, 255, 0.45);
-    height: auto;
-    overflow-y: auto;
-}
 #UlChoixReponse .ui-selecting { background: #fec71b; }
 #UlChoixReponse .ui-selected { background-color: #FDA068; color: #000000; }
 
+#UlChoixReponse li {
+    background-color: rgba(79, 168, 255, 0.45);
+    height: auto;
+    max-height: 100px;
+    overflow-y: auto;
+    margin-bottom: 2px;
+}

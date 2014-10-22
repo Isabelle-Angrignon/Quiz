@@ -69,7 +69,6 @@ function genererReponsesCMU($idQuestion, $ordreReponse)
     if($ordreReponse == 1)
     {
         shuffle($listeReponses);
-        echo "Mélangé : ";
     }
 
     if (!empty($listeReponses))
