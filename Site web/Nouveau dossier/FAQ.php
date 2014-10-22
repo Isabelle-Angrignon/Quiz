@@ -29,7 +29,8 @@ if(isset($_SESSION['typeUsager']))
 
 <div class="contenu">
 
-FAQ
+<h1>Foire au question (FAQ)</h1>
+    <hr>
 
 </div>
 

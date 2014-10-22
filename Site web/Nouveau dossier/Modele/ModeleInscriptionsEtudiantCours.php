@@ -69,10 +69,10 @@ function InscrireEtudiantCours($idEtudiant , $nom , $prenom, $idCours, $idProf)
 
         $requete->execute();
 
-        $ligneAffectee = $requete->fetch();
+
         $requete->closeCursor();
         unset($bdd);
-        return $ligneAffectee;
+
     }
     else{
         echo "shit";
@@ -91,10 +91,10 @@ function desinscrireEtudiantCours($idEtudiant , $idCours, $idProf)
 
         $requete->execute();
 
-        $ligneAffectee = $requete->fetch();
+
         $requete->closeCursor();
         unset($bdd);
-        return $ligneAffectee;
+
     }
     else{
         echo "shit";
