@@ -60,6 +60,10 @@ fieldset {
 	margin-left:11%;
 }
 
+#UlQuiz li {
+    cursor:not-allowed;
+}
+
 #UlQuestion {
 	height:85%;
 }
@@ -80,6 +84,7 @@ fieldset {
 	height:500px;
 	display:inline-block;
 }
+
 
 .ListeDivElementStyle {
 	width:100%;

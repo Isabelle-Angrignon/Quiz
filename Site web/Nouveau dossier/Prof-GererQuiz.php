@@ -16,6 +16,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
         include("Controleur/cFonctionsCours.php");
         include("Modele/ModeleCours.php");
         include("Modele/ModeleQuestions.php");
+
+    demarrerSession();
+    redirigerSiNonConnecte('Prof');
     ?>
 
     <script src="Javascript/Generique.js"></script>
@@ -29,10 +32,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
         /////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////
         $(function() {
-                $("#UlQuiz").sortable({
+               /* $("#UlQuiz").sortable({
                     connectWith: "#QuizDropZone",
                     revert: 150
-                }).disableSelection();
+                }).disableSelection();*/
                 $("#UlModifQuiz").sortable({
                     connectWith: "#UlQuestion",
                     revert: 150,
@@ -94,13 +97,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
     </div>
     <div id="ListeQuiz"class="Liste ListeGererQuiz">
         <ul id="UlQuiz">
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz mi-session</li>
+            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz méchant</li>
+            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Quiz sur les singes</li>
         </ul>
         <div id="ajouterQuiz"></div>
     </div>
