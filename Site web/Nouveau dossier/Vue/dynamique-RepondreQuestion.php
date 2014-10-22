@@ -38,7 +38,7 @@ $infoQuestion = $_SESSION['infoQuestion'];
                 if (quizTermine() == 1)
 
                 {
-                    $(document).ready(function() { afficherScoreFinal(););
+                   /* $(document).ready(function() {*/ afficherScoreFinal();/*);*/
                     $('#dFondOmbrage').remove();
                 }
                 else {
