@@ -61,9 +61,8 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
                 addClickEventToQuestions();
                 $("#AjouterQuestion").click( function() {
-                    var id = "UlQuestion";
-                    ajouterLi_ToUl_V2(id, "Un nouvel Element Bad Ass",-1, true);
-                    addClickEventToQuestions();
+                    ajouterVariableSession("", "nouvelleQuestion");
+                    creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
                 });
 
 

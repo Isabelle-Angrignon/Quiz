@@ -248,9 +248,13 @@ function ajouterQuestion() {
         async : false,
         data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
                 "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
-        dataType: "text",
+        dataType: "json",
         success: function(resultat){
-            alert(resultat);
+            for(var i = 0; i < resultat.length; ++i) {
+                alert("Nouvelle question : " + resultat[i].idNouvelleQuestion + "// ErreurInfo : " + resultat[i].InfoErreur + " // " + "Erreur : " + resultat[i].Erreur);
+                ajouterLi_ToUl_V2("UlQuestion", jsonQuestion.enonceQuestion,resultat[i].idNouvelleQuestion, true);
+            }
+            addClickEventToQuestions();
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.

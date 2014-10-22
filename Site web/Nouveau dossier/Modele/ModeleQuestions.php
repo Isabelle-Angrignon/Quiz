@@ -107,7 +107,7 @@ function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $
 
 function modifierQuestion($connexion, $idQuestion,$enonceQuestion, $lienImage, $difficulte, $ordreReponsesAleatoire, $typeQuestion, $idProprietaire, $referenceWeb)
 {
-    if(isset($connexion))
+    if(!isset($connexion))
     {
         $bdd = connecterProf();
     }
@@ -127,7 +127,11 @@ function modifierQuestion($connexion, $idQuestion,$enonceQuestion, $lienImage, $
     $requete->bindParam(7, $idProprietaire, PDO::PARAM_STR, 10);
     $requete->bindParam(8, $referenceWeb, PDO::PARAM_STR);
 
-    if(!$requete->execute())
+    try
+    {
+        $requete->execute();
+    }
+    catch(PDOException $e)
     {
         throw new ErrorException("Erreur dans la modification de la question ayant comme énoncé : " . $enonceQuestion);
     }
