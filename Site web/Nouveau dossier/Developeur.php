@@ -29,7 +29,14 @@ if(isset($_SESSION['typeUsager']))
 
 <div class="contenu">
 
-    Developpeur
+    <div>
+        <div>
+
+        </div>
+        <div>
+
+        </div>
+    </div>
 
 </div>
 
