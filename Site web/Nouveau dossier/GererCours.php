@@ -127,7 +127,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
             <div id="BTN_Cours" class="ListeDivElementStyle BoutonDiv">Ajouter un cours</div>
 		</div>
 		<div id="ListeModifGroupe" class="Liste ListeGererCours">
-			<div id="QuizDropZone" class="ListeDivElementStyle"></div>
+			<div id="QuizDropZone" class="ListeDivElementStyle"> </div>
 			<ul id="UlModifGroupe">
 
 			</ul>

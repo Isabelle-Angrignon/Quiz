@@ -28,7 +28,7 @@
             ?>
         <div id="login">
             <p id="titreConnexion">Connexion</p>
-
+            <hr>
             <form id="login_Form" method="post" action="../index.php">
                 <div id="loginLabels">
                     <p >Nom d'usager </p>
@@ -44,11 +44,12 @@
             </form>
 
 
-            <p id="linkLostAcount"><a href="#">Mot de passe oublié ? </a></p>
+
 
         </div>
 
     </div>
+    <script>$("#btnConnexion").button();</script>
 	
 	<?php
 		include("Vue/Template/BasDePage.php");

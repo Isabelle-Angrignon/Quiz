@@ -1,14 +1,26 @@
 ﻿body{
-	background-color: #EAEAEA;
+	background-color: #A8C1D7;
 }
 html,body{
 	width:100%;
 	margin:0;
 }
+a{
+    color:#ffffff;
 
+}
+a:hover{
+    color:orange;
+}
 .fixed {
 	position:fixed;
 	z-index:30;
+}
+
+.JquerryButton{
+    width:250px;
+    height:40px;
+    font-size:15px;
 }
 div#enteteSite{
 	height:50px;
@@ -86,7 +98,7 @@ div#enteteSite{
 	height: 50px;
 	margin: 0 auto;
 	position: relative;
-	background-color: #0066CC;
+    background-color:rgb(73,128,209);
 	border: 2px black solid;
 	text-align: center;
 }

@@ -39,10 +39,11 @@ fieldset {
 
 #QuizDropZone {
 	margin-bottom:20px;
-	background-color:#FD8740;
+	background-color:white;
 	list-style-type:none;
 	vertical-align:middle;
 	border:outset;
+    text-align: center;
 }
 
 #QuizDropZone li {
@@ -57,7 +58,8 @@ fieldset {
 }
 
 .QuizDropZone_hover {
-	background-color: #FDA068;
+	background-color: white;
+    vertical-align: middle;
 }
 
 #ListeGererEtudiants {

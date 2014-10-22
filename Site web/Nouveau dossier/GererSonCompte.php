@@ -87,7 +87,7 @@
             </form>
         </div>
 
-
+        <script>$(".JquerryButton").button();</script>
 
         <?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur']))) {
             echo ' <script>$(document).ready(function(){ swal({title:"Erreur" ,type:"warning", text:"'. $_SESSION['erreur'] .'"});});</script>';
@@ -104,7 +104,7 @@
 		include("Vue/Template/BasDePage.php");
 	?>
 
-<script>$(".JquerryButton").button();</script>
+
 
 </body>
 
