@@ -14,12 +14,9 @@
 /*format du texte de la barre d'info de suivi du quiz*/
 .suiviQuiz{
     text-align: center;
-    padding: 2%;
+    padding: 2px;
     text-decoration:none;
 }
-
-
-
 div.suiviQuiz {
     width:90%;
     background-color: #FDA068;
@@ -69,7 +66,7 @@ div.suiviQuiz {
     padding-right: 10px;
 }
 
-/* mettre une classe pour les éléments de laquestion ici au besoin*/
+/* mettre une classe pour les éléments de la question ici au besoin*/
 
 .zoneQuestion {
     border-radius: 5px;
@@ -126,24 +123,17 @@ div.suiviQuiz {
 
 #UlChoixReponse .ui-selecting { background: #fec71b; }
 #UlChoixReponse .ui-selected {
-
-  /*  background-color: #fda068; color: #000000;*/
-
-    border: 1px solid #2f2f2f;
-    background: #fda068 url("../../jquery-ui-1.11.2.custom/images/ui-bg_highlight-soft_42_518ec4_1x100.png") 50% 50% repeat-x;
+    border: 1px solid #bebdbd;
+    background: #f9f9f9 url("../../jquery-ui-1.11.2.custom/images/ui-bg_highlight-hard_100_f9f9f9_1x100.png") 50% 50% repeat-x;
+    color: #e69700;
     font-weight: bold;
-    color: #ffffff;
-
-
 }
-
-
-
 
 #UlChoixReponse li {
     background-color: rgba(79, 168, 255, 0.45);
     height: auto;
-    max-height: 100px;
+    min-height: 43px;
+    max-height: 70px;
     overflow-y: auto;
     margin-bottom: 2px;
 }
