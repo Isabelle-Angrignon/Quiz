@@ -18,6 +18,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
         include("Modele/ModeleQuestions.php");
 
     demarrerSession();
+    gestionParamChange();
     redirigerSiNonConnecte('Prof');
     ?>
 
