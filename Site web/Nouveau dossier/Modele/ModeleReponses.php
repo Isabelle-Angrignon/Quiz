@@ -68,6 +68,73 @@ function ajouterReponse($connexion, $enonceReponse, $imageReponse,$idQuestion, $
     $requete->bindParam(4, $estValide, PDO::PARAM_INT);
     $requete->bindParam(5, $positionReponse, PDO::PARAM_INT);
 
+    try
+    {
+        $requete->execute();
+    }
+    catch(PDOException $e)
+    {
+        throw new ErrorException("Erreur dans l'ajout de la réponse ayant comme énoncé : " . $enonceReponse);
+    }
+
+    $requete->closeCursor();
+
+    if(!isset($connexion))
+    {
+        unset($bdd);
+    }
+}
+
+function modifierReponse($connexion, $idReponse, $enonceReponse,$imageReponse, $estValide, $positionReponse)
+{
+    if(!isset($connexion))
+    {
+        $bdd = connecterProf();
+    }
+    else
+    {
+        $bdd = $connexion;
+    }
+
+    $requete = $bdd->prepare("CALL modifierReponse(?,?,?,?,?)");
+
+    $requete->bindParam(1, $idReponse, PDO::PARAM_INT);
+    $requete->bindParam(2, $enonceReponse, PDO::PARAM_STR);
+    $requete->bindParam(3, $imageReponse, PDO::PARAM_STR, 100);
+    $requete->bindParam(4, $estValide, PDO::PARAM_INT);
+    $requete->bindParam(5, $positionReponse, PDO::PARAM_INT);
+
+    try
+    {
+        $requete->execute();
+    }
+    catch(PDOException $e)
+    {
+        throw new ErrorException("Erreur dans la modification de la réponse ayant comme énoncé : " . $enonceReponse);
+    }
+
+    $requete->closeCursor();
+
+    if(!isset($connexion))
+    {
+        unset($bdd);
+    }
+}
+
+function supprimerReponse($connexion, $idReponse)
+{
+    if(!isset($connexion))
+    {
+        $bdd = connecterProf();
+    }
+    else
+    {
+        $bdd = $connexion;
+    }
+
+    $requete = $bdd->prepare("CALL supprimerReponse(?)");
+
+    $requete->bindParam(1, $idReponse, PDO::PARAM_INT);
 
 
     try
@@ -76,7 +143,7 @@ function ajouterReponse($connexion, $enonceReponse, $imageReponse,$idQuestion, $
     }
     catch(PDOException $e)
     {
-        throw new ErrorException("Erreur dans l'ajout de la réponse ayant comme énoncé : " . $enonceReponse);
+        throw new ErrorException("Erreur dans la modification de la réponse ayant comme énoncé : " . $enonceReponse);
     }
 
     $requete->closeCursor();

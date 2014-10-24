@@ -6,6 +6,8 @@
  */
 $doitArreter = false;
 $question = $_POST['tableauQuestion'];
+session_start();
+
 if($question['enonceQuestion'] == "")
 {
     echo "Vous devez entrer un énoncé à votre question.   ";

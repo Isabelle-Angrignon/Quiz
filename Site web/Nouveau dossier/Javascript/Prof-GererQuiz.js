@@ -160,6 +160,7 @@ function jsonifierReponsesQuestionCourante() {
 
     // Pour chacune de mes réponses, je vérifie si elles sont cochées ou non et je prend leur énoncé.
     // Par la suite, j'ajoute ma réponse sous forme d'une rangée dans mon string de format JSON
+    var position = 0;
     $("#Ul_Reponses li").each( function() {
         var estCoche = false;
         if($(this).children("input[type=checkbox]").prop("checked") == true) {
@@ -167,7 +168,7 @@ function jsonifierReponsesQuestionCourante() {
         }
         // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
         reponsesEnString += '{"enonce":"'+$(this).children("div").text().replace(/[\"]/g, '\\"')+'", "estBonneReponse":"' + estCoche + '",' +
-                            '"idReponse":"' + $(this).children("input[type=checkbox]").attr("value") + '"},';
+                            '"idReponse":"' + $(this).children("input[type=checkbox]").attr("value") + '", "positionReponse":"'+ ++position +'"},';
     });
 
     // J'enlève la dernière virgule de mon string car, en JSON, le dernier élément ne prend pas de virgule
@@ -292,7 +293,6 @@ function ajouterQuestion() {
 }
 
 function modifierQuestion(idQuestion) {
-    alert(idQuestion);
     var jsonQuestion = getJSONEnonceQuestion(idQuestion);
 
     var jsonReponses = jsonifierReponsesQuestionCourante();
@@ -311,7 +311,13 @@ function modifierQuestion(idQuestion) {
             "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
         dataType: "text",
         success: function(resultat){
-            alert(resultat);
+            if(resultat.trim() != "") {
+                swal("Erreur !", resultat, "error");
+            }
+            else
+            {
+                swal("Félicitation !", "Votre modification de question à réussi", "success");
+            }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.

@@ -38,7 +38,7 @@ fieldset {
 	background-color:#ffffff;
 	list-style-type:none;
 	vertical-align:middle;
-	border:outset;
+	border:dashed black 1px;
 }
 
 #QuizDropZone li {
