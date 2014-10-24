@@ -13,7 +13,7 @@ if($question['enonceQuestion'] == "")
 }
 if(!isset($_POST['tableauReponses']))
 {
-    echo "Ajout de la question ne s'est pas fait car elle ne contient aucune réponse.   ";
+    echo "Vous devez entrer au moins une réponse.   ";
     $doitArreter = true;
 }
 if(!isset($_POST['tableauCours']))
@@ -50,19 +50,6 @@ $tableauReponses = $_POST['tableauReponses'];
 $tableauCours = $_POST['tableauCours'];
 $typeQuestion = $_POST['typeQuestion'];
 $tableauTypeQuizAssocie = $_POST['tableauTypeQuizAssocie'];
-
-/*echo $tableauQuestion['enonceQuestion']."         ";
-foreach($tableauReponses['reponses'] as $reponses)
-{
-    echo $reponses['enonce']."       ";
-}
-foreach($tableauCours['cours'] as $cours)
-{
-    echo $cours['nomCours']."         ";
-}
-
-echo $typeQuestion."        ";
-echo $tableauTypeQuizAssocie."        ";*/
 
 
 ajouterUneQuestion($tableauQuestion, $tableauReponses, $tableauCours, $typeQuestion, $tableauTypeQuizAssocie);

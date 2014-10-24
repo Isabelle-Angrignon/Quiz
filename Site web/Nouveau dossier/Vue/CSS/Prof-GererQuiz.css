@@ -122,8 +122,8 @@ fieldset {
 
 #EnonceQuestion {
     background-color:#E66100;
-    max-width:600px;
-    max-height:100px;
+    width:480px;
+    max-height:200px;
     overflow-y:auto;
     overflow-x:hidden;
     //font-size:12px;

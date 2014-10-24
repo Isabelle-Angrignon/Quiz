@@ -109,7 +109,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
     <div id="ListeGererQuestions" class="Liste ListeGererQuiz">
         <ul id="UlQuestion">
             <?php
-                remplirListeQuestions(4, "420jean");
+                remplirListeQuestions(1, $_SESSION["idUsager"]);
             ?>
         </ul>
         <div id="AjouterQuestion" class="ListeDivElementStyle">Ajouter une question</div>

@@ -101,6 +101,28 @@ function cocherCheckBoxCoursSelonQuestion(idQuestion) {
     });
 }
 
+// cocherCheckBoxSelonValue
+// Par Mathieu Dumoulin
+// Date: 24/10/2014
+// Intrants: idConteneur = le id du ul contenant ce CheckBox
+// Description:
+function cocherCheckBoxCoursSelonCoursCourant() {
+    $("#listeAjoutCours li").children("input[type=checkbox]").each( function() {
+       if($(this).attr("value") == $("#DDL_Cours option:selected").attr("value")) {
+           $(this).prop('checked', true);
+       }
+    });
+}
+
+function cocherRadioButtonAvecValeur(valeur){
+    $("#TypeQuestion li").children("input[type=radio]").each( function() {
+        if($(this).attr("value") == valeur) {
+            $(this).prop('checked', true);
+        }
+    });
+}
+
+
 function cocherTypeQuestionSelonQuestion(typeQuestion) {
     $("#TypeQuestion input[type=radio]").each(function() {
        if($(this).attr("value") == typeQuestion) {
@@ -220,6 +242,7 @@ function getJSONEnonceQuestion(idQuestion) {
     enonce = enonce.replace(/[\s]*/, "");
     // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
     enonce = enonce.replace(/[\"]/g, '\\"');
+    enonce = enonce.trim();
     var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"420jean"';
     if(idQuestion != null) {
         jsonQuestion +=', "idQuestion":"'+ idQuestion+'"';
@@ -250,7 +273,7 @@ function ajouterQuestion() {
                 "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
         dataType: "text",
         success: function(resultat){
-            if(resultat != "") {
+            if(resultat.trim() != "") {
                 swal("Erreur !", resultat, "error");
             }
             else

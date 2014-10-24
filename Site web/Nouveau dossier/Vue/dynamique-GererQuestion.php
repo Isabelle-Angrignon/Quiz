@@ -109,6 +109,10 @@
                 {
                     echo "<script>cocherCheckBoxCoursSelonQuestion(". $_SESSION['idQuestion'].");</script>";
                 }
+                else if($_SESSION["etat"] == "nouvelleQuestion")
+                {
+                    echo "<script>cocherCheckBoxCoursSelonCoursCourant();</script>";
+                }
             ?>
         </ul>
     </div>
@@ -120,6 +124,10 @@
                 if($_SESSION["etat"] == "modifierQuestion")
                 {
                     echo "<script>cocherTypeQuestionSelonQuestion('".$typeQuestion."');</script>";
+                }
+                else if($_SESSION["etat"] == "nouvelleQuestion")
+                {
+                    echo "<script>cocherRadioButtonAvecValeur('CHOIX_MULTI_UNIQUE');</script>";
                 }
             ?>
         </ul>
