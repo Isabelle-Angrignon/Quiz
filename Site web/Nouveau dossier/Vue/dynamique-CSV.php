@@ -14,8 +14,7 @@
     <div class="conteneur" >
         <form id="Form_CSV" action="../Controleur/cFonctionsGestionFichier.php" method="post"
               enctype="multipart/form-data">
-            <input type="hidden" id="coursPost" name="cours"></input>
-            <label for="file">nom du fichier:</label>
+            <input type="hidden" id="coursPost" name="cours">
             <input type="file" name="file" id="file" accept=".csv"><br>
             <div id="soumettre" class="ListeDivElementStyle JquerryButton">Ajouter le groupe</div>
         </form>
@@ -26,8 +25,15 @@
 
 <script>
     $('#soumettre').button();
+
     $('#soumettre').click(function(){
-        $('#Form_CSV').submit();
+        if ($('#file').val() != "" ){
+             $('#Form_CSV').submit();
+        }
+        else{
+            swal({title:"Erreur" ,type:"warning", text:"Veuillez choisir un fichier svp"});
+        }
+
     });
 
 </script>
