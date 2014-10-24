@@ -6,8 +6,8 @@
     <a href="GererSonCompte.php" class="NavBar">Mon Compte</a>
     <?php
         // Ajout de l'onglet de menu Admin
-        if(isset($_SESSION['TypeUsager']) && $_SESSION['TypeUsager'] == 'Admin') {
-            echo "<a href='Admin' class='NavBar'>Administrateur</a>";
+        if(isset($_SESSION['typeUsager']) && $_SESSION['typeUsager'] == 'Admin') {
+            echo "<a href='Admin.php' class='NavBar'>Administrateur</a>";
         }
     ?>
 </nav>

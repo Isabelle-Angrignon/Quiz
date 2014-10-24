@@ -27,9 +27,19 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
     {
         if ($NouvMotPasse == $ConfNouvMotPasse)
         {
-            ModifierMotPasse($_SESSION['idUsager'],$NouvMotPasse);
-            unset($_SESSION['erreur']);
-            header('Location: ../GererSonCompte.php');
+            if($AncientMotPasse == $NouvMotPasse){
+
+                $_SESSION['erreur'] = "Le nouveaut mot de passe doit être différent de l'ancien";
+                header('Location: ../GererSonCompte.php');
+            }
+            else
+            {
+                ModifierMotPasse($_SESSION['idUsager'], $NouvMotPasse);
+                unset($_SESSION['erreur']);
+                setParamChange($_SESSION['idUsager'], true);
+                $_SESSION['paramChange'] = 1;
+                header('Location: ../GererSonCompte.php');
+            }
         }
         else
         {

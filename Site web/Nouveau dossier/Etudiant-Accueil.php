@@ -16,6 +16,7 @@
     include("Modele/ModeleInscriptionsEtudiantCours.php");
 
     demarrerSession();
+    gestionParamChange();
     redirigerSiNonConnecte('Etudiant');
     ?>
 

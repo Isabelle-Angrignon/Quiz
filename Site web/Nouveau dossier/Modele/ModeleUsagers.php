@@ -139,5 +139,29 @@ function RecupererMotPasse($Pid){
     return $infoUsager;
 }
 
+function setParamChange($idUsager,$estChanger)
+{
+    $paramChange = -1;
+    if ($estChanger == true){ $paramChange = 1;} else{ $paramChange = 0;}
+    $bdd = connecterAdmin();
+    $requete = $bdd->prepare("CALL ModifierParamChange(? , ?)");
+    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
+    $requete->bindparam(2, $paramChange, PDO::PARAM_INT);
+
+    $requete->execute();
+}
+
+function recupererParamChange($idUsager)
+{
+    $bdd = connecterAdmin();
+    $requete = $bdd->prepare("CALL recupererParamChange(?)");
+    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
+
+    $requete->execute();
+
+    $infoUsager = $requete->fetch();
+
+    return $infoUsager;
+}
 
 ?>

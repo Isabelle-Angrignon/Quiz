@@ -4,7 +4,14 @@
 //Date: 23 septembre 2014
 //But: Contient diverses fonctions génériques
 
-
+function gestionParamChange()
+{
+    if($_SESSION['paramChange'] == '0')
+    {
+        header('Location: ../GererSonCompte.php');
+        $_SESSION['erreur'] = "Vous devez changer votre mot de passe avant d'avoir accès au reste du site";
+    }
+}
 
 
 
@@ -90,6 +97,7 @@ function definirTypeUsager($usager, $estAdmin )
     {
         $_SESSION['typeUsager'] = 'Etudiant';
     }
+    $_SESSION['paramChange'] = recupererParamChange($usager)[0]['paramChange'];
 }
 
 /*
