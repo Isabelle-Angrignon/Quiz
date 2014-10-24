@@ -1,0 +1,34 @@
+.padding{
+    margin-top: 6%;
+}
+
+.padding:hover{
+    border: 1px solid #bebdbd;
+    background: #f9f9f9 url("../../jquery-ui-1.11.2.custom/images/ui-bg_highlight-hard_100_f9f9f9_1x100.png") 50% 50% repeat-x;
+    color: #e69700;
+    font-weight: bold;
+}
+
+.nonImplementer{
+
+}
+#deploiement{
+    max-width:55%;
+    margin-left: 40%;
+    max-height: 500px;
+    text-align: center;
+}
+
+#optionCours{
+    width: 30%;
+    margin-top: 2%;
+    margin-left: 2%;
+    float:left;
+}
+
+#leConteneur{
+    display:inline-block;
+    width: 100%;
+    float:right;
+    margin-top: 2%;
+}
