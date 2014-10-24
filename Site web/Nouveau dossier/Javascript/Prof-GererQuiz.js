@@ -248,13 +248,19 @@ function ajouterQuestion() {
         async : false,
         data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
                 "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
-        dataType: "json",
+        dataType: "text",
         success: function(resultat){
-            for(var i = 0; i < resultat.length; ++i) {
-                alert("Nouvelle question : " + resultat[i].idNouvelleQuestion + "// ErreurInfo : " + resultat[i].InfoErreur + " // " + "Erreur : " + resultat[i].Erreur);
-                ajouterLi_ToUl_V2("UlQuestion", jsonQuestion.enonceQuestion,resultat[i].idNouvelleQuestion, true);
+            if(resultat != "") {
+                swal("Erreur !", resultat, "error");
             }
-            addClickEventToQuestions();
+            else
+            {
+                $(".dFondOmbrage").detach();
+                var id = $("#DDL_Cours option:selected").attr("value");
+                updateUlQuestion( id );
+                swal("Félicitation !", "Votre ajout de question à réussi", "success");
+            }
+
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.

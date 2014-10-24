@@ -122,7 +122,6 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
             associerTypeQuizQuestion($bdd, 200, $typeQuiz['id']);
         }
 
-        echo json_encode(array("idNouvelleQuestion" => $idQuestion[0], "IntroErreur" => "", "Erreur" => ""));
         $bdd->commit();
     }
     //catch(PDOException $e){}
@@ -134,7 +133,7 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
             $bdd->rollback();
 
             //on affiche un message d'erreur ainsi que les erreurs
-            echo json_encode(array("idNouvelleQuestion" => "", "IntroErreur" => "Tout ne s'est pas bien passé, voir les erreurs ci-dessous", "Erreur" => $e->getMessage()));
+            echo $e->getMessage();
         }
         catch (PDOException $e){echo "Erreur dans le rollback";}
     }
