@@ -27,12 +27,15 @@ function getReponsesFromQuestion($idQuestion)
 {
     if($idQuestion != null)
     {
+        $tabIdReponses = array();
         $reponses = recupererReponsesAQuestion($idQuestion);
 
         foreach($reponses as $uneReponse)
         {
             creerCheckBoxReponse("reponses", $uneReponse["idReponse"], $uneReponse["enonceReponse"], $uneReponse["reponseEstValide"]);
+            array_push($tabIdReponses,$uneReponse["idReponse"]);
         }
+        $_SESSION["tabIdReponses"] = $tabIdReponses;
     }
 }
 
@@ -119,7 +122,7 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
         // Associer la question à un/des type(s) de quiz
         foreach($tableauTypeQuizAssocie['typeQuizAss'] as $typeQuiz)
         {
-            associerTypeQuizQuestion($bdd, 200, $typeQuiz['id']);
+            associerTypeQuizQuestion($bdd, $idQuestion[0], $typeQuiz['id']);
         }
 
         $bdd->commit();
@@ -156,10 +159,27 @@ function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours
             /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
             $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null);
 
-        /*// Ajouter les réponses de cette question dans la base de données
+        // Ajouter les réponses de cette question dans la base de données
+        if(isset($_SESSION["tabIdReponses"]))
+        {
+            $tabIdAnciennesReponses = $_SESSION["tabIdReponses"];
+        }
+        else
+        {
+            $tabIdAnciennesReponses = array();
+        }
         $positionReponse = 0;
         foreach($tableauReponses['reponses'] as $reponse)
         {
+            $action = "";
+            foreach($tabIdAnciennesReponses as $ancienneReponse)
+            {
+                if($ancienneReponse == $reponse["idReponse"])
+                {
+                    $action = "Modifier";
+                    // Enlever l'élément du array  ////////////////////////////////////////////////////////////////////
+                }
+            }
             $estBon = 0;
             if($reponse['estBonneReponse'] == 'true')
             {
@@ -168,7 +188,7 @@ function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours
             ajouterReponse($bdd, $reponse['enonce'], null, $idQuestion, $estBon, ++$positionReponse);
         }
 
-        // Associer la question à un/plusieurs cours
+       /* // Associer la question à un/plusieurs cours
         foreach($tableauCours['cours'] as $Cours)
         {
             associerQuestionACours($bdd, $idQuestion[0], $Cours['idCours']);
