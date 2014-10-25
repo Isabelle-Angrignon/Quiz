@@ -47,7 +47,7 @@ include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
     });
     //Vue/Template/dynamique-ReinitialiserMotDePasse.php
     $('#reintinialiser').click(function(){
-        CreerDeploiement('Vue/Template/dynamique-ReinitialiserMotDePasse.php');
+        CreerDeploiement('Vue/dynamique-ReinitialiserMotDePasse.php');
     })
 
 </script>
