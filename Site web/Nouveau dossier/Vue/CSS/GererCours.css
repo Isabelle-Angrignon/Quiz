@@ -42,7 +42,7 @@ fieldset {
 	background-color:white;
 	list-style-type:none;
 	vertical-align:middle;
-	border:outset;
+    border:dashed black 1px;
     text-align: center;
 }
 
