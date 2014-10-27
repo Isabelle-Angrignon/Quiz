@@ -1,0 +1,54 @@
+.droite {
+    text-align: center;
+    display: inline-block;
+
+}
+
+.gauche {
+    text-align: center;
+
+}
+
+.conteneur{
+
+}
+
+img{
+    width: 200px;
+    height: 200px;
+    margin-top:2%;
+
+}
+
+#ImgSimon{
+
+}
+#ImgIsa{
+    margin-left: 5%;
+}
+#ImgMathieu{
+    margin-left: 5%;
+}
+
+#page{
+    text-align: center;
+}
+
+#DescSimon{
+    width: 200px;
+}
+#DescIsa{
+    width: 200px;
+}
+#DescMathieu{
+    width: 200px;
+}
+
+h1{
+    margin-left: 10%;
+    width:80%;
+}
+
+hr{
+    width: 80;
+}

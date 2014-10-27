@@ -30,7 +30,10 @@
         if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont vide"});}
         if(temp ==true){
         temp = ($('#TB_NumeroDA').val().length <= 10 && $('#TB_Nom').val().length <= 50 && $('#TB_Prenom').val().length <= 30);
-        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont trop long"});}}
+        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont trop long"});}
+            if(temp ==true){temp = $('#TB_NumeroDA').val()[0] != "4"}
+            if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Impossible de créer un étudiant dont le numero de DA commence par 4"});}
+        }
         return temp;
     }
     $('#soumettre').button();
