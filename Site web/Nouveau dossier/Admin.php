@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="Vue/CSS/Admin.css" type="text/css" media="screen" >
     <link rel="stylesheet" href="Vue/CSS/GererSonCompte.css" type="text/css" media="screen" >
     <script src="Javascript/Admin.js"></script>
+    <script src="Javascript/GererCours.js"></script>
 </head>
 
 <body>
@@ -29,7 +30,7 @@ include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
         <label>Options</label>
         <ul id="optionAdmin">
             <li id="reintinialiser" class="ui-state-default padding">Réinitialiser un mot de passe</li>
-            <li id="ajouterProf" class="ui-state-default padding nonImplementer">Ajouter un compte professeur</li>
+            <li id="ajouterProf" class="ui-state-default padding ">Ajouter un compte professeur</li>
             <li id="modifierCours" class="ui-state-default padding nonImplementer">Supprimer un professeur</li>
             <li id="nommerAdmin" class="ui-state-default padding nonImplementer">Nommer un nouvel administateur</li>
             <li id="modifierCours" class="ui-state-default padding nonImplementer">Modifier un cours</li>
@@ -48,7 +49,10 @@ include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
     //Vue/Template/dynamique-ReinitialiserMotDePasse.php
     $('#reintinialiser').click(function(){
         CreerDeploiement('Vue/dynamique-ReinitialiserMotDePasse.php');
-    })
+    });
+    $('#ajouterProf').click(function(){
+        CreerDeploiement('Vue/dynamique-AjouterProf.php');
+    });
 
 </script>
 
