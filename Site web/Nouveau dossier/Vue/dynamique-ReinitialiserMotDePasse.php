@@ -2,18 +2,19 @@
 ?>
 
 
-    <p class="titre">Réinitialisation de mot de passe</p>
+
+    <p class="titre">Réinitialisation d'un mot de passe</p>
     <hr>
     <div class="conteneur" >
         <div class="gauche">
-            Numero de DA : <br>
+            Numéro de DA : <br>
         </div>
 
         <div class="droite">
             <input type="text" id="TB_DA" /><br>
         </div>
     </div>
-    <div id="soumettre" class="ListeDivElementStyle JquerryButton">Reinitialiser le mot de passe</div>
+    <div id="soumettre" class="ListeDivElementStyle JquerryButton">Réinitialiser</div>
 
 
 
@@ -26,7 +27,7 @@
 
         }
         else{
-            swal({title:"Erreur" ,type:"warning", text:"Le numero de DA n'est pas conforme"});
+            swal({title:"Erreur" ,type:"warning", text:"Le numéro de DA n'est pas conforme"});
         }
     });
 

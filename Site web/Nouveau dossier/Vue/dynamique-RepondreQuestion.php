@@ -109,14 +109,8 @@ $infoQuestion = $_SESSION['infoQuestion'];
     </div>
 
     <div id="bouttonSuivant" class="zoneQuestion">
-        <button type="button" id="btnSuivant">
-            Valider/Suivant
-        </button>
-
-
+        <button type="button" id="btnSuivant">Valider & Suivant</button>
     </div>
-
-
 </div>
 
 

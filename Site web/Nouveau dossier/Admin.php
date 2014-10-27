@@ -45,7 +45,7 @@ include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
 
 <script>
     $('.nonImplementer').click(function(){
-        swal("Désolé","Cette fonction n'est pas encore implémentées","error");
+        swal("Désolé","Cette fonction n'est pas encore implémentée","error");
     });
     //Vue/Template/dynamique-ReinitialiserMotDePasse.php
     $('#reintinialiser').click(function(){

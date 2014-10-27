@@ -6,7 +6,7 @@ On lui passe minimum deux params:
   value = idQuestion
   text = enonceQuestion 
   
-optionnel: prendre des tags autan qu'il y en a... !!!! :/
+optionnel: prendre des tags autant qu'il y en a... !!!! :/
 
 -->
 <li id=<?php echo $_GET['idQuestion'] ?> class="ui-state-default" >

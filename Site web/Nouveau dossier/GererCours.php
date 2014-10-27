@@ -25,13 +25,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
   	<script src="Javascript/Generique.js"></script>
   	<script src="Javascript/GererCours.js"></script>
   	<script>
-  	/////////////////////////////////////////////////////////////////////////////////////////
-  	////// Aide mémoire de Mathieu pour prochaine rencontre 
-  	/////////////////////////////////////////////////////////////////////////////////////////
-  	////// - Remplir la liste de cours avec la BD
-  	////// - Continuer le Pop up dynamique
-  	/////////////////////////////////////////////////////////////////////////////////////////
-  	/////////////////////////////////////////////////////////////////////////////////////////
+
 	  $(function() {
 	    $("#UlCours").sortable({
 	    	connectWith: "#QuizDropZone",
@@ -84,23 +78,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
 	    	creeFrameDynamique();
 	    });*/
-	     $("#AjouterQuestion").click( function() {
-	    	var id = "UlEtudiants";
-	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
-		});
-
-          $("nav").ready(function() {
-              var nbElement = $("nav a").length;
-              var format = 100/nbElement;
-              $("nav a").each( function() {
-                  $(this).width(format + "%");
-              });
-          });
-	  });
-	  /*accept: function(sender) {
-	    		return $(this).children("li").length == 0;
-	    	}*/
-
 
 	</script>
 </head>
@@ -116,7 +93,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 		
 	<div class="contenu">
 		<div id="LBL_ListesGererCours">
-			<label id="GererCours" for="ListeCours">Cours informatique</label>
+			<label id="GererCours" for="ListeCours">Cours d'informatique</label>
 			<label id="ModifierGroupe" for="ListeModifGroupe">Modifier votre groupe ici</label>
 			<label id="GererEtudiants" for="ListeModifGroupe">Étudiants</label>
 		</div>

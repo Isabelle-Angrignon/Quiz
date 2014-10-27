@@ -8,9 +8,9 @@
     <hr>
     <div class="conteneur" >
         <div class="gauche">
-            Numero DA : <br>
+            Numéro DA : <br>
             Nom : <br>
-            Prenom
+            Prénom :
         </div>
 
         <div class="droite">
@@ -27,12 +27,12 @@
     function estValide(){
         temp = true;
         temp = ($('#TB_NumeroDA').val() != "" && $('#TB_Nom').val() != "" && $('#TB_Prenom').val() != "");
-        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont vide"});}
+        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certains champs sont vides"});}
         if(temp ==true){
         temp = ($('#TB_NumeroDA').val().length <= 10 && $('#TB_Nom').val().length <= 50 && $('#TB_Prenom').val().length <= 30);
-        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont trop long"});}
+        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certains champs sont trop longs"});}
             if(temp ==true){temp = $('#TB_NumeroDA').val()[0] != "4"}
-            if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Impossible de créer un étudiant dont le numero de DA commence par 4"});}
+            if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Impossible de créer un étudiant dont le numéro de DA commence par 4"});}
         }
         return temp;
     }
