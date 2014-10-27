@@ -5,10 +5,6 @@
 	<?php
         include("Vue/Template/InclusionJQuery.php");
         include("Vue/Template/InclusionTemplate.php");
-
-
-
-
 	?>
     <link rel="stylesheet" href="Vue/CSS/GererSonCompte.css" type="text/css" media="screen" >
 </head>
@@ -31,18 +27,14 @@
 	
 	<div class="contenu">
 
-
-
-
-
         <div id="general">
-            <p class="titre">Mon Compte</p>
+            <p class="titre">Mon compte</p>
             <hr>
             <div class="conteneur" >
                 <div class="gauche">
-                    Nom <br>
-                    Prenom <br>
-                    Numero de DA <br>
+                    Nom :<br>
+                    Prénom :<br>
+                    Numéro de DA : <br>
                 </div>
 
                 <div class="droite">
@@ -51,13 +43,13 @@
                     <?php echo $_SESSION['idUsager']; ?>  <br>
                 </div>
             </div>
-                <p class="titre">Mon Courriel</p>
+                <p class="titre">Mon courriel</p>
                 <hr>
                     <form class="conteneur" method="post" action="../Controleur/ChangerEmail.php">
                         <div class="gauche">
                             <label>Courriel actuel </label> <br>
-                            <label>Nouveau Couriel </label> <br>
-                            <label>Confirmer le nouveau Couriel</label>
+                            <label>Nouveau courriel </label> <br>
+                            <label>Confirmer le nouveau Courriel</label>
                         </div>
 
                         <div class="droite">
@@ -95,16 +87,11 @@
         }
         ?>
 
-
-
-
     </div>
 	
 	<?php
 		include("Vue/Template/BasDePage.php");
 	?>
-
-
 
 </body>
 
