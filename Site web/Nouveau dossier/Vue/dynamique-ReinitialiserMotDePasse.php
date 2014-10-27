@@ -23,6 +23,7 @@
         if($('#TB_DA').val().length != 0 && $('#TB_DA').val().length <= 10) {
 
             reinitialiserMotDePasse($('#TB_DA').val());
+
         }
         else{
             swal({title:"Erreur" ,type:"warning", text:"Le numero de DA n'est pas conforme"});

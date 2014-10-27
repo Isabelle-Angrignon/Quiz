@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="Vue/CSS/GererSonCompte.css" type="text/css" media="screen" >
     <script src="Javascript/Admin.js"></script>
     <script src="Javascript/GererCours.js"></script>
+
 </head>
 
 <body>
