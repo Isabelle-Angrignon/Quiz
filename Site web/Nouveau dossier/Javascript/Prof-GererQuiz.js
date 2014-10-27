@@ -30,14 +30,14 @@ function traiterJSONQuestions(resultat) {
     }
 }
 
-function updateUlQuestion(idCours) {
+function updateUlQuestion(idCours, idProprietaire) {
     if(idCours != "") {
         $("#UlQuestion li").remove();
 
         $.ajax({
             type: 'POST',
             url: 'Controleur/ListerQuestions.php',
-            data: {"Triage":"default", "idCours":idCours , "idProprietaire": "420jean"},
+            data: {"Triage":"default", "idCours":idCours , "idProprietaire":idProprietaire},
             dataType: "json",
             success: function(resultat) {
                 traiterJSONQuestions(resultat);
@@ -236,7 +236,7 @@ function jsonifierTypeQuizAssQuestionCourante() {
     return jsonTypeQuizAss;
 }
 
-function getJSONEnonceQuestion(idQuestion) {
+function getJSONEnonceQuestion(idQuestion,idCreateur ) {
     var enonce = document.getElementById("EnonceQuestion").textContent;
 
     // Par défaut, les furteurs tels que chrome et firefox ajoutent 13 caractères au début du texte d'un contentEditable élément.
@@ -244,7 +244,7 @@ function getJSONEnonceQuestion(idQuestion) {
     // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
     enonce = enonce.replace(/[\"]/g, '\\"');
     enonce = enonce.trim();
-    var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"420jean"';
+    var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"' + idCreateur + '"';
     if(idQuestion != null) {
         jsonQuestion +=', "idQuestion":"'+ idQuestion+'"';
     }
@@ -254,9 +254,9 @@ function getJSONEnonceQuestion(idQuestion) {
     return jsonQuestion;
 }
 
-function ajouterQuestion() {
+function ajouterQuestion(idCreateur) {
 
-    var jsonQuestion = getJSONEnonceQuestion();
+    var jsonQuestion = getJSONEnonceQuestion(idCreateur);
 
     var jsonReponses = jsonifierReponsesQuestionCourante();
 
@@ -280,8 +280,8 @@ function ajouterQuestion() {
             else
             {
                 $(".dFondOmbrage").detach();
-                var id = $("#DDL_Cours option:selected").attr("value");
-                updateUlQuestion( id );
+                var cours = $("#DDL_Cours option:selected").attr("value");
+                updateUlQuestion( cours, idCreateur );
                 swal("Félicitation !", "Votre ajout de question à réussi", "success");
             }
 

@@ -35,10 +35,6 @@
 
 
 
-
-
-
-
     // En résumé, lorsque je clique sur un des div d'enoncé de réponse, s'il n'est pas déjà en train d'être déplacé,
     // disable son attribut qui le rend selectable jusqu'à temps qu'il perd le focus
     $("#Ul_Reponses").sortable().click(function(){
@@ -71,13 +67,6 @@
        }
     });
 
- /*   $("#EnonceQuestion").ready(function () {
-
-        alert($(this).html().length.toString());
-       /*if($(this).text() == ) {
-           alert($("#EnonceQuestion").text());
-       }
-    });*/
 
     $("#BTN_ConfirmerQuestion").button();
 
@@ -155,7 +144,7 @@
         }
         elseif( $_SESSION["etat"] == "nouvelleQuestion")
         {
-            echo "Ajouter onclick='ajouterQuestion()'";
+            echo "Ajouter onclick='ajouterQuestion(\"".$_SESSION['idUsager']."\")'";
         }
     ?>
         >

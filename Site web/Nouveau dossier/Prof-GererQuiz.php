@@ -26,12 +26,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
     <script src="Javascript/GererCours.js"></script>
     <script src="Javascript/Prof-GererQuiz.js"></script>
     <script>
-        /////////////////////////////////////////////////////////////////////////////////////////
-        ////// Aide mémoire de Mathieu pour prochaine rencontre
-        /////////////////////////////////////////////////////////////////////////////////////////
-        ////// - Continuer le Pop up dynamique
-        /////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////
         $(function() {
                /* $("#UlQuiz").sortable({
                     connectWith: "#QuizDropZone",
@@ -68,17 +62,13 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
 
         });
-        /*accept: function(sender) {
-         return $(this).children("li") == 0;
-         }*/
+
     </script>
 </head>
 
 <body>
 
 <?php
-    /*demarrerSession();
-    redirigerSiNonConnecte();*/
     include("Vue/Template/EnteteSite.php");
     include("Vue/Template/MenuProf.php");
 ?>
@@ -120,26 +110,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
     include("Vue/Template/BasDePage.php");
 ?>
 
-<script>
-
-
-
-
-    /*$("#UlQuestion").ready(function() {
-        $.ajax({
-            type: 'POST',
-            url: 'Controleur/ListerQuestions.php',
-            data: {"Triage":"default", "idCours":4 , "idProprietaire": "420jean"},
-            dataType: "json",
-            success: function(resultat) {
-                traiterJSONQuestions(resultat);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
-            }
-        });
-    });*/
-</script>
 </body>
 
 </html>

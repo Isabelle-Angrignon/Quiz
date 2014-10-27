@@ -9,7 +9,7 @@ if(isset($_POST['action']))
 {
     if($_POST['action'] == 'nouveauCheckBox')
     {
-        nouveauCheckBox();
+        nouveauInputReponses("radio");
     }
     else if($_POST['action'] == 'listeCoursSelonQuestion')
     {
@@ -29,6 +29,6 @@ if(isset($_POST['session']))
     }
 }
 
-function nouveauCheckBox() {
-    echo "<li class='ui-sortable-handle ui-sortable'><input type='checkbox' name='reponses' value='0'><div class='reponsesQuestion' contenteditable='true'></div></li>";
+function nouveauInputReponses($typeInput) {
+    echo "<li class='ui-sortable-handle ui-sortable'><input type='".$typeInput."' name='reponses' value='0'><div class='reponsesQuestion' contenteditable='true'></div></li>";
 }
