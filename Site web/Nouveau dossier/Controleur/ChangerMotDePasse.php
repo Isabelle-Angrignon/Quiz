@@ -34,11 +34,12 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
             }
             else
             {
-                ModifierMotPasse($_SESSION['idUsager'], $NouvMotPasse);
+                $retour = ModifierMotPasse($_SESSION['idUsager'], $NouvMotPasse);
                 unset($_SESSION['erreur']);
                 setParamChange($_SESSION['idUsager'], true);
                 $_SESSION['paramChange'] = 1;
                 header('Location: ../GererSonCompte.php');
+                echo $retour;
             }
         }
         else

@@ -10,3 +10,9 @@ p.centrer{
     width: 70%;
     margin-left: 15%;
 }
+
+.screenshot{
+    width:80%;
+    margin-top: 20px;
+    border:solid black 1px;
+}

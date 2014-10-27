@@ -38,7 +38,7 @@
     $('#soumettre').click(function(){
         if(estValide()) {
             creerEtudiantCoursAjax($('#TB_NumeroDA').val(), $('#TB_Nom').val(), $('#TB_Prenom').val());
-            swal({title:"Réussite" ,type:"success", text:"Le professeur a été ajouté "});
+
         }
 
 

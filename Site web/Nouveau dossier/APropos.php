@@ -43,6 +43,52 @@ if(isset($_SESSION['typeUsager']))
             potentiel de réussite et réduire les abandons du programme.  Les enseignants créent
             des questions et les agencent en quiz à soumettre aux étudiants.
         </p>
+
+        <hr>
+
+        <h3>La page servant a réponde a des quiz</h3>
+        <p class="centrer">Sur cette page l'étudiant pourra sélectionner un quiz a droit pour y répondre
+        ou appuyer sur le bouton générer qui lui fera passer un test avec des questions aléatoires selon le cours
+        sélectionner.</p>
+        <img class="screenshot" src="Vue/Images/RepondreQuestion.png" alt="logo" >
+
+
+        <h3>La page servant a réponde a une question pour des étudiants</h3>
+        <p class="centrer">Sur cette pas l'étudiant répond à la question et appuie sur valider ce qui lui dit si
+            il a obtenue une bonne réponse et le fait passer a la question suivante..</p>
+        <img class="screenshot" src="Vue/Images/RepondreQuestionDynamique.png" alt="logo" >
+
+
+        <h3>La page servant a créer des quiz</h3>
+        <p class="centrer">Dans la partie de gauche sont lister tout les quizs du professeur. Dans celle de droite sont
+        lister les questions que le professeur a pour ce cours. La zone centrale permet de joindre les deux. Il suffit de faire
+        glisser un quiz sur la zone blanche et les questions du quiz apparaitrons dans la zone central ce qui permettra de les modifier.</p>
+        <img class="screenshot" src="Vue/Images/Quiz-Question.png" alt="logo" >
+
+
+        <h3>La page servant a créer des question</h3>
+        <p class="centrer"> Dans la zone orange on inscrit l'énoncé de la question. La zone bleu permet d'y inscrire les réponses
+        et de cocher la bonne réponses. La zone a droite regroupe les différents paramètres d'une question</p>
+        <img class="screenshot" src="Vue/Images/CreerQuestion.png" alt="logo" >
+
+
+        <h3>La page servant a gérer ces groupes</h3>
+        <p class="centrer"> Dans la partie a gauche sont lister les différents cours de la technique. Dans la partie a droite sont
+        lister tout les étudiants de la technique. Lorsque un cours est glisser au centre de l'écran cela permet de modifier les
+        élèves inscrit a ce cours et donc l'accès au quiz.</p>
+        <img class="screenshot" src="Vue/Images/GererCours.png" alt="logo" >
+
+
+        <h3>La page administrateur</h3>
+        <p class="centrer">Cette page contient les différentes options dont seul les administrateurs ont accès comme supprimer
+        un compte ou encore réinitialiser un mot de passe</p>
+        <img class="screenshot" src="Vue/Images/Admin.png" alt="logo" >
+
+
+        <h3>La page servant a gérer son compte</h3>
+        <p class="centrer">Cette page permet a un usager du site de modifier son mot de passe ou encore son adresse courriel.</p>
+        <img class="screenshot" src="Vue/Images/GererCompte.png" alt="logo" >
+
     </div>
 </div>
 

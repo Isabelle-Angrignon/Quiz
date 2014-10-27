@@ -12,9 +12,10 @@ But: Contient diverses fonctions d'accès à la table usager
 //Permet d'ajouter un usager de base qu'il soit prof ou non. Le numero de commence par 420 dans le cas d'un prof
 //
 
-function ajouterUsager($id, $prenom, $nom)
+function ajouterUsager($id, $nom, $prenom)
 {
 	// a retirer et mettre connecterProf
+    $reussi = 0;
     $bdd = connecterProf();
 	if (isset($id) AND isset($prenom) AND isset($nom))
 	{
@@ -24,9 +25,10 @@ function ajouterUsager($id, $prenom, $nom)
 	    $requete->bindparam(3, $nom, PDO::PARAM_STR,50);
 	       
 	    $requete->execute();
-	    
 
-	    $requete->closeCursor();
+        $reussi = $requete->rowCount();
+
+	    $retour = $requete->closeCursor();
         unset($bdd);
 
 	}
@@ -34,6 +36,7 @@ function ajouterUsager($id, $prenom, $nom)
     {
         unset($bdd);
     }
+    return $reussi;
 }
 
 /*validerUsager
@@ -122,8 +125,9 @@ function ModifierMotPasse($idUsager, $NouveauMotPasse){
 
     $requete->execute();
 
+    $reussi = $requete->rowCount();
 
-
+    return $reussi;
 
 }
 
@@ -158,6 +162,8 @@ function recupererParamChange($idUsager)
     $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
 
     $requete->execute();
+
+   //// 1 si modifié et 0 sinon...
 
     $infoUsager = $requete->fetch();
 

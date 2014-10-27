@@ -2,7 +2,7 @@
 ?>
 
 
-    <p class="titre">Reinitialisation de mot de passe</p>
+    <p class="titre">Réinitialisation de mot de passe</p>
     <hr>
     <div class="conteneur" >
         <div class="gauche">

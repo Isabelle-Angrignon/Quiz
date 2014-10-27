@@ -110,7 +110,14 @@ function creerEtudiantCoursAjax(idEleve,nom,prenom) {
         url: "Controleur/AjouterUsager.php",
         data: {"idUsager" :idEleve, "nom" :nom, "prenom" :prenom},
         dataType: "text",
-        success: function(resultat) {},
+        success: function(resultat){
+            if(resultat == 1) {
+            swal({title:"Réussite" ,type:"success", text:"L'usager a été créer"});
+        }
+        else{
+            swal({title:"Échec" ,type:"error", text:"Ce numero de DA existe déjà"});
+        }
+        },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
         }
