@@ -12,4 +12,4 @@
     ?>
 </nav>
 
-<script>$("#notImplement").click(function(){swal("Désolé","Les statisitques ne sont pas encore implémenter","error");});</script>
+<script>$("#notImplement").click(function(){swal("Désolé","Les statistiques ne sont pas encore implémentées","error");});</script>
