@@ -42,7 +42,7 @@ fieldset {
 	background-color:white;
 	list-style-type:none;
 	vertical-align:middle;
-	border:outset;
+    border:dashed black 1px;
     text-align: center;
 }
 
@@ -119,5 +119,8 @@ fieldset {
 	float:right;
     margin-right: 2%;
 
+}
+#UlCours li{
+    margin-top:5px;
 }
 

@@ -7,6 +7,7 @@
     include("Vue/Template/InclusionTemplate.php");
     demarrerSession();
     ?>
+    <link rel="stylesheet" href="Vue/CSS/Developeur.css" type="text/css" media="screen" >
 </head>
 
 <body>
@@ -27,14 +28,20 @@ if(isset($_SESSION['typeUsager']))
 
 ?>
 
-<div class="contenu">
-
-    <div>
-        <div>
+<div id="page" class="contenu">
+    <h1>Les dévelopeurs</h1>
+    <hr>
+    <div class="conteneur">
+        <div class="gauche">
+            <img src="Vue/Images/Simon.jpg" id="ImgSimon">
+            <img src="Vue/Images/Mathieu.jpg" id="ImgMathieu">
+            <img src="Vue/Images/Isabelle.jpg" id="ImgIsa">
 
         </div>
-        <div>
-
+        <div class="droite">
+            <p>Simon Bouchard</p>
+            <p> Mathieu Dumoulin</p>
+            <p>Isabelle Angrignon</p>
         </div>
     </div>
 

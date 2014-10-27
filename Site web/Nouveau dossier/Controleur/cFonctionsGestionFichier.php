@@ -27,8 +27,8 @@
 				echo 'Size: ' . ($_FILES['file']['size'] / 1024) . ' kB<br>';
 				echo 'Stored in: ' . $_FILES['file']['tmp_name'] . '<br>';	
 				move_uploaded_file($_FILES['file']['tmp_name'],
-				'C:\Users\Simon\Documents\GitHub\Quiz\Site web\Nouveau dossier\FichierCSV\\' . $_FILES['file']['name']);
-				echo 'Stored in: ' . 'C:\Users\Simon\Documents\GitHub\Quiz\Site web\Nouveau dossier\FichierCSV\\' . $_FILES['file']['name'];
+				'C:\Users\QUIZ\Documents\GitHub\Quiz\Site web\Nouveau dossier\FichierCSV\\' . $_FILES['file']['name']);
+				echo 'Stored in: ' . 'C:\Users\QUIZ\Documents\GitHub\Quiz\Site web\Nouveau dossier\FichierCSV\\' . $_FILES['file']['name'];
 	    }
 	    
 	    return $_FILES['file']['name'];
