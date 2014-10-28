@@ -13,12 +13,12 @@ function remplirUIModifGroupeAjax(Cours) {
             var idUsager;
             var nom;
             var prenom;
+
             for(var i = 0; i < resultat.length; ++i) {
                 idUsager = resultat[i].idUsager;
                 nom = resultat[i].nom;
                 prenom = resultat[i].prenom;
-
-                ajouterLi_AvecDiv("UlEtudiants",nom + " " + prenom, idUsager, true,idUsager,"divDansLi");
+                ajouterLi_AvecDiv("UlModifGroupe",nom + " " + prenom, idUsager, true,idUsager,"divDansLi", "allo");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -42,7 +42,7 @@ function remplirUIEtudiantCoursAjax(Cours) {
                 nom = resultat[i].nom;
                 prenom = resultat[i].prenom;
 
-                ajouterLi_AvecDiv("UlEtudiants",nom + " " + prenom, idUsager, true,idUsager,"divDansLi");
+                ajouterLi_AvecDiv("UlEtudiants",nom + " " + prenom, idUsager, true,idUsager,"divDansLi", "");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -65,7 +65,7 @@ function ListerEtudiantAjax() {
                 nom = resultat[i].nom;
                 prenom = resultat[i].prenom;
 
-                ajouterLi_AvecDiv("UlEtudiants",nom + " " + prenom, idUsager, true,idUsager,"divDansLi");
+                ajouterLi_AvecDiv("UlEtudiants",nom + " " + prenom, idUsager, true,idUsager,"divDansLi", "");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
