@@ -93,6 +93,31 @@ function ajouterLi_ToUl_Selectable(idUl, element,idElement, estThemeJqueryUI) {
     document.getElementById(idUl).appendChild(liTag);
 }
 
+// Nom : ajouterLi_Questions
+// Par : Mathieu Dumoulin
+// Date : 27/10/2014
+// Intrant(s) : String idUl, String element,String idElement , bool estThemeJqueryUI
+// Extrant(s) : Il n'y a pas d'extrant
+// Description : Cette fonction prend l'id d'une balise Ul et lui ajoute un Li créé dynamiquement comportant le texte (element) passer en paramêtre
+//	   en donnant les classe pour le thême d'un sortable au Li si estThemeJqueryUI est à true. De plus, elle ajoute un div qui permet d'afficher d'autres informations dans le li
+function ajouterLi_AvecDiv(idUl, element,idElement, estThemeJqueryUI, texteDiv, classDiv) {
+    // Initialisation du li
+    var liTag = document.createElement("li");
+    liTag.Value = element;
+    liTag.setAttribute("id",idElement);
+    if(estThemeJqueryUI) {
+        liTag.setAttribute("class", "ui-state-default");
+    }
+    liTag.appendChild(document.createTextNode(element));
+    // Initialisation du div qui va dans le li
+    var divProf = document.createElement("div");
+    divProf.setAttribute("class", classDiv);
+    divProf.appendChild(document.createTextNode(texteDiv));
+    // Ajout du div dans le li
+    liTag.appendChild(divProf);
+
+    document.getElementById(idUl).appendChild(liTag);
+}
 
 // creeBaliseAvecClasse(baliseACreer, classe)
 // Par Mathieu Dumoulin

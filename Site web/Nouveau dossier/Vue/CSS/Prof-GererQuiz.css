@@ -68,9 +68,8 @@ fieldset {
 	height:85%;
 }
 
-.divProfDansLi {
-    font-size : 10px;
-    margin-left : 150px;
+.Reponsefocused[contentEditable=true]{
+    background-color:white;
 }
 
 #BTN_SupprimerReponse {

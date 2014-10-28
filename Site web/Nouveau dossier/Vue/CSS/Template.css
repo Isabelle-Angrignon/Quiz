@@ -160,6 +160,11 @@ div#enteteSite{
 	line-height:50px;
 }
 
+.divDansLi {
+    font-size : 10px;
+    margin-left : 150px;
+}
+
 .Alerte{
 	background:#FFFF66;
 	border-radius: 30px;
