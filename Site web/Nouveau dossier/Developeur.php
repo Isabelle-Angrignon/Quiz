@@ -46,7 +46,7 @@ if(isset($_SESSION['typeUsager']))
         <div class="droite">
             <label class="DescSimon">simon.bouchard01@gmail.com</label>
             <label class="DescMathieu">Mathieu.Dumoulin@outlook.com</label>
-            <label class="DescIsa">Isabelle.Angrignon@hotmail.ca</label>
+            <label class="DescIsa">isabelle.angrignon@hotmail.ca</label>
         </div>
     </div>
 
