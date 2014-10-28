@@ -28,11 +28,7 @@ if(!isset($_POST['typeQuestion']))
     echo "Vous devez lier la question à un type de question.   ";
     $doitArreter = true;
 }
-if(!isset($_POST['tableauTypeQuizAssocie']))
-{
-    echo "Vous devez lier la question à un type de quiz.   ";
-    $doitArreter = true;
-}
+
 
 if($doitArreter)
 {
@@ -51,6 +47,6 @@ $tableauQuestion = $_POST['tableauQuestion'];
 $tableauReponses = $_POST['tableauReponses'];
 $tableauCours = $_POST['tableauCours'];
 $typeQuestion = $_POST['typeQuestion'];
-$tableauTypeQuizAssocie = $_POST['tableauTypeQuizAssocie'];
+isset($_POST['tableauTypeQuizAssocie'])?$tableauTypeQuizAssocie = $_POST['tableauTypeQuizAssocie'] : $tableauTypeQuizAssocie = "";
 
 modifierUneQuestion($tableauQuestion, $tableauReponses, $tableauCours, $typeQuestion, $tableauTypeQuizAssocie);

@@ -7,7 +7,7 @@
 function addClickEventToQuestions(usagerCourant) {
     $("#UlQuestion li").off("click");
     $("#UlQuestion li").click( function() {
-        if(usagerCourant == $(this).children(".divProfDansLi").text())
+        if(usagerCourant == $(this).children(".divDansLi").text())
         {
             var etat = "";
             if($(this).attr("id") == -1) {
@@ -22,34 +22,11 @@ function addClickEventToQuestions(usagerCourant) {
         else
         {
             swal("Oups",
-                "Vous ne disposez pas des droits pour modifier cette question. Veuillez contacter le propriétaire : " + $(this).children(".divProfDansLi").text(),
+                "Vous ne disposez pas des droits pour modifier cette question. Veuillez contacter le propriétaire : " + $(this).children(".divDansLi").text(),
                 "error");
         }
 
     });
-}
-
-// Nom : ajouterLi_Questions
-// Par : Mathieu Dumoulin
-// Date : 19/09/2014
-// Intrant(s) : String idUl, String element,String idElement , bool estThemeJqueryUI
-// Extrant(s) : Il n'y a pas d'extrant
-// Description : Cette fonction prend l'id d'une balise Ul et lui ajoute un Li créé dynamiquement comportant le texte (element) passer en paramêtre
-//				 en donnant les classe pour le thême d'un sortable au Li si estThemeJqueryUI est à true
-function ajouterLi_Questions(idUl, element,idElement, estThemeJqueryUI, nomProprietaire) {
-    // Initialisation du li
-    var liTag = document.createElement("li");
-    liTag.Value = element;
-    liTag.setAttribute("id",idElement);
-    if(estThemeJqueryUI) {
-        liTag.setAttribute("class", "ui-state-default");
-    }
-    liTag.appendChild(document.createTextNode(element));
-    var divProf = document.createElement("div");
-    divProf.setAttribute("class", "divProfDansLi");
-    divProf.appendChild(document.createTextNode(nomProprietaire));
-    liTag.appendChild(divProf);
-    document.getElementById(idUl).appendChild(liTag);
 }
 
 function traiterJSONQuestions(resultat) {
@@ -59,7 +36,7 @@ function traiterJSONQuestions(resultat) {
         if(enonceDeLaQuestion.length > 25) {
             enonceDeLaQuestion = enonceDeLaQuestion.substring(0, 25) + "...";
         }
-        ajouterLi_Questions("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true, resultat[i].idUsager_Proprietaire);
+        ajouterLi_AvecDiv("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true, resultat[i].idUsager_Proprietaire, "divDansLi");
     }
 }
 
