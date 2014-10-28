@@ -33,18 +33,22 @@ if(isset($_SESSION['typeUsager']))
 <h1>Foire aux questions (FAQ)</h1>
     <hr>
     <h3>Comment fait-on pour s'inscrire ?</h3>
-    <p class="reponse">Ce n'est pas a l'étudiants de s'inscrire. Lorsque'un professeur vous inscira a son cours vous serez
-    automatiquement inscrit comme étudiants avec comme mot de passe votre numero de DA</p>
+    <p class="reponse">Ce n'est pas à l'étudiant de s'inscrire. Lorsque'un professeur vous inscira à son cours pour
+    vous donner accès à ses questions et quiz, votre compte d'étudiant sera automatiquement créé avec votre numero de
+    DA comme nom d'usager et mot de passe.  Vous devrez obligatoirement modifier votre mot de passe à la première
+    connexion.</p>
     <br>
     <h3>Je suis inscrit mais je ne sais pas quel est mon mot de passe ?</h3>
     <p class="reponse">Par défaut votre mot de passe et votre numéro de DA</p>
     <br>
-    <h3>J'ai perdu mon mot de passe comment fais-je pour le réinitialiser ?</h3>
-    <p class="reponse">Contactez un administateur ils sont les seuls capable de réinitialiser un mot de passe</p>
+    <h3>J'ai oublié mon mot de passe.  Comment fais-je pour le réinitialiser ?</h3>
+    <p class="reponse">Contactez un professeur.  Il fera la demande à un administateur s'il n'a pas le pouvoir de le
+    réinitialiser.</p>
     <br>
-    <h3>Je suis un professeur au collège Lionnl-Groulx et j'aimerais avoir un compte ?</h3>
-    <p class="reponse">Si vous êtes un professeur appartement au département d'informatique il vous suffit de prendre contacte avec un
-        administrateurs. Ces derniers pourront vous créer un compte</p>
+    <h3>Je suis un professeur au collège Lionnel-Groulx, comment faire pour avoir un compte ?</h3>
+    <p class="reponse">Pour le moment, seuls les professeurs du département d'informatique peuvent utiliser le QuizInfo.
+    Si c'est votre cas, il vous suffit de prendre contact avec l'un des administrateurs. Ces derniers pourront vous
+    créer un compte.</p>
     <br>
 
 </div>
