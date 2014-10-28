@@ -304,7 +304,7 @@ function ajouterQuestion(idCreateur) {
 
     var estValide = false;
     for(var i = 0; i < jsonReponses.reponses.length; ++i) {
-        if(jsonReponses.reponses[i].estBonneReponse == true) {
+        if(jsonReponses.reponses[i].estBonneReponse == "true") {
             estValide = true;
         }
     }
@@ -334,7 +334,7 @@ function ajouterQuestion(idCreateur) {
         });
     }
     else {
-        swal("Oups !", "Cette question n'est pas valide car elle ne contient pas de bonne réponse.", "warning");
+            swal("Oups !", "Cette question n'est pas valide car elle ne contient pas de bonne réponse.", "warning");
     }
 
 }
@@ -350,26 +350,38 @@ function modifierQuestion( idCreateur,idQuestion) {
 
     var jsonTypeQuizAss = jsonifierTypeQuizAssQuestionCourante();
 
-    $.ajax({
-        type:"POST",
-        url:'Controleur/AJAX_ModifierQuestion.php',
-        async : false,
-        data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
-            "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
-        dataType: "text",
-        success: function(resultat){
-            if(resultat.trim() != "") {
-                swal("Erreur !", resultat, "error");
-            }
-            else {
-                $(".dFondOmbrage").detach();
-                var cours = $("#DDL_Cours option:selected").attr("value");
-                updateUlQuestion( cours, idCreateur );
-                swal("Félicitation !", "Votre modification de question à réussi", "success");
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
+    var estValide = false;
+    for(var i = 0; i < jsonReponses.reponses.length; ++i) {
+        if(jsonReponses.reponses[i].estBonneReponse == "true") {
+            estValide = true;
         }
-    });
+    }
+
+    if(estValide) {
+        $.ajax({
+            type:"POST",
+            url:'Controleur/AJAX_ModifierQuestion.php',
+            async : false,
+            data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
+                "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
+            dataType: "text",
+            success: function(resultat){
+                if(resultat.trim() != "") {
+                    swal("Erreur !", resultat, "error");
+                }
+                else {
+                    $(".dFondOmbrage").detach();
+                    var cours = $("#DDL_Cours option:selected").attr("value");
+                    updateUlQuestion( cours, idCreateur );
+                    swal("Félicitation !", "Votre modification de question à réussi", "success");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
+            }
+        });
+    }
+    else {
+        swal("Oups !", "Cette question n'est pas valide car elle ne contient pas de bonne réponse.", "warning");
+    }
 }

@@ -174,9 +174,12 @@ function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours
 
         // Associer la question à un/des type(s) de quiz
         dissocierTypeQuizQuestion($bdd, $tableauDeQuestion['idQuestion']);
-        foreach($tableauTypeQuizAssocie['typeQuizAss'] as $typeQuiz)
+        if(isset($tableauTypeQuizAssocie))
         {
-            associerTypeQuizQuestion($bdd, $tableauDeQuestion['idQuestion'], $typeQuiz['id']);
+            foreach($tableauTypeQuizAssocie['typeQuizAss'] as $typeQuiz)
+            {
+                associerTypeQuizQuestion($bdd, $tableauDeQuestion['idQuestion'], $typeQuiz['id']);
+            }
         }
 
         $bdd->commit();
