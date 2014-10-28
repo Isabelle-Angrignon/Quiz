@@ -188,10 +188,7 @@ function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours
             //on annule la transation
             $bdd->rollback();
 
-            //on affiche un message d'erreur ainsi que les erreurs
-            echo 'Tout ne s\'est pas bien passé, voir les erreurs ci-dessous<br />';
-            echo 'Erreur : '.$e->getMessage().'<br />';
-            echo 'N° : '.$e->getCode();
+            echo $e->getMessage();
         }
         catch (PDOException $e){echo "Erreur dans le rollback";}
     }
