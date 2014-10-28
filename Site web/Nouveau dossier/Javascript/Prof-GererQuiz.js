@@ -4,19 +4,52 @@
 // Description : Contient tout le code Javascript spécifique à la page Prof-GererQuiz.php
 
 
-function addClickEventToQuestions() {
+function addClickEventToQuestions(usagerCourant) {
     $("#UlQuestion li").off("click");
     $("#UlQuestion li").click( function() {
-        var etat = "";
-        if($(this).attr("id") == -1) {
-            etat = "nouvelleQuestion";
+        if(usagerCourant == $(this).children(".divProfDansLi").text())
+        {
+            var etat = "";
+            if($(this).attr("id") == -1) {
+                etat = "nouvelleQuestion";
+            }
+            else {
+                etat = "modifierQuestion";
+            }
+            ajouterVariableSession($(this).attr("id"), etat);
+            creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
         }
-        else {
-            etat = "modifierQuestion";
+        else
+        {
+            swal("Oups",
+                "Vous ne disposez pas des droits pour modifier cette question. Veuillez contacter le propriétaire : " + $(this).children(".divProfDansLi").text(),
+                "error");
         }
-        ajouterVariableSession($(this).attr("id"), etat);
-        creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
+
     });
+}
+
+// Nom : ajouterLi_Questions
+// Par : Mathieu Dumoulin
+// Date : 19/09/2014
+// Intrant(s) : String idUl, String element,String idElement , bool estThemeJqueryUI
+// Extrant(s) : Il n'y a pas d'extrant
+// Description : Cette fonction prend l'id d'une balise Ul et lui ajoute un Li créé dynamiquement comportant le texte (element) passer en paramêtre
+//				 en donnant les classe pour le thême d'un sortable au Li si estThemeJqueryUI est à true
+function ajouterLi_Questions(idUl, element,idElement, estThemeJqueryUI, nomProprietaire) {
+    // Initialisation du li
+    var liTag = document.createElement("li");
+    liTag.Value = element;
+    liTag.setAttribute("id",idElement);
+    if(estThemeJqueryUI) {
+        liTag.setAttribute("class", "ui-state-default");
+    }
+    liTag.appendChild(document.createTextNode(element));
+    var divProf = document.createElement("div");
+    divProf.setAttribute("class", "divProfDansLi");
+    divProf.appendChild(document.createTextNode(nomProprietaire));
+    liTag.appendChild(divProf);
+    document.getElementById(idUl).appendChild(liTag);
 }
 
 function traiterJSONQuestions(resultat) {
@@ -26,23 +59,23 @@ function traiterJSONQuestions(resultat) {
         if(enonceDeLaQuestion.length > 25) {
             enonceDeLaQuestion = enonceDeLaQuestion.substring(0, 25) + "...";
         }
-        ajouterLi_ToUl_V2("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true);
+        ajouterLi_Questions("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true, resultat[i].idUsager_Proprietaire);
     }
 }
 
-function updateUlQuestion(idCours, idProprietaire) {
+function updateUlQuestion(idCours, usagerCourant) {
     if(idCours != "") {
         $("#UlQuestion li").remove();
-
         $.ajax({
             type: 'POST',
             url: 'Controleur/ListerQuestions.php',
-            data: {"Triage":"default", "idCours":idCours , "idProprietaire":idProprietaire},
+            data: {"Triage":"default", "idCours":idCours , "idProprietaire":usagerCourant},
             dataType: "json",
             success: function(resultat) {
                 traiterJSONQuestions(resultat);
+
                 // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
-                addClickEventToQuestions();
+                addClickEventToQuestions(usagerCourant);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
@@ -72,6 +105,19 @@ function ajouterNouvelleReponse() {
     $.post('Vue/Prof-GererQuiz-AjoutElement.php', {"action":"nouveauCheckBox"}, function(resultat) {
         $("#Ul_Reponses").append(resultat);
     }, 'html');
+}
+
+function supprimerReponseCourante() {
+    if($("#Ul_Reponses").children("li").length == 1) {
+        swal("Oups", "Vous ne pouvez pas avoir de question sans aucune réponse", "error");
+    }
+    else if($(".Reponsefocused").length == 0) {
+        swal("Oups", "Veuillez sélectionner une réponse pour la supprimer.", "warning");
+    }
+    else {
+        $(".Reponsefocused").parent().remove();
+    }
+
 }
 
 // cocherCheckBoxCoursSelonQuestion
@@ -147,6 +193,8 @@ function cocherTypeQuizAssocieSelonQuestion(typeQuiz) {
 }
 
 
+
+
 // jsonifierReponsesQuestionCourante
 // Par Mathieu Dumoulin
 // Date: 20/10/2014
@@ -163,12 +211,12 @@ function jsonifierReponsesQuestionCourante() {
     var position = 0;
     $("#Ul_Reponses li").each( function() {
         var estCoche = false;
-        if($(this).children("input[type=checkbox]").prop("checked") == true) {
+        if($(this).children("input[type=radio]").prop("checked") == true) {
             estCoche = true;
         }
         // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
         reponsesEnString += '{"enonce":"'+$(this).children("div").text().replace(/[\"]/g, '\\"')+'", "estBonneReponse":"' + estCoche + '",' +
-                            '"idReponse":"' + $(this).children("input[type=checkbox]").attr("value") + '", "positionReponse":"'+ ++position +'"},';
+                            '"idReponse":"' + $(this).children("input[type=radio]").attr("value") + '", "positionReponse":"'+ ++position +'"},';
     });
 
     // J'enlève la dernière virgule de mon string car, en JSON, le dernier élément ne prend pas de virgule
@@ -236,7 +284,7 @@ function jsonifierTypeQuizAssQuestionCourante() {
     return jsonTypeQuizAss;
 }
 
-function getJSONEnonceQuestion(idQuestion,idCreateur ) {
+function getJSONEnonceQuestion(idCreateur, idQuestion ) {
     var enonce = document.getElementById("EnonceQuestion").textContent;
 
     // Par défaut, les furteurs tels que chrome et firefox ajoutent 13 caractères au début du texte d'un contentEditable élément.
@@ -277,23 +325,21 @@ function ajouterQuestion(idCreateur) {
             if(resultat.trim() != "") {
                 swal("Erreur !", resultat, "error");
             }
-            else
-            {
+            else {
                 $(".dFondOmbrage").detach();
                 var cours = $("#DDL_Cours option:selected").attr("value");
                 updateUlQuestion( cours, idCreateur );
                 swal("Félicitation !", "Votre ajout de question à réussi", "success");
             }
-
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
+            swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
         }
     });
 }
 
-function modifierQuestion(idQuestion) {
-    var jsonQuestion = getJSONEnonceQuestion(idQuestion);
+function modifierQuestion( idCreateur,idQuestion) {
+    var jsonQuestion = getJSONEnonceQuestion(idCreateur, idQuestion);
 
     var jsonReponses = jsonifierReponsesQuestionCourante();
 
@@ -314,13 +360,15 @@ function modifierQuestion(idQuestion) {
             if(resultat.trim() != "") {
                 swal("Erreur !", resultat, "error");
             }
-            else
-            {
+            else {
+                $(".dFondOmbrage").detach();
+                var cours = $("#DDL_Cours option:selected").attr("value");
+                updateUlQuestion( cours, idCreateur );
                 swal("Félicitation !", "Votre modification de question à réussi", "success");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
+            swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
         }
     });
 }

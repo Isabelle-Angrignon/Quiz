@@ -67,14 +67,11 @@ function ajouterLi_ToUl_V2(idUl, element,idElement, estThemeJqueryUI) {
     liTag.setAttribute("id",idElement);
     if(estThemeJqueryUI) {
         liTag.setAttribute("class", "ui-state-default");
-        // Initialisation du span contenu dans le li (nécéssaire pour les sortables)
-        /*    var spanTag = document.createElement("span");
-       spanTag .setAttribute("class", "ui-icon ui-icon-arrowthick-2-n-s");
-        liTag.appendChild(spanTag);*/
     }
     liTag.appendChild(document.createTextNode(element));
     document.getElementById(idUl).appendChild(liTag);
 }
+
 
 // Nom : ajouterLi_ToUl
 // Par : Mathieu Dumoulin

@@ -68,6 +68,15 @@ fieldset {
 	height:85%;
 }
 
+.divProfDansLi {
+    font-size : 10px;
+    margin-left : 150px;
+}
+
+#BTN_SupprimerReponse {
+    float:right;
+}
+
 #AjouterQuestion {
 	border:solid black;
 	margin-top:10%;
@@ -135,9 +144,12 @@ fieldset {
     outline: none;
 }
 
-/*#EnonceQuestion[contenteditable=true]:empty:before{
+.enonceVide:before {
     content: attr(placeholder);
-}*/
+    color: white;
+}
+
+
 #reponseConteneur {
     background-color:rgba(125, 171, 211, 1);
     min-height:50px;
@@ -148,7 +160,7 @@ fieldset {
     padding:10px;
 }
 
-#reponseConteneur ul li input[type=checkbox] {
+#reponseConteneur ul li input[type=radio] {
     width:20px;
     height:20px;
     vertical-align: middle;

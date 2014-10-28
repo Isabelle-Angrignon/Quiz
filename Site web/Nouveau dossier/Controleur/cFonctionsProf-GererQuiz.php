@@ -32,7 +32,7 @@ function getReponsesFromQuestion($idQuestion)
 
         foreach($reponses as $uneReponse)
         {
-            creerCheckBoxReponse("reponses", $uneReponse["idReponse"], $uneReponse["enonceReponse"], $uneReponse["reponseEstValide"]);
+            creerInputReponse("radio","reponses", $uneReponse["idReponse"], $uneReponse["enonceReponse"], $uneReponse["reponseEstValide"]);
             array_push($tabIdReponses,$uneReponse["idReponse"]);
         }
         $_SESSION["tabIdReponses"] = $tabIdReponses;
@@ -65,10 +65,10 @@ function prendreTypeQuizAssocie($idQuestion)
     return $Types;
 }
 
-function creerCheckBoxReponse($nomDuGroupe, $valeur, $textAffiche, $isChecked)
+function creerInputReponse($typeInput, $nomDuGroupe, $valeur, $textAffiche, $isChecked)
 {
     $isChecked? $checked = "checked":$checked="";
-    echo "<li><input type='checkbox' name=".$nomDuGroupe." value=".$valeur." ".$checked."><div class='reponsesQuestion' contenteditable='true'>".$textAffiche."</div></li>";
+    echo "<li><input type='".$typeInput."' name=".$nomDuGroupe." value=".$valeur." ".$checked."><div class='reponsesQuestion' contenteditable='true'>".$textAffiche."</div></li>";
 }
 
 function creerInputGenerique($typeInput, $nomDuGroupe,$valeur,$textAffiche)
@@ -95,7 +95,6 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
         set_error_handler('useless_error_handler');
         $bdd->beginTransaction();
 
-
         // Ajouter la question dans la base de données
         $idQuestion = ajouterQuestion($bdd, $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
                     /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
@@ -108,6 +107,7 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
             $estBon = convertEstBonneReponseToTINYINT($reponse['estBonneReponse']);
             ajouterReponse($bdd, $reponse['enonce'], "", $idQuestion[0], $estBon, ++$positionReponse);
         }
+
         $positionCours = 0;
         // Associer la question à un/plusieurs cours
         foreach($tableauCours['cours'] as $Cours)
@@ -149,85 +149,29 @@ function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours
         set_error_handler('useless_error_handler');
         $bdd->beginTransaction();
 
-
-        // Ajouter la question dans la base de données
-       // $idQuestion = modifierQuestion($bdd, $tableauDeQuestion['idQuestion'], $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
-         //   /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
-        //    $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null);
+        // Modifier la question dans la base de données
+        modifierQuestion($bdd, $tableauDeQuestion['idQuestion'], $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
+           /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
+           $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null);
 
         // Ajouter les réponses de cette question dans la base de données
-        if(isset($_SESSION["tabIdReponses"]))
-        {
-            $tabIdAnciennesReponses = $_SESSION["tabIdReponses"];
-        }
-        else
-        {
-            $tabIdAnciennesReponses = array();
-        }
-
-        // Si on encode pas notre tableauReponses, PHP ne le reconnait pas comme étant un vrai JSON.
-        $tableauNouvelleReponses = json_decode(json_encode($tableauReponses));
-
-        // Je dois garder une variable qui contient la grandeur du tableau initial car unset(array[index]) de change pas l'index des éléments qui suivent le unset mais change le size du tableau
-        $nbAncienneReponses = count($tabIdAnciennesReponses);
-        $nbNouvelleReponses = count($tableauNouvelleReponses->reponses);
-
-        $positionReponse = 0;
-        for($x = 0; $x < $nbNouvelleReponses; ++$x)
-        {
-            $action = "";
-            for($i = 0; $i < $nbAncienneReponses && $action == ""; ++$i)
-            {
-                if($tabIdAnciennesReponses[$i] == $tableauNouvelleReponses->reponses[$x]->idReponse)
-                {
-                    $action = "Modifier";
-                    unset($tabIdAnciennesReponses[$i]);
-                }
-            }
-
-            if($action == "Modifier")
-            {
-                $idReponse = $tableauNouvelleReponses->reponses[$x]->idReponse;
-                $enonce = $tableauNouvelleReponses->reponses[$x]->enonce;
-                $positionReponse = $tableauNouvelleReponses->reponses[$x]->positionReponse;
-                // Dans la base de donnée, estBonneReponse représente un TINYINT donc on doit le transformer en TINYINT.
-                $estBon = convertEstBonneReponseToTINYINT($tableauNouvelleReponses->reponses[$x]->estBonneReponse);
-
-                modifierReponse($bdd,$idReponse, $enonce,"", $estBon, $positionReponse);
-                unset($tableauNouvelleReponses->reponses[$x]);
-            }
-        }
-        // Ajouter les nouvelles réponses dans la bd
-        foreach($tableauNouvelleReponses->reponses as $reponse)
-        {
-            $enonce = $reponse->enonce;
-            $positionReponse = $reponse->positionReponse;
-            $idQuestion =  $tableauDeQuestion['idQuestion'];
-            // Dans la base de donnée, estBonneReponse représente un TINYINT donc on doit le transformer en TINYINT.
-            $estBon = convertEstBonneReponseToTINYINT($reponse->estBonneReponse);
-
-            ajouterReponse($bdd, $enonce, "", $idQuestion, $estBon, $positionReponse);
-        }
-
-        foreach($tabIdAnciennesReponses as $idAncienneReponse)
-        {
-            supprimerReponse($bdd, $idAncienneReponse);
-        }
+        modifierReponses($bdd, $tableauReponses, $tableauDeQuestion['idQuestion']);
 
 
-       /* // Associer la question à un/plusieurs cours
+        // Associer la question à un/plusieurs cours
+        dissocierQuestionACours($bdd, $tableauDeQuestion['idQuestion']);
         foreach($tableauCours['cours'] as $Cours)
         {
-            associerQuestionACours($bdd, $idQuestion[0], $Cours['idCours']);
+            associerQuestionACours($bdd, $tableauDeQuestion['idQuestion'], $Cours['idCours']);
         }
 
         // Associer la question à un/des type(s) de quiz
-
+        dissocierTypeQuizQuestion($bdd, $tableauDeQuestion['idQuestion']);
         foreach($tableauTypeQuizAssocie['typeQuizAss'] as $typeQuiz)
         {
-            associerTypeQuizQuestion($bdd, $idQuestion[0], $typeQuiz['id']);
+            associerTypeQuizQuestion($bdd, $tableauDeQuestion['idQuestion'], $typeQuiz['id']);
         }
-        echo $idQuestion[0];*/
+
         $bdd->commit();
     }
     catch(ErrorException $e)
@@ -254,22 +198,92 @@ function convertEstBonneReponseToTINYINT($estBonneReponse)
     return $estBonneReponse=='true'?1:0;
 }
 
+function modifierReponses($bdd, $tableauReponses, $identifiantQuestion)
+{
+    // Reprendre les anciennes réponses
+    if(isset($_SESSION["tabIdReponses"]))
+    {
+        $tabIdAnciennesReponses = $_SESSION["tabIdReponses"];
+    }
+    else
+    {
+        $tabIdAnciennesReponses = array();
+    }
+
+    // Si on encode pas notre tableauReponses, PHP ne le reconnait pas comme étant un vrai JSON.
+    $tableauNouvelleReponses = json_decode(json_encode($tableauReponses));
+
+    // Je dois garder une variable qui contient la grandeur du tableau initial car unset(array[index]) de change pas l'index des éléments qui suivent le unset mais change le size du tableau
+    $nbAncienneReponses = count($tabIdAnciennesReponses);
+    $nbNouvelleReponses = count($tableauNouvelleReponses->reponses);
+
+    $positionReponse = 0;
+    for($x = 0; $x < $nbNouvelleReponses; ++$x)
+    {
+        $action = "";
+        for($i = 0; $i < $nbAncienneReponses && $action == ""; ++$i)
+        {
+            if(isset($tabIdAnciennesReponses[$i]))
+            {
+                if($tabIdAnciennesReponses[$i] == $tableauNouvelleReponses->reponses[$x]->idReponse)
+                {
+                    $action = "Modifier";
+                    unset($tabIdAnciennesReponses[$i]);
+                }
+            }
+
+        }
+        if($action == "Modifier")
+        {
+            $idReponse = $tableauNouvelleReponses->reponses[$x]->idReponse;
+            $enonce = $tableauNouvelleReponses->reponses[$x]->enonce;
+            $positionReponse = $tableauNouvelleReponses->reponses[$x]->positionReponse;
+            // Dans la base de donnée, estBonneReponse représente un TINYINT donc on doit le transformer en TINYINT.
+            $estBon = convertEstBonneReponseToTINYINT($tableauNouvelleReponses->reponses[$x]->estBonneReponse);
+
+            modifierReponse($bdd,$idReponse, $enonce,"", $estBon, $positionReponse);
+            unset($tableauNouvelleReponses->reponses[$x]);
+        }
+    }
+    // Ajouter les nouvelles réponses dans la bd
+    foreach($tableauNouvelleReponses->reponses as $reponse)
+    {
+        $enonce = $reponse->enonce;
+        $positionReponse = $reponse->positionReponse;
+        $idQuestion =  $identifiantQuestion;
+        // Dans la base de donnée, estBonneReponse représente un TINYINT donc on doit le transformer en TINYINT.
+        $estBon = convertEstBonneReponseToTINYINT($reponse->estBonneReponse);
+
+        ajouterReponse($bdd, $enonce, "", $idQuestion, $estBon, $positionReponse);
+    }
+
+    foreach($tabIdAnciennesReponses as $idAncienneReponse)
+    {
+        supprimerReponse($bdd, $idAncienneReponse);
+    }
+}
+
+
 function useless_error_handler($no, $str, $file, $line){
     switch($no){
         // Erreur fatale
         case E_USER_ERROR:
+            echo "Fatale";
             break;
 
         // Avertissement
         case E_USER_WARNING:
+            echo "Warning";
             break;
 
         // Note
         case E_USER_NOTICE:
+            echo "Notice";
             break;
 
         // Erreur générée par PHP
         default:
+            echo "Message : ". $str . " ---------- Ligne: ". $line . " ------------" . $file;
             break;
     }
 }

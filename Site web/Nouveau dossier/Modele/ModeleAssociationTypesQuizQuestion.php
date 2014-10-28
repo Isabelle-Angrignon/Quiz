@@ -50,3 +50,35 @@ function associerTypeQuizQuestion($connexion, $idQuestion, $typeQuiz)
         unset($bdd);
     }
 }
+
+function dissocierTypeQuizQuestion($connexion, $idQuestion)
+{
+    if(!isset($connexion))
+    {
+        $bdd = connecterProf();
+    }
+    else
+    {
+        $bdd = $connexion;
+    }
+
+    $requete = $bdd->prepare("CALL supprimerLienQuestionTypeQuiz(?)");
+
+    $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
+
+    try
+    {
+        $requete->execute();
+    }
+    catch(PDOException $e)
+    {
+        throw new ErrorException("Erreur dans la suppression de la liaison des types de quiz avec la question : " . $idQuestion);
+    }
+
+    $requete->closeCursor();
+
+    if(!isset($connexion))
+    {
+        unset($bdd);
+    }
+}

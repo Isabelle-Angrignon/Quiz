@@ -143,7 +143,7 @@ function supprimerReponse($connexion, $idReponse)
     }
     catch(PDOException $e)
     {
-        throw new ErrorException("Erreur dans la modification de la réponse ayant comme énoncé : " . $enonceReponse);
+        throw new ErrorException("Erreur dans la suppression de la réponse ayant comme identifiant : " . $idReponse );
     }
 
     $requete->closeCursor();

@@ -25,7 +25,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
     <script src="Javascript/Generique.js"></script>
     <script src="Javascript/GererCours.js"></script>
     <script src="Javascript/Prof-GererQuiz.js"></script>
+
     <script>
+
         $(function() {
                /* $("#UlQuiz").sortable({
                     connectWith: "#QuizDropZone",
@@ -46,24 +48,24 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 }).disableSelection();
 
 
-                $("#DDL_Cours").selectmenu({
+               $("#DDL_Cours").selectmenu({
                     width:400,
                     select: function(event, ui) {
                          var id = $("#DDL_Cours option:selected").attr("value");
-                         updateUlQuestion( id );
+                         updateUlQuestion( id, <?php echo '"'.$_SESSION["idUsager"].'"' ?> );
                     }
                 });
 
-                addClickEventToQuestions();
+                addClickEventToQuestions(<?php echo '"'.$_SESSION["idUsager"].'"';  ?>);
+
                 $("#AjouterQuestion").click( function() {
                     ajouterVariableSession("", "nouvelleQuestion");
                     creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
                 });
-
-
         });
 
     </script>
+
 </head>
 
 <body>

@@ -43,11 +43,16 @@
         }
         $(this).sortable( "option", "disabled", true );
         $(this).children(".reponsesQuestion").attr('contenteditable','true');
+        $(".reponsesQuestion:focus").addClass("Reponsefocused");
         // Ici j'utilise l'event focusout car, contrairement à ce que blur fait, focusout est déclanché
         // lorsque l'élément en question perd son focus sur un de ses enfants
-    }).focusout(function(){
+    }).focusout(function(event){
         $(this).sortable( 'option', 'disabled', false);
         $(this).children(".reponsesQuestion").attr('contenteditable','false');
+        if($(event.relatedTarget).attr("id") != "BTN_SupprimerReponse") {
+            $(".Reponsefocused").removeClass("Reponsefocused");
+        }
+
     });
 
 
@@ -63,16 +68,41 @@
     $("#listeAjoutCours input[type=checkbox]").click(function() {
        if($("#listeAjoutCours input:checkbox:checked").length == 0) {
            $(this).prop('checked', true);
-           alert("Une question doit absolument être liée à un cours.");
+           swal("Erreur","Une question doit absolument être liée à un cours." ,"error");
        }
     });
 
+    $("#TypeQuestion li input[type=radio]").click(function() {
+        alert($(this).attr("value"));
+    });
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Je dois simuler un placeholder car, de base avec google Chrome et Firefox, les contentEditable div contiennent des charactères invisibles (pour le curseur)
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Met le placeholder si l'énoncé est vide
+    $("#EnonceQuestion").ready(function() {
+       if($("#EnonceQuestion").text().trim() == "") {
+           $("#EnonceQuestion").addClass("enonceVide");
+       }
+    });
+    // Met le placeholder si l'énoncé va être vide suite à cette action. Le retire sinon.
+    $("#EnonceQuestion").keydown(function(event) {
+        // Je ne vérifie pas si le texte est vide car avec les key events le résultat n'est pas fluide.
+        // Keydown : Calcule si le texte est vide avant de capter la touche qui est entrée
+        // Keyup : "Glitch" avant de retirer la classe (Elle est retirer seulement après que la lettre est ajoutée au texte et c'est visible).
+        // event.which == 8  --> Un backspace
+        if($(this).text().trim().length == 1 && event.which == 8) {
+            $(this).addClass("enonceVide");
+        }
+        else if(event.which != 8) {
+            $(this).removeClass("enonceVide");
+        }
+    });
     $("#BTN_ConfirmerQuestion").button();
 
 </script>
 <div id="QuestionConteneur">
-    <div id="EnonceQuestion" contenteditable="true">
+    <div id="EnonceQuestion" contenteditable="true" placeholder="Entrer un énoncé ici...">
         <?php
             echo isset($enonceQuestion)?$enonceQuestion:"";
         ?>
@@ -87,6 +117,7 @@
         ?>
         </ul>
         <input type="button" id="BTN_AjouterReponse" onclick="ajouterNouvelleReponse()"  value="Ajouter une réponse">
+        <input type="button" id="BTN_SupprimerReponse" onclick="supprimerReponseCourante()" value="Supprimer une réponse">
     </div>
 </div>
 <div id="parametresQuestion">
@@ -140,7 +171,7 @@
     <?php
         if($_SESSION["etat"] == "modifierQuestion")
         {
-            echo "Modifier onclick='modifierQuestion(\"".$_SESSION['idQuestion']."\")'";
+            echo "Modifier onclick='modifierQuestion(\"".$_SESSION['idUsager']."\",\"". $_SESSION['idQuestion']."\")'";
         }
         elseif( $_SESSION["etat"] == "nouvelleQuestion")
         {

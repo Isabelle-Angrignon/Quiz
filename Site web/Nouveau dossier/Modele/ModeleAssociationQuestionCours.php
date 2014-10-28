@@ -51,3 +51,34 @@ function associerQuestionACours($connexion, $idQuestion, $idCours) {
         unset($bdd);
     }
 }
+
+function dissocierQuestionACours($connexion, $idQuestion) {
+    if(!isset($connexion))
+    {
+        $bdd = connecterProf();
+    }
+    else
+    {
+        $bdd = $connexion;
+    }
+
+    $requete = $bdd->prepare("CALL supprimerLienQuestionCours(?)");
+
+    $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
+
+    try
+    {
+        $requete->execute();
+    }
+    catch(PDOException $e)
+    {
+        throw new ErrorException("Erreur dans la suppression de la liaison de la question : " . $idQuestion);
+    }
+
+    $requete->closeCursor();
+
+    if(!isset($connexion))
+    {
+        unset($bdd);
+    }
+}
