@@ -12,13 +12,13 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
 
     if($AncientMotPasse == '' || $NouvMotPasse == '' || $ConfNouvMotPasse == '')
     {
-        $_SESSION['erreur'] = 'Certain champs sont vide';
+        $_SESSION['erreur'] = 'Certains champs sont vides';
         header('Location: ../GererSonCompte.php');
         return 0;
     }
     if(strlen($AncientMotPasse) > 16 || strlen($NouvMotPasse) > 16 || strlen($ConfNouvMotPasse) > 16)
     {
-        $_SESSION['erreur'] = 'Les mots de passes sont limités a 16 caracteres';
+        $_SESSION['erreur'] = 'Les mots de passes sont limités à 16 caractères';
         header('Location: ../GererSonCompte.php');
         return 0;
     }
@@ -29,7 +29,7 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
         {
             if($AncientMotPasse == $NouvMotPasse){
 
-                $_SESSION['erreur'] = "Le nouveaut mot de passe doit être différent de l'ancien";
+                $_SESSION['erreur'] = "Le nouveau mot de passe doit être différent de l'ancien";
                 header('Location: ../GererSonCompte.php');
             }
             else
@@ -44,13 +44,13 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
         }
         else
         {
-            $_SESSION['erreur'] = 'Les mots de passes ne sont pas identiques';
+            $_SESSION['erreur'] = 'Les mots de passe ne sont pas identiques';
             header('Location: ../GererSonCompte.php');
         }
     }
     else
     {
-        $_SESSION['erreur'] = 'Le mot de passe ne coresspond pas a votre ancient mot de passe';
+        $_SESSION['erreur'] = 'Le mot de passe ne correspond pas à votre ancien mot de passe';
         header('Location: ../GererSonCompte.php');
     }
 }

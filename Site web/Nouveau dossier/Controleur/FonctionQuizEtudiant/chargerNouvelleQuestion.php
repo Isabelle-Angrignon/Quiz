@@ -29,18 +29,3 @@ else
     echo '1';
 }
 
-
-/*
-//gestion des question du quiz...
-if (isset($_SESSION["listeQuestions"]))
-{
-    if (!empty($_SESSION["listeQuestions"])) {
-        echo ' <script>creeFrameDynamique("QuestionAleatoire", "Vue/dynamique-RepondreQuestion.php")</script> ';
-        //retirer la première question de la liste, elle est récupérée au début de la page
-        /////////////////////next
-    }
-    else
-    {
-        resetVarSessionQuiz();
-    }
-}*/

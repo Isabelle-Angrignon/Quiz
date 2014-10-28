@@ -21,7 +21,7 @@ if (isset($_SESSION['idCours'])) {
 }
 else
 {
-    echo '<script>alert("Pas de cours dans session...")</script>';
+    echo '<script>alert("Aucun cours dans la variable session! Consultez un administrateur")</script>';
 }
 
 
