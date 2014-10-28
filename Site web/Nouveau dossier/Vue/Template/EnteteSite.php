@@ -4,7 +4,7 @@
     <form id="EspaceDeconnexion" method="post" action="controleur/seDeconnecter.php">
     <?php
     if (isset($_SESSION['idUsager'])){
-        echo '<div id="NomUsager">'.$_SESSION['Nom'] . ' ' . $_SESSION['Prenom'] .'</div> <div id ="BTN_Deconnecter">Se déconnecter</div> ';
+        echo '<div id="NomUsager">'.$_SESSION['Nom'] . ', ' . $_SESSION['Prenom'] .'</div> <div id ="BTN_Deconnecter">Se déconnecter</div> ';
     }?>
     </form>
 </div>

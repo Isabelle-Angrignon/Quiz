@@ -214,6 +214,7 @@ function insererHTMLfromPHP(idConteneur, pathFichierPHP) {
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
         }
+
     });
 }
 

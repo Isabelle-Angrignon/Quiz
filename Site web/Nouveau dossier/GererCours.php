@@ -27,58 +27,53 @@ Description: Cette interface représente l'interface principale d'un professeur 
   	<script>
 
 	  $(function() {
-	    $("#UlCours").sortable({
-	    	connectWith: "#QuizDropZone",
-	    	revert: 150
-	    });
-	    $("#UlModifGroupe").sortable({
-	    	connectWith: "#UlEtudiants",
-	    	revert: 150,
-            receive: function(event,ui){
-                inscrireEtudiantCoursAjax($(ui.item).attr('id'),$(ui.item).text().split(" ")[1]
-                    ,$(ui.item).text().split(" ")[0],$("#QuizDropZone").find("li").attr("id"));
-            },
-            remove: function(event,ui){
-                desinscrireEtudiantCoursAjax($(ui.item).attr('id'),$("#QuizDropZone").find("li").attr("id"));
-            }
-	    });
-	    $("#UlEtudiants").sortable({
-	    	connectWith: "#UlModifGroupe",
-	    	revert: 150,
-            dropOnEmpty:false
-	    });
-	    $("#QuizDropZone").sortable({
-	    	connectWith: "#UlCours",
-	    	revert: 150,
-            receive: function(event,ui) {
-                $("#UlCours").sortable("option","connectWith",false);
-                $( "#UlEtudiants" ).sortable( "option", "dropOnEmpty", true );
-                $('#UIModifGroupe').empty();
-                $('#UlEtudiants').empty();
-                remplirUIModifGroupeAjax($(ui.item).attr('id'));
-                remplirUIEtudiantCoursAjax($(ui.item).attr('id'));
-                $('#BTN_CSV').show();
-                $('#BTN_Cours').hide();
-            },
-            remove: function(event,ui){
-                $("#UlCours").sortable("option","connectWith","#QuizDropZone");
-                $( "#UlEtudiants" ).sortable( "option", "dropOnEmpty", false );
-                $('#UlModifGroupe').empty();
-                $('#UlEtudiants').empty();
-                ListerEtudiantAjax();
-                $('#BTN_CSV').hide();
-                $('#BTN_Cours').show();
-            }
+          $("#UlCours").sortable({
+              connectWith: "#QuizDropZone",
+              revert: 150
+          });
+          $("#UlModifGroupe").sortable({
+              connectWith: "#UlEtudiants",
+              revert: 150,
+              receive: function (event, ui) {
+                  inscrireEtudiantCoursAjax($(ui.item).attr('id'), $(ui.item).text().split(" ")[1], $(ui.item).text().split(" ")[0], $("#QuizDropZone").find("li").attr("id"));
+              },
+              remove: function (event, ui) {
+                  desinscrireEtudiantCoursAjax($(ui.item).attr('id'), $("#QuizDropZone").find("li").attr("id"));
+              }
+          });
+          $("#UlEtudiants").sortable({
+              connectWith: "#UlModifGroupe",
+              revert: 150,
+              dropOnEmpty: false
+          });
+          $("#QuizDropZone").sortable({
+              connectWith: "#UlCours",
+              revert: 150,
+              receive: function (event, ui) {
+                  $("#UlCours").sortable("option", "connectWith", false);
+                  $("#UlEtudiants").sortable("option", "dropOnEmpty", true);
+                  $('#UIModifGroupe').empty();
+                  $('#UlEtudiants').empty();
+                  remplirUIModifGroupeAjax($(ui.item).attr('id'));
+                  remplirUIEtudiantCoursAjax($(ui.item).attr('id'));
+                  $('#BTN_GestionGoupe').show();
+                  $('#BTN_Cours').hide();
+              },
+              remove: function (event, ui) {
+                  $("#UlCours").sortable("option", "connectWith", "#QuizDropZone");
+                  $("#UlEtudiants").sortable("option", "dropOnEmpty", false);
+                  $('#UlModifGroupe').empty();
+                  $('#UlEtudiants').empty();
+                  ListerEtudiantAjax();
+                  $('#BTN_GestionGoupe').hide();
+                  $('#BTN_Cours').show();
+              }
 
-	    });
-	    
-	    $("#DDL_Cours").selectmenu();
-	    /*$("#UlEtudiants").click( function() {
-	    	/*var id = $(this).attr("id");
-	    	ajouterLi_ToUl(id, "Un nouvel Element Bad Ass", true);
-	    	creeFrameDynamique();
-	    });*/
+          });
 
+
+
+      });
 	</script>
 </head>
 
@@ -109,7 +104,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
 			<ul id="UlModifGroupe">
 
 			</ul>
-            <div id="BTN_CSV"class="ListeDivElementStyle BoutonDiv">Ajouter un CSV</div>
+            <div id="BTN_GestionGoupe">
+                <div id="BTN_CSV"class="ListeDivElementStyle BoutonDiv">Remplir</div>
+                <div id="BTN_Vider"class="ListeDivElementStyle BoutonDiv">Vider</div>
+            </div>
 		</div>
 		<div id="ListeGererEtudiants" class="Liste ListeGererCours">
 			<ul id="UlEtudiants">
@@ -123,12 +121,18 @@ Description: Cette interface représente l'interface principale d'un professeur 
 		include("Vue/Template/BasDePage.php");
 	?>
  <script>
-     $('#BTN_CSV').hide();
+     $('#BTN_GestionGoupe').hide();
      $( "#BTN_Cours" ).click(function() {
          creeFrameDynamique('divDynamique','Vue/dynamique-CreerCours.php');
      });
      $( "#BTN_CSV" ).click(function() {
          creeFrameDynamique('divDynamique','Vue/dynamique-CSV.php');
+     });
+     $( "#BTN_Vider" ).click(function() {
+         desinscrireToutEtudiantCoursAjax($("#QuizDropZone").find("li").attr("id"));
+         $('#UlModifGroupe').empty();
+         $('#UlEtudiants').empty();
+         ListerEtudiantAjax();
      });
      $( "#BTN_Eleve" ).click(function() {
          creeFrameDynamique('divDynamique','Vue/dynamique-CreerEtudiants.php');

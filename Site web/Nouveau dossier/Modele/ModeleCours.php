@@ -1,4 +1,4 @@
-<?php
+#1<?php
 //LireCours
 //Fait par : Simon Bouchard
 //Intrant : Aucun

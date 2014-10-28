@@ -28,7 +28,7 @@ function ajouterUsager($id, $nom, $prenom)
 
         $reussi = $requete->rowCount();
 
-	    $retour = $requete->closeCursor();
+	    $requete->closeCursor();
         unset($bdd);
 
 	}
