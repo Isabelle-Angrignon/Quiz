@@ -44,7 +44,8 @@ if(isset($_SESSION['typeUsager']))
             créent les questions et les agencent en quiz à soumettre aux étudiants.
         </p>
 
-        <hr>
+        <p> Ce projet a été supervisé par <b> Patrice Roy </b> et été livré à : <b>Stéphanne Chassé</b> , <b>Joan-Sébastien Morales</b>
+            , <b>Étienne Forest</b></p>
 
         <h3>La page servant à répondre à des quiz</h3>
         <p class="centrer">Sur cette page, l'étudiant pourra sélectionner un quiz à droite pour y répondre
