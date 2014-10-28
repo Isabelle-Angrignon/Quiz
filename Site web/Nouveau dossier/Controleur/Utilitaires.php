@@ -121,6 +121,11 @@ function GenererLi($idUi , $valeur , $idLi)
     echo '<script>ajouterLi_ToUl_V2( "'. $idUi . '" , "'.$valeur.'" ,"'.$idLi.'", true);</script>';
 }
 
+function GenererLi_V2($idUi , $valeur , $idLi, $textDiv , $classDiv)
+{
+    echo '<script>ajouterLi_AvecDiv( "'. $idUi . '" , "'.$valeur.'" ,"'.$idLi.'", true , "'.$textDiv .'", "'. $classDiv .'");</script>';
+}
+
 
 function GenererLiSelect($idUl , $valeur , $idLi)
 {

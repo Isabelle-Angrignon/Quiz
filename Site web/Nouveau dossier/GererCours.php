@@ -52,12 +52,14 @@ Description: Cette interface représente l'interface principale d'un professeur 
               receive: function (event, ui) {
                   $("#UlCours").sortable("option", "connectWith", false);
                   $("#UlEtudiants").sortable("option", "dropOnEmpty", true);
-                  $('#UIModifGroupe').empty();
+                  $('#UlModifGroupe').empty();
                   $('#UlEtudiants').empty();
+                  alert($(ui.item).attr('id'));
                   remplirUIModifGroupeAjax($(ui.item).attr('id'));
                   remplirUIEtudiantCoursAjax($(ui.item).attr('id'));
                   $('#BTN_GestionGoupe').show();
                   $('#BTN_Cours').hide();
+
               },
               remove: function (event, ui) {
                   $("#UlCours").sortable("option", "connectWith", "#QuizDropZone");
