@@ -44,7 +44,7 @@ function ListerCoursDansUl($IdUl)
     $Donnee = LireCours();
     foreach($Donnee as $Row)
     {
-        GenererLi($IdUl,substr($Row['codeCours'] . ' ' . $Row['nomCours'],0,50), $Row['idCours']);
+        GenererLi_V2($IdUl,substr($Row['nomCours'],0,25), $Row['idCours'],$Row['codeCours'],"divDansLi");
     }
 }
 
@@ -59,7 +59,7 @@ function InsererEleves()
     $Donnee = LireEtudiant();
     foreach($Donnee as $Row)
     {
-        GenererLi('UlEtudiants',$Row['nom'] . ' ' . $Row['prenom'], $Row['idUsager']);
+        GenererLi_V2('UlEtudiants',$Row['nom'] . ' ' . $Row['prenom'], $Row['idUsager'],$Row['idUsager'],"divDansLi");
     }
 }
 
