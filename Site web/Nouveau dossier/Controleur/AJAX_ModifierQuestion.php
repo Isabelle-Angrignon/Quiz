@@ -47,6 +47,6 @@ $tableauQuestion = $_POST['tableauQuestion'];
 $tableauReponses = $_POST['tableauReponses'];
 $tableauCours = $_POST['tableauCours'];
 $typeQuestion = $_POST['typeQuestion'];
-isset($_POST['tableauTypeQuizAssocie'])?$tableauTypeQuizAssocie = $_POST['tableauTypeQuizAssocie'] : $tableauTypeQuizAssocie = "";
+isset($_POST['tableauTypeQuizAssocie'])?$tableauTypeQuizAssocie = $_POST['tableauTypeQuizAssocie'] : $tableauTypeQuizAssocie = null;
 
 modifierUneQuestion($tableauQuestion, $tableauReponses, $tableauCours, $typeQuestion, $tableauTypeQuizAssocie);
