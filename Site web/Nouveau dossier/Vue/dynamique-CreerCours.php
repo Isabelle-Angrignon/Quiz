@@ -2,12 +2,12 @@
 ?>
 
 
-    <p class="titre">Nouveau Cours</p>
+    <p class="titre">Nouveau cours</p>
     <hr>
     <div class="conteneur" >
         <div class="gauche">
-            Nom Cours : <br>
-            Code Cours : <br>
+            Nom cours : <br>
+            Code cours : <br>
 
         </div>
 
@@ -24,10 +24,10 @@
     function estValide(){
         temp = true;
         temp = ($('#TB_Nom').val() != "" && $('#TB_Code').val() != "" );
-        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont vide"});}
+        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certains champs sont vides"});}
         else{
         temp = ($('#TB_Nom').val().length <= 200 && $('#TB_Code').val().length <= 10 );
-        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certain champs sont trop long"});}}
+        if (temp == false){swal({title:"Erreur" ,type:"warning", text:"Certains champs sont trop longs"});}}
         return temp;
     }
     $('#soumettre').button();

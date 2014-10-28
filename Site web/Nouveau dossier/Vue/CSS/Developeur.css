@@ -1,6 +1,7 @@
 .droite {
     text-align: center;
     display: inline-block;
+    width:60%;
 
 }
 
@@ -34,14 +35,20 @@ img{
     text-align: center;
 }
 
-#DescSimon{
-    width: 200px;
+.gras{
+    font-weight: bold;
 }
-#DescIsa{
+.DescSimon{
     width: 200px;
+    float: left;
 }
-#DescMathieu{
+.DescIsa{
     width: 200px;
+    float: right;
+}
+.DescMathieu{
+    width: 200px;
+
 }
 
 h1{

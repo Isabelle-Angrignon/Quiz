@@ -39,9 +39,14 @@ if(isset($_SESSION['typeUsager']))
 
         </div>
         <div class="droite">
-            <p>Simon Bouchard</p>
-            <p> Mathieu Dumoulin</p>
-            <p>Isabelle Angrignon</p>
+            <label class="DescSimon gras">Simon Bouchard</label>
+            <label class="DescMathieu gras"> Mathieu Dumoulin</label>
+            <label class="DescIsa gras">Isabelle Angrignon</label>
+        </div>
+        <div class="droite">
+            <label class="DescSimon">simon.bouchard01@gmail.com</label>
+            <label class="DescMathieu">Mathieu.Dumoulin@outlook.com</label>
+            <label class="DescIsa">Isabelle.Angrignon@hotmail.ca</label>
         </div>
     </div>
 

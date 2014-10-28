@@ -19,13 +19,14 @@ function reinitialiserMotDePasse(numeroDA) {
         data: {"numeroDA" :numeroDA},
         dataType: "text",
         success: function(resultat) {
-            if (resultat == 1) {
-                swal({   title: "Erreur!",   text: "Le numero de DA est invalide",   type: "warning"});
+            if (resultat == 0) {
+                swal({   title: "Erreur!",   text: "Le numero de DA est invalide ou le mot de passe est déjà le mot de passe par défaut",   type: "error"});
             }
-            else if (resultat == 0)
+            else if (resultat == 1)
             {
                 swal({   title: "Opération réussite!",   text: "Reinitialisation de mot de passe réussi",   type: "success"});
             }
+            alert(resultat);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);

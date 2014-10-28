@@ -10,13 +10,13 @@ ChangerMotPasse($_POST['numeroDA']);
 
 function ChangerMotPasse($NumeroDA){
     try {
-        ModifierMotPasse($NumeroDA, $NumeroDA);
+        $retour = ModifierMotPasse($NumeroDA, $NumeroDA);
         setParamChange($NumeroDA,0);
-        echo 0;
+        echo $retour;
     }
     catch (PDOException $e)
     {
-        echo 1;
+        echo 3;
     }
 }
 

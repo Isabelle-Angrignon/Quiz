@@ -44,7 +44,7 @@
                 }
                 else
                 {
-                    swal({ title: "Hum...",   text: "Vous devez sélectionner un cours spécifique pour générer un quiz aléatoire",   type: "error",   confirmButtonText: "Dac!" });
+                    swal({ title: "Oups...",   text: "Vous devez sélectionner un cours spécifique pour générer un quiz aléatoire",   type: "error",   confirmButtonText: "Dac!" });
                 }
             });
         });
@@ -119,15 +119,7 @@ if(!isset($_SESSION['bonnesReponses']))
     </form>
 </div>
 
-<?php
-
-include("Vue/Template/BasDePage.php");
-
-
-?>
-
-
-
+<?php  include("Vue/Template/BasDePage.php");  ?>
 
 </body>
 

@@ -9,7 +9,7 @@
 </script>
 
 
-    <p class="titre">Insérer votre fichier csv</p>
+    <p class="titre">Insérer un fichier csv</p>
     <hr>
     <div class="conteneur" >
         <form id="Form_CSV" action="../Controleur/cFonctionsGestionFichier.php" method="post"
