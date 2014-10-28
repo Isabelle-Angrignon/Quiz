@@ -7,7 +7,7 @@
 function addClickEventToQuestions(usagerCourant) {
     $("#UlQuestion li").off("click");
     $("#UlQuestion li").click( function() {
-        if(usagerCourant == $(this).children(".divDansLi").text())
+        if(usagerCourant == $(this).children(".divProfDansLi").attr("placeholder"))
         {
             var etat = "";
             if($(this).attr("id") == -1) {
@@ -22,7 +22,7 @@ function addClickEventToQuestions(usagerCourant) {
         else
         {
             swal("Oups",
-                "Vous ne disposez pas des droits pour modifier cette question. Veuillez contacter le propriétaire : " + $(this).children(".divDansLi").text(),
+                "Vous ne disposez pas des droits pour modifier cette question. Veuillez contacter le propriétaire : " + $(this).children(".divProfDansLi").text(),
                 "error");
         }
 
@@ -31,12 +31,16 @@ function addClickEventToQuestions(usagerCourant) {
 
 function traiterJSONQuestions(resultat) {
     var enonceDeLaQuestion;
+    var nomProf;
+    var idProprietaire;
     for(var i = 0; i < resultat.length; ++i) {
         enonceDeLaQuestion = resultat[i].enonceQuestion;
         if(enonceDeLaQuestion.length > 25) {
             enonceDeLaQuestion = enonceDeLaQuestion.substring(0, 25) + "...";
         }
-        ajouterLi_AvecDiv("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true, resultat[i].idUsager_Proprietaire, "divDansLi");
+        nomProf = resultat[i].prenom + " " + resultat[i].nom;
+        idProprietaire = resultat[i].idUsager_Proprietaire;
+        ajouterLi_AvecDiv("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true, nomProf, "divProfDansLi", idProprietaire);
     }
 }
 

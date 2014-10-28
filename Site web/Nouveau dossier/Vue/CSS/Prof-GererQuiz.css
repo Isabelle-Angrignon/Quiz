@@ -68,6 +68,13 @@ fieldset {
 	height:85%;
 }
 
+.divProfDansLi {
+    font-size : 10px;
+    font-family: arial;
+    width:100%;
+    text-align:right;
+}
+
 .Reponsefocused[contentEditable=true]{
     background-color:white;
 }
