@@ -31,12 +31,16 @@ function addClickEventToQuestions(usagerCourant) {
 
 function traiterJSONQuestions(resultat) {
     var enonceDeLaQuestion;
+    var nomProf;
+    var idProprietaire;
     for(var i = 0; i < resultat.length; ++i) {
         enonceDeLaQuestion = resultat[i].enonceQuestion;
         if(enonceDeLaQuestion.length > 25) {
             enonceDeLaQuestion = enonceDeLaQuestion.substring(0, 25) + "...";
         }
-        ajouterLi_AvecDiv("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true, resultat[i].idUsager_Proprietaire, "divDansLi");
+        nomProf = resultat[i].prenom + " " + resultat[i].nom;
+        idProprietaire = resultat[i].idUsager_Proprietaire;
+        ajouterLi_AvecDiv("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true, nomProf, "divProfDansLi", idProprietaire);
     }
 }
 
