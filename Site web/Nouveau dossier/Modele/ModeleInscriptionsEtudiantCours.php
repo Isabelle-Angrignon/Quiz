@@ -101,5 +101,26 @@ function desinscrireEtudiantCours($idEtudiant , $idCours, $idProf)
     }
 }
 
+function desinscrireToutEtudiantCours($idCours, $idProf)
+{
+    $bdd = connecterProf();
+    if (isset($idCours) AND isset($idProf))
+    {
+        $requete = $bdd->prepare("CALL desinscrireToutEtudiantCours(?, ?)");
+        $requete->bindparam(1, $idCours, PDO::PARAM_INT,10);
+        $requete->bindparam(2, $idProf, PDO::PARAM_STR,10);
+
+        $requete->execute();
+
+
+        $requete->closeCursor();
+        unset($bdd);
+
+    }
+    else{
+        echo "shit";
+    }
+}
+
 
 ?>

@@ -114,7 +114,7 @@ function creerEtudiantCoursAjax(idEleve,nom,prenom) {
             if(resultat == 1) {
             swal({title:"Réussite" ,type:"success", text:"L'usager a été créer"});
         }
-        else{
+        else if (resultat==0){
             swal({title:"Échec" ,type:"error", text:"Ce numero de DA existe déjà"});
         }
         },
@@ -151,8 +151,22 @@ function ListerCoursAjax() {
                 codeCours = resultat[i].codeCours;
                 nomCours = resultat[i].nomCours;
 
-                ajouterLi_ToUl_V2("UlCours",codeCours + " " + nomCours, idCours, true);
+                ajouterLi_ToUl_V2("UlCours",(codeCours + " " + nomCours, idCours).substr(0,50), true);
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+function desinscrireToutEtudiantCoursAjax(Cours) {
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/EnleverToutEtudiantCours.php",
+        data: {"idCours" :Cours},
+        dataType: "html",
+        success: function(resultat) {
+            // alert(resultat);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);

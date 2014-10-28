@@ -124,3 +124,16 @@ fieldset {
     margin-top:5px;
 }
 
+#BTN_CSV{
+    width:45%;
+    float: left;
+}
+
+#BTN_Vider{
+    width:45%;
+    float: right;
+}
+#BTN_GestionGoupe{
+    display: inline-block;
+    width: 100%;
+}

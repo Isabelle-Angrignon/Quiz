@@ -44,7 +44,7 @@ function ListerCoursDansUl($IdUl)
     $Donnee = LireCours();
     foreach($Donnee as $Row)
     {
-        GenererLi($IdUl,$Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
+        GenererLi($IdUl,substr($Row['codeCours'] . ' ' . $Row['nomCours'],0,50), $Row['idCours']);
     }
 }
 

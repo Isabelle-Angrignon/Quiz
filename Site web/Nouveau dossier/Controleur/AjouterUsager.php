@@ -9,6 +9,12 @@ CreerUsager($_POST['idUsager'], $_POST['nom'],$_POST['prenom']);
 
 function CreerUsager($idEleve,$nom,$prenom)
 {
-    ajouterUsager($idEleve,$nom,$prenom);
+    try {
+        $retour = ajouterUsager($idEleve, $nom, $prenom);
+        echo $retour;
+    }
+    catch (PDOException $e){
+        echo 0;
+    }
 }
 ?>
