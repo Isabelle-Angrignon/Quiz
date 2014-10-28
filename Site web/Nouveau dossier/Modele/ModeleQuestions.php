@@ -62,7 +62,7 @@ function trieParDefaultQuestions($idCours, $idProprietaire)
 // Par: Mathieu Dumoulin
 // Date: 15/10/2014
 // Description: Cette fonction ajoute une question dans la base de données. Si la connexion passée en paramètre est null, cette fonction va créer et fermer sa propre connexion.
-function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $ordreReponsesAleatoire, $typeQuestion, $idProprietaire, $referenceWeb)
+function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $ordreReponsesAleatoire, $typeQuestion, $idProprietaire, $referenceWeb, $estDisponible)
 {
     if(!isset($connexion))
     {
@@ -73,7 +73,7 @@ function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $
         $bdd = $connexion;
     }
 
-    $requete = $bdd->prepare("CALL ajouterQuestion(?,?,?,?,?,?,?)");
+    $requete = $bdd->prepare("CALL ajouterQuestion(?,?,?,?,?,?,?,?)");
 
     $requete->bindParam(1, $enonceQuestion, PDO::PARAM_STR);
     $requete->bindParam(2, $lienImage, PDO::PARAM_STR, 100);
@@ -82,6 +82,7 @@ function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $
     $requete->bindParam(5, $typeQuestion, PDO::PARAM_STR, 30);
     $requete->bindParam(6, $idProprietaire, PDO::PARAM_STR, 10);
     $requete->bindParam(7, $referenceWeb, PDO::PARAM_STR);
+    $requete->bindParam(8, $estDisponible, PDO::PARAM_INT,1);
 
     try
     {
@@ -105,7 +106,7 @@ function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $
 }
 
 
-function modifierQuestion($connexion, $idQuestion,$enonceQuestion, $lienImage, $difficulte, $ordreReponsesAleatoire, $typeQuestion, $idProprietaire, $referenceWeb)
+function modifierQuestion($connexion, $idQuestion,$enonceQuestion, $lienImage, $difficulte, $ordreReponsesAleatoire, $typeQuestion, $idProprietaire, $referenceWeb, $estDiponible)
 {
     if(!isset($connexion))
     {
@@ -116,7 +117,7 @@ function modifierQuestion($connexion, $idQuestion,$enonceQuestion, $lienImage, $
         $bdd = $connexion;
     }
 
-    $requete = $bdd->prepare("CALL modifierQuestion(?,?,?,?,?,?,?,?)");
+    $requete = $bdd->prepare("CALL modifierQuestion(?,?,?,?,?,?,?,?,?)");
 
     $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
     $requete->bindParam(2, $enonceQuestion, PDO::PARAM_STR);
@@ -126,6 +127,7 @@ function modifierQuestion($connexion, $idQuestion,$enonceQuestion, $lienImage, $
     $requete->bindParam(6, $typeQuestion, PDO::PARAM_STR, 30);
     $requete->bindParam(7, $idProprietaire, PDO::PARAM_STR, 10);
     $requete->bindParam(8, $referenceWeb, PDO::PARAM_STR);
+    $requete->bindParam(9, $estDiponible, PDO::PARAM_INT,1);
 
     try
     {

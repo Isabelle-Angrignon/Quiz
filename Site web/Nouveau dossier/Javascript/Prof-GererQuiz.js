@@ -83,7 +83,11 @@ function ajouterVariableSession(idQuestion, etat) {
     });
 }
 function ajouterNouvelleReponse() {
-    $.post('Vue/Prof-GererQuiz-AjoutElement.php', {"action":"nouveauCheckBox"}, function(resultat) {
+    var aCocher;
+    // Si je n'ai aucune réponse de coché, je coche cette nouvelle réponse
+    $("#Ul_Reponses").children("li").length == 0? aCocher=1 : aCocher=0;
+
+    $.post('Vue/Prof-GererQuiz-AjoutElement.php', {"action":"nouveauCheckBox", "aCocher":aCocher}, function(resultat) {
         $("#Ul_Reponses").append(resultat);
     }, 'html');
 }
@@ -96,8 +100,11 @@ function supprimerReponseCourante() {
         swal("Oups", "Veuillez sélectionner une réponse pour la supprimer.", "warning");
     }
     else {
+        // .remove() gère automatiquement de supprimer la classe de l'élément (en supprimant l'élément)
         $(".Reponsefocused").parent().remove();
     }
+    // Si l'élément a déjà été supprimé, le sélecteur ne va correspondre à aucun élément et cette commande ne va pas être éxécutée.
+    $(".Reponsefocused").removeClass("Reponsefocused");
 
 }
 
@@ -295,28 +302,41 @@ function ajouterQuestion(idCreateur) {
 
     var jsonTypeQuizAss = jsonifierTypeQuizAssQuestionCourante();
 
-    $.ajax({
-        type:"POST",
-        url:'Controleur/AJAX_AjouterQuestion.php',
-        async : false,
-        data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
-                "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
-        dataType: "text",
-        success: function(resultat){
-            if(resultat.trim() != "") {
-                swal("Erreur !", resultat, "error");
-            }
-            else {
-                $(".dFondOmbrage").detach();
-                var cours = $("#DDL_Cours option:selected").attr("value");
-                updateUlQuestion( cours, idCreateur );
-                swal("Félicitation !", "Votre ajout de question à réussi", "success");
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
+    var estValide = false;
+    for(var i = 0; i < jsonReponses.reponses.length; ++i) {
+        if(jsonReponses.reponses[i].estBonneReponse == true) {
+            estValide = true;
         }
-    });
+    }
+
+    if(estValide) {
+        $.ajax({
+            type:"POST",
+            url:'Controleur/AJAX_AjouterQuestion.php',
+            async : false,
+            data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
+                "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
+            dataType: "text",
+            success: function(resultat){
+                if(resultat.trim() != "") {
+                    swal("Erreur !", resultat, "error");
+                }
+                else {
+                    $(".dFondOmbrage").detach();
+                    var cours = $("#DDL_Cours option:selected").attr("value");
+                    updateUlQuestion( cours, idCreateur );
+                    swal("Félicitation !", "Votre ajout de question à réussi", "success");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
+            }
+        });
+    }
+    else {
+        swal("Oups !", "Cette question n'est pas valide car elle ne contient pas de bonne réponse.", "warning");
+    }
+
 }
 
 function modifierQuestion( idCreateur,idQuestion) {

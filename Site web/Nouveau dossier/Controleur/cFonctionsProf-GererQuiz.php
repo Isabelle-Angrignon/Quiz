@@ -95,10 +95,12 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
         set_error_handler('useless_error_handler');
         $bdd->beginTransaction();
 
+
+        isset($tableauTypeQuizAssocie)? $estDiponible = 1: $estDiponible = 0;
         // Ajouter la question dans la base de données
         $idQuestion = ajouterQuestion($bdd, $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
                     /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
-                    $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null);
+                    $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null, $estDiponible);
 
         // Ajouter les réponses de cette question dans la base de données
         $positionReponse = 0;
@@ -116,10 +118,14 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
         }
 
         // Associer la question à un/des type(s) de quiz
-        foreach($tableauTypeQuizAssocie['typeQuizAss'] as $typeQuiz)
+        if(isset($tableauTypeQuizAssocie))
         {
-            associerTypeQuizQuestion($bdd, $idQuestion[0], $typeQuiz['id']);
+            foreach($tableauTypeQuizAssocie['typeQuizAss'] as $typeQuiz)
+            {
+                associerTypeQuizQuestion($bdd, $idQuestion[0], $typeQuiz['id']);
+            }
         }
+
 
         $bdd->commit();
     }
@@ -150,9 +156,10 @@ function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours
         $bdd->beginTransaction();
 
         // Modifier la question dans la base de données
+        isset($tableauTypeQuizAssocie)? $estDiponible = 1: $estDiponible = 0;
         modifierQuestion($bdd, $tableauDeQuestion['idQuestion'], $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
            /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
-           $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null);
+           $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null, $estDiponible);
 
         // Ajouter les réponses de cette question dans la base de données
         modifierReponses($bdd, $tableauReponses, $tableauDeQuestion['idQuestion']);

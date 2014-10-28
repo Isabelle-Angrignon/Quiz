@@ -114,6 +114,10 @@
         {
             getReponsesFromQuestion($_SESSION["idQuestion"]);
         }
+        else if($_SESSION["etat"] == "nouvelleQuestion")
+        {
+            echo "<script>ajouterNouvelleReponse()</script>";
+        }
         ?>
         </ul>
         <input type="button" id="BTN_AjouterReponse" onclick="ajouterNouvelleReponse()"  value="Ajouter une réponse">
