@@ -7,7 +7,7 @@
 function addClickEventToQuestions(usagerCourant) {
     $("#UlQuestion li").off("click");
     $("#UlQuestion li").click( function() {
-        if(usagerCourant == $(this).children(".divDansLi").text())
+        if(usagerCourant == $(this).children(".divProfDansLi").attr("placeholder"))
         {
             var etat = "";
             if($(this).attr("id") == -1) {
@@ -22,7 +22,7 @@ function addClickEventToQuestions(usagerCourant) {
         else
         {
             swal("Oups",
-                "Vous ne disposez pas des droits pour modifier cette question. Veuillez contacter le propriétaire : " + $(this).children(".divDansLi").text(),
+                "Vous ne disposez pas des droits pour modifier cette question. Veuillez contacter le propriétaire : " + $(this).children(".divProfDansLi").text(),
                 "error");
         }
 

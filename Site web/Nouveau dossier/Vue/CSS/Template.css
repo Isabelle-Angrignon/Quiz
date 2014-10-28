@@ -166,7 +166,9 @@ div#enteteSite{
 
 .divDansLi { //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     font-size : 10px;
-    margin-left : 150px;
+    font-family: arial;
+    width:100%;
+    text-align:right;
 }
 
 .Alerte{
