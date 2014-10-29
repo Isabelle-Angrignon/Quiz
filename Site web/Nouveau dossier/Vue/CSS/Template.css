@@ -7,8 +7,12 @@ html,body{
 }
 a{
     color:#ffffff;
-
 }
+
+a:hover{
+    color:#000000;
+}
+
 a #nomSite{
     color:#000000;
 }
@@ -16,9 +20,7 @@ a #nomSite:hover{
     color:#ffffff;
 }
 
-a:hover{
-    color:#000000;
-}
+
 .fixed {
 	position:fixed;
 	z-index:30;

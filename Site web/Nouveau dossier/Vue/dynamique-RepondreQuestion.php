@@ -47,8 +47,6 @@ $infoQuestion = $_SESSION['infoQuestion'];
                 }
             }
         });
-
-
     });
 </script>
 
@@ -61,7 +59,9 @@ $infoQuestion = $_SESSION['infoQuestion'];
         <?php  echo ($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']);  ?>
     </label>
 
-    <label id="labelTitre" class="suiviQuiz"> Aléatoire <?php   ?> </label>
+    <label id="labelTitre" class="suiviQuiz"> Aléatoire
+        <?php   /* récupérer le titre si formatif sinon afficher aléatoire*/  ?>
+    </label>
 </div>
 <div id="divSuiviQuiz2" class="suiviQuiz" >
     <label id="labelProp" class="suiviQuiz"> Cours de:    <?php    echo getNomProfDuCoursDeLEtudiant()  ?>     </label>
@@ -81,7 +81,7 @@ $infoQuestion = $_SESSION['infoQuestion'];
             <?php
             if (!empty($infoQuestion))
             {
-                echo 'Question de : '. $infoQuestion[0]['idUsager_Proprietaire'] . '</br> ';
+                echo 'Question de : '. $infoQuestion[0]['prof'] . '</br> ';
             }
             ?>
         </label>
@@ -109,7 +109,7 @@ $infoQuestion = $_SESSION['infoQuestion'];
     </div>
 
     <div id="bouttonSuivant" class="zoneQuestion">
-        <button type="button" id="btnSuivant">Valider & Suivant</button>
+        <button type="button" id="btnSuivant">Valider & suivant</button>
     </div>
 </div>
 
