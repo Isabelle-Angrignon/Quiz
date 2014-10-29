@@ -29,6 +29,7 @@ function ChangerEmail($ChainePremier , $ChaineDeuxieme)
         {
             ModifierAdresseEmail($_SESSION['idUsager'], $ChainePremier);
             unset($_SESSION['erreur']);
+            $_SESSION['reussite'] = "L'adresse Courriel a été changé";
             header('Location: ../GererSonCompte.php');
             //redirigerSiDejaConnecte();
         }

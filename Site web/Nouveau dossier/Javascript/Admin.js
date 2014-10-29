@@ -21,12 +21,12 @@ function reinitialiserMotDePasse(numeroDA) {
         success: function(resultat) {
             if (resultat == 0) {
                 swal({   title: "Erreur!",   text: "Le numero de DA est invalide ou le mot de passe est déjà le mot de passe par défaut",   type: "error"});
+                $("#TB_DA").val("");
             }
             else if (resultat == 1)
             {
                 swal({   title: "Opération réussite!",   text: "Reinitialisation de mot de passe réussi",   type: "success"});
             }
-            alert(resultat);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);

@@ -36,6 +36,7 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
             {
                 $retour = ModifierMotPasse($_SESSION['idUsager'], $NouvMotPasse);
                 unset($_SESSION['erreur']);
+                $_SESSION['reussite']= "Le mot de passe a été changé";
                 setParamChange($_SESSION['idUsager'], true);
                 $_SESSION['paramChange'] = 1;
                 header('Location: ../GererSonCompte.php');
