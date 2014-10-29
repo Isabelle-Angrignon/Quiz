@@ -39,15 +39,15 @@ if(isset($_SESSION['typeUsager']))
     connexion.</p>
     <br>
     <h3>Je suis inscrit mais je ne sais pas quel est mon mot de passe ?</h3>
-    <p class="reponse">Par défaut votre mot de passe et votre numéro de DA</p>
+    <p class="reponse">Par défaut, votre mot de passe est votre numéro de DA</p>
     <br>
     <h3>J'ai oublié mon mot de passe.  Comment fais-je pour le réinitialiser ?</h3>
     <p class="reponse">Contactez un professeur.  Il fera la demande à un administateur s'il n'a pas le pouvoir de le
     réinitialiser.</p>
     <br>
-    <h3>Je suis un professeur au collège Lionnel-Groulx, comment faire pour avoir un compte ?</h3>
+    <h3>Je suis un professeur au collège Lionnel-Groulx. Comment faire pour avoir un compte ?</h3>
     <p class="reponse">Pour le moment, seuls les professeurs du département d'informatique peuvent utiliser le QuizInfo.
-    Si c'est votre cas, il vous suffit de prendre contact avec l'un des administrateurs. Ces derniers pourront vous
+    Si c'est votre cas, il vous suffit de prendre contact avec un administrateur. Ce dernier pourra vous
     créer un compte.</p>
     <br>
 

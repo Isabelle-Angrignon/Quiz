@@ -45,7 +45,7 @@
             </div>
                 <p class="titre">Mon courriel</p>
                 <hr>
-                    <form class="conteneur" method="post" action="../Controleur/ChangerEmail.php">
+                    <form class="conteneur" method="post" action="Controleur/ChangerEmail.php">
                         <div class="gauche">
                             <label>Courriel actuel </label> <br>
                             <label>Nouveau courriel </label> <br>
