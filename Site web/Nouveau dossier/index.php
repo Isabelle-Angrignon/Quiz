@@ -10,14 +10,19 @@
 </head>
 
 <body>
-
+<!--[if IE]>
+<h1> Ce site web ne supporte pas internet explorer </h1>
+<hr/>
+<p> Veuillez utiliser firefox ou chrome </p>
+<![endif]-->
+<![if !IE]>
 	<?php		
 		demarrerSession();
 		redirigerSiDejaConnecte();		
 		validerUsager();		
 		include("Vue/Template/EnteteSite.php");
 	?>
-	
+
 	<div class="contenu">
             <?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur'])))
             {
@@ -53,7 +58,7 @@
 	<?php
 		include("Vue/Template/BasDePage.php");
 	?>
-
+<![endif]>
 </body>
 
 </html>

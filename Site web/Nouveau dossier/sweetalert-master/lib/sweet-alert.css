@@ -39,7 +39,7 @@
     text-transform: none;
     position: relative; }
   .sweet-alert p {
-    color: #797979;
+    color: rgba(47, 47, 47, 0.90) /*#797979;  couleur du message*/
     font-size: 16px;
     text-align: center;
     font-weight: 300;

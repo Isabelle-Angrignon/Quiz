@@ -174,9 +174,12 @@ function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours
 
         // Associer la question à un/des type(s) de quiz
         dissocierTypeQuizQuestion($bdd, $tableauDeQuestion['idQuestion']);
-        foreach($tableauTypeQuizAssocie['typeQuizAss'] as $typeQuiz)
+        if(isset($tableauTypeQuizAssocie))
         {
-            associerTypeQuizQuestion($bdd, $tableauDeQuestion['idQuestion'], $typeQuiz['id']);
+            foreach($tableauTypeQuizAssocie['typeQuizAss'] as $typeQuiz)
+            {
+                associerTypeQuizQuestion($bdd, $tableauDeQuestion['idQuestion'], $typeQuiz['id']);
+            }
         }
 
         $bdd->commit();
@@ -188,10 +191,7 @@ function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours
             //on annule la transation
             $bdd->rollback();
 
-            //on affiche un message d'erreur ainsi que les erreurs
-            echo 'Tout ne s\'est pas bien passé, voir les erreurs ci-dessous<br />';
-            echo 'Erreur : '.$e->getMessage().'<br />';
-            echo 'N° : '.$e->getCode();
+            echo $e->getMessage();
         }
         catch (PDOException $e){echo "Erreur dans le rollback";}
     }
