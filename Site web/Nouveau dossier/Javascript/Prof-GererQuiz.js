@@ -11,7 +11,7 @@ function addClickEventToQuestions(usagerCourant) {
             swal("Oups",
             "Vous ne disposez pas des droits pour modifier cette question. Aucune modification ne sera sauvegardée.",
             "warning");
-            ajouterVariableSessionProprietaireQuestion($(this).children(".divProfDansLi").attr("placeholder"));
+
         }
 
         var etat = "";
@@ -20,6 +20,7 @@ function addClickEventToQuestions(usagerCourant) {
         }
         else {
             etat = "modifierQuestion";
+            ajouterVariableSessionProprietaireQuestion($(this).children(".divProfDansLi").attr("placeholder"));
         }
         ajouterVariableSessionQuestion($(this).attr("id"), etat);
         creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
@@ -33,8 +34,8 @@ function traiterJSONQuestions(resultat) {
     var idProprietaire;
     for(var i = 0; i < resultat.length; ++i) {
         enonceDeLaQuestion = resultat[i].enonceQuestion;
-        if(enonceDeLaQuestion.length > 25) {
-            enonceDeLaQuestion = enonceDeLaQuestion.substring(0, 25) + "...";
+        if(enonceDeLaQuestion.length > 24) {
+            enonceDeLaQuestion = enonceDeLaQuestion.substring(0, 24) + "...";
         }
         nomProf = resultat[i].prenom + " " + resultat[i].nom;
         idProprietaire = resultat[i].idUsager_Proprietaire;
@@ -358,24 +359,30 @@ function ajouterQuestion(idCreateur) {
 }
 
 function modifierQuestion( idCreateur,idQuestion, idProprietaire) {
-    var jsonQuestion = getJSONEnonceQuestion(idCreateur, idQuestion);
 
-    var jsonReponses = jsonifierReponsesQuestionCourante();
-
-    var jsonCours = jsonifierCoursQuestionCourante();
-
-    var typeQuestion = $("#TypeQuestion li input[type=radio]:checked").attr("value");
-
-    var jsonTypeQuizAss = jsonifierTypeQuizAssQuestionCourante();
-
-    var estValide = false;
-    for(var i = 0; i < jsonReponses.reponses.length; ++i) {
-        if(jsonReponses.reponses[i].estBonneReponse == "true") {
-            estValide = true;
-        }
+    if(idCreateur != idProprietaire) {
+        swal("Avertissement",
+            "Vous ne pouvez pas modifier cette question car vous n'êtes  pas le propriétaire. Veuillez contacter le propriétaire si vous voulez la modifier.",
+            "error" );
     }
+    else {
+        var jsonQuestion = getJSONEnonceQuestion(idCreateur, idQuestion);
 
-    if(idCreateur == idProprietaire) {
+        var jsonReponses = jsonifierReponsesQuestionCourante();
+
+        var jsonCours = jsonifierCoursQuestionCourante();
+
+        var typeQuestion = $("#TypeQuestion li input[type=radio]:checked").attr("value");
+
+        var jsonTypeQuizAss = jsonifierTypeQuizAssQuestionCourante();
+
+        var estValide = false;
+        for(var i = 0; i < jsonReponses.reponses.length; ++i) {
+            if(jsonReponses.reponses[i].estBonneReponse == "true") {
+                estValide = true;
+            }
+        }
+
         if(estValide) {
             $.ajax({
                 type:"POST",
@@ -403,8 +410,5 @@ function modifierQuestion( idCreateur,idQuestion, idProprietaire) {
         else {
             swal("Oups !", "Cette question n'est pas valide car elle ne contient pas de bonne réponse.", "warning");
         }
-    }
-    else {
-        swal("Avertissement", "Vous ne pouvez pas modifier cette question car vous n'êtes  pas le propriétaire. Veuillez contacter le propriétaire si vous voulez la modifier.", "error" );
     }
 }

@@ -20,6 +20,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
     demarrerSession();
     gestionParamChange();
     redirigerSiNonConnecte('Prof');
+
     ?>
 
     <script src="Javascript/Generique.js"></script>
@@ -59,7 +60,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 addClickEventToQuestions(<?php echo '"'.$_SESSION["idUsager"].'"';  ?>);
 
                 $("#AjouterQuestion").click( function() {
-                    ajouterVariableSession("", "nouvelleQuestion");
+                    ajouterVariableSessionQuestion("", "nouvelleQuestion");
                     creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
                 });
         });
@@ -73,6 +74,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <?php
     include("Vue/Template/EnteteSite.php");
     include("Vue/Template/MenuProf.php");
+
 ?>
 
 <div class="contenu">
@@ -83,8 +85,8 @@ Description: Cette interface représente l'interface principale d'un professeur 
         </select></fieldset>
     <div id="LBL_ListesGererQuiz">
         <label id="GererQuiz" for="ListeQuiz">Mes quiz</label>
-        <label id="ModifierQuiz" for="ListeModifQuiz">Modifier votre quiz ici</label>
-        <label id="GererQuestions" for="ListeModifQuiz">Mes questions</label>
+        <label id="ModifierQuiz" for="ListeModifQuiz">Modifier un quiz ici</label>
+        <label id="GererQuestions" for="ListeModifQuiz">Questions disponibles</label>
     </div>
     <div id="ListeQuiz"class="Liste ListeGererQuiz">
         <ul id="UlQuiz">
@@ -101,7 +103,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
     <div id="ListeGererQuestions" class="Liste ListeGererQuiz">
         <ul id="UlQuestion">
             <?php
-                remplirListeQuestions(1, $_SESSION["idUsager"]);
+                remplirListeQuestions($_SESSION['PremierCours'], $_SESSION["idUsager"]);
             ?>
         </ul>
         <div id="AjouterQuestion" class="ListeDivElementStyle">Ajouter une question</div>
