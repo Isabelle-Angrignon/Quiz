@@ -113,6 +113,9 @@ function creerEtudiantCoursAjax(idEleve,nom,prenom) {
         success: function(resultat){
             if(resultat == 1) {
             swal({title:"Réussite" ,type:"success", text:"L'usager a été créer"});
+                $("#TB_NumeroDA").val("");
+                $("#TB_Nom").val("");
+                $("#TB_Prenom").val("");
         }
         else if (resultat==0){
             swal({title:"Échec" ,type:"error", text:"Ce numero de DA existe déjà"});
@@ -130,7 +133,7 @@ function ajouterCoursAjax(nom,code) {
         url: "Controleur/AjouterCours.php",
         data: {"nom" :nom, "code" :code},
         dataType: "html",
-        success: function(resultat) {alert(resultat);},
+        success: function(resultat) {},
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
         }
