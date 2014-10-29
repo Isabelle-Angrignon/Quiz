@@ -29,7 +29,7 @@ if(isset($_SESSION['typeUsager']))
 
 <div class="contenu">
     <div class = "centrer">
-        <h1 id="header"> Le projet QuizInfo </h1>
+        <h1> Le projet QuizInfo </h1>
         <img id="logo" src="Vue/Images/Logo_QI_carre.png" alt="logo" >
         <p class="centrer">
             Le QuizInfo est un outil de génération de quiz avec une base de données contenant
@@ -52,7 +52,7 @@ if(isset($_SESSION['typeUsager']))
         <br/>
 
         <hr/>
-        <h1 id="header">Description des principales pages</h1>
+        <h1>Description des principales pages</h1>
 
         <h3>La page servant à répondre à des quiz</h3>
         <p class="centrer">Sur cette page, l'étudiant pourra sélectionner un quiz à droite pour y répondre
