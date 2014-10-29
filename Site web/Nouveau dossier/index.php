@@ -11,9 +11,9 @@
 
 <body>
 <!--[if IE]>
-<h1> Ce site web ne supporte pas internet explorer </h1>
+<h1 style="text-align:center"> Ce site web ne supporte pas internet explorer </h1>
 <hr/>
-<p> Veuillez utiliser firefox ou chrome </p>
+<p style="text-align:center"> Veuillez utiliser firefox ou chrome </p>
 <![endif]-->
 <![if !IE]>
 	<?php		
