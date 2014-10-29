@@ -82,8 +82,13 @@
         <script>$(".JquerryButton").button();</script>
 
         <?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur']))) {
-            echo ' <script>$(document).ready(function(){ swal({title:"Erreur" ,type:"warning", text:"'. $_SESSION['erreur'] .'"});});</script>';
+            echo ' <script>$(document).ready(function(){ swal({title:"Avertissement" ,type:"warning", text:"'. $_SESSION['erreur'] .'"});});</script>';
             unset($_SESSION['erreur']);
+        }
+        ?>
+        <?php if ((isset($_SESSION['reussite'])) && (!empty($_SESSION['reussite']))) {
+            echo ' <script>$(document).ready(function(){ swal({title:"Réussite" ,type:"success", text:"'. $_SESSION['reussite'] .'"});});</script>';
+            unset($_SESSION['reussite']);
         }
         ?>
 
