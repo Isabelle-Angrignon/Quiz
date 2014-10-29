@@ -7,24 +7,22 @@
 function addClickEventToQuestions(usagerCourant) {
     $("#UlQuestion li").off("click");
     $("#UlQuestion li").click( function() {
-        if(usagerCourant == $(this).children(".divProfDansLi").attr("placeholder"))
-        {
-            var etat = "";
-            if($(this).attr("id") == -1) {
-                etat = "nouvelleQuestion";
-            }
-            else {
-                etat = "modifierQuestion";
-            }
-            ajouterVariableSession($(this).attr("id"), etat);
-            creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
-        }
-        else
-        {
+        if(usagerCourant != $(this).children(".divProfDansLi").attr("placeholder")) {
             swal("Oups",
-                "Vous ne disposez pas des droits pour modifier cette question. Veuillez contacter le propriétaire : " + $(this).children(".divProfDansLi").text(),
-                "error");
+            "Vous ne disposez pas des droits pour modifier cette question. Aucune modification ne sera sauvegardée.",
+            "warning");
+            ajouterVariableSessionProprietaireQuestion($(this).children(".divProfDansLi").attr("placeholder"));
         }
+
+        var etat = "";
+        if($(this).attr("id") == -1) {
+            etat = "nouvelleQuestion";
+        }
+        else {
+            etat = "modifierQuestion";
+        }
+        ajouterVariableSessionQuestion($(this).attr("id"), etat);
+        creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
 
     });
 }
@@ -64,14 +62,14 @@ function updateUlQuestion(idCours, usagerCourant) {
         });
     }
 }
-// ajouterVariableSession
+// ajouterVariableSessionQuestion
 // Par Mathieu Dumoulin
 // Date: 14/10/2014
 // Intrants: idQuestion = Identifiant représentant la question dans la session
 //           etat = Action causant l'ouverture du div dynamique
 // Extrant: Il n'y a pas d'extrant
 // Description: Cette fonction envoi, à l'aide de AJAX, les variables passées en paramètre dans la session
-function ajouterVariableSession(idQuestion, etat) {
+function ajouterVariableSessionQuestion(idQuestion, etat) {
     $.ajax({
         type: "post",
         url: 'Vue/Prof-GererQuiz-AjoutElement.php',
@@ -82,6 +80,26 @@ function ajouterVariableSession(idQuestion, etat) {
         }
     });
 }
+
+// ajouterVariableSessionProprietaireQuestion
+// Par Mathieu Dumoulin
+// Date: 14/10/2014
+// Intrants: idProprietaire = Identifiant représentant le proprietaire de la question dans la session
+// Extrant: Il n'y a pas d'extrant
+// Description: Cette fonction envoi, à l'aide de AJAX, les variables passées en paramètre dans la session
+function ajouterVariableSessionProprietaireQuestion(idProprietaire) {
+
+    $.ajax({
+        type: "post",
+        url: 'Vue/Prof-GererQuiz-AjoutElement.php',
+        async:false,
+        data:  {"session":true, "idProprietaire":idProprietaire},
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
 function ajouterNouvelleReponse() {
     var aCocher;
     // Si je n'ai aucune réponse de coché, je coche cette nouvelle réponse
@@ -339,7 +357,7 @@ function ajouterQuestion(idCreateur) {
 
 }
 
-function modifierQuestion( idCreateur,idQuestion) {
+function modifierQuestion( idCreateur,idQuestion, idProprietaire) {
     var jsonQuestion = getJSONEnonceQuestion(idCreateur, idQuestion);
 
     var jsonReponses = jsonifierReponsesQuestionCourante();
@@ -357,31 +375,36 @@ function modifierQuestion( idCreateur,idQuestion) {
         }
     }
 
-    if(estValide) {
-        $.ajax({
-            type:"POST",
-            url:'Controleur/AJAX_ModifierQuestion.php',
-            async : false,
-            data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
-                "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
-            dataType: "text",
-            success: function(resultat){
-                if(resultat.trim() != "") {
-                    swal("Erreur !", resultat, "error");
+    if(idCreateur == idProprietaire) {
+        if(estValide) {
+            $.ajax({
+                type:"POST",
+                url:'Controleur/AJAX_ModifierQuestion.php',
+                async : false,
+                data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
+                    "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
+                dataType: "text",
+                success: function(resultat){
+                    if(resultat.trim() != "") {
+                        swal("Erreur !", resultat, "error");
+                    }
+                    else {
+                        $(".dFondOmbrage").detach();
+                        var cours = $("#DDL_Cours option:selected").attr("value");
+                        updateUlQuestion( cours, idCreateur );
+                        swal("Félicitation !", "Votre modification de question à réussi", "success");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
                 }
-                else {
-                    $(".dFondOmbrage").detach();
-                    var cours = $("#DDL_Cours option:selected").attr("value");
-                    updateUlQuestion( cours, idCreateur );
-                    swal("Félicitation !", "Votre modification de question à réussi", "success");
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
-            }
-        });
+            });
+        }
+        else {
+            swal("Oups !", "Cette question n'est pas valide car elle ne contient pas de bonne réponse.", "warning");
+        }
     }
     else {
-        swal("Oups !", "Cette question n'est pas valide car elle ne contient pas de bonne réponse.", "warning");
+        swal("Avertissement", "Vous ne pouvez pas modifier cette question car vous n'êtes  pas le propriétaire. Veuillez contacter le propriétaire si vous voulez la modifier.", "error" );
     }
 }

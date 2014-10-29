@@ -27,6 +27,11 @@ if(isset($_POST['session']))
         isset($_POST['idQuestion'])? $_SESSION['idQuestion'] = $_POST['idQuestion'] : $_SESSION['idQuestion'] = NULL;
         // etat
         isset($_POST['etat'])? $_SESSION['etat'] = $_POST['etat'] : $_SESSION['etat'] = NULL;
+
+        if(isset($_POST['idProprietaire']))
+        {
+            $_SESSION['idProprietaire'] = $_POST['idProprietaire'];
+        }
     }
 }
 

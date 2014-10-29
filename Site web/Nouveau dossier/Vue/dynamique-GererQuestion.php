@@ -166,7 +166,13 @@
     <?php
         if($_SESSION["etat"] == "modifierQuestion")
         {
-            echo "Modifier onclick='modifierQuestion(\"".$_SESSION['idUsager']."\",\"". $_SESSION['idQuestion']."\")'";
+            if(isset($_SESSION['idProprietaire']))
+            {
+                $UsagerCourrant = $_SESSION['idUsager'];
+                $idQuestion = $_SESSION['idQuestion'];
+                $Proprietaire = $_SESSION['idProprietaire'];
+            }
+            echo "Modifier onclick='modifierQuestion(\"".$UsagerCourrant."\",\"". $idQuestion."\", \"". $Proprietaire ."\")'";
         }
         elseif( $_SESSION["etat"] == "nouvelleQuestion")
         {
