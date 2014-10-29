@@ -30,7 +30,7 @@ if(isset($_SESSION['typeUsager']))
 <div class="contenu">
     <div class = "centrer">
         <h1 id="header"> Le projet QuizInfo </h1>
-        <img id="logo" src="Vue/Images/Logo_QIz.png" alt="logo" >
+        <img id="logo" src="Vue/Images/Logo_QI_carre.png" alt="logo" >
         <p class="centrer">
             Le QuizInfo est un outil de génération de quiz avec une base de données contenant
             entre autre une banque de questions de types vrai ou faux et d'autres à choix de réponse.
@@ -44,8 +44,15 @@ if(isset($_SESSION['typeUsager']))
             créent les questions et les agencent en quiz à soumettre aux étudiants.
         </p>
 
-        <p> Ce projet a été supervisé par <b> Patrice Roy </b> et été livré à : <b>Stéphanne Chassé</b> , <b>Joan-Sébastien Morales</b>
-            , <b>Étienne Forest</b></p>
+        <p class="centrer"> Ce projet a été supervisé par <b> Patrice Roy</b>.
+        <br/>
+            Les représentants clients sont les enseiggnants de première session suivant :<br/>
+            <b>Stéphanne Chassé</b>, <b>Joan-Sébastien Morales</b> et <b>Étienne Forest</b>
+        </p>
+        <br/>
+
+        <hr/>
+        <h1 id="header">Description des principales pages</h1>
 
         <h3>La page servant à répondre à des quiz</h3>
         <p class="centrer">Sur cette page, l'étudiant pourra sélectionner un quiz à droite pour y répondre

@@ -1,0 +1,9 @@
+Hotfix release available: 2014-09-29a "Hrun".
+          <a href="http://download.dokuwiki.org">upgrade now!</a> [46.1] <a href="http://www.dokuwiki.org/update_check">(what's this?)</a>
+%
+New release available: 2014-09-29 "Hrun".
+          <a href="http://download.dokuwiki.org">upgrade now!</a> [46] <a href="http://www.dokuwiki.org/update_check">(what's this?)</a>
+%
+Security Hotfix 2014-05-05b to prevent zero byte attacks on external auth systems is available.
+          <a href="http://download.dokuwiki.org">upgrade now!</a> [44.2] <a href="http://www.dokuwiki.org/update_check">(what's this?)</a>
+%

@@ -88,6 +88,7 @@
             $(this).removeClass("enonceVide");
         }
     });
+
     $("#BTN_ConfirmerQuestion").button();
 
 </script>
