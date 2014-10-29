@@ -30,7 +30,7 @@ if(isset($_SESSION['typeUsager']))
 <div class="contenu">
     <div class = "centrer">
         <h1> Le projet QuizInfo </h1>
-        <img id="logo" src="Vue/Images/Logo_QI_carre.png" alt="logo" >
+        <img id="logo" src="Vue/Images/Logo_QI_ico.png" alt="logo" >
         <p class="centrer">
             Le QuizInfo est un outil de génération de quiz avec une base de données contenant
             entre autre une banque de questions de types vrai ou faux et d'autres à choix de réponse.
