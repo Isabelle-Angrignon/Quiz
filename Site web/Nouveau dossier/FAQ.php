@@ -41,7 +41,7 @@ if(isset($_SESSION['typeUsager']))
     <h3>Je suis inscrit mais je ne sais pas quel est mon mot de passe ?</h3>
     <p class="reponse">Par défaut, votre mot de passe est votre numéro de DA</p>
     <br>
-    <h3>J'ai oublié mon mot de passe.  Comment fais-je pour le réinitialiser ?</h3>
+    <h3>J'ai oublié mon mot de passe.  Comment faire pour le réinitialiser ?</h3>
     <p class="reponse">Contactez un professeur.  Il fera la demande à un administateur s'il n'a pas le pouvoir de le
     réinitialiser.</p>
     <br>
