@@ -14,7 +14,7 @@ if ( $score == 100)
 }
 elseif ($score <= 60)
 {
-    echo "Ouf! une révision est nécessaire! " . $resultat;
+    echo "Ouf! une révision s'impose! " . $resultat;
 }
 else
 {
