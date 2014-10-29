@@ -26,10 +26,11 @@ function ListerCoursDansSelect($IdSelect, $tousMesCours)
         $Donnee = LireCours();
 
         $_SESSION['listeCours'] = $Donnee;
+        $_SESSION['PremierCours'] = $Donnee[0]['idCours'];
         foreach($Donnee as $Row)
-        {
-            GenererOption($IdSelect, $Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
-        }
+    {
+        GenererOption($IdSelect, $Row['codeCours'] . ' ' . $Row['nomCours'], $Row['idCours']);
+    }
     }
 }
 

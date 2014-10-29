@@ -62,7 +62,13 @@
        }
     });
 
+
     $("#TypeQuestion li input[type=radio]").click(function() {
+        if($(this).attr("value") == "VRAI_FAUX" ) {
+            swal("Pas implémenté", "La création du type de question vrai/faux n'est pas encore implémentée", "error");
+            $("#TypeQuestion li:first-child input[type=radio]").prop("checked", true);
+        }
+
         // À implémenter... Changement du reponseConteneur selon le type de question
     });
 
@@ -166,12 +172,9 @@
     <?php
         if($_SESSION["etat"] == "modifierQuestion")
         {
-            if(isset($_SESSION['idProprietaire']))
-            {
-                $UsagerCourrant = $_SESSION['idUsager'];
-                $idQuestion = $_SESSION['idQuestion'];
-                $Proprietaire = $_SESSION['idProprietaire'];
-            }
+            $UsagerCourrant = $_SESSION['idUsager'];
+            $idQuestion = $_SESSION['idQuestion'];
+            isset($_SESSION['idProprietaire']) ? $Proprietaire = $_SESSION['idProprietaire'] : $Proprietaire = "";
             echo "Modifier onclick='modifierQuestion(\"".$UsagerCourrant."\",\"". $idQuestion."\", \"". $Proprietaire ."\")'";
         }
         elseif( $_SESSION["etat"] == "nouvelleQuestion")
