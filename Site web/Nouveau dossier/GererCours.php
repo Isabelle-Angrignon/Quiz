@@ -54,7 +54,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
                   $("#UlEtudiants").sortable("option", "dropOnEmpty", true);
                   $('#UlModifGroupe').empty();
                   $('#UlEtudiants').empty();
-                  alert($(ui.item).attr('id'));
                   remplirUIModifGroupeAjax($(ui.item).attr('id'));
                   remplirUIEtudiantCoursAjax($(ui.item).attr('id'));
                   $('#BTN_GestionGoupe').show();
