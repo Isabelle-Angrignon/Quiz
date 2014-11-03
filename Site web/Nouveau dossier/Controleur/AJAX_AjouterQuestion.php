@@ -38,6 +38,7 @@ include("../Modele/ModeleQuestions.php");
 include("../Modele/ModeleReponses.php");
 include("../Modele/ModeleAssociationQuestionCours.php");
 include("../Modele/ModeleAssociationTypesQuizQuestion.php");
+include("../Modele/ModeleQuestionsVraiFaux.php");
 
 
 $tableauQuestion = $_POST['tableauQuestion'];

@@ -7,9 +7,8 @@ include("../Modele/ModeleUtilisateurs.php");
 // Description: Ce fichier ajoute les éléments HTML selon la variable $_POST['action'] ainsi que des variables de session selon la variable $_POST['session']
 if(isset($_POST['action']))
 {
-    if($_POST['action'] == 'nouveauCheckBox')
+    if($_POST['action'] == 'nouveauInput')
     {
-
         nouveauInputReponses("radio", $_POST['aCocher']);
     }
     else if($_POST['action'] == 'listeCoursSelonQuestion')
