@@ -23,7 +23,20 @@
     <script src="Javascript/Etudiant-Accueil.js"></script>
     <script>
         $(function() {
-            $("#DDL_Cours").selectmenu();
+            $("#DDL_Cours").selectmenu({
+                width:400,
+                select: function(event, ui) {
+                    SetIdCoursSession();
+                    //vider liste
+                    $("#UlQuizFormatif").empty();
+                    //regénérer liste formatifs
+                    listerQuizFormatifs();
+
+             /*       var id = $("#DDL_Cours option:selected").attr("value");
+                    updateUlQuestion( id, <?php echo '"'.$_SESSION["idUsager"].'"' ?> );*/
+                }
+            });
+
 
             $("#UlQuizFormatif").click( function() {
                 //appeler la fonction php qui génere une liste de questions pour un idQuiz spécifique...;
@@ -90,15 +103,8 @@ if(!isset($_SESSION['bonnesReponses']))
         <div id="ListeQuiz"class="Liste ListeGererQuiz">
             <label>Formatif</label>
             <ul id="UlQuizFormatif">
-                <!-- les items de quiz apparaîtront ici Bidon en attendant-->
-                <li class="ui-state-default">Quiz semaine 3</li>
-                <li class="ui-state-default">Quiz semaine 6</li>
-                <li class="ui-state-default">Quiz semaine 9</li>
-                <li class="ui-state-default">Quiz mi-session</li>
-                <li class="ui-state-default">Un autre quiz...</li>
-                <!-- les items de quiz apparaîtront ici Bidon en attendant-->
-                <?php
-                ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], "get id cours dans ddl selected", "FORMATIF")
+               <?php
+                ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], $_SESSION['idCours'], "FORMATIF");
                 ?>
             </ul>
             <!--

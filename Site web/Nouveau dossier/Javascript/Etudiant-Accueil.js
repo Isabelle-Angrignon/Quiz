@@ -24,9 +24,26 @@ function SetIdCoursSession(){
     return coursEstChoisi;
 }
 
+function listerQuizFormatifs(){
+    $.ajax({
+        type:"POST",
+        url: 'Controleur/FonctionQuizEtudiant/ListerQuizFormatifs.php',
+        async : !1,
+        success: function(resultSet){
+            if(resultSet != null){
 
-function genererQuestionsAleatoires()
-{
+                for (var i = 0; i < resultSet.length; ++i){//////////////////////////////////retourne 210 vs 3
+                    ajouterLi_ToUl_Selectable("UlQuizFormatif", resultSet[i].titreQuiz , resultSet[i].idQuiz, true);
+                }
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
+        }
+    });
+}
+
+function genererQuestionsAleatoires(){
     var quizEstCree = 0;
     $.ajax({
         type:"POST",
@@ -41,22 +58,17 @@ function genererQuestionsAleatoires()
     });
     return quizEstCree;
 }
-/*var zeSingleton = (function(){
-    this.OstieDeBooleen = 0;
-    this.VireATrue = function(){this.OstieDeBooleen = 1;}
-    this.obtenirBooleen = function(){return this.OstieDeBooleen;}
-});*/
 
-function gererQuestionRepondue() {
+function gererQuestionRepondue(continuerQuiz) {
 
-//Récupérer le id de la réponse cliquée
+    //Récupérer le id de la réponse cliquée
     var idReponse;
     estRepondu =0;
     $("#UlChoixReponse .ui-selected").each(function() {
         idReponse = $(this).attr("id");
     });
 
-//Valider cette réponse
+    //Valider cette réponse
      $.ajax({
         type:"POST",
         url:"Controleur/FonctionQuizEtudiant/validerReponseAQuestion.php",
@@ -64,27 +76,28 @@ function gererQuestionRepondue() {
         async : !1,
         datatype: "text",
         success: function(resultat) {
-            //serie de if pour débuggage a remplacer par des sweetAlert.
-            if(resultat == 1)
-            {
-                swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",   confirmButtonText: "Dac!" });
+            var close  = true; //Variable pour dire au sweetalert de réponse de se fermer après qu'on ait cliqué ok.
+            // si c'est la dernière question, alors on va afficher un autre sweetalert pour le score final donc,
+            //la variable close doit être à false.
+
+            //valide que la dernière question a été chargée dans la page
+            if (estDerniereQuestion() == 1){ close =false; }
+
+            if(resultat == 1) {
+                swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",   confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
             }
-            else if(resultat == 0)
-            {
-                swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",   confirmButtonText: "Dac!" });
+            else if(resultat == 0) {
+                swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",   confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
                 // ajouter un ajax pour récupérer le lien hypertext de la question si il y en a une.
             }
-            else if(resultat == 'X')
-            {
+            else if(resultat == 'X') {
                 swal({   title: "Oh la la!",   text: " Une erreur s'est produite au moment de la validation. ",   type: "warning",   confirmButtonText: "Dac!" });
             }
-            else
-            {
+            else {
                 swal({   title: "Oups!",   text: "Répondez d'abord à la question!",   type: "error",   confirmButtonText: "Dac!" });
             }
             //retour de validation si question répondue...
-            if (resultat == 1 || resultat == 0)
-            {
+            if (resultat == 1 || resultat == 0) {
                 estRepondu = 1;
                 updateScoreAffiche(resultat);
                 // Update stats bd
@@ -96,6 +109,22 @@ function gererQuestionRepondue() {
         }
     });
     return estRepondu;
+}
+
+function estDerniereQuestion(){
+    var estDerniere = 0;
+    $.ajax({
+        type:"POST",
+        url:"Controleur/FonctionQuizEtudiant/estDerniereQuestion.php",
+        async : !1,
+        success: function(res) {
+            estDerniere = res;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
+        }
+    });
+    return estDerniere;
 }
 
 function updateScoreAffiche(resultat){
@@ -135,8 +164,16 @@ function chargerNouvelleQuestion(){
 
 }
 
-function quizTermine()
-{
+function continuerQuiz() {
+    if (quizTermine() == 1) {
+        afficherScoreFinal();
+    }
+    else {
+        chargerNouvelleQuestion();//dans la session
+    }
+}
+
+function quizTermine(){
     var termine = 0;
     $.ajax({
         type:"POST",
@@ -152,15 +189,15 @@ function quizTermine()
     return termine;
 }
 
-function afficherScoreFinal()
-{
+function afficherScoreFinal(){
     $.ajax({
         type:"POST",
         url:"Controleur/FonctionQuizEtudiant/afficherScoreFinal.php",
         async : !1,
         success: function(msg) {
-
+            $('#dFondOmbrage').remove();
             swal({title: "Quiz terminé!", text: msg, type: "success", confirmButtonText: "Dac!"});
+
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);

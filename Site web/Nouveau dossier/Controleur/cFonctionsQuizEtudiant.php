@@ -10,13 +10,16 @@
 */
 function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz)
 {
+    if ($idCours == 0)
+    {
+
+    }
     $Donnee = ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz );
     foreach($Donnee as $Row)
     {
-        GenererLiSelect($idUl,$Row['titrequiz'], $Row['idQuiz']);
+        GenererLiSelect($idUl,$Row['titreQuiz'], $Row['idQuiz']);
     }
 }
-
 
 /*
     Nom: genererChoixDeReponses
