@@ -10,15 +10,9 @@ function remplirUIModifGroupeAjax(Cours) {
         data: {"idCours" :Cours },
         dataType: "json",
         success: function(resultat) {
-            var idUsager;
-            var nom;
-            var prenom;
-
             for(var i = 0; i < resultat.length; ++i) {
-                idUsager = resultat[i].idUsager;
-                nom = resultat[i].nom;
-                prenom = resultat[i].prenom;
-                ajouterLi_AvecDiv("UlModifGroupe",nom + " " + prenom, idUsager, true,idUsager,"divDansLi", "allo");
+                ajouterLi_AvecDiv("UlModifGroupe",resultat[i].nom + " " + resultat[i].prenom,
+                    resultat[i].idUsager, true,resultat[i].idUsager,"divDansLi", "allo");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -34,15 +28,9 @@ function remplirUIEtudiantCoursAjax(Cours) {
         data: {"idCours" :Cours },
         dataType: "json",
         success: function(resultat) {
-            var idUsager;
-            var nom;
-            var prenom;
             for(var i = 0; i < resultat.length; ++i) {
-                idUsager = resultat[i].idUsager;
-                nom = resultat[i].nom;
-                prenom = resultat[i].prenom;
-
-                ajouterLi_AvecDiv("UlEtudiants",nom + " " + prenom, idUsager, true,idUsager,"divDansLi", "");
+              ajouterLi_AvecDiv("UlEtudiants",resultat[i].nom + " " + resultat[i].prenom,
+                    resultat[i].idUsager, true,resultat[i].idUsager,"divDansLi", "");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -57,15 +45,9 @@ function ListerEtudiantAjax() {
         url: "Controleur/ListerEleve.php",
         dataType: "json",
         success: function(resultat) {
-            var idUsager;
-            var nom;
-            var prenom;
             for(var i = 0; i < resultat.length; ++i) {
-                idUsager = resultat[i].idUsager;
-                nom = resultat[i].nom;
-                prenom = resultat[i].prenom;
-
-                ajouterLi_AvecDiv("UlEtudiants",nom + " " + prenom, idUsager, true,idUsager,"divDansLi", "");
+                ajouterLi_AvecDiv("UlEtudiants",resultat[i].nom + " " +
+                resultat[i].prenom, resultat[i].idUsager, true,resultat[i].idUsager,"divDansLi", "");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -146,15 +128,9 @@ function ListerCoursAjax() {
         url: "Controleur/ListerCours.php",
         dataType: "json",
         success: function(resultat) {
-            var idCours;
-            var codeCours;
-            var nomCours;
             for(var i = 0; i < resultat.length; ++i) {
-                idCours = resultat[i].idCours;
-                codeCours = resultat[i].codeCours;
-                nomCours = resultat[i].nomCours;
-
-                ajouterLi_AvecDiv("UlCours",(nomCours).substr(0,25), idCours, true,codeCours,"divDansLi");
+                ajouterLi_AvecDiv("UlCours",(resultat[i].nomCours).substr(0,25),
+                    resultat[i].idCours, true,resultat[i].codeCours,"divDansLi");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {

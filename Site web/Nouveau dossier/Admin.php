@@ -33,8 +33,8 @@ include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
             <li id="reintinialiser" class="ui-state-default padding">Réinitialiser un mot de passe</li>
             <li id="ajouterProf" class="ui-state-default padding ">Ajouter un compte professeur</li>
             <li id="supprimerCompte" class="ui-state-default padding">Supprimer un compte</li>
-            <li id="nommerAdmin" class="ui-state-default padding nonImplementer">Nommer un nouvel administateur</li>
-            <li id="modifierCours" class="ui-state-default padding nonImplementer">Modifier un cours</li>
+            <li id="nommerAdmin" class="ui-state-default padding ">Nommer un nouvel administateur</li>
+            <li id="modifierCours" class="ui-state-default padding ">Modifier un cours</li>
         </ul>
 
     </div>
@@ -44,8 +44,8 @@ include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
 </div>
 
 <script>
-    $('.nonImplementer').click(function(){
-        swal("Désolé","Cette fonction n'est pas encore implémentée","error");
+    $('#modifierCours').click(function(){
+        CreerDeploiement('Vue/dynamique-ModifierCours.php');
     });
     //Vue/Template/dynamique-ReinitialiserMotDePasse.php
     $('#reintinialiser').click(function(){
@@ -56,6 +56,9 @@ include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
     });
     $('#supprimerCompte').click(function(){
         CreerDeploiement('Vue/dynamique-SupprimerUnCompte.php');
+    });
+    $('#nommerAdmin').click(function(){
+        CreerDeploiement('Vue/dynamique-NommerAdmin.php');
     });
 
 </script>

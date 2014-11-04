@@ -56,3 +56,25 @@ function supprimerUnCompte(numeroDA){
         }
     });
 }
+function nommerAdminAjax(numeroDA){
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/nommerAdmin.php",
+        data: {"numeroDA" :numeroDA},
+        dataType: "text",
+        success: function(resultat) {
+            alert(resultat);
+            if (resultat == 0) {
+                swal({   title: "Erreur!",   text: "Une érreur est survenue",   type: "error"});
+                $("#TB_DA").val("");
+            }
+            else if (resultat == 1)
+            {
+                swal({   title: "Opération réussite!",   text: "Le professeur a été augmenté au rang d'admin",   type: "success"});
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
