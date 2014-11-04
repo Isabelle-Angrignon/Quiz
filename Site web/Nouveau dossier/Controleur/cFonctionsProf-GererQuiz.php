@@ -23,18 +23,28 @@ function getQuestion($idQuestion) {
     return recupererElementsQuestion($idQuestion);
 }
 
-function getReponsesFromQuestion($idQuestion)
+function getReponsesFromQuestion($idQuestion, $typeQuestion)
 {
     if($idQuestion != null)
     {
         $tabIdReponses = array();
-        $reponses = recupererReponsesAQuestion($idQuestion);
-
-        foreach($reponses as $uneReponse)
+        if($typeQuestion == "VRAI_FAUX")
         {
-            creerInputReponse("radio","reponses", $uneReponse["idReponse"], $uneReponse["enonceReponse"], $uneReponse["reponseEstValide"]);
-            array_push($tabIdReponses,$uneReponse["idReponse"]);
+            $reponse = afficherQuestionVraiFaux($idQuestion);
+            creerInputReponse("radio","reponses", 1, "Vrai", $reponse["reponseEstVrai"]);
+            $reponse["reponseEstVrai"] == 1? $fauxEstVrai = 0: $fauxEstVrai = 1;
+            creerInputReponse("radio","reponses", 0, "Faux", $fauxEstVrai);
         }
+        else
+        {
+            $reponses = recupererReponsesAQuestion($idQuestion);
+            foreach($reponses as $uneReponse)
+            {
+                creerInputReponse("radio","reponses", $uneReponse["idReponse"], $uneReponse["enonceReponse"], $uneReponse["reponseEstValide"]);
+                array_push($tabIdReponses,$uneReponse["idReponse"]);
+            }
+        }
+
         $_SESSION["tabIdReponses"] = $tabIdReponses;
     }
 }
@@ -102,13 +112,31 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
                     /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
                     $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null, $estDiponible);
 
+
         // Ajouter les réponses de cette question dans la base de données
-        $positionReponse = 0;
-        foreach($tableauReponses['reponses'] as $reponse)
+        if($typeQuestion != "VRAI_FAUX")
         {
-            $estBon = convertEstBonneReponseToTINYINT($reponse['estBonneReponse']);
-            ajouterReponse($bdd, $reponse['enonce'], "", $idQuestion[0], $estBon, ++$positionReponse);
+            $positionReponse = 0;
+            foreach($tableauReponses['reponses'] as $reponse)
+            {
+                $estBon = convertEstBonneReponseToTINYINT($reponse['estBonneReponse']);
+                ajouterReponse($bdd, $reponse['enonce'], "", $idQuestion[0], $estBon, ++$positionReponse);
+            }
         }
+        else
+        {
+            $estVrai = 0;
+            foreach($tableauReponses['reponses'] as $reponse)
+            {
+                if($reponse['idReponse'] == 1 && $reponse["estBonneReponse"] == true)
+                {
+                    $estVrai = 1;
+                }
+            }
+
+            ajouterLienQuestionsVraiFaux($bdd, $idQuestion[0], $estVrai);
+        }
+
 
         $positionCours = 0;
         // Associer la question à un/plusieurs cours
@@ -162,7 +190,24 @@ function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours
            $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null, $estDiponible);
 
         // Ajouter les réponses de cette question dans la base de données
-        modifierReponses($bdd, $tableauReponses, $tableauDeQuestion['idQuestion']);
+        modifierReponses($bdd, $tableauReponses, $tableauDeQuestion['idQuestion'], $typeQuestion);
+
+        // Je supprime la question de la table Liaison Vrai/Faux
+        supprimerLienQuestionVraiFaux($bdd, $tableauDeQuestion['idQuestion']);
+
+        if($typeQuestion == "VRAI_FAUX")
+        {
+            $estVrai = 0;
+            foreach($tableauReponses['reponses'] as $reponse)
+            {
+                if($reponse['idReponse'] == 1 && $reponse["estBonneReponse"] == "true")
+                {
+                    $estVrai = 1;
+                }
+            }
+
+            ajouterLienQuestionsVraiFaux($bdd, $tableauDeQuestion['idQuestion'], $estVrai);
+        }
 
 
         // Associer la question à un/plusieurs cours
@@ -205,7 +250,7 @@ function convertEstBonneReponseToTINYINT($estBonneReponse)
     return $estBonneReponse=='true'?1:0;
 }
 
-function modifierReponses($bdd, $tableauReponses, $identifiantQuestion)
+function modifierReponses($bdd, $tableauReponses, $identifiantQuestion, $typeQuestion)
 {
     // Reprendre les anciennes réponses
     if(isset($_SESSION["tabIdReponses"]))
@@ -216,53 +261,56 @@ function modifierReponses($bdd, $tableauReponses, $identifiantQuestion)
     {
         $tabIdAnciennesReponses = array();
     }
-
-    // Si on encode pas notre tableauReponses, PHP ne le reconnait pas comme étant un vrai JSON.
-    $tableauNouvelleReponses = json_decode(json_encode($tableauReponses));
-
-    // Je dois garder une variable qui contient la grandeur du tableau initial car unset(array[index]) de change pas l'index des éléments qui suivent le unset mais change le size du tableau
-    $nbAncienneReponses = count($tabIdAnciennesReponses);
-    $nbNouvelleReponses = count($tableauNouvelleReponses->reponses);
-
-    $positionReponse = 0;
-    for($x = 0; $x < $nbNouvelleReponses; ++$x)
+    if($typeQuestion != "Vrai_Faux")
     {
-        $action = "";
-        for($i = 0; $i < $nbAncienneReponses && $action == ""; ++$i)
+        // Si on encode pas notre tableauReponses, PHP ne le reconnait pas comme étant un vrai JSON.
+        $tableauNouvelleReponses = json_decode(json_encode($tableauReponses));
+
+        // Je dois garder une variable qui contient la grandeur du tableau initial car unset(array[index]) de change pas l'index des éléments qui suivent le unset mais change le size du tableau
+        $nbAncienneReponses = count($tabIdAnciennesReponses);
+        $nbNouvelleReponses = count($tableauNouvelleReponses->reponses);
+
+        $positionReponse = 0;
+        for($x = 0; $x < $nbNouvelleReponses; ++$x)
         {
-            if(isset($tabIdAnciennesReponses[$i]))
+            $action = "";
+            for($i = 0; $i < $nbAncienneReponses && $action == ""; ++$i)
             {
-                if($tabIdAnciennesReponses[$i] == $tableauNouvelleReponses->reponses[$x]->idReponse)
+                if(isset($tabIdAnciennesReponses[$i]))
                 {
-                    $action = "Modifier";
-                    unset($tabIdAnciennesReponses[$i]);
+                    if($tabIdAnciennesReponses[$i] == $tableauNouvelleReponses->reponses[$x]->idReponse)
+                    {
+                        $action = "Modifier";
+                        unset($tabIdAnciennesReponses[$i]);
+                    }
                 }
+
             }
+            if($action == "Modifier")
+            {
+                $idReponse = $tableauNouvelleReponses->reponses[$x]->idReponse;
+                $enonce = $tableauNouvelleReponses->reponses[$x]->enonce;
+                $positionReponse = $tableauNouvelleReponses->reponses[$x]->positionReponse;
+                // Dans la base de donnée, estBonneReponse représente un TINYINT donc on doit le transformer en TINYINT.
+                $estBon = convertEstBonneReponseToTINYINT($tableauNouvelleReponses->reponses[$x]->estBonneReponse);
 
+                modifierReponse($bdd,$idReponse, $enonce,"", $estBon, $positionReponse);
+                unset($tableauNouvelleReponses->reponses[$x]);
+            }
         }
-        if($action == "Modifier")
+        // Ajouter les nouvelles réponses dans la bd
+        foreach($tableauNouvelleReponses->reponses as $reponse)
         {
-            $idReponse = $tableauNouvelleReponses->reponses[$x]->idReponse;
-            $enonce = $tableauNouvelleReponses->reponses[$x]->enonce;
-            $positionReponse = $tableauNouvelleReponses->reponses[$x]->positionReponse;
+            $enonce = $reponse->enonce;
+            $positionReponse = $reponse->positionReponse;
+            $idQuestion =  $identifiantQuestion;
             // Dans la base de donnée, estBonneReponse représente un TINYINT donc on doit le transformer en TINYINT.
-            $estBon = convertEstBonneReponseToTINYINT($tableauNouvelleReponses->reponses[$x]->estBonneReponse);
+            $estBon = convertEstBonneReponseToTINYINT($reponse->estBonneReponse);
 
-            modifierReponse($bdd,$idReponse, $enonce,"", $estBon, $positionReponse);
-            unset($tableauNouvelleReponses->reponses[$x]);
+            ajouterReponse($bdd, $enonce, "", $idQuestion, $estBon, $positionReponse);
         }
     }
-    // Ajouter les nouvelles réponses dans la bd
-    foreach($tableauNouvelleReponses->reponses as $reponse)
-    {
-        $enonce = $reponse->enonce;
-        $positionReponse = $reponse->positionReponse;
-        $idQuestion =  $identifiantQuestion;
-        // Dans la base de donnée, estBonneReponse représente un TINYINT donc on doit le transformer en TINYINT.
-        $estBon = convertEstBonneReponseToTINYINT($reponse->estBonneReponse);
 
-        ajouterReponse($bdd, $enonce, "", $idQuestion, $estBon, $positionReponse);
-    }
 
     foreach($tabIdAnciennesReponses as $idAncienneReponse)
     {

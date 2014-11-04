@@ -7,7 +7,9 @@
     include("../Modele/ModeleAssociationQuestionCours.php");
     include("../Modele/ModeleTypesQuestion.php");
     include("../Modele/ModeleTypesQuiz.php");
+    include("../Modele/ModeleQuestionsVraiFaux.php");
     include("../Modele/ModeleAssociationTypesQuizQuestion.php");
+
 
     session_start();
 
@@ -42,7 +44,6 @@
         if($(event.relatedTarget).attr("id") != "BTN_SupprimerReponse") {
             $(".Reponsefocused").removeClass("Reponsefocused");
         }
-
     });
 
 
@@ -65,11 +66,35 @@
 
     $("#TypeQuestion li input[type=radio]").click(function() {
         if($(this).attr("value") == "VRAI_FAUX" ) {
-            swal("Pas implémenté", "La création du type de question vrai/faux n'est pas encore implémentée", "error");
-            $("#TypeQuestion li:first-child input[type=radio]").prop("checked", true);
+            if($("#Ul_Reponses").children("li").length > 0) {
+                // Un SweetAlert qui demande confirmation pour supprimer les anciennes réponses
+                swal({   title: "Êtes-vous sur?",
+                    text: "Cette action va supprimer vos anciennes réponses. Êtes-vous sur de vouloir continuer?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Supprimer mes anciennes réponses"
+                }, function(){
+                    $("#Ul_Reponses").html("");
+                    ajouterReponsesVraiFaux();
+                });
+            }
+            else {
+                ajouterReponsesVraiFaux();
+            }
         }
+        else if($(this).attr("value") == "CHOIX_MULTI_UNIQUE") {
+            $("#Ul_Reponses").html("");
+            ajouterNouvelleReponse();
+            ajouterNouvelleReponse();
+            // Enable les boutons d'ajout et de suppression de réponse
+            $("#reponseConteneur input[type=button]").removeAttr("disabled");
+            // Je permet à l'usager de modifier le texte des réponses. Ça cancelle entre autre le event.preventDefault()
+            $("#Ul_Reponses li .reponsesQuestion").keydown(function() {
+                return true;
+            });
 
-        // À implémenter... Changement du reponseConteneur selon le type de question
+        }
     });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,10 +131,12 @@
     </div>
     <div id="reponseConteneur">
         <ul id="Ul_Reponses">
+
         <?php
         if($_SESSION["etat"] == "modifierQuestion")
         {
-            getReponsesFromQuestion($_SESSION["idQuestion"]);
+            getReponsesFromQuestion($_SESSION["idQuestion"], $typeQuestion);
+            echo "<script>enleverModificationReponse();</script>";
         }
         else if($_SESSION["etat"] == "nouvelleQuestion")
         {

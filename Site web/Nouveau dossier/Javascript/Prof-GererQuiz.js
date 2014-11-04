@@ -101,14 +101,47 @@ function ajouterVariableSessionProprietaireQuestion(idProprietaire) {
     });
 }
 
+function enleverModificationReponse() {
+    // Disable les boutons d'ajout et de suppression de réponse
+    $("#reponseConteneur input[type=button]").attr("disabled", "disabled");
+    // J'empêche l'usager de modifier le texte des réponses.
+    $("#Ul_Reponses li .reponsesQuestion").keydown(function(e) {
+        e.preventDefault();
+    });
+}
+
+function ajouterReponsesVraiFaux() {
+    // Création du frame des réponses vrai/faux
+    $.when(ajouterNouvelleReponse(), ajouterNouvelleReponse()).done( function() {
+
+        $("#Ul_Reponses li").ready(function() {
+            // Réponse vrai
+            $("#Ul_Reponses li:first-child").children(".reponsesQuestion").text("Vrai");
+            $("#Ul_Reponses li:first-child").children("input[type=radio]").attr("value",1);
+
+            // Réponse faux
+            $("#Ul_Reponses li:nth-child(2)").children(".reponsesQuestion").text("Faux");
+            $("#Ul_Reponses li:nth-child(2)").children("input[type=radio]").attr("value",0);
+        });
+    });
+}
+
+
 function ajouterNouvelleReponse() {
     var aCocher;
     // Si je n'ai aucune réponse de coché, je coche cette nouvelle réponse
     $("#Ul_Reponses").children("li").length == 0? aCocher=1 : aCocher=0;
 
-    $.post('Vue/Prof-GererQuiz-AjoutElement.php', {"action":"nouveauCheckBox", "aCocher":aCocher}, function(resultat) {
-        $("#Ul_Reponses").append(resultat);
-    }, 'html');
+    $.ajax({
+        type: "post",
+        url: "Vue/Prof-GererQuiz-AjoutElement.php",
+        data: {"action":"nouveauInput", "aCocher":aCocher},
+        dataType: "html",
+        async:false,
+        success: function(resultat) {
+            $("#Ul_Reponses").append(resultat);
+        }
+    });
 }
 
 function supprimerReponseCourante() {
