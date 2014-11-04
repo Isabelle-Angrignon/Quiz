@@ -28,6 +28,64 @@ function addClickEventToQuestions(usagerCourant) {
     });
 }
 
+function gererChangementTypeQuestion(elemCourant, e) {
+    if($(elemCourant).attr("value") == "VRAI_FAUX" ) {
+        if($("#Ul_Reponses").children("li").length > 0) {
+            if(reponsesSontValides()) {
+                // Un SweetAlert qui demande confirmation pour supprimer les anciennes réponses
+                swal({   title: "Êtes-vous sur?",
+                    text: "Cette action va supprimer les anciennes réponses. Êtes-vous sur de vouloir continuer?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Supprimer les anciennes réponses"
+                }, function(aAccepter){
+                    if(aAccepter) {
+                        $("#Ul_Reponses").html("");
+                        ajouterReponsesVraiFaux();
+                        desactiverUnInputTypeQuestion(elemCourant);
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                });
+            }
+            else {
+                $("#Ul_Reponses").html("");
+                ajouterReponsesVraiFaux();
+                desactiverUnInputTypeQuestion(elemCourant);
+                return true;
+            }
+
+        }
+        else {
+            ajouterReponsesVraiFaux();
+            desactiverUnInputTypeQuestion(elemCourant);
+            return true;
+        }
+    }
+    else if($(elemCourant).attr("value") == "CHOIX_MULTI_UNIQUE") {
+        desactiverUnInputTypeQuestion(elemCourant);
+        $("#Ul_Reponses").html("");
+        ajouterNouvelleReponse();
+        ajouterNouvelleReponse();
+        // Enable les boutons d'ajout et de suppression de réponse
+        $("#reponseConteneur input[type=button]").removeAttr("disabled");
+        // Je permet à l'usager de modifier le texte des réponses. Ça cancelle entre autre le event.preventDefault()
+        $("#Ul_Reponses li .reponsesQuestion").keydown(function() {
+            return true;
+        });
+        return true;
+    }
+}
+
+function desactiverUnInputTypeQuestion(inputTypeQuestionADesactiver) {
+    // Je remet actif l'ancien radio button qui était disabled
+    $("#TypeQuestion li input[disabled=disabled]").attr("disabled",false);
+    // Je désactive le radio button qui vient d'être pressé
+    $(inputTypeQuestionADesactiver).attr("disabled", true);
+}
 function traiterJSONQuestions(resultat) {
     var enonceDeLaQuestion;
     var nomProf;
@@ -110,6 +168,9 @@ function enleverModificationReponse() {
     });
 }
 
+// ajouterReponsesVraiFaux
+// Par Mathieu Dumoulin
+// Description : Cette fonction ajoute les réponses vrai/faux dans le #Ul_Reponses
 function ajouterReponsesVraiFaux() {
     // Création du frame des réponses vrai/faux
     $.when(ajouterNouvelleReponse(), ajouterNouvelleReponse()).done( function() {
@@ -122,8 +183,31 @@ function ajouterReponsesVraiFaux() {
             // Réponse faux
             $("#Ul_Reponses li:nth-child(2)").children(".reponsesQuestion").text("Faux");
             $("#Ul_Reponses li:nth-child(2)").children("input[type=radio]").attr("value",0);
+
+            enleverModificationReponse();
         });
     });
+}
+
+// reponsesSontValides
+// Par Mathieu Dumoulin
+// Description : Cette fonction vérifie si les réponses sont valides. Pour ce faire, il faut qu'il n'y ai
+//               aucun énoncé vide et qu'au moins une réponse soit vrai.
+function reponsesSontValides() {
+    var reponsesSontNonVides = true;
+    var uneBonneReponse = false;
+    $("#Ul_Reponses li").each(function() {
+        // Si j'ai une réponse qui est vide, mes réponses ne sont pas valides.
+        if($(this).children(".reponsesQuestion").text().trim() == "")  {
+            reponsesSontNonVides = false;
+        }
+        // Si j'ai au moins une réponse qui est Vrai
+        if($(this).children("input").prop("checked") == true) {
+            uneBonneReponse = true;
+        }
+    });
+
+    return reponsesSontNonVides && uneBonneReponse;
 }
 
 
@@ -204,6 +288,7 @@ function cocherRadioButtonAvecValeur(valeur){
     $("#TypeQuestion li").children("input[type=radio]").each( function() {
         if($(this).attr("value") == valeur) {
             $(this).prop('checked', true);
+            $(this).prop('disabled', true);
         }
     });
 }
@@ -212,8 +297,8 @@ function cocherRadioButtonAvecValeur(valeur){
 function cocherTypeQuestionSelonQuestion(typeQuestion) {
     $("#TypeQuestion input[type=radio]").each(function() {
        if($(this).attr("value") == typeQuestion) {
-     //   $(this).attr('checked', true);
           $(this).prop('checked', true);
+          $(this).prop('disabled', true);
        }
     });
 }
@@ -343,25 +428,19 @@ function getJSONEnonceQuestion(idCreateur, idQuestion ) {
 }
 
 function ajouterQuestion(idCreateur) {
+    if( reponsesSontValides()) {
+        var jsonQuestion = getJSONEnonceQuestion(idCreateur);
 
-    var jsonQuestion = getJSONEnonceQuestion(idCreateur);
+        var jsonReponses = jsonifierReponsesQuestionCourante();
 
-    var jsonReponses = jsonifierReponsesQuestionCourante();
+        var jsonCours = jsonifierCoursQuestionCourante();
 
-    var jsonCours = jsonifierCoursQuestionCourante();
+        var typeQuestion = $("#TypeQuestion li input[type=radio]:checked").attr("value");
 
-    var typeQuestion = $("#TypeQuestion li input[type=radio]:checked").attr("value");
+        var jsonTypeQuizAss = jsonifierTypeQuizAssQuestionCourante();
 
-    var jsonTypeQuizAss = jsonifierTypeQuizAssQuestionCourante();
 
-    var estValide = false;
-    for(var i = 0; i < jsonReponses.reponses.length; ++i) {
-        if(jsonReponses.reponses[i].estBonneReponse == "true") {
-            estValide = true;
-        }
-    }
 
-    if(estValide) {
         $.ajax({
             type:"POST",
             url:'Controleur/AJAX_AjouterQuestion.php',
@@ -386,7 +465,7 @@ function ajouterQuestion(idCreateur) {
         });
     }
     else {
-            swal("Oups !", "Cette question n'est pas valide car elle ne contient pas de bonne réponse.", "warning");
+        swal("Oups !", "Cette question n'est pas valide car elle contient une réponse qui est vide et/ou ne contient pas de bonne réponse.", "warning");
     }
 
 }
@@ -398,7 +477,7 @@ function modifierQuestion( idCreateur,idQuestion, idProprietaire) {
             "Vous ne pouvez pas modifier cette question car vous n'êtes  pas le propriétaire. Veuillez contacter le propriétaire si vous voulez la modifier.",
             "error" );
     }
-    else {
+    else if(reponsesSontValides()) {
         var jsonQuestion = getJSONEnonceQuestion(idCreateur, idQuestion);
 
         var jsonReponses = jsonifierReponsesQuestionCourante();
@@ -409,39 +488,31 @@ function modifierQuestion( idCreateur,idQuestion, idProprietaire) {
 
         var jsonTypeQuizAss = jsonifierTypeQuizAssQuestionCourante();
 
-        var estValide = false;
-        for(var i = 0; i < jsonReponses.reponses.length; ++i) {
-            if(jsonReponses.reponses[i].estBonneReponse == "true") {
-                estValide = true;
-            }
-        }
 
-        if(estValide) {
-            $.ajax({
-                type:"POST",
-                url:'Controleur/AJAX_ModifierQuestion.php',
-                async : false,
-                data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
-                    "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
-                dataType: "text",
-                success: function(resultat){
-                    if(resultat.trim() != "") {
-                        swal("Erreur !", resultat, "error");
-                    }
-                    else {
-                        $(".dFondOmbrage").detach();
-                        var cours = $("#DDL_Cours option:selected").attr("value");
-                        updateUlQuestion( cours, idCreateur );
-                        swal("Félicitation !", "Votre modification de question à réussi", "success");
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
+        $.ajax({
+            type:"POST",
+            url:'Controleur/AJAX_ModifierQuestion.php',
+            async : false,
+            data: {"tableauQuestion":jsonQuestion, "tableauReponses":jsonReponses, "tableauCours":jsonCours,
+                "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
+            dataType: "text",
+            success: function(resultat){
+                if(resultat.trim() != "") {
+                    swal("Erreur !", resultat, "error");
                 }
-            });
-        }
-        else {
-            swal("Oups !", "Cette question n'est pas valide car elle ne contient pas de bonne réponse.", "warning");
-        }
+                else {
+                    $(".dFondOmbrage").detach();
+                    var cours = $("#DDL_Cours option:selected").attr("value");
+                    updateUlQuestion( cours, idCreateur );
+                    swal("Félicitation !", "Votre modification de question à réussi", "success");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
+            }
+        });
+    }
+    else {
+        swal("Oups !", "Cette question n'est pas valide car elle contient une réponse qui est vide et/ou ne contient pas de bonne réponse.", "warning");
     }
 }

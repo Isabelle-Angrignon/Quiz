@@ -64,26 +64,44 @@
     });
 
 
-    $("#TypeQuestion li input[type=radio]").click(function() {
+    var elemCourant;
+    $("#TypeQuestion li input[type=radio]").mousedown(function(e) {
+        elemCourant = this;
         if($(this).attr("value") == "VRAI_FAUX" ) {
             if($("#Ul_Reponses").children("li").length > 0) {
-                // Un SweetAlert qui demande confirmation pour supprimer les anciennes réponses
-                swal({   title: "Êtes-vous sur?",
-                    text: "Cette action va supprimer vos anciennes réponses. Êtes-vous sur de vouloir continuer?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Supprimer mes anciennes réponses"
-                }, function(){
+                if(reponsesSontValides()) {
+                    // Un SweetAlert qui demande confirmation pour supprimer les anciennes réponses
+                    swal({   title: "Êtes-vous sur?",
+                        text: "Cette action va supprimer les anciennes réponses. Êtes-vous sur de vouloir continuer?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Supprimer les anciennes réponses"
+                    }, function(aAccepter){
+                        if(aAccepter) {
+                            $("#Ul_Reponses").html("");
+                            ajouterReponsesVraiFaux();
+                            $(elemCourant).prop("checked", true);
+                            desactiverUnInputTypeQuestion(elemCourant);
+                        }
+                    });
+                }
+                else {
                     $("#Ul_Reponses").html("");
                     ajouterReponsesVraiFaux();
-                });
+                    $(this).prop("checked", true);
+                    desactiverUnInputTypeQuestion(this);
+                }
+
             }
             else {
                 ajouterReponsesVraiFaux();
+                $(this).prop("checked", true);
+                desactiverUnInputTypeQuestion(this);
             }
         }
         else if($(this).attr("value") == "CHOIX_MULTI_UNIQUE") {
+            desactiverUnInputTypeQuestion(this);
             $("#Ul_Reponses").html("");
             ajouterNouvelleReponse();
             ajouterNouvelleReponse();
@@ -93,7 +111,7 @@
             $("#Ul_Reponses li .reponsesQuestion").keydown(function() {
                 return true;
             });
-
+            $(this).prop("checked", true);
         }
     });
 
@@ -136,7 +154,6 @@
         if($_SESSION["etat"] == "modifierQuestion")
         {
             getReponsesFromQuestion($_SESSION["idQuestion"], $typeQuestion);
-            echo "<script>enleverModificationReponse();</script>";
         }
         else if($_SESSION["etat"] == "nouvelleQuestion")
         {
