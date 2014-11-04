@@ -23,7 +23,7 @@
     $('#soumettre').click(function(){
         if($('#TB_DA').val().length != 0 && $('#TB_DA').val().length <= 10) {
 
-            reinitialiserMotDePasse($('#TB_DA').val());
+            ChercherUsagerAjax($('#TB_DA').val(),reinitialiserMotDePasse);
 
         }
         else{

@@ -170,4 +170,39 @@ function recupererParamChange($idUsager)
     return $infoUsager;
 }
 
+function ChercherUsager($idUsager){
+    $bdd = connecterEtudiant();
+    $requete = $bdd->prepare("CALL ChercherUsager(?)");
+    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
+
+    $requete->execute();
+
+    $retour = $infoUsager = $requete->fetch();
+
+    if($infoUsager['nom'] != null)// si ici, il d=faut sauvegarder le idUsager dans la session+ si prof, eleve+
+    {
+        $retour = $infoUsager;
+    }
+    else
+    {
+        $retour = null;
+    }
+    $requete->closeCursor();
+
+    unset($bdd);// fermer connection bd
+    return $retour;
+}
+
+function SupprimerUnCompte($numeroDA){
+    $bdd = connecterAdmin();
+    $requete = $bdd->prepare("CALL supprimerCompte(?)");
+    $requete->bindparam(1, $numeroDA, PDO::PARAM_STR,10);
+
+    $requete->execute();
+
+    $reussi = $requete->rowCount();
+
+    return $reussi;
+}
+
 ?>

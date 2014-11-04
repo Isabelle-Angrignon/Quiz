@@ -20,12 +20,35 @@ function reinitialiserMotDePasse(numeroDA) {
         dataType: "text",
         success: function(resultat) {
             if (resultat == 0) {
-                swal({   title: "Erreur!",   text: "Le numero de DA est invalide ou le mot de passe est déjà le mot de passe par défaut",   type: "error"});
+                swal({   title: "Erreur!",   text: "Le mot de passe est déjà le mot de passe par défaut",   type: "error"});
                 $("#TB_DA").val("");
             }
             else if (resultat == 1)
             {
                 swal({   title: "Opération réussite!",   text: "Reinitialisation de mot de passe réussi",   type: "success"});
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function supprimerUnCompte(numeroDA){
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/SupprimerUnCompte.php",
+        data: {"numeroDA" :numeroDA},
+        dataType: "text",
+        success: function(resultat) {
+            alert(resultat);
+            if (resultat == 0) {
+                swal({   title: "Erreur!",   text: "Une érreur est survenue",   type: "error"});
+                $("#TB_DA").val("");
+            }
+            else if (resultat == 1)
+            {
+                swal({   title: "Opération réussite!",   text: "Le compte a bel et bien été supprimer",   type: "success"});
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
