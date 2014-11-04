@@ -3,7 +3,7 @@
 
 
 
-    <p class="titre">Réinitialisation d'un mot de passe</p>
+    <p class="titre">Supprimer un compte</p>
     <hr>
     <div class="conteneur" >
         <div class="gauche">
@@ -14,16 +14,16 @@
             <input type="text" id="TB_DA" /><br>
         </div>
     </div>
-    <div id="soumettre" class="ListeDivElementStyle JquerryButton">Réinitialiser</div>
+    <div id="soumettre" class="ListeDivElementStyle JquerryButton">Supprimer</div>
 
 
 
 <script>
     $('#soumettre').button();
     $('#soumettre').click(function(){
-        if($('#TB_DA').val().length != 0 && $('#TB_DA').val().length <= 10) {
+        if($('#TB_DA').val().length != 0 && $('#TB_DA').val().length <= 10 && $('#TB_DA').val()[0] != "4") {
 
-            ChercherUsagerAjax($('#TB_DA').val(),reinitialiserMotDePasse);
+            ChercherUsagerAjax($('#TB_DA').val(),supprimerUnCompte);
 
         }
         else{

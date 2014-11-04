@@ -3,27 +3,27 @@
 
 
 
-    <p class="titre">Réinitialisation d'un mot de passe</p>
+    <p class="titre">Nommer un nouvel Admin</p>
     <hr>
     <div class="conteneur" >
         <div class="gauche">
-            Numéro de DA : <br>
+            DA du professeur : <br>
         </div>
 
         <div class="droite">
             <input type="text" id="TB_DA" /><br>
         </div>
     </div>
-    <div id="soumettre" class="ListeDivElementStyle JquerryButton">Réinitialiser</div>
+    <div id="soumettre" class="ListeDivElementStyle JquerryButton">Rendre administrateur</div>
 
 
 
 <script>
     $('#soumettre').button();
     $('#soumettre').click(function(){
-        if($('#TB_DA').val().length != 0 && $('#TB_DA').val().length <= 10) {
+        if($('#TB_DA').val().length != 0 && $('#TB_DA').val().length <= 10 && $('#TB_DA').val()[0] == "4") {
 
-            ChercherUsagerAjax($('#TB_DA').val(),reinitialiserMotDePasse);
+           // reinitialiserMotDePasse($('#TB_DA').val());
 
         }
         else{
