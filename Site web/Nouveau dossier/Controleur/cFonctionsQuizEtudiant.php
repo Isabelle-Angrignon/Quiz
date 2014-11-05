@@ -8,17 +8,27 @@
     Description: Cette fonction génère autant de balise "li" qu'il y a de quiz à afficher
     Pour un type donnée, selon le cours et l'étudiant
 */
+
+
 function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz)
 {
     if ($idCours == 0)
     {
-
+        $Donnee = ListerQuizEtudiant($idEtudiant, $typeQuiz );
+        foreach($Donnee as $Row)
+        {
+            GenererLiSelect($idUl,$Row['titreQuiz'], $Row['idQuiz']);
+        }
     }
-    $Donnee = ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz );
-    foreach($Donnee as $Row)
+    else
     {
-        GenererLiSelect($idUl,$Row['titreQuiz'], $Row['idQuiz']);
+        $Donnee = ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz );
+        foreach($Donnee as $Row)
+        {
+            GenererLiSelect($idUl,$Row['titreQuiz'], $Row['idQuiz']);
+        }
     }
+
 }
 
 /*

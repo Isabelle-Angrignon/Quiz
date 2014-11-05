@@ -104,7 +104,7 @@ if(!isset($_SESSION['bonnesReponses']))
             <label>Formatif</label>
             <ul id="UlQuizFormatif">
                <?php
-                ListerQuizDansUl("UlQuizFormatif", $_SESSION["idUsager"], $_SESSION['idCours'], "FORMATIF");
+               ListerQuizDansUl("UlQuizFormatif", $_SESSION['idUsager'], 0 ,"FORMATIF");
                 ?>
             </ul>
             <!--

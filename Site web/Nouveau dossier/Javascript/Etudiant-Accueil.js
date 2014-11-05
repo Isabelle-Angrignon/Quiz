@@ -29,11 +29,11 @@ function listerQuizFormatifs(){
         type:"POST",
         url: 'Controleur/FonctionQuizEtudiant/ListerQuizFormatifs.php',
         async : !1,
-        success: function(resultSet){
-            if(resultSet != null){
-
-                for (var i = 0; i < resultSet.length; ++i){//////////////////////////////////retourne 210 vs 3
-                    ajouterLi_ToUl_Selectable("UlQuizFormatif", resultSet[i].titreQuiz , resultSet[i].idQuiz, true);
+        dataType: "json",
+        success: function(resultat){
+            if(resultat != null){
+                for (var i = 0; i < resultat.length; ++i){
+                    ajouterLi_ToUl_Selectable("UlQuizFormatif", resultat[i].titreQuiz , resultat[i].idQuiz, true);
                 }
             }
         },
@@ -152,10 +152,8 @@ function chargerNouvelleQuestion(){
         url:"Controleur/FonctionQuizEtudiant/chargerNouvelleQuestion.php",
         async : !1,
         success: function(msg) {
-
                 //recharger le div dynamique
                 insererHTMLfromPHP("divDynamique", "Vue/dynamique-RepondreQuestion.php");
-
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);

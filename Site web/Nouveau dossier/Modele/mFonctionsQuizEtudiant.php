@@ -63,9 +63,9 @@ function ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz)
 function ListerQuizEtudiant($idEtudiant, $typeQuiz)
 {
     $bdd = connecterEtudiant();
-    $requete = $bdd->prepare("CALL ListerQuizEtudiant( ? , ? )");
+    $requete = $bdd->prepare("CALL listerQuizEtudiant( ? , ? )");
     $requete->bindparam(1, $idEtudiant, PDO::PARAM_STR,10);
-    $requete->bindparam(3, $typeQuiz, PDO::PARAM_STR,20);
+    $requete->bindparam(2, $typeQuiz, PDO::PARAM_STR,20);
     $requete->execute();
     $resultat = $requete->fetchAll();
 
@@ -74,4 +74,3 @@ function ListerQuizEtudiant($idEtudiant, $typeQuiz)
 
     return $resultat;
 }
-?>
