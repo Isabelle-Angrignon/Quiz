@@ -31,16 +31,11 @@
                     $("#UlQuizFormatif").empty();
                     //regénérer liste formatifs
                     listerQuizFormatifs();
-
-             /*       var id = $("#DDL_Cours option:selected").attr("value");
-                    updateUlQuestion( id, <?php echo '"'.$_SESSION["idUsager"].'"' ?> );*/
+                    addClickEventToQuiz();
                 }
             });
 
-
-            $("#UlQuizFormatif").click( function() {
-                //appeler la fonction php qui génere une liste de questions pour un idQuiz spécifique...;
-            });
+            addClickEventToQuiz();
 
             $("#UlQuizAleatoire").click( function() {
 

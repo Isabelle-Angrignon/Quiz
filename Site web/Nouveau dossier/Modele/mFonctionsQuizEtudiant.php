@@ -35,6 +35,34 @@ function genererQuestionsAleatoires($cours)
     return null;
 }
 
+function genererQuestionsQuiz($idQuiz)
+{
+    $bdd = connecterEtudiant();
+
+    if (isset($idQuiz))
+    {
+        $requete = $bdd->prepare("CALL genererQuestionsQuiz(?)");
+        $requete->bindparam(1, $idQuiz, PDO::PARAM_INT,10);
+
+        if (!empty($requete)) {
+            $requete->execute();
+            $quiz = $requete->fetchAll();
+        }
+
+        if (isset($quiz)  && !empty($quiz))
+        {
+            return $quiz;
+        }
+        else
+        {
+            return null;
+        }
+        $requete->closeCursor();
+    }
+    unset($bdd);// fermer connection bd
+
+    return null;
+}
 
 
 /*

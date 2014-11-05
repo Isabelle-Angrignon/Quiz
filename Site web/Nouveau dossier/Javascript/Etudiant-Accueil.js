@@ -3,6 +3,51 @@
 // Date : 14/10/2014
 // Description : Contient tout le code Javascript spécifique à la page Etudiant-Accueil.php
 
+function addClickEventToQuiz(){
+    $("#UlQuizFormatif li").off("click");
+    $("#UlQuizFormatif li").click( function() {
+        //Récupérer idQuiz:
+        var idQuiz = $(this).attr('id');
+        //appeler la fonction php qui génere une liste de questions pour un idQuiz spécifique...
+        ouvrirUnQuiz("FORMATIF", idQuiz );
+    });
+}
+
+function ouvrirUnQuiz(typeQuiz, idQuiz){
+    if (typeQuiz == "ALEATOIRE"){
+        ouvrirUnQuizAleatoire();
+    }
+    else if (typeQuiz == "FORMATIF") {
+        ouvrirUnQuizFormatif(idQuiz);
+    }
+    else{
+        swal({ title: "Désolé",   text: "Ce type de quiz n'est pas géré.",   type: "warning",   confirmButtonText: "Dac!" });
+    }
+}
+
+function ouvrirUnQuizFormatif(idQuiz){
+    if (genererListeQuestions("FORMATIF", idQuiz) == 1) {
+        creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php");
+    }
+    else  {
+        swal({ title: "Désolé",   text: "Il n'y a aucune question dans ce quiz.",   type: "warning",   confirmButtonText: "Dac!" });
+    }
+}
+
+function ouvrirUnQuizAleatoire(){
+    if (SetIdCoursSession()==1) {
+        if (genererListeQuestions("ALEATOIRE", 0) == 1) {
+            creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php");
+        }
+        else {
+            swal({ title: "Désolé",   text: "Il n'y a aucune question aléatoire définie pour ce cours.",   type: "warning",   confirmButtonText: "Dac!" });
+        }
+    }
+    else  {
+        swal({ title: "Oups...",   text: "Vous devez sélectionner un cours spécifique pour générer un quiz aléatoire",   type: "error",   confirmButtonText: "Dac!" });
+    }
+}
+
 function SetIdCoursSession(){
     var idCours = $("#DDL_Cours option:selected").attr("value");
     var coursEstChoisi = 0;
@@ -41,6 +86,35 @@ function listerQuizFormatifs(){
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
         }
     });
+}
+
+function genererListeQuestions(typeQuiz, idQuiz){
+    if (typeQuiz == "FORMATIF"){
+        return listerQuestionsFormatif(idQuiz);
+    }
+    else if (typeQuiz == "ALEATOIRE"){
+        return genererQuestionsAleatoires();
+    }
+    else {
+        return null;
+    }
+}
+
+function listerQuestionsFormatif(idQuiz){
+    var quizEstCree = 0;
+    $.ajax({
+        type:"POST",
+        url:"Controleur/FonctionQuizEtudiant/listerQuestionsFormatif.php",///////////////////////////////////////////
+        async : !1,
+        data: {"idQuiz" : idQuiz },
+        success: function(msg) {
+            quizEstCree = msg;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
+        }
+    });
+    return quizEstCree;
 }
 
 function genererQuestionsAleatoires(){
