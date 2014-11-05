@@ -14,18 +14,19 @@ if (isset($_SESSION['listeQuestions']) )
         $idQuestion = $_SESSION['listeQuestions'][0];
         //recupérer infos question
         $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion']);
-        array_shift($_SESSION['listeQuestions']);
+
+        //Les derniers éléments traités sont alors en position [0]
+        array_unshift($_SESSION['listeQuestionRepondues'], $idQuestion['idQuestion']);//met au début de la file
+        array_shift($_SESSION['listeQuestions']);//retire du début de la file
     }
     else
     {
         resetVarSessionQuiz();
     }
-    // rien a dire
     echo '0';
 }
 else
 {
-    // affiche le message de ton choix
-    echo '1';
+    echo 'Pas de liste';
 }
 

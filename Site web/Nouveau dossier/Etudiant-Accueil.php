@@ -23,37 +23,22 @@
     <script src="Javascript/Etudiant-Accueil.js"></script>
     <script>
         $(function() {
+            //Générer la gestion de click sur les formatifs
+            addClickEventToQuizFormatif();
+
             $("#DDL_Cours").selectmenu({
                 width:400,
                 select: function(event, ui) {
-                    SetIdCoursSession();
-                    //vider liste
+                    SetIdCoursSession();// utilisé pour mettre a jour la liste de quiz formatifs
                     $("#UlQuizFormatif").empty();
-                    //regénérer liste formatifs
                     listerQuizFormatifs();
-                    addClickEventToQuiz();
+                    //Regénérer la gestion de click sur les formatifs
+                    addClickEventToQuizFormatif();
                 }
             });
 
-            addClickEventToQuiz();
-
             $("#UlQuizAleatoire").click( function() {
-
-                if (SetIdCoursSession()==1)
-                {
-                    if (genererQuestionsAleatoires()==1)
-                    {
-                        creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php");
-                    }
-                    else
-                    {
-                        swal({ title: "Désolé",   text: "Il n'y a aucune question aléatoire définie pour ce cours.",   type: "warning",   confirmButtonText: "Dac!" });
-                    }
-                }
-                else
-                {
-                    swal({ title: "Oups...",   text: "Vous devez sélectionner un cours spécifique pour générer un quiz aléatoire",   type: "error",   confirmButtonText: "Dac!" });
-                }
+                ouvrirUnQuiz("ALEATOIRE",null);
             });
         });
     </script>
@@ -96,19 +81,21 @@ if(!isset($_SESSION['bonnesReponses']))
         </div>
         <!-- Cadre principal contenant tous les types de quiz -->
         <div id="ListeQuiz"class="Liste ListeGererQuiz">
+
             <label>Formatif</label>
             <ul id="UlQuizFormatif">
                <?php
                ListerQuizDansUl("UlQuizFormatif", $_SESSION['idUsager'], 0 ,"FORMATIF");
                 ?>
             </ul>
-            <!--
-            <label>Formatif</label>
-            <ul id="UlQuizFormatif">
-                 les items de quiz appaîtront ici
-            </ul>-->
-        </div>
 
+        </div>
+        <!-- <div id="ListeExamen" class="Liste ListeGererQuiz">
+            <label>Sommatif / examen</label>
+            <ul id="UlQuizSommatif">
+                 les items de quiz appaîtront ici
+            </ul>
+        </div>-->
         <div id="QuizAleatoire" class="Liste ListeGererQuiz">
 
             <label>Aléatoire</label>

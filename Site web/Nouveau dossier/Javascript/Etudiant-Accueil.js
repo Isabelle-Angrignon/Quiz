@@ -3,16 +3,17 @@
 // Date : 14/10/2014
 // Description : Contient tout le code Javascript spécifique à la page Etudiant-Accueil.php
 
-function addClickEventToQuiz(){
+function addClickEventToQuizFormatif(){
     $("#UlQuizFormatif li").off("click");
     $("#UlQuizFormatif li").click( function() {
         //Récupérer idQuiz:
         var idQuiz = $(this).attr('id');
+        setIdQuizSession(idQuiz);
         //appeler la fonction php qui génere une liste de questions pour un idQuiz spécifique...
         ouvrirUnQuiz("FORMATIF", idQuiz );
     });
 }
-
+//Gestion complète d'un quiz
 function ouvrirUnQuiz(typeQuiz, idQuiz){
     if (typeQuiz == "ALEATOIRE"){
         ouvrirUnQuizAleatoire();
@@ -69,6 +70,20 @@ function SetIdCoursSession(){
     return coursEstChoisi;
 }
 
+//Met le idQuiz dans la variable de session et réinitialise les variables de sessions relatives à un quiz.
+function setIdQuizSession(idQuiz){
+    $.ajax({
+        type:"POST",
+        url: 'Controleur/FonctionQuizEtudiant/SetIdQuizSession.php',
+        data:{'selectQuiz':idQuiz},
+        dataType:"text",
+        async : !1,
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
+        }
+    });
+}
+
 function listerQuizFormatifs(){
     $.ajax({
         type:"POST",
@@ -104,7 +119,7 @@ function listerQuestionsFormatif(idQuiz){
     var quizEstCree = 0;
     $.ajax({
         type:"POST",
-        url:"Controleur/FonctionQuizEtudiant/listerQuestionsFormatif.php",///////////////////////////////////////////
+        url:"Controleur/FonctionQuizEtudiant/listerQuestionsFormatif.php",
         async : !1,
         data: {"idQuiz" : idQuiz },
         success: function(msg) {
@@ -133,6 +148,43 @@ function genererQuestionsAleatoires(){
     return quizEstCree;
 }
 
+function traiterResultatReponse(resultat){
+    var close  = true; //Variable pour dire au sweetalert de réponse de se fermer après qu'on ait cliqué ok.
+    // si c'est la dernière question, alors on va afficher un autre sweetalert pour le score final donc,
+    //la variable close doit être à false.
+
+    //valide que la dernière question a été chargée dans la page
+    if (estDerniereQuestion() == 1){ close =false; }
+
+    if(resultat == 1) {
+        swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",
+            confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
+        // mettre bonne réponse dans session
+
+    }
+    else if(resultat == 0) {
+        swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",
+            confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
+        // TODO ajouter un ajax pour récupérer le lien hypertext de la question si il y en a une.
+
+        // mettre mauvaise réponse dans session
+    }
+    else if(resultat == 'X') {
+        swal({   title: "Oh la la!",   text: " Une erreur s'est produite au moment de la validation. ",   type: "warning",   confirmButtonText: "Dac!" });
+    }
+    else {
+        swal({   title: "Oups!",   text: "Répondez d'abord à la question!",   type: "error",
+            confirmButtonText: "Dac!" });
+    }
+    //retour de validation si question répondue...
+    if (resultat == 1 || resultat == 0) {
+        estRepondu = 1;
+        updateScoreAffiche(resultat);
+        // Update stats bd
+        // to do///////
+    }
+}
+
 function gererQuestionRepondue(continuerQuiz) {
 
     //Récupérer le id de la réponse cliquée
@@ -150,33 +202,7 @@ function gererQuestionRepondue(continuerQuiz) {
         async : !1,
         datatype: "text",
         success: function(resultat) {
-            var close  = true; //Variable pour dire au sweetalert de réponse de se fermer après qu'on ait cliqué ok.
-            // si c'est la dernière question, alors on va afficher un autre sweetalert pour le score final donc,
-            //la variable close doit être à false.
-
-            //valide que la dernière question a été chargée dans la page
-            if (estDerniereQuestion() == 1){ close =false; }
-
-            if(resultat == 1) {
-                swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",   confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
-            }
-            else if(resultat == 0) {
-                swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",   confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
-                // ajouter un ajax pour récupérer le lien hypertext de la question si il y en a une.
-            }
-            else if(resultat == 'X') {
-                swal({   title: "Oh la la!",   text: " Une erreur s'est produite au moment de la validation. ",   type: "warning",   confirmButtonText: "Dac!" });
-            }
-            else {
-                swal({   title: "Oups!",   text: "Répondez d'abord à la question!",   type: "error",   confirmButtonText: "Dac!" });
-            }
-            //retour de validation si question répondue...
-            if (resultat == 1 || resultat == 0) {
-                estRepondu = 1;
-                updateScoreAffiche(resultat);
-                // Update stats bd
-                // to do///////
-            }
+            traiterResultatReponse(resultat);
         },
          error: function(jqXHR, textStatus, errorThrown) {
              alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);

@@ -106,8 +106,41 @@ function resetVarSessionQuiz()
     unset($_SESSION['listeReponses'] );
     unset($_SESSION['infoQuestion'] );
     unset($_SESSION['idQuestion'] );
+    unset($_SESSION['listeQuestionRepondues']);
+    unset($_SESSION['bienRepondu']);
+
+    //Pour affichage html dans le pop-up de questions
     $_SESSION['questionsRepondues'] = 0;
     $_SESSION['bonnesReponses'] = 0;
+}
+
+function gererReponse($estBonneReponse)
+{
+    if($estBonneReponse)
+    {
+        echo "1";
+        updateReponseQuestionSession(1);
+    }
+    else
+    {
+        echo "0";
+        updateReponseQuestionSession(0);
+    }
+}
+
+function updateReponseQuestionSession($estBonneReponse)
+{
+    $reponse['resultat'] = $estBonneReponse;
+    if (!isset($_SESSION['bienRepondu']))
+    {
+        $_SESSION['bienRepondu'][0] = $estBonneReponse;
+    }
+    else
+    {
+        array_unshift($_SESSION['bienRepondu'] ,$estBonneReponse );
+    }
+
+
 }
 
 function getNomCours()

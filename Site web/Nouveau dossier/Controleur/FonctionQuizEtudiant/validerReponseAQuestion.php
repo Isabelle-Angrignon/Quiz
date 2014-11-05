@@ -1,24 +1,20 @@
 <?php
 
 include("..//Utilitaires.php");
+include("..//cFonctionsQuizEtudiant.php");
 demarrerSession();
 redirigerSiNonConnecte('Etudiant');
 
 $idReponse =  $_POST['idReponse'];
-$idQuestion = $_SESSION['infoQuestion'][0]['idQuestion'];////// pourrait prende  [0]  au milieu
+$idQuestion = $_SESSION['infoQuestion'][0]['idQuestion'];//meme si il n'y a g'un enregistrement dans infoQuestion, il faut spécifier [0]
 
 
 switch( $_SESSION['infoQuestion'][0]['typeQuestion']){
+
     case "VRAI_FAUX":
-        if($_SESSION['listeReponses'][0]['reponseEstVrai'] == $idReponse)
-        {
-            echo "1";
-        }
-        else
-        {
-            echo "0";
-        }
+        echo gererReponse($_SESSION['listeReponses'][0]['reponseEstVrai'] == $idReponse);
         break;
+
     case "CHOIX_MULTI_UNIQUE":
         //trouver la bonne réponse...
         foreach($_SESSION['listeReponses'] as $reponse)
@@ -29,20 +25,14 @@ switch( $_SESSION['infoQuestion'][0]['typeQuestion']){
             }
         }
 
-
-        if($bonneRep == $idReponse)
-        {
-            echo "1";
-        }
-        else
-        {
-            echo "0";
-        }
+        echo gererReponse($bonneRep == $idReponse);
         break;
+
+    //ajouter autres types de questions ici
+
     default:
         echo "x";
         break;
-
 }
 
 ?>
