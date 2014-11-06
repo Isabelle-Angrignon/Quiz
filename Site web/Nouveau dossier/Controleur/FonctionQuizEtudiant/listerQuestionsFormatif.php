@@ -21,6 +21,9 @@ if (isset($Liste) && !empty($Liste))
     $_SESSION["listeQuestions"] = $Liste;
     //Preparer premiere question
     $idQuestion = $_SESSION['listeQuestions'][0];
+
+    $_SESSION['listeQuestionRepondues'][0] = $idQuestion['idQuestion'];
+
     //recupérer infos question
     $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion']);
     array_shift($_SESSION['listeQuestions']);
