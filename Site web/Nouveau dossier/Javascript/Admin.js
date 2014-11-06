@@ -78,3 +78,37 @@ function nommerAdminAjax(numeroDA){
         }
     });
 }
+
+function ListerCoursSelectAjax() {
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/ListerCours.php",
+        dataType: "json",
+        async:false,
+        success: function(resultat) {
+            for(var i = 0; i < resultat.length; ++i) {
+                ajouterOption_ToSelect('DDL_Cours',resultat[i].idCours,resultat[i].nomCours,resultat[i].codeCours);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function ModifierCoursAjax(idCours,nomCours,codeCours) {
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/modifierCours.php",
+        data: {"idCours" :idCours,"nomCours":nomCours,"codeCours":codeCours},
+        dataType: "text",
+        async:false,
+        success: function(resultat) {
+            swal({title :"operation réussi", text:"Le cours a été modifier",type:"success"});
+            CreerDeploiement('Vue/dynamique-ModifierCours.php');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}

@@ -36,14 +36,26 @@
     $('#soumettre').button();
     $('#soumettre').click(function(){
         if (estValide()) {
+            ModifierCoursAjax($("#DDL_Cours option:selected").attr("value"),$("#TB_Nom").val(),$("#TB_Code").val());
         }
     });
 
     $('#DDL_Cours').ready(function(){
-        ajouterOption_ToSelect('DDL_Cours','0','Je suis le cours 0');
-        ajouterOption_ToSelect('DDL_Cours','1','Je suis le cours 1');
-        ajouterOption_ToSelect('DDL_Cours','2','Je suis le cours 2');
-    }).selectmenu();
+        ListerCoursSelectAjax();
+        var id = $("#DDL_Cours option:selected").attr("value");
+        var text = $("#DDL_Cours option:selected").text();
+        var codeCours = $("#DDL_Cours option:selected").attr("placeholder");
+        $('#TB_Nom').val(text);
+        $('#TB_Code').val(codeCours);
+    }).selectmenu({
+        select: function(event, ui) {
+            var id = $("#DDL_Cours option:selected").attr("value");
+            var text = $("#DDL_Cours option:selected").text();
+            var codeCours = $("#DDL_Cours option:selected").attr("placeholder");
+            $('#TB_Nom').val(text);
+            $('#TB_Code').val(codeCours);
+        }
+    });
 
 
 
