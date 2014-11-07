@@ -56,3 +56,59 @@ function supprimerUnCompte(numeroDA){
         }
     });
 }
+function nommerAdminAjax(numeroDA){
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/nommerAdmin.php",
+        data: {"numeroDA" :numeroDA},
+        dataType: "text",
+        success: function(resultat) {
+            alert(resultat);
+            if (resultat == 0) {
+                swal({   title: "Erreur!",   text: "Une érreur est survenue",   type: "error"});
+                $("#TB_DA").val("");
+            }
+            else if (resultat == 1)
+            {
+                swal({   title: "Opération réussite!",   text: "Le professeur a été augmenté au rang d'admin",   type: "success"});
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function ListerCoursSelectAjax() {
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/ListerCours.php",
+        dataType: "json",
+        async:false,
+        success: function(resultat) {
+            for(var i = 0; i < resultat.length; ++i) {
+                ajouterOption_ToSelect('DDL_Cours',resultat[i].idCours,resultat[i].nomCours,resultat[i].codeCours);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function ModifierCoursAjax(idCours,nomCours,codeCours) {
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/modifierCours.php",
+        data: {"idCours" :idCours,"nomCours":nomCours,"codeCours":codeCours},
+        dataType: "text",
+        async:false,
+        success: function(resultat) {
+            swal({title :"operation réussi", text:"Le cours a été modifier",type:"success"});
+            CreerDeploiement('Vue/dynamique-ModifierCours.php');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}

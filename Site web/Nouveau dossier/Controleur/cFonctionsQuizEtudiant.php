@@ -8,17 +8,27 @@
     Description: Cette fonction génère autant de balise "li" qu'il y a de quiz à afficher
     Pour un type donnée, selon le cours et l'étudiant
 */
+
+
 function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz)
 {
     if ($idCours == 0)
     {
-
+        $Donnee = ListerQuizEtudiant($idEtudiant, $typeQuiz );
+        foreach($Donnee as $Row)
+        {
+            GenererLiSelect($idUl,$Row['titreQuiz'], $Row['idQuiz']);
+        }
     }
-    $Donnee = ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz );
-    foreach($Donnee as $Row)
+    else
     {
-        GenererLiSelect($idUl,$Row['titreQuiz'], $Row['idQuiz']);
+        $Donnee = ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz );
+        foreach($Donnee as $Row)
+        {
+            GenererLiSelect($idUl,$Row['titreQuiz'], $Row['idQuiz']);
+        }
     }
+
 }
 
 /*
@@ -96,8 +106,41 @@ function resetVarSessionQuiz()
     unset($_SESSION['listeReponses'] );
     unset($_SESSION['infoQuestion'] );
     unset($_SESSION['idQuestion'] );
+    unset($_SESSION['listeQuestionRepondues']);
+    unset($_SESSION['bienRepondu']);
+
+    //Pour affichage html dans le pop-up de questions
     $_SESSION['questionsRepondues'] = 0;
     $_SESSION['bonnesReponses'] = 0;
+}
+
+function gererReponse($estBonneReponse)
+{
+    if($estBonneReponse)
+    {
+        echo "1";
+        updateReponseQuestionSession(1);
+    }
+    else
+    {
+        echo "0";
+        updateReponseQuestionSession(0);
+    }
+}
+
+function updateReponseQuestionSession($estBonneReponse)
+{
+    $reponse['resultat'] = $estBonneReponse;
+    if (!isset($_SESSION['bienRepondu']))
+    {
+        $_SESSION['bienRepondu'][0] = $estBonneReponse;
+    }
+    else
+    {
+        array_unshift($_SESSION['bienRepondu'] ,$estBonneReponse );
+    }
+
+
 }
 
 function getNomCours()

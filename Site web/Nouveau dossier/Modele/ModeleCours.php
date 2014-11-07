@@ -30,5 +30,18 @@ function AjouterCours($nomCours, $CodeCours)
     unset($bdd);
 }
 
+function ModifierCours($IdCours,$nomCours, $CodeCours)
+{
+    $bdd = connecterProf();
+    $requete = $bdd->prepare("CALL modifierCours(?,?,?)");
+    $requete->bindparam(1, $IdCours, PDO::PARAM_INT);
+    $requete->bindparam(2, $nomCours, PDO::PARAM_STR,200);
+    $requete->bindparam(3, $CodeCours, PDO::PARAM_STR,10);
+    $requete->execute();
+
+    $requete->closeCursor();
+    unset($bdd);
+}
+
 
 ?>

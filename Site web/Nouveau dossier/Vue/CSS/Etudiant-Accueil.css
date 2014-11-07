@@ -21,9 +21,6 @@ fieldset {
 #DDL_Cours {
     width:100%;
 }
-#UlQuizFormatif li{
-    cursor: not-allowed;
-}
 
 /* CSS propre aux listes principales */
 #ListeQuiz {

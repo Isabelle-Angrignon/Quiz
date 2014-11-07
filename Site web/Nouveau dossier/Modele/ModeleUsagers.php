@@ -205,4 +205,16 @@ function SupprimerUnCompte($numeroDA){
     return $reussi;
 }
 
+function nommerAdmin($idUsager){
+    $bdd = connecterAdmin();
+    $requete = $bdd->prepare("CALL nommerAdmin(?)");
+    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
+
+    $requete->execute();
+
+    $reussi = $requete->rowCount();
+
+    return $reussi;
+}
+
 ?>

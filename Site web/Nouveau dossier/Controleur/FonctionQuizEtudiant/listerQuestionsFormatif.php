@@ -9,18 +9,19 @@ include("..//..//Modele/ModeleQuestions.php");
 demarrerSession();
 redirigerSiNonConnecte('Etudiant');
 
-$cours = $_SESSION['idCours'];
+$idQuiz = $_POST['idQuiz'];
 
 //devra fair un switch case selon le type de quiz...
-$Liste = genererQuestionsAleatoires($cours);
+$Liste = genererQuestionsQuiz($idQuiz);
 
 if (isset($Liste) && !empty($Liste))
 {
-    shuffle($Liste);// ne pas réassigner a un array, les éléments sont mélengés à même la variable.
+    //shuffle($Liste);// ne pas réassigner a un array, les éléments sont mélengés à même la variable.
 
     $_SESSION["listeQuestions"] = $Liste;
     //Preparer premiere question
     $idQuestion = $_SESSION['listeQuestions'][0];
+
     $_SESSION['listeQuestionRepondues'][0] = $idQuestion['idQuestion'];
 
     //recupérer infos question

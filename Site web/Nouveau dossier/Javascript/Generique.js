@@ -22,9 +22,12 @@ $(function() {
 // Extrant(s) : Il n'y a pas d'extrant
 // Description : Cette fonction prend l'id d'une balise Select et lui ajoute le texte à afficher ainsi que
 // l'élément "unique" en tant qu'attribut value(passés en paramètre) à l'aide d'une balise option.
-function ajouterOption_ToSelect(idSelect, element, texte) {
+function ajouterOption_ToSelect(idSelect, element, texte,placeHolder) {
 	var optionTag = document.createElement("option");
 	optionTag.setAttribute("value", element);
+    if(placeHolder != null){
+        optionTag.setAttribute("placeholder",placeHolder);
+    }
 	// createTextNode permet de mettre du texte représentant notre balise (ce que l'usager voit comme texte)
 	optionTag.appendChild(document.createTextNode(texte));
 	document.getElementById(idSelect).appendChild(optionTag);
