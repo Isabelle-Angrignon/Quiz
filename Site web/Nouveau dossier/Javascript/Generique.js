@@ -201,15 +201,18 @@ function insererNouveauDiv(idDiv, idParent, classDiv) {
 //           text = le texte que le checkbox va afficher à l'interface
 // Description: Cette fonction créée un nouveau CheckBox en limitant son nombre de caractères
 //              pour qu'il soit d'une taille raisonnable pour son parent
-function creerNouveauCheckBox(idParent, name, value, text, tailleDuTexte) {
+function creerNouveauInput(typeInput, idParent, name, value, text, tailleDuTexte, isChecked) {
     var li = document.createElement("li");
 
-    var checkbox = document.createElement("input");
-    checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("name", name);
-    checkbox.setAttribute("value", value);
+    var input = document.createElement("input");
+    input.setAttribute("type", typeInput);
+    input.setAttribute("name", name);
+    input.setAttribute("value", value);
+    if(isChecked != null) {
+        input.setAttribute("checked", "checked");
+    }
 
-    li.appendChild(checkbox);
+    li.appendChild(input);
     if(tailleDuTexte != null && text.length > tailleDuTexte) {
         text = text.substr(0,tailleDuTexte) + "...";
     }

@@ -11,12 +11,16 @@
 
     $triage = $_POST['Triage'];
     $idProprietaire = $_POST['idProprietaire'];
-    $idCours = $_POST['idCours'];
+    isset($_POST['idCours'])?$idCours = $_POST['idCours']: $idCours = "";
 
     $resultatTriage;
     if($triage == 'default')
     {
         $resultatTriage = trieParDefaultQuestions($idCours, $idProprietaire);
+    }
+    else if($triage == "selonQuiz")
+    {
+        $resultatTriage = listerQuestionsDunQuiz($idQuiz, $idProprietaire);
     }
     echo $resultatTriage;
 

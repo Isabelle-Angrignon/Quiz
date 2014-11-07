@@ -53,7 +53,7 @@
 
 
     $("#DDL_Cours").children("option").each(function() {
-        creerNouveauCheckBox("listeAjoutCours", "cours", $(this).attr("value"), $(this).text(), 40);
+        creerNouveauInput("checkbox","listeAjoutCours", "cours", $(this).attr("value"), $(this).text(), 40);
        // Coche la checkbox des cours qui sont déjà lié à la question
     });
     $("#listeAjoutCours input[type=checkbox]").click(function() {
@@ -63,55 +63,26 @@
        }
     });
 
-
-    var elemCourant;
-    $("#TypeQuestion li input[type=radio]").mousedown(function(e) {
-        elemCourant = this;
+    var dictionnaireReponsesChoixMulti;
+    $("#TypeQuestion li input[type=radio]").change(function(e) {
+        // Si c'est vrai/faux
         if($(this).attr("value") == "VRAI_FAUX" ) {
-            if($("#Ul_Reponses").children("li").length > 0) {
-                if(reponsesSontValides()) {
-                    // Un SweetAlert qui demande confirmation pour supprimer les anciennes réponses
-                    swal({   title: "Êtes-vous sur?",
-                        text: "Cette action va supprimer les anciennes réponses. Êtes-vous sur de vouloir continuer?",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Supprimer les anciennes réponses"
-                    }, function(aAccepter){
-                        if(aAccepter) {
-                            $("#Ul_Reponses").html("");
-                            ajouterReponsesVraiFaux();
-                            $(elemCourant).prop("checked", true);
-                            desactiverUnInputTypeQuestion(elemCourant);
-                        }
-                    });
-                }
-                else {
-                    $("#Ul_Reponses").html("");
-                    ajouterReponsesVraiFaux();
-                    $(this).prop("checked", true);
-                    desactiverUnInputTypeQuestion(this);
-                }
-
-            }
-            else {
-                ajouterReponsesVraiFaux();
-                $(this).prop("checked", true);
-                desactiverUnInputTypeQuestion(this);
-            }
+            // Je sauvegarde mes anciennes réponses avant des supprimer
+            dictionnaireReponsesChoixMulti = jsonifierReponsesQuestionCourante();
+            $("#Ul_Reponses").html("");
+            ajouterReponsesVraiFaux();
         }
         else if($(this).attr("value") == "CHOIX_MULTI_UNIQUE") {
-            desactiverUnInputTypeQuestion(this);
             $("#Ul_Reponses").html("");
-            ajouterNouvelleReponse();
-            ajouterNouvelleReponse();
-            // Enable les boutons d'ajout et de suppression de réponse
-            $("#reponseConteneur input[type=button]").removeAttr("disabled");
-            // Je permet à l'usager de modifier le texte des réponses. Ça cancelle entre autre le event.preventDefault()
-            $("#Ul_Reponses li .reponsesQuestion").keydown(function() {
-                return true;
-            });
-            $(this).prop("checked", true);
+            if(dictionnaireReponsesChoixMulti == null) {
+                // Par défaut, je met 2 réponses vides.
+                ajouterNouvelleReponse();
+                ajouterNouvelleReponse();
+            }
+            else {
+                ajouterReponsesViaJSON(dictionnaireReponsesChoixMulti);
+            }
+            permettreModificationReponses();
         }
     });
 
@@ -139,6 +110,7 @@
     });
 
     $("#BTN_ConfirmerQuestion").button();
+    $("#BTN_SupprimerQuestion").button();
 
 </script>
 <div id="QuestionConteneur">
@@ -226,5 +198,19 @@
             echo "Ajouter onclick='ajouterQuestion(\"".$_SESSION['idUsager']."\")'";
         }
     ?>
-        >
+    >
+    <input type="button" id="BTN_SupprimerQuestion" value=
+    <?php
+        if($_SESSION["etat"] == "modifierQuestion")
+        {
+            $idQuestion = $_SESSION['idQuestion'];
+            isset($_SESSION['idProprietaire']) ? $Proprietaire = $_SESSION['idProprietaire'] : $Proprietaire = "";
+            echo "'Supprimer cette question' onclick='supprimerQuestion(\"".$UsagerCourrant."\",\"". $idQuestion."\", \"". $Proprietaire ."\")'";
+        }
+        elseif( $_SESSION["etat"] == "nouvelleQuestion")
+        {
+            echo '"Annuler l\'ajout" onclick="annulerQuestion()"';
+        }
+    ?>
+    >
 </div>

@@ -36,7 +36,7 @@ function recupererElementsQuestion($idQuestion)
     }
 }
 
-// Nom: prendreListeQuestion
+// Nom: trieParDefaultQuestions
 // Par: Mathieu Dumoulin
 // Intrants: $idCours = identifiant du cours en question. $idProprietaire = identifiant du professeur en question
 // Extrants: Le résultat de la procédure, sous forme de JSON
@@ -57,6 +57,29 @@ function trieParDefaultQuestions($idCours, $idProprietaire)
 
     return json_encode($resultat);
 }
+
+// Nom: listerQuestionsSelonQuiz
+// Par: Mathieu Dumoulin
+// Intrants: $idQuiz = identifiant du quiz qui contient les questions voulues. $idProprietaire = identifiant du professeur en question
+// Extrants: Le résultat de la procédure, sous forme de JSON
+// Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestionsSelonQuiz()
+function listerQuestionsDunQuiz($idQuiz, $idProprietaire)
+{
+    $bdd = connecterProf();
+    $requete = $bdd->prepare("CALL listerQuestionsSelonQuiz(?,?)");
+
+    $requete->bindParam(1, $idQuiz, PDO::PARAM_INT,10);
+    $requete->bindParam(2, $idProprietaire, PDO::PARAM_STR, 10);
+
+    $requete->execute();
+    $resultat = $requete->fetchAll();
+
+    $requete->closeCursor();
+    unset($bdd);
+
+    return json_encode($resultat);
+}
+
 
 // Nom: ajouterQuestion
 // Par: Mathieu Dumoulin
@@ -144,6 +167,27 @@ function modifierQuestion($connexion, $idQuestion,$enonceQuestion, $lienImage, $
     {
         unset($bdd);
     }
+}
+
+function supprimerQuestion($idQuestion)
+{
+    $bdd = connecterProf();
+
+    $requete = $bdd->prepare("CALL supprimerQuestion(?)");
+
+    $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
+
+    try
+    {
+        $requete->execute();
+    }
+    catch(PDOException $e)
+    {
+        echo "Erreur dans la suppression de la question : " . $idQuestion;
+    }
+
+    $requete->closeCursor();
+    unset($bdd);
 }
 
 ?>

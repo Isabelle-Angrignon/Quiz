@@ -35,6 +35,7 @@ fieldset {
 
 #QuizDropZone {
 	margin-bottom:20px;
+    height:52px;
 	background-color:#ffffff;
 	list-style-type:none;
 	vertical-align:middle;
@@ -43,9 +44,15 @@ fieldset {
 }
 
 #QuizDropZone li {
-	border-radius: inherit;
-	padding-top:15px;
-	height:35px;
+    height:35px;
+    border-radius:inherit;
+    cursor:pointer;
+    vertical-align:middle;
+    padding-top:15px;
+    text-align: left;
+    padding-left:20px;
+    font-weight:100;
+    padding-right:12px;
 }
 
 #QuizDropZone li span {
@@ -53,16 +60,8 @@ fieldset {
 	line-height:50px;
 }
 
-.QuizDropZone_hover {
-	background-color: #ffffff;
-}
-
 #ListeGererQuestions {
 	margin-left:11%;
-}
-
-#UlQuiz li {
-    cursor:not-allowed;
 }
 
 #UlQuestion {
@@ -229,5 +228,10 @@ fieldset {
 }
 #BTN_ConfirmerQuestion {
     float:right;
-    margin-right:100px;
+    margin-right:40px;
+}
+
+#BTN_SupprimerQuestion {
+    float:right;
+    margin-right:20px;
 }

@@ -34,7 +34,7 @@ function getReponsesFromQuestion($idQuestion, $typeQuestion)
             creerInputReponse("radio","reponses", 1, "Vrai", $reponse["reponseEstVrai"]);
             $reponse["reponseEstVrai"] == 1? $fauxEstVrai = 0: $fauxEstVrai = 1;
             creerInputReponse("radio","reponses", 0, "Faux", $fauxEstVrai);
-            echo "<script>enleverModificationReponse()</script>";
+            echo "<script>enleverModificationReponses()</script>";
         }
         else
         {

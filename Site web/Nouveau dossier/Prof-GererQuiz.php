@@ -39,10 +39,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         $(function() {
-               /* $("#UlQuiz").sortable({
+                $("#UlQuiz").sortable({
                     connectWith: "#QuizDropZone",
                     revert: 150
-                }).disableSelection();*/
+                }).disableSelection();
                 $("#UlModifQuiz").sortable({
                     connectWith: "#UlQuestion",
                     revert: 150,
@@ -50,19 +50,37 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 }).disableSelection();
                 $("#UlQuestion").sortable({
                     revert: 150,
-                    helper : 'clone'
+                    connectWith: "#UlModifQuiz",
+                    helper : 'clone',
+                    dropOnEmpty : false
                 }).disableSelection();
                 $("#QuizDropZone").sortable({
                     connectWith: "#UlQuiz",
-                    revert: 150
+                    revert: 150,
+                    receive: function (event, ui) {
+                        $("#UlQuiz").sortable("option", "connectWith", false);
+                        $("#UlQuestion").sortable("option", "dropOnEmpty", true);
+                        $('#UlModifQuiz').empty();
+                        $('#UlQuestion').empty();
+                        var idQuiz = $(ui.item).attr("value");
+                        updateUlQuestion( "", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "selonQuiz", idQuiz);
+                    },
+                    remove: function (event, ui) {
+                        $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");
+                        $("#UlQuestion").sortable("option", "dropOnEmpty", false);
+                        $('#UlModifQuiz').empty();
+                        $('#UlQuestion').empty();
+                        var idCours = $("#DDL_Cours option:selected").attr("value");
+                        updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "default" );
+                    }
                 }).disableSelection();
 
 
                $("#DDL_Cours").selectmenu({
                     width:400,
                     select: function(event, ui) {
-                         var id = $("#DDL_Cours option:selected").attr("value");
-                         updateUlQuestion( id, <?php echo '"'.$_SESSION["idUsager"].'"' ?> );
+                         var idCours = $("#DDL_Cours option:selected").attr("value");
+                         updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>,"default" );
                     }
                 });
 
