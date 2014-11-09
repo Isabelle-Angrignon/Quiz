@@ -6,7 +6,7 @@ demarrerSession();
 redirigerSiNonConnecte('Etudiant');
 
 $score = ceil($_SESSION['bonnesReponses'] *100 / $_SESSION['questionsRepondues']);
-$resultat = $_SESSION['bonnesReponses'] . " / " . $_SESSION['questionsRepondues'] . " (" . $score . "%) " . print_r($_SESSION['listeQuestionRepondues']) . print_r($_SESSION['bienRepondu']) ;
+$resultat = $_SESSION['bonnesReponses'] . " / " . $_SESSION['questionsRepondues'] . " (" . $score . "%) " /*. print_r($_SESSION['listeQuestionRepondues']) . print_r($_SESSION['bienRepondu']) */;
 
 if ( $score == 100)
 {
