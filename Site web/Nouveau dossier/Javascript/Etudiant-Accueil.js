@@ -74,10 +74,13 @@ function SetIdCoursSession(){
 function setIdQuizSession(idQuiz){
     $.ajax({
         type:"POST",
-        url: 'Controleur/FonctionQuizEtudiant/SetIdQuizSession.php',
+        url: 'Controleur/FonctionQuizEtudiant/setIdQuizSession.php',
         data:{'selectQuiz':idQuiz},
         dataType:"text",
         async : !1,
+        success: function(msg){
+
+        },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
         }
@@ -148,6 +151,7 @@ function genererQuestionsAleatoires(){
     return quizEstCree;
 }
 
+
 function traiterResultatReponse(resultat){
     var close  = true; //Variable pour dire au sweetalert de réponse de se fermer après qu'on ait cliqué ok.
     // si c'est la dernière question, alors on va afficher un autre sweetalert pour le score final donc,
@@ -159,15 +163,11 @@ function traiterResultatReponse(resultat){
     if(resultat == 1) {
         swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",
             confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
-        // mettre bonne réponse dans session
-
     }
     else if(resultat == 0) {
         swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",
             confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
         // TODO ajouter un ajax pour récupérer le lien hypertext de la question si il y en a une.
-
-        // mettre mauvaise réponse dans session
     }
     else if(resultat == 'X') {
         swal({   title: "Oh la la!",   text: " Une erreur s'est produite au moment de la validation. ",   type: "warning",   confirmButtonText: "Dac!" });
@@ -294,6 +294,8 @@ function afficherScoreFinal(){
         async : !1,
         success: function(msg) {
             $('#dFondOmbrage').remove();
+            //TODO update stats via session
+
             swal({title: "Quiz terminé!", text: msg, type: "success", confirmButtonText: "Dac!"});
 
         },

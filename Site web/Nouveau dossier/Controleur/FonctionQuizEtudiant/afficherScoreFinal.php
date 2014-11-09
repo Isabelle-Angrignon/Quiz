@@ -2,6 +2,8 @@
 include("..//Utilitaires.php");
 include("..//..//Modele/ModeleUtilisateurs.php");
 include("..//..//Modele/ModeleUsagers.php");
+
+include("..//..//Modele/ModeleStatistiques.php");
 demarrerSession();
 redirigerSiNonConnecte('Etudiant');
 
@@ -10,13 +12,25 @@ $resultat = $_SESSION['bonnesReponses'] . " / " . $_SESSION['questionsRepondues'
 
 if ( $score == 100)
 {
-    echo "Bravo! Score parfait! " . $resultat ;
+    $resultat =  "Bravo! Score parfait! " . $resultat ;
 }
 elseif ($score <= 60)
 {
-    echo "Ouf! une révision s'impose! " . $resultat ;
+    $resultat = "Ouf! une révision s'impose! " . $resultat ;
 }
 else
 {
-    echo "Score final: " . $resultat;
+    $resultat = "Score final: " . $resultat;
 }
+
+
+if (isset($_SESSION['typeQuiz']))
+{
+    $resultat = $resultat .  "   dans type de quiz!!!!";
+    if($_SESSION['typeQuiz'] == "FORMATIF")
+    {
+        $resultat =  $resultat . "  " . miseAJourStatsQuiz();
+    }
+}
+
+echo $resultat;
