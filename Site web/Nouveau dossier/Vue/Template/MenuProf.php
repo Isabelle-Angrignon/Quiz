@@ -2,7 +2,7 @@
 <nav class="fixed">
 	<a href='Prof-GererQuiz.php' class='NavBar'>Mes quiz et questions</a>
 	<a href='GererCours.php' class='NavBar'>Mes cours</a>
-    <a href='#' class='NavBar' id="notImplement">Statistiques</a>
+    <a href='#' class='NavBar' id="stats">Statistiques</a>
     <a href="GererSonCompte.php" class="NavBar">Mon Compte</a>
     <?php
         // Ajout de l'onglet de menu Admin
@@ -12,4 +12,17 @@
     ?>
 </nav>
 
-<script>$("#notImplement").click(function(){swal("Désolé","Les statistiques ne sont pas encore implémentées","error");});</script>
+<script>
+    $("#stats").click(function(){swal({   title: "Êtes-vous sur?",
+        text: "Voulez vous télécharger un .csv contenant les statistiques ?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Télécharger",
+        closeOnConfirm:true
+    }, function(){
+        window.location.assign("Controleur/ListerStats.php");
+    });
+    });
+
+</script>

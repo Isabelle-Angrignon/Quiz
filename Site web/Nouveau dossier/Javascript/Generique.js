@@ -263,28 +263,42 @@ function viderHTMLfromElement(idElement) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function ChercherUsagerAjax(idUsager , functionOnTrue) {
+        $.ajax({
+            type: 'POST',
+            url: "Controleur/ChercherUsager.php",
+            data: {"idUsager" :idUsager},
+            dataType: "json",
+            success: function(resultat) {
+                if(!resultat.hasOwnProperty('echec') ) {
+                    swal({   title: "Êtes-vous sur?",
+                        text: "Est-ce bien "+resultat.prenom + " " + resultat.nom +" sur qui vous voulez entreprendre cette action ?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "GO ! ",
+                        closeOnConfirm:false
+                    }, function(){
+                        functionOnTrue(idUsager);
+                    });
+                }
+                else{
+                    swal({   title: "Erreur!",   text: "Le numero de DA est invalide",   type: "error"});
+                }
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+            }
+        });
+}
+
+function ListerStatsAjax() {
     $.ajax({
         type: 'POST',
-        url: "Controleur/ChercherUsager.php",
-        data: {"idUsager" :idUsager},
-        dataType: "json",
+        url: "Controleur/ListerStats.php",
+        dataType: "text",
         success: function(resultat) {
-            if(!resultat.hasOwnProperty('echec') ) {
-                swal({   title: "Êtes-vous sur?",
-                    text: "Est-ce bien "+resultat.prenom + " " + resultat.nom +" sur qui vous voulez entreprendre cette action ?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "GO ! ",
-                    closeOnConfirm:false
-                }, function(){
-                    functionOnTrue(idUsager);
-                });
-            }
-            else{
-                swal({   title: "Erreur!",   text: "Le numero de DA est invalide",   type: "error"});
-            }
-
+            alert(resultat);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);

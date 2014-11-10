@@ -56,4 +56,18 @@ function miseAJourStatsQuiz()
     }
 }
 
+function obtenirStat()
+{
+
+    $bdd = connecterProf();
+    $requete = $bdd->prepare("CALL ListerStats()");
+    $requete->execute();
+    $resultat = $requete->fetchAll();
+
+    $requete->closeCursor();
+    unset($bdd);
+
+    return $resultat;
+}
+
 ?>
