@@ -100,6 +100,19 @@ function genererReponsesCMU($idQuestion, $ordreReponse)
 }
 
 
+function resetVarSessionScoreAffiche()
+{
+    if(!isset($_SESSION['questionsRepondues']))
+    {
+        $_SESSION['questionsRepondues'] = 0;
+    }
+    if(!isset($_SESSION['bonnesReponses']))
+    {
+        $_SESSION['bonnesReponses'] = 0;
+    }
+}
+
+
 function resetVarSessionQuiz()
 {
     unset($_SESSION['listeQuestions'] );
