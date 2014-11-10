@@ -44,7 +44,6 @@ function miseAJourStatsQuiz()
 
                 miseAJourStatsQuestion($idEtudiant, $question, $idQuiz, $resultat );
             }
-            echo "Les statistiques on été mises à jour. ";
         }
         else
         {

@@ -8,7 +8,7 @@ demarrerSession();
 redirigerSiNonConnecte('Etudiant');
 
 $score = ceil($_SESSION['bonnesReponses'] *100 / $_SESSION['questionsRepondues']);
-$resultat = $_SESSION['bonnesReponses'] . " / " . $_SESSION['questionsRepondues'] . " (" . $score . "%) " /*. print_r($_SESSION['listeQuestionRepondues']) . print_r($_SESSION['bienRepondu']) */;
+$resultat = $_SESSION['bonnesReponses'] . " / " . $_SESSION['questionsRepondues'] . " (" . $score . "%) " ;
 
 if ( $score == 100)
 {
@@ -26,10 +26,9 @@ else
 
 if (isset($_SESSION['typeQuiz']))
 {
-    $resultat = $resultat .  "   dans type de quiz!!!!";
     if($_SESSION['typeQuiz'] == "FORMATIF")
     {
-        $resultat =  $resultat . "  " . miseAJourStatsQuiz();
+        miseAJourStatsQuiz();
     }
 }
 
