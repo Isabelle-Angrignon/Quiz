@@ -1,5 +1,6 @@
 <?php
 
+
 // listerQuizSelonCoursProprietaire
 // Par Mathieu Dumoulin
 // Description : Cette fonction liste tous les quiz d'un cours selon son propriétaire.
@@ -21,7 +22,28 @@ function listerQuizSelonCoursProprietaire($idCours, $idProprietaire)
     return json_encode($resultat);
 }
 
+function recupererTypeQuiz($idQuiz)
+{
+    $bdd = connecterEtudiant();
+
+    if (isset($idQuiz))
+    {
+        $requete = $bdd->prepare("CALL recupererTypeQuiz( ? )");
+        $requete->bindparam(1, $idQuiz, PDO::PARAM_INT,10);
 
 
+        $requete->execute();
+
+        $type = $requete->fetch();
+
+        $requete->closeCursor();
+        unset($bdd);
+
+        return $type[0];
+    }
+    else{
+        return null;
+    }
+}
 
 ?>
