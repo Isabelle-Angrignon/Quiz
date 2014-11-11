@@ -3,17 +3,37 @@
 // Date : 14/10/2014
 // Description : Contient tout le code Javascript spécifique à la page Etudiant-Accueil.php
 
+////////// Modele commentaires //////////////////
+// Par: Isabelle Angrignon
+// Nom:
+// But:
+// Intrants:
+// Extrants:
+//////////////////////////////////////////////////
+
+// Par: Isabelle Angrignon
+// Nom: addClickEventToQuizFormatif
+// But: Ajoute un gestionnaire d'événement qui permet d'ouvrir un quiz formatif à partir de l'identifiant unique d'un quiz (idQuiz)
+// Intrants: aucun
+// Extrants: aucun
 function addClickEventToQuizFormatif(){
     $("#UlQuizFormatif li").off("click");
     $("#UlQuizFormatif li").click( function() {
         //Récupérer idQuiz:
         var idQuiz = $(this).attr('id');
+        //todo var estAleatoire = $(this).   récupérer l'ordre aléatoire
         setIdQuizSession(idQuiz);
         //appeler la fonction php qui génere une liste de questions pour un idQuiz spécifique...
         ouvrirUnQuiz("FORMATIF", idQuiz );
     });
 }
-//Gestion complète d'un quiz
+
+// Par: Isabelle Angrignon
+// Nom: ouvrirUnQuiz
+// But: Permet l'appel de la méthode ouvrirQuizFormatif ouvrirQuizAleatoire selon son type.
+// Intrants: type de quiz: selon enum: ALEATOIRE, FORMATIF ou SOMMATIF
+//           idQuiz: unsigned int(10), clé primaire du quiz de la table Quiz
+// Extrants: aucun sauf si erreur
 function ouvrirUnQuiz(typeQuiz, idQuiz){
     if (typeQuiz == "ALEATOIRE"){
         ouvrirUnQuizAleatoire();
@@ -26,6 +46,12 @@ function ouvrirUnQuiz(typeQuiz, idQuiz){
     }
 }
 
+// Par: Isabelle Angrignon
+// Nom: ouvrirUnQuizFormatif
+// But:  Permet la préparation de la liste de questions du quiz formatif passé en paramètre et crée la fenêtre
+//       d'affichage de question à répondre s'il y a des questions à répondre.
+// Intrants: idQuiz: unsigned int(10), clé primaire du quiz de la table Quiz
+// Extrants: aucun sauf si aucune liste de généré, on affiche une alerte.
 function ouvrirUnQuizFormatif(idQuiz){
     if (genererListeQuestions("FORMATIF", idQuiz) == 1) {
         creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php");
@@ -35,6 +61,13 @@ function ouvrirUnQuizFormatif(idQuiz){
     }
 }
 
+// Par: Isabelle Angrignon
+// Nom: ouvrirUnQuizAleatoire
+// But:  Permet la préparation de la liste de questions aléatoires pour un cours spécifique et crée la fenêtre
+//       d'affichage de question à répondre s'il y a des questions à répondre.
+//      On vérifie d'abors si un cours est sélectionné dans le menu déroulant, sinon on affiche une alerte
+// Intrants: aucun
+// Extrants: aucun sauf si aucune liste de généré ou si aucun cours n'est sélectionné, alors on affiche une alerte.
 function ouvrirUnQuizAleatoire(){
     if (SetIdCoursSession()==1) {
         if (genererListeQuestions("ALEATOIRE", 0) == 1) {
@@ -49,6 +82,12 @@ function ouvrirUnQuizAleatoire(){
     }
 }
 
+// Par: Isabelle Angrignon
+// Nom: SetIdCoursSession
+// But: Récupère le idCours du cours sélectionné dans le menu déroulant et fait appel à la page php appelée par Ajax
+//      pour mettre la valeur dans la variable de session pour usage futur.
+// Intrants: aucun
+// Extrants: coursEstChoisi: int 0|1
 function SetIdCoursSession(){
     var idCours = $("#DDL_Cours option:selected").attr("value");
     var coursEstChoisi = 0;
@@ -70,20 +109,33 @@ function SetIdCoursSession(){
     return coursEstChoisi;
 }
 
+// Par: Isabelle Angrignon
+// Nom: setIdQuizSession
+// But: Récupère le idQuiz du quiz FORMATIF ou SOMMATIF sélectionné dans la liste de quiz et fait appel à la page php
+//      appelée par Ajax pour mettre la valeur dans la variable de session pour usage futur.
+// Intrants: idQuiz: unsigned int(10)
+// Extrants: aucun
 //Met le idQuiz dans la variable de session et réinitialise les variables de sessions relatives à un quiz.
 function setIdQuizSession(idQuiz){
     $.ajax({
         type:"POST",
-        url: 'Controleur/FonctionQuizEtudiant/SetIdQuizSession.php',
+        url: 'Controleur/FonctionQuizEtudiant/setIdQuizSession.php',
         data:{'selectQuiz':idQuiz},
         dataType:"text",
         async : !1,
+        success: function(msg){   },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
         }
     });
 }
 
+// Par: Isabelle Angrignon
+// Nom: listerQuizFormatifs
+// But: Appel par Ajax à la page php qui génère la liste des quiz formatifs.
+//      de session).  Recoit une liste de format JSON que l'on utilise pour mettre dans les éléments "li" de la liste de quiz.
+// Intrants: aucun
+// Extrants: aucun
 function listerQuizFormatifs(){
     $.ajax({
         type:"POST",
@@ -103,6 +155,13 @@ function listerQuizFormatifs(){
     });
 }
 
+
+// Par: Isabelle Angrignon
+// Nom: genererListeQuestions
+// But: Appelle la méthode qui génère la liste de questions selon le type de quiz choisi
+// Intrants: type de quiz: selon enum: ALEATOIRE, FORMATIF ou SOMMATIF
+//           idQuiz: unsigned int(10), clé primaire du quiz de la table Quiz
+// Extrants: quizEstCree: int 0|1
 function genererListeQuestions(typeQuiz, idQuiz){
     if (typeQuiz == "FORMATIF"){
         return listerQuestionsFormatif(idQuiz);
@@ -111,10 +170,15 @@ function genererListeQuestions(typeQuiz, idQuiz){
         return genererQuestionsAleatoires();
     }
     else {
-        return null;
+        return 0;
     }
 }
 
+// Par: Isabelle Angrignon
+// Nom: listerQuestionsFormatif
+// But: Génère la liste de questions du quiz choisi passé en paramètres
+// Intrants: idQuiz: unsigned int(10), clé primaire du quiz de la table Quiz
+// Extrants: quizEstCree: int 0|1
 function listerQuestionsFormatif(idQuiz){
     var quizEstCree = 0;
     $.ajax({
@@ -132,6 +196,11 @@ function listerQuestionsFormatif(idQuiz){
     return quizEstCree;
 }
 
+// Par: Isabelle Angrignon
+// Nom: genererQuestionsAleatoires
+// But: Génère la liste de questions aléatoires d'un cours choisi (selon la variable de session
+// Intrants: aucun
+// Extrants: quizEstCree: int 0|1
 function genererQuestionsAleatoires(){
     var quizEstCree = 0;
     $.ajax({
@@ -148,6 +217,13 @@ function genererQuestionsAleatoires(){
     return quizEstCree;
 }
 
+// Par: Isabelle Angrignon
+// Nom: traiterResultatReponse
+// But: 1 - Vérifie si on est rendu à la dernière question: si oui, on s'assure que le "sweet alert" de quiz terminé va
+//          s'afficher après le "sweet alert" du résultats de la question qui vient d'être répondue.
+//      2 -  todo compléter commentaires
+// Intrants:
+// Extrants:
 function traiterResultatReponse(resultat){
     var close  = true; //Variable pour dire au sweetalert de réponse de se fermer après qu'on ait cliqué ok.
     // si c'est la dernière question, alors on va afficher un autre sweetalert pour le score final donc,
@@ -159,15 +235,11 @@ function traiterResultatReponse(resultat){
     if(resultat == 1) {
         swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",
             confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
-        // mettre bonne réponse dans session
-
     }
     else if(resultat == 0) {
         swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",
             confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
         // TODO ajouter un ajax pour récupérer le lien hypertext de la question si il y en a une.
-
-        // mettre mauvaise réponse dans session
     }
     else if(resultat == 'X') {
         swal({   title: "Oh la la!",   text: " Une erreur s'est produite au moment de la validation. ",   type: "warning",   confirmButtonText: "Dac!" });
@@ -295,7 +367,6 @@ function afficherScoreFinal(){
         success: function(msg) {
             $('#dFondOmbrage').remove();
             swal({title: "Quiz terminé!", text: msg, type: "success", confirmButtonText: "Dac!"});
-
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);

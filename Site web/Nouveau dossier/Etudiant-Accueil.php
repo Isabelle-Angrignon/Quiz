@@ -29,7 +29,9 @@
             $("#DDL_Cours").selectmenu({
                 width:400,
                 select: function(event, ui) {
-                    SetIdCoursSession();// utilisé pour mettre a jour la liste de quiz formatifs
+                    //Permet de mettre à jour la liste des quiz formatifs (et éventuellemnt sommatifs) selon le cours choisi
+                    //Si aucun cours choisi, listera tous les quiz.
+                    SetIdCoursSession();
                     $("#UlQuizFormatif").empty();
                     listerQuizFormatifs();
                     //Regénérer la gestion de click sur les formatifs
@@ -52,14 +54,8 @@ include("Vue/Template/EnteteSite.php");
 include("Vue/Template/MenuEtudiant.php");
 
 //Pour le premier affichage
-if(!isset($_SESSION['questionsRepondues']))
-{
-    $_SESSION['questionsRepondues'] = 0;
-}
-if(!isset($_SESSION['bonnesReponses']))
-{
-    $_SESSION['bonnesReponses'] = 0;
-}
+resetVarSessionScoreAffiche();
+
 
 ?>
 
