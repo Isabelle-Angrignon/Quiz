@@ -58,7 +58,7 @@ function trieParDefaultQuestions($idCours, $idProprietaire)
     return json_encode($resultat);
 }
 
-// Nom: listerQuestionsSelonQuiz
+// Nom: listerQuestionsDunQuiz
 // Par: Mathieu Dumoulin
 // Intrants: $idQuiz = identifiant du quiz qui contient les questions voulues. $idProprietaire = identifiant du professeur en question
 // Extrants: Le résultat de la procédure, sous forme de JSON
@@ -68,7 +68,7 @@ function listerQuestionsDunQuiz($idQuiz, $idProprietaire)
     $bdd = connecterProf();
     $requete = $bdd->prepare("CALL listerQuestionsSelonQuiz(?,?)");
 
-    $requete->bindParam(1, $idQuiz, PDO::PARAM_INT,10);
+    $requete->bindParam(1, $idQuiz, PDO::PARAM_INT);
     $requete->bindParam(2, $idProprietaire, PDO::PARAM_STR, 10);
 
     $requete->execute();
@@ -79,6 +79,32 @@ function listerQuestionsDunQuiz($idQuiz, $idProprietaire)
 
     return json_encode($resultat);
 }
+
+// Nom: listerQuestionsPasDansCeQuiz
+// Par: Mathieu Dumoulin
+// Intrants: $idQuiz = identifiant du quiz qui contient les questions voulues. $idProprietaire = identifiant du professeur en question
+//           $idCours = identifiant du cours qui est sélectionné dans la DDL.  $typeQuiz = type du quiz qui est présentement en cours de modification
+// Extrants: Le résultat de la procédure, sous forme de JSON
+// Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestionsSelonQuiz()
+function listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours, $typeQuiz)
+{
+    $bdd = connecterProf();
+    $requete = $bdd->prepare("CALL listerQuestionsPasDansQuiz(?,?,?,?)");
+
+    $requete->bindParam(1, $idQuiz, PDO::PARAM_INT);
+    $requete->bindParam(2, $idProprietaire, PDO::PARAM_STR, 10);
+    $requete->bindParam(3, $idCours, PDO::PARAM_INT);
+    $requete->bindParam(4, $typeQuiz, PDO::PARAM_STR,20);
+
+    $requete->execute();
+    $resultat = $requete->fetchAll();
+
+    $requete->closeCursor();
+    unset($bdd);
+
+    return json_encode($resultat);
+}
+
 
 
 // Nom: ajouterQuestion

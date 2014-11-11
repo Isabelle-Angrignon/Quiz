@@ -5,13 +5,12 @@
 
 
 function addClickEventToQuestions(usagerCourant) {
-    $("#UlQuestion li").off("click");
-    $("#UlQuestion li").click( function() {
+    $("#UlQuestion li, #UlModifQuiz li").off("click");
+    $("#UlQuestion li, #UlModifQuiz li").click( function() {
         if(usagerCourant != $(this).children(".divProfDansLi").attr("placeholder")) {
             swal("Oups",
             "Vous ne disposez pas des droits pour modifier cette question. Aucune modification ne sera sauvegardée.",
             "warning");
-
         }
 
         var etat = "";
@@ -36,7 +35,7 @@ function ajouterReponsesViaJSON(json) {
     }
 }
 
-function traiterJSONQuestions(resultat) {
+function traiterJSONQuestions(resultat, idParent) {
     var enonceDeLaQuestion;
     var nomProf;
     var idProprietaire;
@@ -47,29 +46,85 @@ function traiterJSONQuestions(resultat) {
         }
         nomProf = resultat[i].prenom + " " + resultat[i].nom;
         idProprietaire = resultat[i].idUsager_Proprietaire;
-        ajouterLi_AvecDiv("UlQuestion", enonceDeLaQuestion, resultat[i].idQuestion, true, nomProf, "divProfDansLi", idProprietaire);
+        ajouterLi_AvecDiv(idParent, enonceDeLaQuestion, resultat[i].idQuestion, true, nomProf, "divProfDansLi", idProprietaire);
     }
 }
 
-function updateUlQuestion(idCours, usagerCourant, triage, idQuiz) {
-    if(idCours != "") {
-        $("#UlQuestion li").remove();
-        $.ajax({
-            type: 'POST',
-            url: 'Controleur/ListerQuestions.php',
-            data: {"Triage":triage, "idCours":idCours , "idProprietaire":usagerCourant, "idQuiz":idQuiz},
-            dataType: "json",
-            success: function(resultat) {
-                traiterJSONQuestions(resultat);
+function traiterJSONQuiz(resultat) {
+    var titreQuiz = "";
+    var typeQuiz = "";
 
-                // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
-                addClickEventToQuestions(usagerCourant);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+    if(resultat.length != 0) {
+        for(var i = 0; i < resultat.length; ++i) {
+            titreQuiz = resultat[i].titreQuiz;
+            if(titreQuiz.length > 24) {
+                titreQuiz = titreQuiz.substring(0, 24) + "...";
             }
-        });
+            typeQuiz = resultat[i].typeQuiz;
+            ajouterLi_AvecDiv("UlQuiz", titreQuiz, resultat[i].idQuiz, true, typeQuiz, "divProfDansLi");
+        }
     }
+    else {
+        $("#UlQuiz").text("Vous ne disposez d'aucun quiz pour ce cours.");
+    }
+
+}
+
+function updateUlQuiz(idCours, idProprietaire) {
+    $("#UlQuiz").text("");
+    $("#UlQuiz li").remove();
+    $.ajax({
+        type: 'POST',
+        url: 'Controleur/listerQuizProf-GererQuiz.php',
+        data: {"idCours":idCours , "idProprietaire":idProprietaire},
+        dataType: "json",
+        success: function(resultat) {
+            traiterJSONQuiz(resultat);
+
+            // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+
+}
+
+function updateUlModifQuiz(triage,usagerCourant,idQuiz) {
+    $("#UlModifQuiz li").remove();
+    $.ajax({
+        type: 'POST',
+        url: 'Controleur/ListerQuestions.php',
+        data: {"Triage":triage , "idProprietaire":usagerCourant, "idQuiz":idQuiz},
+        dataType: "json",
+        async:false,
+        success: function(resultat) {
+            traiterJSONQuestions(resultat, "UlModifQuiz");
+            // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
+            addClickEventToQuestions(usagerCourant);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function updateUlQuestion(idCours, usagerCourant, triage, idQuiz) {
+    $("#UlQuestion li").remove();
+    $.ajax({
+        type: 'POST',
+        url: 'Controleur/ListerQuestions.php',
+        data: {"Triage":triage, "idCours":idCours , "idProprietaire":usagerCourant, "idQuiz":idQuiz},
+        dataType: "json",
+        success: function(resultat) {
+            traiterJSONQuestions(resultat, "UlQuestion");
+            // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
+            addClickEventToQuestions(usagerCourant);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
 }
 // ajouterVariableSessionQuestion
 // Par Mathieu Dumoulin
@@ -423,7 +478,16 @@ function ajouterQuestion(idCreateur) {
                 else {
                     $(".dFondOmbrage").detach();
                     var cours = $("#DDL_Cours option:selected").attr("value");
-                    updateUlQuestion( cours, idCreateur );
+
+                    // Gestion de l'affichage des questions dans les listes
+                    if($("#QuizDropZone").children("li").length == 0) {
+                        updateUlQuestion( cours, idUsagerCourant, "default");
+                    }
+                    else {
+                        var idQuiz = $("#QuizDropZone li:first-child").attr("id");
+                        updateUlQuestion(cours, idUsagerCourant, "selonQuiz", idQuiz);
+                        updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
+                    }
                     swal("Félicitation !", "Votre question à été ajoutée", "success");
                 }
             },
@@ -471,7 +535,15 @@ function modifierQuestion( idUsagerCourant,idQuestion, idProprietaire) {
                 else {
                     $(".dFondOmbrage").detach();
                     var cours = $("#DDL_Cours option:selected").attr("value");
-                    updateUlQuestion( cours, idUsagerCourant );
+                    // Gestion de l'affichage des questions dans les listes
+                    if($("#QuizDropZone").children("li").length == 0) {
+                        updateUlQuestion( cours, idUsagerCourant, "default");
+                    }
+                    else {
+                        var idQuiz = $("#QuizDropZone li:first-child").attr("id");
+                        updateUlQuestion(cours, idUsagerCourant, "selonQuiz", idQuiz);
+                        updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
+                    }
                     swal("Félicitation !", "Votre question à été modifiée", "success");
                 }
             },
@@ -518,7 +590,17 @@ function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
                         else {
                             $(".dFondOmbrage").detach();
                             var cours = $("#DDL_Cours option:selected").attr("value");
-                            updateUlQuestion( cours, idUsagerCourant );
+
+                            // Gestion de l'affichage des questions dans les listes
+                            if($("#QuizDropZone").children("li").length == 0) {
+                                updateUlQuestion( cours, idUsagerCourant, "default");
+                            }
+                            else {
+                                var idQuiz = $("#QuizDropZone li:first-child").attr("id");
+                                updateUlQuestion(cours, idUsagerCourant, "selonQuiz", idQuiz);
+                                updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
+                            }
+
                             swal("Félicitation !", "Votre question à été supprimée", "success");
                         }
                     },

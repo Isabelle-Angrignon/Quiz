@@ -12,6 +12,7 @@
     $triage = $_POST['Triage'];
     $idProprietaire = $_POST['idProprietaire'];
     isset($_POST['idCours'])?$idCours = $_POST['idCours']: $idCours = "";
+    isset($_POST['idQuiz'])?$idQuiz = $_POST['idQuiz']: $idQuiz = "";
 
     $resultatTriage;
     if($triage == 'default')
@@ -20,7 +21,7 @@
     }
     else if($triage == "selonQuiz")
     {
-        $resultatTriage = listerQuestionsDunQuiz($idQuiz, $idProprietaire);
+        $resultatTriage = listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours,"" /* TODO RESTE À CHERCHER LE TYPE QUIZ */  );
     }
     echo $resultatTriage;
 

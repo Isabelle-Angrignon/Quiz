@@ -34,6 +34,7 @@ function ListerCoursDansSelect($IdSelect, $tousMesCours)
     }
 }
 
+
 // ListerCoursDansUI
 // Permet d'insérer un eleve dans un li
 // fait par : Simon Bouchard

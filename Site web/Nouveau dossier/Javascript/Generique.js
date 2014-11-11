@@ -56,7 +56,7 @@ function ajouterLi_ToUl(idUl, element, estThemeJqueryUI) {
 	document.getElementById(idUl).appendChild(liTag);
 }
 
-// Nom : ajouterLi_ToUl
+// Nom : ajouterLi_ToUl_V2
 // Par : Mathieu Dumoulin
 // Date : 19/09/2014
 // Intrant(s) : String idUl, String element,String idElement , bool estThemeJqueryUI
@@ -75,14 +75,14 @@ function ajouterLi_ToUl_V2(idUl, element,idElement, estThemeJqueryUI) {
     document.getElementById(idUl).appendChild(liTag);
 }
 
-
-// Nom : ajouterLi_ToUl
-// Par : Mathieu Dumoulin
+// Nom : ajouterLi_ToUl_Selectable
+// Par : Isabelle Angrignon
 // Date : 19/09/2014
 // Intrant(s) : String idUl, String element,String idElement , bool estThemeJqueryUI
 // Extrant(s) : Il n'y a pas d'extrant
 // Description : Cette fonction prend l'id d'une balise Ul et lui ajoute un Li créé dynamiquement comportant le texte (element) passer en paramêtre
-//				 en donnant les classe pour le thême d'un sortable au Li si estThemeJqueryUI est à true
+//				 en donnant les classe pour le thême d'un selectable au Li si estThemeJqueryUI est à true.
+//               La différence de cette fonction comparée aux autres est quelle ajoute le terme selectable à la classe JQueryUI que le Li se fait attribuée.
 function ajouterLi_ToUl_Selectable(idUl, element,idElement, estThemeJqueryUI) {
     // Initialisation du li
     var liTag = document.createElement("li");
@@ -90,7 +90,6 @@ function ajouterLi_ToUl_Selectable(idUl, element,idElement, estThemeJqueryUI) {
     liTag.setAttribute("id",idElement);
     if(estThemeJqueryUI) {
         liTag.setAttribute("class", "ui-state-default selectable");
-
     }
     liTag.appendChild(document.createTextNode(element));
     document.getElementById(idUl).appendChild(liTag);

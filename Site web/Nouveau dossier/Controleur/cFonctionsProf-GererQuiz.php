@@ -12,7 +12,13 @@ function remplirListeQuestions($idCours, $idProprietaire, $triage = 'default')
     {
         $resultatTriage = trieParDefaultQuestions($idCours, $idProprietaire);
     }
-    echo "<script>traiterJSONQuestions(" . $resultatTriage .");</script>";
+    echo "<script>traiterJSONQuestions(" . $resultatTriage .", 'UlQuestion');</script>";
+}
+
+function remplirListeQuiz($idCours, $idProprietaire)
+{
+    $listeQuiz = listerQuizSelonCoursProprietaire($idCours, $idProprietaire);
+    echo "<script>traiterJSONQuiz(" . $listeQuiz .");</script>";
 }
 
 

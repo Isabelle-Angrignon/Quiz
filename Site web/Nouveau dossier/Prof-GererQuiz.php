@@ -16,6 +16,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
         include("Controleur/cFonctionsCours.php");
         include("Modele/ModeleCours.php");
         include("Modele/ModeleQuestions.php");
+        include("Modele/ModeleQuiz.php");
 
     demarrerSession();
     gestionParamChange();
@@ -28,16 +29,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
     <script src="Javascript/Prof-GererQuiz.js"></script>
 
     <script>
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////  Pour l'instant, il n'y a pas d'ancien typeQuestion lorsqu'on modifie une question...
-        /////////////  Effet néfaste : Je dois toujours détruire le lien dans la table et le reconstruire.
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////  Mettre un span qui contient si on peut modifier les réponses ou non ?
-        /////////////  Effet néfaste : On peut toujours sélectionner une réponse même si on ne peut pas la modifer
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         $(function() {
                 $("#UlQuiz").sortable({
                     connectWith: "#QuizDropZone",
@@ -62,8 +53,11 @@ Description: Cette interface représente l'interface principale d'un professeur 
                         $("#UlQuestion").sortable("option", "dropOnEmpty", true);
                         $('#UlModifQuiz').empty();
                         $('#UlQuestion').empty();
-                        var idQuiz = $(ui.item).attr("value");
-                        updateUlQuestion( "", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "selonQuiz", idQuiz);
+                        var idQuiz = $(ui.item).attr("id");
+                        var idCours = $("#DDL_Cours option:selected").attr("value");
+                        updateUlModifQuiz("selonQuiz", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, idQuiz);
+                        updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "selonQuiz", idQuiz);
+
                     },
                     remove: function (event, ui) {
                         $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");
@@ -80,10 +74,17 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     width:400,
                     select: function(event, ui) {
                          var idCours = $("#DDL_Cours option:selected").attr("value");
+                         removeLiFromQuizDropZone();
                          updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>,"default" );
+                         updateUlQuiz(idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>);
                     }
                 });
-
+                function removeLiFromQuizDropZone() {
+                    $("#QuizDropZone li").remove();
+                    $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");
+                    $("#UlQuestion").sortable("option", "dropOnEmpty", false);
+                    $('#UlModifQuiz').empty();
+                }
                 addClickEventToQuestions(<?php echo '"'.$_SESSION["idUsager"].'"';  ?>);
 
                 $("#AjouterQuestion").click( function() {
@@ -91,7 +92,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
                 });
         });
-
     </script>
 
 </head>
@@ -117,9 +117,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
     </div>
     <div id="ListeQuiz"class="Liste ListeGererQuiz">
         <ul id="UlQuiz">
-            <li class="ui-state-default">Quiz mi-session</li>
-            <li class="ui-state-default">Quiz méchant</li>
-            <li class="ui-state-default">Quiz sur les singes</li>
+            <?php
+                remplirListeQuiz($_SESSION['PremierCours'], $_SESSION["idUsager"]);
+            ?>
         </ul>
         <div id="ajouterQuiz"></div>
     </div>
