@@ -1,13 +1,29 @@
-<!-- Upload d'un fichier php -->
-
 
 <?php
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  CFonctionGestionFichier.php
+//  Fait par : Simon Bouchard
+//  Commenter le : 12/11/2014
+//
+//  Description :
+//  Ce fichier est appeler par un formulaire en post. Il permet d'ajouter en lot
+//  plusiseurs étudiants à partir d'un fichier CSV. Une fois le traitement
+//  terminer on renvoie a la page GererCours.php
+//
+//  Avertissement :
+//  Les érreures ne sont pas traiter PEU IMPORTE CE QUI SE PASSE LES ÉTUDIANTS SERONT CRÉER (ou du moins essayer)
+//
+//  Redirection : GererCours.php
+//
+//  Param File : Le fichier csv qui contient les étudiants selon le format de colnet
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
     include("../Controleur/Utilitaires.php");
 	include("../Modele/ModeleInscriptionsEtudiantCours.php");
     include("../Modele/ModeleUtilisateurs.php");
     demarrerSession();
     redirigerSiNonConnecte('Prof');
-
 	$nomFichier = UploadFile();
 	LireCSV($nomFichier);
 	unlink('..\FichierCSV\\' . $nomFichier);
@@ -62,24 +78,14 @@
         header('Location: ../GererCours.php');
     
     }
-    
-    //Fait par : Simon Bouchard
-    // Intrant : La ligne a gerer 
-    // Extrant : Le traitement de la ligne a réussi
-    // 2014-09-24
-    // 
-    function GererLigneEleve($ligne )
-    {	
-    	
-    	//ajouterUsager();
-    }
-    
-    
+
     // Fait par : Simon Bouchard
     // Intrant : La premiere ligne du fichier csv
     // Extrant : Si le fichier est valide 
     // 2014-09-24
     // Vérifie si le fichier CSV est valide
+    // Actuellement par manque de temps aucune vérification n'est faite mais la fonction est prévue
+    // pour la premiere ligne du fichier et déterminer par celle-ci si le fichier est valide ou non ...
     function ValiderFichier ( $premiereLigneCSV)
     {
     	return true;
