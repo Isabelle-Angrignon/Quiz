@@ -10,14 +10,17 @@ demarrerSession();
 redirigerSiNonConnecte('Etudiant');
 
 $idQuiz = $_POST['idQuiz'];
+$ordeQuestionsEstAleatoire = $_POST['ordreQuestionsEstAleatoire'];
 
 //devra fair un switch case selon le type de quiz...
 $Liste = genererQuestionsQuiz($idQuiz);
 
-if (isset($Liste) && !empty($Liste))
+if (isset($Liste) && !empty($Liste) && isset($ordeQuestionsEstAleatoire))
 {
-    //shuffle($Liste);// ne pas réassigner a un array, les éléments sont mélengés à même la variable.
-
+    if ($ordeQuestionsEstAleatoire == 1)
+    {
+        shuffle($Liste);
+    }
     $_SESSION["listeQuestions"] = $Liste;
     //Preparer premiere question
     $idQuestion = $_SESSION['listeQuestions'][0];

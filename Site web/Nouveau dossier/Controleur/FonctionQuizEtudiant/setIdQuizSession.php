@@ -15,12 +15,10 @@ $_SESSION['idQuiz'] = $_POST['selectQuiz'];
 
 if (isset ($_SESSION['idQuiz']))
 {
-    $type = recupererTypeQuiz($_SESSION['idQuiz']);
-    $_SESSION['typeQuiz'] = $type;
+    $info = recupererInfoQuiz($_SESSION['idQuiz']);
+    $_SESSION['typeQuiz'] = $info['typeQuiz'];
+    $_SESSION['ordreQuestionsEstAleatoire'] = $info['ordreQuestionsAleatoire'];
 }
-
-
-
 
 //Remet a vide les variables de session reliées au quiz.
 //Tel la liste des questions et autres.

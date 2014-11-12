@@ -21,7 +21,6 @@ function addClickEventToQuizFormatif(){
     $("#UlQuizFormatif li").click( function() {
         //Récupérer idQuiz:
         var idQuiz = $(this).attr('id');
-        //todo var estAleatoire = $(this).   récupérer l'ordre aléatoire
         setIdQuizSession(idQuiz);
         //appeler la fonction php qui génere une liste de questions pour un idQuiz spécifique...
         ouvrirUnQuiz("FORMATIF", idQuiz );
@@ -48,18 +47,38 @@ function ouvrirUnQuiz(typeQuiz, idQuiz){
 
 // Par: Isabelle Angrignon
 // Nom: ouvrirUnQuizFormatif
-// But:  Permet la préparation de la liste de questions du quiz formatif passé en paramètre et crée la fenêtre
-//       d'affichage de question à répondre s'il y a des questions à répondre.
+// But:  Permet la préparation de la liste de questions (aléatoire ou non) du quiz formatif passé en paramètre
+//       et crée la fenêtre d'affichage de question à répondre s'il y a des questions à répondre.
 // Intrants: idQuiz: unsigned int(10), clé primaire du quiz de la table Quiz
 // Extrants: aucun sauf si aucune liste de généré, on affiche une alerte.
 function ouvrirUnQuizFormatif(idQuiz){
-    if (genererListeQuestions("FORMATIF", idQuiz) == 1) {
+    var ordreQuestEstAleatoire = getOrdreQuestionEstAleatoire(idQuiz);
+    if (genererListeQuestions("FORMATIF", idQuiz, ordreQuestEstAleatoire) == 1) {
         creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php");
     }
     else  {
         swal({ title: "Désolé",   text: "Il n'y a aucune question dans ce quiz.",   type: "warning",   confirmButtonText: "Dac!" });
     }
 }
+//todo commentaires
+function getOrdreQuestionEstAleatoire(idQuiz){
+    var ordre = 0;
+    $.ajax({
+        type:"POST",
+        url: 'Controleur/FonctionQuizEtudiant/getOrdreQuestionsEstAleatoire.php',
+        data:{'idQuiz':idQuiz},
+        dataType:"text",
+        async : !1,
+        success: function(resultat){
+            ordre = resultat;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
+        }
+    });
+    return ordre;
+}
+
 
 // Par: Isabelle Angrignon
 // Nom: ouvrirUnQuizAleatoire
@@ -123,7 +142,7 @@ function setIdQuizSession(idQuiz){
         data:{'selectQuiz':idQuiz},
         dataType:"text",
         async : !1,
-        success: function(msg){   },
+        success: function(msg){        },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
         }
@@ -161,10 +180,13 @@ function listerQuizFormatifs(){
 // But: Appelle la méthode qui génère la liste de questions selon le type de quiz choisi
 // Intrants: type de quiz: selon enum: ALEATOIRE, FORMATIF ou SOMMATIF
 //           idQuiz: unsigned int(10), clé primaire du quiz de la table Quiz
+//           ordreQuestionsEstAleatoire: int, 1|0
 // Extrants: quizEstCree: int 0|1
-function genererListeQuestions(typeQuiz, idQuiz){
+function genererListeQuestions(typeQuiz, idQuiz, ordreQuestionsEstAleatoire ){
+    //Détermine la valeur par défaut de l'ordre des questions à aléatoire si pas passé en paramètre
+    ordreQuestionsEstAleatoire = (typeof ordreQuestionsEstAleatoire === 'undefined') ? 1 : ordreQuestionsEstAleatoire;
     if (typeQuiz == "FORMATIF"){
-        return listerQuestionsFormatif(idQuiz);
+        return listerQuestionsFormatif(idQuiz, ordreQuestionsEstAleatoire );
     }
     else if (typeQuiz == "ALEATOIRE"){
         return genererQuestionsAleatoires();
@@ -178,14 +200,15 @@ function genererListeQuestions(typeQuiz, idQuiz){
 // Nom: listerQuestionsFormatif
 // But: Génère la liste de questions du quiz choisi passé en paramètres
 // Intrants: idQuiz: unsigned int(10), clé primaire du quiz de la table Quiz
+//           ordreQuestionsEstAleatoire: int, 1|0
 // Extrants: quizEstCree: int 0|1
-function listerQuestionsFormatif(idQuiz){
+function listerQuestionsFormatif(idQuiz, ordreQuestionsEstAleatoire){
     var quizEstCree = 0;
     $.ajax({
         type:"POST",
         url:"Controleur/FonctionQuizEtudiant/listerQuestionsFormatif.php",
         async : !1,
-        data: {"idQuiz" : idQuiz },
+        data: {"idQuiz" : idQuiz , "ordreQuestionsEstAleatoire" : ordreQuestionsEstAleatoire },
         success: function(msg) {
             quizEstCree = msg;
         },
@@ -221,9 +244,11 @@ function genererQuestionsAleatoires(){
 // Nom: traiterResultatReponse
 // But: 1 - Vérifie si on est rendu à la dernière question: si oui, on s'assure que le "sweet alert" de quiz terminé va
 //          s'afficher après le "sweet alert" du résultats de la question qui vient d'être répondue.
-//      2 -  todo compléter commentaires
-// Intrants:
-// Extrants:
+//      2 - Afficher le "sweet alert" approprié selon qu'on a bien répondu, mal répondu ou pas répondu du tout.
+//          Si répondu, on appelle "continuerQuiz" qui s'occupe de la suite des choses.
+//      3 - Met à jour le score affiché.
+// Intrants:  résultat int 1|0
+// Extrants: aucun
 function traiterResultatReponse(resultat){
     var close  = true; //Variable pour dire au sweetalert de réponse de se fermer après qu'on ait cliqué ok.
     // si c'est la dernière question, alors on va afficher un autre sweetalert pour le score final donc,
@@ -239,7 +264,8 @@ function traiterResultatReponse(resultat){
     else if(resultat == 0) {
         swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",
             confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
-        // TODO ajouter un ajax pour récupérer le lien hypertext de la question si il y en a une.
+        // TODO si un lien existe pour cette question, modifier le swal pour 2 boutons...
+        // ajouter un ajax pour récupérer le lien hypertext de la question si il y en a une.
     }
     else if(resultat == 'X') {
         swal({   title: "Oh la la!",   text: " Une erreur s'est produite au moment de la validation. ",   type: "warning",   confirmButtonText: "Dac!" });
@@ -250,13 +276,11 @@ function traiterResultatReponse(resultat){
     }
     //retour de validation si question répondue...
     if (resultat == 1 || resultat == 0) {
-        estRepondu = 1;
+       // estRepondu = 1;
         updateScoreAffiche(resultat);
-        // Update stats bd
-        // to do///////
     }
 }
-
+//todo continuer commentaires
 function gererQuestionRepondue(continuerQuiz) {
 
     //Récupérer le id de la réponse cliquée
@@ -266,7 +290,7 @@ function gererQuestionRepondue(continuerQuiz) {
         idReponse = $(this).attr("id");
     });
 
-    //Valider cette réponse
+     //Valider cette réponse
      $.ajax({
         type:"POST",
         url:"Controleur/FonctionQuizEtudiant/validerReponseAQuestion.php",
@@ -331,7 +355,6 @@ function chargerNouvelleQuestion(){
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
         }
     });
-
 }
 
 function continuerQuiz() {
