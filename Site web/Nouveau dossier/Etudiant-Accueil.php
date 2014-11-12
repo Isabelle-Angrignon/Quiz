@@ -81,7 +81,8 @@ resetVarSessionScoreAffiche();
             <label>Formatif</label>
             <ul id="UlQuizFormatif">
                <?php
-               ListerQuizDansUl("UlQuizFormatif", $_SESSION['idUsager'], 0 ,"FORMATIF");
+               //Remplissage initial de la liste des quiz, aucun cours sélectionné.
+               ListerQuizDansUl("UlQuizFormatif", $_SESSION['idUsager'], 0 ,"FORMATIF", "divDansLi");
                 ?>
             </ul>
 

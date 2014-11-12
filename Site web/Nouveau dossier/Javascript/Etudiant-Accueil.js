@@ -151,7 +151,7 @@ function setIdQuizSession(idQuiz){
 
 // Par: Isabelle Angrignon
 // Nom: listerQuizFormatifs
-// But: Appel par Ajax à la page php qui génère la liste des quiz formatifs.
+// But: Appel par Ajax à la page php qui génère la liste des quiz formatifs incluant le nom du prof en petits caracteres.
 //      de session).  Recoit une liste de format JSON que l'on utilise pour mettre dans les éléments "li" de la liste de quiz.
 // Intrants: aucun
 // Extrants: aucun
@@ -164,7 +164,8 @@ function listerQuizFormatifs(){
         success: function(resultat){
             if(resultat != null){
                 for (var i = 0; i < resultat.length; ++i){
-                    ajouterLi_ToUl_Selectable("UlQuizFormatif", resultat[i].titreQuiz , resultat[i].idQuiz, true);
+                    ajouterLi_ToUl_Selectable_Div("UlQuizFormatif", resultat[i].titreQuiz , resultat[i].idQuiz,
+                        true, resultat[i].prenom + " " + resultat[i].nom, "divDansLi", resultat[i].idUsager_proprietaire);
                 }
             }
         },
@@ -285,7 +286,6 @@ function gererQuestionRepondue(continuerQuiz) {
 
     //Récupérer le id de la réponse cliquée
     var idReponse;
-    estRepondu =0;
     $("#UlChoixReponse .ui-selected").each(function() {
         idReponse = $(this).attr("id");
     });
@@ -304,7 +304,6 @@ function gererQuestionRepondue(continuerQuiz) {
              alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
         }
     });
-    return estRepondu;
 }
 
 function estDerniereQuestion(){

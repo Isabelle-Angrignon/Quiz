@@ -41,7 +41,7 @@ $infoQuestion = $_SESSION['infoQuestion'];
 
 
 <div id="divSuiviQuiz" class="suiviQuiz" >
-    <label id="labelCours" class="suiviQuiz"><?php echo getNomCours();   ?>   </label>
+    <label id="labelCours" class="suiviQuiz"><?php echo getNomCours(); /*todo si formatif, get nom quiz */  ?>   </label>
 </div>
 <div id="divSuiviQuizCentre" class="suiviQuiz" >
     <label id="labelScore" class="suiviQuiz">
@@ -49,11 +49,11 @@ $infoQuestion = $_SESSION['infoQuestion'];
     </label>
 
     <label id="labelTitre" class="suiviQuiz"> Aléatoire
-        <?php   /* récupérer le titre si formatif sinon afficher aléatoire*/  ?>
+        <?php   /*todo  récupérer le titre si formatif sinon afficher aléatoire*/  ?>
     </label>
 </div>
 <div id="divSuiviQuiz2" class="suiviQuiz" >
-    <label id="labelProp" class="suiviQuiz"> Cours de:    <?php    echo getNomProfDuCoursDeLEtudiant()  ?>     </label>
+    <label id="labelProp" class="suiviQuiz"> Cours de:    <?php    echo getNomProfDuCoursDeLEtudiant() /*todo ajouter nom prof quiz*/ ?>     </label>
 </div>
 
 
