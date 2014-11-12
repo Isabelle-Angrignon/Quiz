@@ -1,8 +1,14 @@
 <?php
-//Fonctions.php
-//Auteur: Isabelle Angringnon
-//Date: 23 septembre 2014
-//But: Contient diverses fonctions génériques
+//////////////////////////////////////////////////////////////////////////////////
+//
+//  Utilitaire.php
+//  Auteur: Isabelle Angringnon
+//  Date: 23 septembre 2014
+//
+//  Description :
+//  Contient les fonction utiles pour la gestion du site général
+//
+//////////////////////////////////////////////////////////////////////////////////
 
 function gestionParamChange()
 {

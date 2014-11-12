@@ -1,6 +1,20 @@
-/**
- * Created by Simon on 24/10/2014.
- */
+///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Admin.js
+//  Fait par : Simon Bouchard<
+//  Commenter le : 12/11/2014
+//
+//  Description :
+//  Fichier qui contient les différents appel ajax de la page admin ainsi que les fonctions
+//  javascrpit nécessaire au bon fonctionnement de la page
+//
+///////////////////////////////////////////////////////////////////////////////////////
+
+// CreerDeploiement
+// Fait par : Simon Bouchard
+// Commenter le : 12/11/2014
+// Cette fonction insère le contenu d'un fichier a l'intérieur de la page admin
+// Intrant : path = le path du fichier dont le contenu doit être insérer dans la page admin
 function CreerDeploiement(path){
     $('#deploiement').remove();
     var zeDiv = document.createElement('div');
@@ -11,7 +25,13 @@ function CreerDeploiement(path){
 
 }
 
-
+// reintialiserMotDePasse
+// Fait par : Simon Bouchard
+// Commencer le : 12/11/2014
+// Cette fonction est un appel ajax permettant de réinitialiser un mot de passe
+// Fichier appelé :RéinitialiserMotDePasse.php
+// Réaction : Affiche un swal qui indique la réussite ou l'échec de l'opération
+// Intrant : Le numéro de DA de l'usager dont le mot de passe doit être réinitialiser
 function reinitialiserMotDePasse(numeroDA) {
     $.ajax({
         type: 'POST',
@@ -34,6 +54,13 @@ function reinitialiserMotDePasse(numeroDA) {
     });
 }
 
+// Supprimer un Compte
+// Fait par : Simon Bouchard
+// Fait le : 12/11/2014
+// Fait un appel ajax afin de supprimer un compte
+// Fichier appeler : SupprimerUnCompte.php
+// Réaction : Affiche un swal qui indique l'échec ou la réussite de l'opération
+// Intrant : Le numéro de DA du compte a supprimer
 function supprimerUnCompte(numeroDA){
     $.ajax({
         type: 'POST',
@@ -56,6 +83,13 @@ function supprimerUnCompte(numeroDA){
         }
     });
 }
+// nommerAdminAjax
+// Fait par : Simon Bouchard
+// Fait le : 12/11/2014
+// Fait un appel ajax afin de nommer un nouvel admin
+// Fichier appelé : nommerAdmin.php
+// Réaction : Affiche un swal qui indique la réussite ou l'échec de l'opération
+// Intrant  : Le numéro de DA du professeur que l'on doit mettre administrateur
 function nommerAdminAjax(numeroDA){
     $.ajax({
         type: 'POST',
@@ -78,7 +112,13 @@ function nommerAdminAjax(numeroDA){
         }
     });
 }
-
+// ListerCoursSelectAjax
+// Fait par : Simon Bouchard
+// Fait le : 12/11/2014
+// Appel ajax qui liste les cours
+// Fichier appelé : ListerCours.php
+// Réaction : Créer la liste déroulante du déploiement de modifier Cours
+// Intrant : Aucun
 function ListerCoursSelectAjax() {
     $.ajax({
         type: 'POST',
@@ -95,7 +135,13 @@ function ListerCoursSelectAjax() {
         }
     });
 }
-
+// ModifierCoursAjax
+// Fait par : Simon Bouchard
+// Fait le : 12/11/2014
+// Appel ajax qui modifie des cours
+// Fichier appelé : modifierCours.php
+// Réaction : Affiche un swal qui indique la réussite ou l'échec de l'opération
+// Intant : idCours = id du cours a modifier , nom = nouveau nom du cours , codeCours = nouveau code du cours
 function ModifierCoursAjax(idCours,nomCours,codeCours) {
     $.ajax({
         type: 'POST',
