@@ -21,7 +21,10 @@ function addClickEventToQuizFormatif(){
     $("#UlQuizFormatif li").click( function() {
         //Récupérer idQuiz:
         var idQuiz = $(this).attr('id');
-        setIdQuizSession(idQuiz);
+        var titreQuiz = $(this).attr('placeholder');
+        var idProf = $(this).children("div").attr('placeholder');
+        var nomProf = $(this).children("div").text();
+        setInfoQuizSession(idQuiz, titreQuiz, idProf, nomProf );
         //appeler la fonction php qui génere une liste de questions pour un idQuiz spécifique...
         ouvrirUnQuiz("FORMATIF", idQuiz );
     });
@@ -135,14 +138,14 @@ function SetIdCoursSession(){
 // Intrants: idQuiz: unsigned int(10)
 // Extrants: aucun
 //Met le idQuiz dans la variable de session et réinitialise les variables de sessions relatives à un quiz.
-function setIdQuizSession(idQuiz){
+function setInfoQuizSession(idQuiz,titreQuiz,  idProf, nomProf){
     $.ajax({
         type:"POST",
-        url: 'Controleur/FonctionQuizEtudiant/setIdQuizSession.php',
-        data:{'selectQuiz':idQuiz},
+        url: 'Controleur/FonctionQuizEtudiant/setInfoQuizSession.php',
+        data:{'selectQuiz':idQuiz,'titreQuiz': titreQuiz, 'idProf': idProf, 'nomProf':nomProf},
         dataType:"text",
         async : !1,
-        success: function(msg){        },
+        success: function(msg){     },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
         }

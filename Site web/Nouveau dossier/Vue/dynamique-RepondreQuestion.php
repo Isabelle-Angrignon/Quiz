@@ -14,8 +14,12 @@ include("..//Modele/ModeleReponses.php");
 demarrerSession();
 redirigerSiNonConnecte('Etudiant');
 
-//recupérer infos question
+//recupérer infos question et quiz
 $infoQuestion = $_SESSION['infoQuestion'];
+$typeQuiz = $_SESSION['typeQuiz'];
+$aleatoire = $typeQuiz == "ALEATOIRE";//booleen
+$nomProf = $_SESSION['nomProf'];
+$titreQuiz = $_SESSION['titreQuiz'];
 
 ?>
 
@@ -31,7 +35,7 @@ $infoQuestion = $_SESSION['infoQuestion'];
             }
         });
 
-        //bouton suivant...
+        //bouton valider/suivant...
         $("#btnSuivant").button(); // attache le theme JQueryUI au bouton
         $("#btnSuivant").click( function() {
             gererQuestionRepondue(continuerQuiz);
@@ -41,19 +45,41 @@ $infoQuestion = $_SESSION['infoQuestion'];
 
 
 <div id="divSuiviQuiz" class="suiviQuiz" >
-    <label id="labelCours" class="suiviQuiz"><?php echo getNomCours(); /*todo si formatif, get nom quiz */  ?>   </label>
+    <label id="labelCours" class="suiviQuiz"><?php
+        if($aleatoire)
+        {
+            echo getNomCours();
+        }
+        else
+        {
+            echo getNomCours() . " / " . $titreQuiz ;
+        }
+        ?>
+    </label>
 </div>
 <div id="divSuiviQuizCentre" class="suiviQuiz" >
     <label id="labelScore" class="suiviQuiz">
         <?php  echo ($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']);  ?>
     </label>
 
-    <label id="labelTitre" class="suiviQuiz"> Aléatoire
-        <?php   /*todo  récupérer le titre si formatif sinon afficher aléatoire*/  ?>
+    <label id="labelTitre" class="suiviQuiz">
+        <?php  echo $typeQuiz; ?>
     </label>
 </div>
 <div id="divSuiviQuiz2" class="suiviQuiz" >
-    <label id="labelProp" class="suiviQuiz"> Cours de:    <?php    echo getNomProfDuCoursDeLEtudiant() /*todo ajouter nom prof quiz*/ ?>     </label>
+    <label id="labelProp" class="suiviQuiz">
+        <?php
+        if($aleatoire)
+        {
+            echo "Cours de: " . getNomProfDuCoursDeLEtudiant();
+        }
+        else
+        {
+            echo "Quiz de: " . $nomProf;
+        }
+
+        ?>
+    </label>
 </div>
 
 

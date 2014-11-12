@@ -105,7 +105,7 @@ function ajouterLi_ToUl_Selectable(idUl, element,idElement, estThemeJqueryUI) {
 function ajouterLi_ToUl_Selectable_Div(idUl, element,idElement, estThemeJqueryUI, texteDiv, classDiv, donneeAGarder) {
     // Initialisation du li
     var liTag = document.createElement("li");
-    liTag.Value = element;
+    liTag.setAttribute("placeholder", element);
     liTag.setAttribute("id",idElement);
     if(estThemeJqueryUI) {
         liTag.setAttribute("class", "ui-state-default selectable");
