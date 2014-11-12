@@ -23,6 +23,7 @@ if (isset($Liste) && !empty($Liste))
     $idQuestion = $_SESSION['listeQuestions'][0];
     $_SESSION['listeQuestionRepondues'][0] = $idQuestion['idQuestion'];
 
+    $_SESSION['typeQuiz'] = "ALEATOIRE";
     //recupérer infos question
     $_SESSION['infoQuestion'] = recupererElementsQuestion($idQuestion['idQuestion']);
     array_shift($_SESSION['listeQuestions']);

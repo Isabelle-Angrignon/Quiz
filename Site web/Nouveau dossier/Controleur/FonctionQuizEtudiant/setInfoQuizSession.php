@@ -12,6 +12,10 @@ redirigerSiNonConnecte('Etudiant');
 //on aura besoin du id de quiz dans la mise a jour des stats quiz...
 
 $_SESSION['idQuiz'] = $_POST['selectQuiz'];
+$_SESSION['titreQuiz'] = $_POST['titreQuiz'];
+$_SESSION['idProf'] = $_POST['idProf'];
+$_SESSION['nomProf'] = $_POST['nomProf'];
+
 
 if (isset ($_SESSION['idQuiz']))
 {
