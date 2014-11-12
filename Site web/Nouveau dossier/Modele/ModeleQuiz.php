@@ -22,24 +22,22 @@ function listerQuizSelonCoursProprietaire($idCours, $idProprietaire)
     return json_encode($resultat);
 }
 
-function recupererTypeQuiz($idQuiz)
+function recupererInfoQuiz($idQuiz)
 {
     $bdd = connecterEtudiant();
 
     if (isset($idQuiz))
     {
-        $requete = $bdd->prepare("CALL recupererTypeQuiz( ? )");
+        $requete = $bdd->prepare("CALL recupererInfoQuiz( ? )");
         $requete->bindparam(1, $idQuiz, PDO::PARAM_INT,10);
 
-
         $requete->execute();
-
-        $type = $requete->fetch();
+        $info = $requete->fetch();
 
         $requete->closeCursor();
         unset($bdd);
-
-        return $type[0];
+        
+        return $info;
     }
     else{
         return null;
