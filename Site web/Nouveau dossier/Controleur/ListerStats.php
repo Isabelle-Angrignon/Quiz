@@ -7,25 +7,23 @@ include("../Modele/ModeleStatistiques.php");
 
 demarrerSession();
 redirigerSiNonConnecte('Prof');
-header('Content-Disposition: attachment;Filename=potato.csv');
-$sortie = "";
+header('Content-Disposition: attachment;Filename=QuizInfoStats.csv');
 $stats  = obtenirStat();
-$sortie = date("Y-m-d");
-$sortie .= "\n";
+echo date("Y-m-d");
+echo "\n";
 $Key = array_keys($stats[0]);
 for ( $i = 0 ; $i < count($Key); $i++)
 {
     if ($i%2 == 0 ) {
-        $sortie .= $Key[$i] . ";";
+        echo $Key[$i] . ";";
     }
 }
-$sortie = $sortie . "\n";
+echo  "\n";
 for ($i = 0 ; $i < count($stats); $i++)
 {
     for ($j = 0 ; $j < count($stats[$i])/2; $j++) {
-        $sortie .= $stats[$i][$j] . ";";
+        echo $stats[$i][$j] . ";";
     }
-    $sortie = $sortie . "\n";
+    echo "\n";
 }
-echo $sortie;
 ?>
