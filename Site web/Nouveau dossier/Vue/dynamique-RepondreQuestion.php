@@ -18,8 +18,8 @@ redirigerSiNonConnecte('Etudiant');
 $infoQuestion = $_SESSION['infoQuestion'];
 $typeQuiz = $_SESSION['typeQuiz'];
 $aleatoire = $typeQuiz == "ALEATOIRE";//booleen
-$nomProf = $_SESSION['nomProf'];
-$titreQuiz = $_SESSION['titreQuiz'];
+isset($_SESSION['nomProf'])?$nomProf = $_SESSION['nomProf']:$nomProf="";
+isset($_SESSION['titreQuiz'])?$titreQuiz = $_SESSION['titreQuiz']:$titreQuiz="";
 
 ?>
 
@@ -38,7 +38,10 @@ $titreQuiz = $_SESSION['titreQuiz'];
         //bouton valider/suivant...
         $("#btnSuivant").button(); // attache le theme JQueryUI au bouton
         $("#btnSuivant").click( function() {
-            gererQuestionRepondue(continuerQuiz);
+            var lien = "<?php echo $_SESSION["infoQuestion"][0]['referenceWeb']; ?>";
+            lien = lien!=null?lien:"";
+            var typeQuiz = "<?php echo $_SESSION["typeQuiz"]; ?>";
+            gererQuestionRepondue(continuerQuiz, lien, typeQuiz );
         });
     });
 </script>

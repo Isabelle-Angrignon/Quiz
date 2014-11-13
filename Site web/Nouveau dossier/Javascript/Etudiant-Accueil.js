@@ -253,7 +253,7 @@ function genererQuestionsAleatoires(){
 //      3 - Met à jour le score affiché.
 // Intrants:  résultat int 1|0
 // Extrants: aucun
-function traiterResultatReponse(resultat){
+function traiterResultatReponse(resultat, lien, typeQuiz){
     var close  = true; //Variable pour dire au sweetalert de réponse de se fermer après qu'on ait cliqué ok.
     // si c'est la dernière question, alors on va afficher un autre sweetalert pour le score final donc,
     //la variable close doit être à false.
@@ -261,15 +261,39 @@ function traiterResultatReponse(resultat){
     //valide que la dernière question a été chargée dans la page
     if (estDerniereQuestion() == 1){ close =false; }
 
+    //récupère le lien de référence aux notes de cours
+
     if(resultat == 1) {
         swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",
             confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
     }
     else if(resultat == 0) {
-        swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",
-            confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
-        // TODO si un lien existe pour cette question, modifier le swal pour 2 boutons...
+
         // ajouter un ajax pour récupérer le lien hypertext de la question si il y en a une.
+        if(lien == null || lien == "" || typeQuiz != "ALEATOIRE"){
+            swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",
+                confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
+        }
+        else{
+            swal({  title: "Oups!",
+                    text: "Mauvaise réponse!  Voulez-vous continuer ou réviser?",
+                    type: "error",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Continuer quand même...",
+                    cancelButtonText: "Aller réviser!",
+                    closeOnConfirm: close,
+                    closeOnCancel: true },
+                    function(isConfirm) {
+                        if (isConfirm) {
+                            continuerQuiz();
+                        }
+                        else {
+                           /*todo  redirect */
+                            window.open(lien);
+                        }
+                    });
+        }
     }
     else if(resultat == 'X') {
         swal({   title: "Oh la la!",   text: " Une erreur s'est produite au moment de la validation. ",   type: "warning",   confirmButtonText: "Dac!" });
@@ -284,8 +308,25 @@ function traiterResultatReponse(resultat){
         updateScoreAffiche(resultat);
     }
 }
+//todo commentaires
+function estDerniereQuestion(){
+    var lien = "";
+    $.ajax({
+        type:"POST",
+        url:"Controleur/FonctionQuizEtudiant/estDerniereQuestion.php",
+        async : !1,
+        success: function(res) {
+            estDerniere = res;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
+        }
+    });
+    return lien;
+}
+
 //todo continuer commentaires
-function gererQuestionRepondue(continuerQuiz) {
+function gererQuestionRepondue(continuerQuiz, lien, typeQuiz) {
 
     //Récupérer le id de la réponse cliquée
     var idReponse;
@@ -301,7 +342,7 @@ function gererQuestionRepondue(continuerQuiz) {
         async : !1,
         datatype: "text",
         success: function(resultat) {
-            traiterResultatReponse(resultat);
+            traiterResultatReponse(resultat, lien, typeQuiz);
         },
          error: function(jqXHR, textStatus, errorThrown) {
              alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
