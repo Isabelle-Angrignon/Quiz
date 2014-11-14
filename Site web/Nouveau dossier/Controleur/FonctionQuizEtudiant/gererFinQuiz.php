@@ -36,4 +36,15 @@ if (isset($_SESSION['typeQuiz']))
     }
 }
 
+unsetInfoQuizSession();
 echo $resultat;
+
+function unsetInfoQuizSession()
+{
+    unset($_SESSION['idQuiz']);
+    unset($_SESSION['titreQuiz']);
+    unset($_SESSION['idProf']);
+    unset($_SESSION['nomProf']);
+    unset($_SESSION['typeQuiz']);
+    unset($_SESSION['ordreQuestionsEstAleatoire']);
+}

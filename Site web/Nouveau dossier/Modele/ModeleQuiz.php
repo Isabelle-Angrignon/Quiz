@@ -32,12 +32,12 @@ function recupererInfoQuiz($idQuiz)
         $requete->bindparam(1, $idQuiz, PDO::PARAM_INT,10);
 
         $requete->execute();
-        $info = $requete->fetch();
+        $info = $requete->fetchAll();
 
         $requete->closeCursor();
         unset($bdd);
         
-        return $info;
+        return $info[0];
     }
     else{
         return null;
