@@ -7,6 +7,9 @@ include("..//..//Modele/ModeleStatistiques.php");
 demarrerSession();
 redirigerSiNonConnecte('Etudiant');
 
+
+
+// Gestion de l'affichage du résultat du quiz à l'écran
 $score = ceil($_SESSION['bonnesReponses'] *100 / $_SESSION['questionsRepondues']);
 $resultat = $_SESSION['bonnesReponses'] . " / " . $_SESSION['questionsRepondues'] . " (" . $score . "%) " ;
 
@@ -24,6 +27,7 @@ else
 }
 
 
+// Mise à jour des stats pour quiz non aléatoire
 if (isset($_SESSION['typeQuiz']))
 {
     if($_SESSION['typeQuiz'] == "FORMATIF")

@@ -57,7 +57,6 @@ function miseAJourStatsQuiz()
 
 function obtenirStat()
 {
-
     $bdd = connecterProf();
     $requete = $bdd->prepare("CALL ListerStats()");
     $requete->execute();

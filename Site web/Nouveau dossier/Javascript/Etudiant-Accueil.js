@@ -402,7 +402,7 @@ function chargerNouvelleQuestion(){
 
 function continuerQuiz() {
     if (quizTermine() == 1) {
-        afficherScoreFinal();
+        gererFinQuiz();
     }
     else {
         chargerNouvelleQuestion();//dans la session
@@ -425,10 +425,10 @@ function quizTermine(){
     return termine;
 }
 
-function afficherScoreFinal(){
+function gererFinQuiz(){
     $.ajax({
         type:"POST",
-        url:"Controleur/FonctionQuizEtudiant/afficherScoreFinal.php",
+        url:"Controleur/FonctionQuizEtudiant/gererFinQuiz.php",
         async : !1,
         success: function(msg) {
             $('#dFondOmbrage').remove();

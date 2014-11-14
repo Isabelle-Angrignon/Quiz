@@ -20,6 +20,13 @@ $typeQuiz = $_SESSION['typeQuiz'];
 $aleatoire = $typeQuiz == "ALEATOIRE";//booleen
 isset($_SESSION['nomProf'])?$nomProf = $_SESSION['nomProf']:$nomProf="";
 isset($_SESSION['titreQuiz'])?$titreQuiz = $_SESSION['titreQuiz']:$titreQuiz="";
+if(isset($_SESSION['listeQuestions']) && isset( $_SESSION['listeQuestionRepondues'] )){
+    $nbQuestionsARepondre = count($_SESSION['listeQuestions']) + count($_SESSION['listeQuestionRepondues']);
+}
+else{
+    $nbQuestionsARepondre = "?";
+}
+
 
 ?>
 
@@ -55,14 +62,21 @@ isset($_SESSION['titreQuiz'])?$titreQuiz = $_SESSION['titreQuiz']:$titreQuiz="";
         }
         else
         {
-            echo getNomCours() . " / " . $titreQuiz ;
+            echo getNomCours() . " </br> " . $titreQuiz;
         }
         ?>
     </label>
 </div>
 <div id="divSuiviQuizCentre" class="suiviQuiz" >
     <label id="labelScore" class="suiviQuiz">
-        <?php  echo ($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']);  ?>
+        <?php
+        if($aleatoire) {
+            echo($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']);
+        }
+        else{
+            echo($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']) . " sur " . $nbQuestionsARepondre;
+        }
+        ?>
     </label>
 
     <label id="labelTitre" class="suiviQuiz">
