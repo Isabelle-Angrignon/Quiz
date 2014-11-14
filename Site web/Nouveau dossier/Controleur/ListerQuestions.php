@@ -13,15 +13,35 @@
     $idProprietaire = $_POST['idProprietaire'];
     isset($_POST['idCours'])?$idCours = $_POST['idCours']: $idCours = "";
     isset($_POST['idQuiz'])?$idQuiz = $_POST['idQuiz']: $idQuiz = "";
+    isset($_POST['typeQuiz'])?$typeQuiz = $_POST['typeQuiz']: $typeQuiz = "";
 
     $resultatTriage;
     if($triage == 'default')
     {
         $resultatTriage = trieParDefaultQuestions($idCours, $idProprietaire);
     }
+    else if($triage == "pasDansCeQuiz")
+    {
+        if($idQuiz != "" && isset($idProprietaire) && $idCours != "" && $typeQuiz != "")
+        {
+            $resultatTriage = listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours, $typeQuiz );
+        }
+        else
+        {
+            echo "Erreur dans les variables passées pour le listage des questions pas dans le quiz qui ce fait modifier en ce moment.";
+        }
+
+    }
     else if($triage == "selonQuiz")
     {
-        $resultatTriage = listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours,"" /* TODO RESTE À CHERCHER LE TYPE QUIZ */  );
+        if($idQuiz != "" && isset($idProprietaire))
+        {
+            $resultatTriage = listerQuestionsDunQuiz($idQuiz, $idProprietaire);
+        }
+        else
+        {
+            echo "Erreur dans les variables passées pour le listage selon un quiz.";
+        }
     }
     echo $resultatTriage;
 

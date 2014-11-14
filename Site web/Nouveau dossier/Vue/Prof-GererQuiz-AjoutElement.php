@@ -26,6 +26,8 @@ if(isset($_POST['session']))
         isset($_POST['idQuestion'])? $_SESSION['idQuestion'] = $_POST['idQuestion'] : $_SESSION['idQuestion'] = NULL;
         // etat
         isset($_POST['etat'])? $_SESSION['etat'] = $_POST['etat'] : $_SESSION['etat'] = NULL;
+        // idQuiz
+        isset($_POST['idQuiz'])? $_SESSION['idQuiz'] = $_POST['idQuiz'] : $_SESSION['idQuiz'] = NULL;
 
         if(isset($_POST['idProprietaire']))
         {

@@ -134,6 +134,7 @@ fieldset {
 	margin-right:2%;
 }
 
+/* ----------------  Div Dynamique pour GererQuestions ------------------ */
 #QuestionConteneur {
     display:inline-block;
     width:50%;
@@ -234,4 +235,58 @@ fieldset {
 #BTN_SupprimerQuestion {
     float:right;
     margin-right:20px;
+}
+
+/* --------------------- Div Dynamique pour GererQuiz ----------------------- */
+#divDynamiqueQuiz {
+    width:500px;
+    padding:30px;
+    position:relative;
+}
+
+#sectionTitreQuiz {
+    width:100%;
+    text-align: center;
+}
+
+#titreQuiz {
+    height: 70px;
+    width: 400px;
+    border-radius: 20px;
+    padding-left: 20px;
+    font-size: 36px;
+    border: solid;
+    background-color:#E66100;
+}
+
+#titreQuiz::-webkit-input-placeholder {
+    color: rgb(255,255,255);
+}
+
+#titreQuiz::-moz-placeholder {
+    color: rgb(255,255,255);
+}
+
+#divDynamiqueQuiz #paramQuiz .ui-widget-content {
+    background: #d3d3d3;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+#listeCoursQuiz {
+    list-style-type: none;
+}
+
+#paramQuiz ul {
+    padding:0;
+}
+#paramQuiz {
+    margin-top:50px;
+}
+
+#validationQuiz {
+    width:90%;
+    text-align:right;
+    position:absolute;
+    bottom:30px;
+
 }

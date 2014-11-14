@@ -273,7 +273,8 @@ function modifierReponses($bdd, $tableauReponses, $identifiantQuestion, $typeQue
         // Si on encode pas notre tableauReponses, PHP ne le reconnait pas comme étant un vrai JSON.
         $tableauNouvelleReponses = json_decode(json_encode($tableauReponses));
 
-        // Je dois garder une variable qui contient la grandeur du tableau initial car unset(array[index]) de change pas l'index des éléments qui suivent le unset mais change le size du tableau
+        // Je dois garder une variable qui contient la grandeur du tableau initial car unset(array[index]) ne change pas l'index
+        // des éléments qui suivent le unset mais change le size du tableau
         $nbAncienneReponses = count($tabIdAnciennesReponses);
         $nbNouvelleReponses = count($tableauNouvelleReponses->reponses);
 
@@ -281,13 +282,14 @@ function modifierReponses($bdd, $tableauReponses, $identifiantQuestion, $typeQue
         for($x = 0; $x < $nbNouvelleReponses; ++$x)
         {
             $action = "";
+            // Pour vérifier si les anciennes réponses sont toujours présentes dans les nouvelles réponses
             for($i = 0; $i < $nbAncienneReponses && $action == ""; ++$i)
             {
                 if(isset($tabIdAnciennesReponses[$i]))
                 {
                     if($tabIdAnciennesReponses[$i] == $tableauNouvelleReponses->reponses[$x]->idReponse)
                     {
-                        $action = "Modifier";
+                        $action = "Modifier";   // Retire les anciennes réponses du tableau
                         unset($tabIdAnciennesReponses[$i]);
                     }
                 }
@@ -301,7 +303,7 @@ function modifierReponses($bdd, $tableauReponses, $identifiantQuestion, $typeQue
                 // Dans la base de donnée, estBonneReponse représente un TINYINT donc on doit le transformer en TINYINT.
                 $estBon = convertEstBonneReponseToTINYINT($tableauNouvelleReponses->reponses[$x]->estBonneReponse);
 
-                modifierReponse($bdd,$idReponse, $enonce,"", $estBon, $positionReponse);
+                modifierReponse($bdd,$idReponse, $enonce,"", $estBon, $positionReponse);    // Modifie les anciennes réponses par rapport à la nouvelle
                 unset($tableauNouvelleReponses->reponses[$x]);
             }
         }

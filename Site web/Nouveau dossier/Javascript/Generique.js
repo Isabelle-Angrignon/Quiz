@@ -140,7 +140,6 @@ function creeBaliseAvecClasse(baliseACreer, classe) {
 // Date : 23/09/14
 // Intrant(s) : idDivPrincipal = l'identifiant du pop up
 //              pathFichierPHP = Le path du fichier PHP qui représente le contenu du divPrincipal
-//              idQuestion = La question selon laquelle le frame dynamique est relié
 // Extrant(s) : Le div représentant la page de base du "pop up"
 // Description : Cette fonction créée, à l'aide de balises div, un squelette de fenêtre "pop up" avec un fond en ombragé
 function creeFrameDynamique(idDivPrincipal, pathFichierPHP) {
@@ -151,13 +150,6 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP) {
 		$(this).detach();
 	};
 
-   /* fondOmbrage.onkeydown = function(event) {               												 /////////////////   Ne marche pas car le div ne peut pas avoir le focus.
-		alert(event.keyCode);
-		// KeyCode 27 == Le boutton escape
-		if(event.keyCode == 27){
-			$(this).detach();
-		}
-	};*/
 	var divPrincipale =  creeBaliseAvecClasse("div", "dDivPrincipale");
 	// Nécessaire pour empecher l'événement onclick de son parent d'être activé lorsqu'on clic dessus ce div
 	divPrincipale.onmousedown = function(event) {  event.stopPropagation(); };

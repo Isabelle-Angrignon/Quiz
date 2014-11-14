@@ -21,8 +21,19 @@ function addClickEventToQuestions(usagerCourant) {
             etat = "modifierQuestion";
             ajouterVariableSessionProprietaireQuestion($(this).children(".divProfDansLi").attr("placeholder"));
         }
+
         ajouterVariableSessionQuestion($(this).attr("id"), etat);
         creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
+
+    });
+}
+
+function addClickEventToQuiz() {
+    $("#UlQuiz li, #UlModifQuiz li").off("click");
+    $("#UlQuiz li, #UlModifQuiz li").click( function() {
+        ajouterVariableSessionQuiz($(this).attr("id"));
+
+        creeFrameDynamique("divDynamiqueQuiz", "Vue/dynamique-GererQuiz.php");
 
     });
 }
@@ -82,6 +93,7 @@ function updateUlQuiz(idCours, idProprietaire) {
             traiterJSONQuiz(resultat);
 
             // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
+            addClickEventToQuiz();
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
@@ -109,18 +121,53 @@ function updateUlModifQuiz(triage,usagerCourant,idQuiz) {
     });
 }
 
-function updateUlQuestion(idCours, usagerCourant, triage, idQuiz) {
+function updateUlQuestion(idCours, usagerCourant, triage, idQuiz, typeQuiz) {
     $("#UlQuestion li").remove();
     $.ajax({
         type: 'POST',
         url: 'Controleur/ListerQuestions.php',
-        data: {"Triage":triage, "idCours":idCours , "idProprietaire":usagerCourant, "idQuiz":idQuiz},
+        data: {"Triage":triage, "idCours":idCours , "idProprietaire":usagerCourant, "idQuiz":idQuiz, "typeQuiz":typeQuiz},
         dataType: "json",
         success: function(resultat) {
             traiterJSONQuestions(resultat, "UlQuestion");
             // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
             addClickEventToQuestions(usagerCourant);
         },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function lierQuestionAQuiz(idQuiz, idQuestion, positionQuestion) {
+    $.ajax({
+        type: "post",
+        url: 'Controleur/lierQuizQuestion.php',
+        data:  {"idQuiz":idQuiz, "idQuestion":idQuestion, "positionQuestion":positionQuestion},
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function supprimerLienQuestionAQuiz(idQuiz, idQuestion) {
+    $.ajax({
+        type: "post",
+        url: 'Controleur/supprimerLienQuizQuestion.php',
+        data:  {"idQuiz":idQuiz, "idQuestion":idQuestion},
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function changerOrdreQuestionsDansQuiz() {
+    var jsonQuestions = getJSONQuestionDansQuiz();
+
+    $.ajax({
+        type: "post",
+        url: 'Controleur/changerOrdreQuestionDansQuiz.php',
+        data:  {"tableauQuestionsDansQuiz":jsonQuestions},
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
         }
@@ -139,6 +186,18 @@ function ajouterVariableSessionQuestion(idQuestion, etat) {
         url: 'Vue/Prof-GererQuiz-AjoutElement.php',
         async:false,
         data:  {"session":true, "idQuestion":idQuestion, "etat":etat},
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function ajouterVariableSessionQuiz(idQuiz) {
+    $.ajax({
+        type: "post",
+        url: 'Vue/Prof-GererQuiz-AjoutElement.php',
+        async:false,
+        data:  {"session":true, "idQuiz":idQuiz},
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
         }
@@ -341,7 +400,25 @@ function cocherTypeQuizAssocieSelonQuestion(typeQuiz) {
 }
 
 
+function getJSONQuestionDansQuiz() {
+    var jsonQuestions = '[{"idQuiz":"' + $("#QuizDropZone li:first-child").attr("id") + '"},' +
+                       '{"questions":[';
 
+    $("#UlModifQuiz li").each(function() {
+        jsonQuestions += '{"idQuestion":"' + $(this).attr("id") + '", "positionQuestion":"' + ($(this).index() +1)  +'"},'
+    });
+
+    // J'enlève la dernière virgule de mon string car, en JSON, le dernier élément ne prend pas de virgule
+    if($("#UlModifQuiz li").length > 0) {
+        jsonQuestions = jsonQuestions.substr(0,jsonQuestions.length -1);
+    }
+    // Je ferme par la suite mon string de format JSON
+    jsonQuestions += "]}]";
+    jsonQuestions = JSON.parse(jsonQuestions);
+
+
+    return jsonQuestions;
+}
 
 // jsonifierReponsesQuestionCourante
 // Par Mathieu Dumoulin
@@ -485,7 +562,8 @@ function ajouterQuestion(idCreateur) {
                     }
                     else {
                         var idQuiz = $("#QuizDropZone li:first-child").attr("id");
-                        updateUlQuestion(cours, idUsagerCourant, "selonQuiz", idQuiz);
+                        var typeQuiz = $("#QuizDropZone li:first-child").children("div .divProfDansLi").text();
+                        updateUlQuestion(cours, idUsagerCourant, "pasDansCeQuiz", idQuiz, typeQuiz);
                         updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
                     }
                     swal("Félicitation !", "Votre question à été ajoutée", "success");
@@ -541,7 +619,8 @@ function modifierQuestion( idUsagerCourant,idQuestion, idProprietaire) {
                     }
                     else {
                         var idQuiz = $("#QuizDropZone li:first-child").attr("id");
-                        updateUlQuestion(cours, idUsagerCourant, "selonQuiz", idQuiz);
+                        var typeQuiz = $("#QuizDropZone li:first-child").children("div .divProfDansLi").text();
+                        updateUlQuestion(cours, idUsagerCourant, "pasDansCeQuiz", idQuiz, typeQuiz);
                         updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
                     }
                     swal("Félicitation !", "Votre question à été modifiée", "success");
@@ -597,7 +676,8 @@ function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
                             }
                             else {
                                 var idQuiz = $("#QuizDropZone li:first-child").attr("id");
-                                updateUlQuestion(cours, idUsagerCourant, "selonQuiz", idQuiz);
+                                var typeQuiz = $(ui.item).children("div .divProfDansLi").text();
+                                updateUlQuestion(cours, idUsagerCourant, "selonQuiz", idQuiz,typeQuiz);
                                 updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
                             }
 

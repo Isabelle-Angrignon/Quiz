@@ -30,67 +30,89 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
     <script>
         $(function() {
-                $("#UlQuiz").sortable({
-                    connectWith: "#QuizDropZone",
-                    revert: 150
-                }).disableSelection();
-                $("#UlModifQuiz").sortable({
-                    connectWith: "#UlQuestion",
-                    revert: 150,
-                    helper : 'clone'
-                }).disableSelection();
-                $("#UlQuestion").sortable({
-                    revert: 150,
-                    connectWith: "#UlModifQuiz",
-                    helper : 'clone',
-                    dropOnEmpty : false
-                }).disableSelection();
-                $("#QuizDropZone").sortable({
-                    connectWith: "#UlQuiz",
-                    revert: 150,
-                    receive: function (event, ui) {
-                        $("#UlQuiz").sortable("option", "connectWith", false);
-                        $("#UlQuestion").sortable("option", "dropOnEmpty", true);
-                        $('#UlModifQuiz').empty();
-                        $('#UlQuestion').empty();
-                        var idQuiz = $(ui.item).attr("id");
-                        var idCours = $("#DDL_Cours option:selected").attr("value");
-                        updateUlModifQuiz("selonQuiz", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, idQuiz);
-                        updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "selonQuiz", idQuiz);
-
-                    },
-                    remove: function (event, ui) {
-                        $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");
-                        $("#UlQuestion").sortable("option", "dropOnEmpty", false);
-                        $('#UlModifQuiz').empty();
-                        $('#UlQuestion').empty();
-                        var idCours = $("#DDL_Cours option:selected").attr("value");
-                        updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "default" );
-                    }
-                }).disableSelection();
+            $("#UlQuiz").sortable({
+                connectWith: "#QuizDropZone",
+                revert: 150,
+                helper : 'clone'
+            }).disableSelection();
+            $("#UlModifQuiz").sortable({
+                connectWith: "#UlQuestion",
+                revert: 150,
+                helper : 'clone',
+                receive: function (event, ui) {
+                    var idQuiz = $("#QuizDropZone li:first-child").attr("id");
+                    var idQuestion = $(ui.item).attr("id");
+                    var positionDansQuiz = $(ui.item).index() + 1;
+                    changerOrdreQuestionsDansQuiz();
+                    lierQuestionAQuiz(idQuiz, idQuestion, positionDansQuiz);
+                },
+                remove: function (event, ui) {
+                    var idQuiz = $("#QuizDropZone li:first-child").attr("id");
+                    var idQuestion = $(ui.item).attr("id");
+                    changerOrdreQuestionsDansQuiz();
+                    supprimerLienQuestionAQuiz(idQuiz, idQuestion);
+                },
+                update: function() {
+                    changerOrdreQuestionsDansQuiz();
+                }
+            }).disableSelection();
+            $("#UlQuestion").sortable({
+                revert: 150,
+                connectWith: "#UlModifQuiz",
+                helper : 'clone',
+                dropOnEmpty : false
+            }).disableSelection();
 
 
-               $("#DDL_Cours").selectmenu({
-                    width:400,
-                    select: function(event, ui) {
-                         var idCours = $("#DDL_Cours option:selected").attr("value");
-                         removeLiFromQuizDropZone();
-                         updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>,"default" );
-                         updateUlQuiz(idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>);
-                    }
-                });
-                function removeLiFromQuizDropZone() {
-                    $("#QuizDropZone li").remove();
+            // Fonction qui gère quand qu'un li est drop dans le socle de modification de quiz.
+            $("#QuizDropZone").sortable({
+                connectWith: "#UlQuiz",
+                revert: 150,
+                helper : 'clone',
+                receive: function (event, ui) {
+                    $("#UlQuiz").sortable("option", "connectWith", false);
+                    $("#UlQuestion").sortable("option", "dropOnEmpty", true);
+                    $('#UlModifQuiz').empty();
+                    $('#UlQuestion').empty();
+                    var idQuiz = $(ui.item).attr("id");
+                    var idCours = $("#DDL_Cours option:selected").attr("value");
+                    var typeQuiz = $(ui.item).children("div .divProfDansLi").text();
+                    updateUlModifQuiz("selonQuiz", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, idQuiz);
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz);
+
+                },
+                remove: function (event, ui) {
                     $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");
                     $("#UlQuestion").sortable("option", "dropOnEmpty", false);
                     $('#UlModifQuiz').empty();
+                    $('#UlQuestion').empty();
+                    var idCours = $("#DDL_Cours option:selected").attr("value");
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "default");
                 }
-                addClickEventToQuestions(<?php echo '"'.$_SESSION["idUsager"].'"';  ?>);
+            }).disableSelection();
 
-                $("#AjouterQuestion").click( function() {
-                    ajouterVariableSessionQuestion("", "nouvelleQuestion");
-                    creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
-                });
+
+            $("#DDL_Cours").selectmenu({
+                width:400,
+                select: function(event, ui) {
+                    var idCours = $("#DDL_Cours option:selected").attr("value");
+                    removeLiFromQuizDropZone();
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>,"default" );
+                    updateUlQuiz(idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>);
+                }
+            });
+            function removeLiFromQuizDropZone() {
+                $("#QuizDropZone li").remove();
+                $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");
+                $("#UlQuestion").sortable("option", "dropOnEmpty", false);
+                $('#UlModifQuiz').empty();
+            }
+            addClickEventToQuestions(<?php echo '"'.$_SESSION["idUsager"].'"';  ?>);
+
+            $("#AjouterQuestion").click( function() {
+                ajouterVariableSessionQuestion("", "nouvelleQuestion");
+                creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
+            });
         });
     </script>
 
@@ -131,6 +153,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
         <ul id="UlQuestion">
             <?php
                 remplirListeQuestions($_SESSION['PremierCours'], $_SESSION["idUsager"]);
+
             ?>
         </ul>
         <div id="AjouterQuestion" class="ListeDivElementStyle">Ajouter une question</div>
@@ -140,6 +163,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <?php
     include("Vue/Template/BasDePage.php");
 ?>
+
 
 </body>
 
