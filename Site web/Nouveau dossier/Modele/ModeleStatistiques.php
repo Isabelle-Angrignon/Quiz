@@ -16,7 +16,6 @@ function miseAJourStatsQuestion($idEtudiant, $idQuestion , $idQuiz, $estBon)
 
         $requete->closeCursor();
         unset($bdd);
-
     }
     else{
         echo "Un parametre n'a pas de valeur";
@@ -41,13 +40,12 @@ function miseAJourStatsQuiz()
             {
                 $question = array_shift($listeQuestions);
                 $resultat = array_shift($listeResultats);
-
                 miseAJourStatsQuestion($idEtudiant, $question, $idQuiz, $resultat );
             }
         }
         else
         {
-            echo "oups, problème à la compilation des résultats...";
+            echo "oups, problème à la compilation des statistiques...";
         }
     }
     else{
@@ -57,7 +55,6 @@ function miseAJourStatsQuiz()
 
 function obtenirStat()
 {
-
     $bdd = connecterProf();
     $requete = $bdd->prepare("CALL ListerStats()");
     $requete->execute();
