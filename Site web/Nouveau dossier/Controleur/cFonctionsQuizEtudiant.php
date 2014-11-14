@@ -10,14 +10,16 @@
 */
 
 
-function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz)
+function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz, $classe)
 {
     if ($idCours == 0)
     {
         $Donnee = ListerQuizEtudiant($idEtudiant, $typeQuiz );
         foreach($Donnee as $Row)
         {
-            GenererLiSelect($idUl,$Row['titreQuiz'], $Row['idQuiz']);
+            GenererLiSelectQuiz($idUl, $Row['titreQuiz'], $Row['idQuiz'],
+                $Row['prenom']." ". $Row['nom'],
+                $classe, $Row['idUsager_Proprietaire'] );
         }
     }
     else
@@ -25,7 +27,9 @@ function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz)
         $Donnee = ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz );
         foreach($Donnee as $Row)
         {
-            GenererLiSelect($idUl,$Row['titreQuiz'], $Row['idQuiz']);
+            GenererLiSelectQuiz($idUl,$Row['titreQuiz'], $Row['idQuiz'],
+                $Row['prenom']." ". $Row['nom'],
+                $classe, $Row['idUsager_Proprietaire']);
         }
     }
 
@@ -70,8 +74,8 @@ function genererReponsesVF($idQuestion)
         unset($_SESSION['listeReponses']);
     }
     //générer deux li, un vrai et un faux
-    GenererLiSelect('UlChoixReponse', 'Vrai', '1' );
-    GenererLiSelect('UlChoixReponse', 'Faux', '0' );
+    GenererLiSelectReponse('UlChoixReponse', 'Vrai', '1' );
+    GenererLiSelectReponse('UlChoixReponse', 'Faux', '0' );
 }
 function genererReponsesCMU($idQuestion, $ordreReponse)
 {
@@ -90,7 +94,7 @@ function genererReponsesCMU($idQuestion, $ordreReponse)
 
         foreach ($listeReponses as $Row)
         {
-            GenererLiSelect('UlChoixReponse', $Row['enonceReponse'], $Row['idReponse']);
+            GenererLiSelectReponse('UlChoixReponse', $Row['enonceReponse'], $Row['idReponse']);
         }
     }
     else

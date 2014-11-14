@@ -1,9 +1,16 @@
 <?php
-/*  AJAX_AjouterQuestion
- *  Par: Mathieu Dumoulin
- *  Date: 15/10/2014
- *  Description : Ce fichier effectue le contrôle entre la BD et la vue en ce qui à trait d'un ajout de question à l'aide d'AJAX
- */
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  AJAX_AjouterQuestion
+//  Par: Mathieu Dumoulin
+//  Date: 15/10/2014
+//
+//  Description :
+//  Ce fichier effectue le contrôle entre la BD et la vue en ce qui à
+//  trait d'un ajout de question à l'aide d'AJAX
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//TODO devrait penser a indiquer les parametre post que le fichier prend
 $doitArreter = false;
 $question = $_POST['tableauQuestion'];
 if($question['enonceQuestion'] == "")

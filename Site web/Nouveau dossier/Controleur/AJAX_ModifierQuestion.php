@@ -1,9 +1,17 @@
 <?php
-/*  AJAX_ModifierQuestion
- *  Par: Mathieu Dumoulin
- *  Date: 15/10/2014
- *  Description : Ce fichier effectue le contrôle entre la BD et la vue en ce qui à trait de la modification d'une question à l'aide d'AJAX
- */
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  AJAX_ModifierQuestion
+//  Par: Mathieu Dumoulin
+//  Date: 15/10/2014
+//
+//  Description :
+//  Ce fichier effectue le contrôle entre la BD et la vue en ce qui à
+//  trait de la modification d'une question à l'aide d'AJAX
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//TODO devrait penser a indiquer les parametre post que le fichier prend
 $doitArreter = false;
 $question = $_POST['tableauQuestion'];
 session_start();
@@ -48,6 +56,7 @@ $tableauQuestion = $_POST['tableauQuestion'];
 $tableauReponses = $_POST['tableauReponses'];
 $tableauCours = $_POST['tableauCours'];
 $typeQuestion = $_POST['typeQuestion'];
+//TODO What is this line : 54 ??? Nécessite expliquation sommaire
 isset($_POST['tableauTypeQuizAssocie'])?$tableauTypeQuizAssocie = $_POST['tableauTypeQuizAssocie'] : $tableauTypeQuizAssocie = null;
 
 modifierUneQuestion($tableauQuestion, $tableauReponses, $tableauCours, $typeQuestion, $tableauTypeQuizAssocie);

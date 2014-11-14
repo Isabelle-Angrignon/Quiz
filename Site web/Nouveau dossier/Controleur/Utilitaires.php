@@ -1,8 +1,14 @@
 <?php
-//Fonctions.php
-//Auteur: Isabelle Angringnon
-//Date: 23 septembre 2014
-//But: Contient diverses fonctions génériques
+//////////////////////////////////////////////////////////////////////////////////
+//
+//  Utilitaire.php
+//  Auteur: Isabelle Angringnon
+//  Date: 23 septembre 2014
+//
+//  Description :
+//  Contient les fonction utiles pour la gestion du site général
+//
+//////////////////////////////////////////////////////////////////////////////////
 
 function gestionParamChange()
 {
@@ -126,14 +132,24 @@ function GenererLi_V2($idUi , $valeur , $idLi, $textDiv , $classDiv)
     echo '<script>ajouterLi_AvecDiv( "'. $idUi . '" , "'.$valeur.'" ,"'.$idLi.'", true , "'.$textDiv .'", "'. $classDiv .'");</script>';
 }
 
-
-function GenererLiSelect($idUl , $valeur , $idLi)
+//fonction php qui appelle simplement la version javascript pour creer les éléements d'une liste "selectable" de réponse
+//(sans étiquette de nom de prof).
+function GenererLiSelectReponse($idUl , $valeur , $idLi)
 {
     echo "<script>ajouterLi_ToUl_Selectable( '". $idUl . "' , '". str_replace("'", " \'" , $valeur) . "','".$idLi."', true);</script>";
 }
+
+//fonction php qui appelle simplement la version javascript pour creer les éléements d'une liste "selectable" de réponse
+//(sans étiquette de nom de prof).
+function GenererLiSelectQuiz($idUl , $valeur , $idLi , $nomProf, $classe, $idProf)
+{
+    echo "<script>ajouterLi_ToUl_Selectable_Div( '". $idUl . "' , '". str_replace("'", " \'" , $valeur) . "','".$idLi .
+        "', true,'" . str_replace("'", " \'" , $nomProf)."','".$classe."','".$idProf."');</script>";
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////// Gestion d'erreur avec PHP ////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////// A vérifier si c'est toujours pertinent à la fin du sprint 1 //////////////////////////////////////////////////////////////////
+/////////////////  todo  A vérifier si c'est toujours pertinent à la fin du sprint 1 //////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function my_error_handler($no, $str, $file, $line){
     switch($no){
