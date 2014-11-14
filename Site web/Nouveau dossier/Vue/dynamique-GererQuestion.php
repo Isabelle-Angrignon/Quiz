@@ -148,7 +148,7 @@
                 }
                 else if($_SESSION["etat"] == "nouvelleQuestion")
                 {
-                    echo "<script>cocherCheckBoxCoursSelonCoursCourant();</script>";
+                    echo "<script>cocherCheckBoxCoursSelonCoursCourant('listeAjoutCours');</script>";
                 }
             ?>
         </ul>
@@ -209,7 +209,7 @@
         }
         elseif( $_SESSION["etat"] == "nouvelleQuestion")
         {
-            echo '"Annuler l\'ajout" onclick="annulerQuestion()"';
+            echo '"Annuler l\'ajout" onclick="fermerDivDynamique()"';
         }
     ?>
     >

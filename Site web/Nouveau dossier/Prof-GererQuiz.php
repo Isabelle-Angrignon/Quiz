@@ -113,6 +113,11 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 ajouterVariableSessionQuestion("", "nouvelleQuestion");
                 creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");
             });
+
+            $("#ajouterQuiz").click( function() {
+                ajouterVariableSessionQuiz("", "nouveauQuiz");
+                creeFrameDynamique("divDynamiqueQuiz", "Vue/dynamique-GererQuiz.php");
+            });
         });
     </script>
 
@@ -143,7 +148,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 remplirListeQuiz($_SESSION['PremierCours'], $_SESSION["idUsager"]);
             ?>
         </ul>
-        <div id="ajouterQuiz"></div>
+        <div id="ajouterQuiz" class="ListeDivElementStyle">Ajouter un quiz</div>
     </div>
     <div id="ListeModifQuiz" class="Liste ListeGererQuiz">
         <div id="QuizDropZone" class="ListeDivElementStyle"></div>
@@ -153,7 +158,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
         <ul id="UlQuestion">
             <?php
                 remplirListeQuestions($_SESSION['PremierCours'], $_SESSION["idUsager"]);
-
             ?>
         </ul>
         <div id="AjouterQuestion" class="ListeDivElementStyle">Ajouter une question</div>

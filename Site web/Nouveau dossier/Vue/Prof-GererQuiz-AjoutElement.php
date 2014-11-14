@@ -1,6 +1,7 @@
 <?php
 include("../Modele/ModeleAssociationQuestionCours.php");
 include("../Modele/ModeleUtilisateurs.php");
+include("../Modele/ModeleAssociationQuizCours.php");
 // Prof-GererQuiz-AjoutElement
 // Par Mathieu Dumoulin
 // Date: 13/10/2014
@@ -14,6 +15,11 @@ if(isset($_POST['action']))
     else if($_POST['action'] == 'listeCoursSelonQuestion')
     {
         $resultat = listerCoursSelonQuestion($_POST['idQuestion']);
+        echo  $resultat;
+    }
+    else if($_POST['action'] == 'listeCoursSelonQuiz')
+    {
+        $resultat = listerCoursSelonQuiz($_POST['idQuiz']);
         echo  $resultat;
     }
 }

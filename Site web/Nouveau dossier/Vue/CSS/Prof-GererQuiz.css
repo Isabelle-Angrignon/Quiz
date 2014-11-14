@@ -64,7 +64,7 @@ fieldset {
 	margin-left:11%;
 }
 
-#UlQuestion {
+#UlQuestion, #UlQuiz {
 	height:85%;
 }
 
@@ -87,14 +87,14 @@ fieldset {
     vertical-align: top;
 }
 
-#AjouterQuestion {
+#AjouterQuestion, #ajouterQuiz {
 	border:solid black;
 	margin-top:10%;
 	line-height: 50px;
 	background-color:white;
 }
 
-#AjouterQuestion:hover {
+#AjouterQuestion:hover, #ajouterQuiz:hover {
 	background-color:#E4E4E4;
 }
 
@@ -258,7 +258,7 @@ fieldset {
     border: solid;
     background-color:#E66100;
 }
-
+/* Change la couleur du placeholder du titre d'un quiz lors de sa modification ou sa création. */
 #titreQuiz::-webkit-input-placeholder {
     color: rgb(255,255,255);
 }
@@ -288,5 +288,14 @@ fieldset {
     text-align:right;
     position:absolute;
     bottom:30px;
+}
 
+#ordreQuestionQuiz {
+
+}
+#ordreQuestionQuiz + label {
+    width:30%;
+}
+#disponibiliteQuiz + label {
+    width:50%;
 }

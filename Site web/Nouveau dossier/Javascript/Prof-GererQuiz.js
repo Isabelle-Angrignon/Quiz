@@ -31,7 +31,7 @@ function addClickEventToQuestions(usagerCourant) {
 function addClickEventToQuiz() {
     $("#UlQuiz li, #UlModifQuiz li").off("click");
     $("#UlQuiz li, #UlModifQuiz li").click( function() {
-        ajouterVariableSessionQuiz($(this).attr("id"));
+        ajouterVariableSessionQuiz($(this).attr("id"), "modifierQuiz");
 
         creeFrameDynamique("divDynamiqueQuiz", "Vue/dynamique-GererQuiz.php");
 
@@ -192,12 +192,12 @@ function ajouterVariableSessionQuestion(idQuestion, etat) {
     });
 }
 
-function ajouterVariableSessionQuiz(idQuiz) {
+function ajouterVariableSessionQuiz(idQuiz, etat) {
     $.ajax({
         type: "post",
         url: 'Vue/Prof-GererQuiz-AjoutElement.php',
         async:false,
-        data:  {"session":true, "idQuiz":idQuiz},
+        data:  {"session":true, "idQuiz":idQuiz, "etat":etat},
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
         }
@@ -355,13 +355,34 @@ function cocherCheckBoxCoursSelonQuestion(idQuestion) {
     });
 }
 
+function cocherCheckBoxCoursSelonQuiz(idQuiz) {
+    $.ajax({
+        type:"POST",
+        url:'Vue/Prof-GererQuiz-AjoutElement.php',
+        data: {"action":"listeCoursSelonQuiz", "idQuiz": idQuiz },
+        dataType: "json",
+        success: function(resultat){
+            for(var i = 0; i < resultat.length; ++i) {
+                $("#listeCoursQuiz input[type=checkbox]").each(function(){
+                    if($(this).attr("value") == resultat[i].idCours) {
+                        $(this).prop('checked', true);
+                    }
+                });
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
 // cocherCheckBoxSelonValue
 // Par Mathieu Dumoulin
 // Date: 24/10/2014
 // Intrants: idConteneur = le id du ul contenant ce CheckBox
 // Description:
-function cocherCheckBoxCoursSelonCoursCourant() {
-    $("#listeAjoutCours li").children("input[type=checkbox]").each( function() {
+function cocherCheckBoxCoursSelonCoursCourant(idUl) {
+    $("#" + idUl + " li").children("input[type=checkbox]").each( function() {
        if($(this).attr("value") == $("#DDL_Cours option:selected").attr("value")) {
            $(this).prop('checked', true);
        }
@@ -458,21 +479,21 @@ function jsonifierReponsesQuestionCourante() {
     return jsonReponses;
 }
 
-function jsonifierCoursQuestionCourante() {
+function jsonifierCoursSelectionnes(idUlParent) {
 
     // Ouverture du string de format JSON
     var coursEnString = '{"cours":[';
 
     // Pour chacun de mes cours, je vérifie lesquels sont cochés et je prend leur énoncé.
     // Par la suite, j'ajoute mon cours sous forme d'une rangée dans mon string de format JSON
-    $("#listeAjoutCours li").each( function() {
+    $("#" + idUlParent +" li").each( function() {
         if($(this).children("input[type=checkbox]").prop("checked") == true) {
             // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
             coursEnString += '{"nomCours":"'+$(this).text().replace(/[\"]/g, '\\"')+'", "idCours":"'+ $(this).children("input[type=checkbox]").attr("value") + '"},';
         }
     });
     // J'enlève la dernière virgule de mon string car, en JSON, le dernier élément ne prend pas de virgule
-    if($("#listeAjoutCours li input:checkbox:checked").length > 0) {
+    if($("#" + idUlParent +" li input:checkbox:checked").length > 0) {
         coursEnString = coursEnString.substr(0,coursEnString.length -1);
     }
     // Je ferme par la suite mon string de format JSON
@@ -533,7 +554,7 @@ function ajouterQuestion(idCreateur) {
 
         var jsonReponses = jsonifierReponsesQuestionCourante();
 
-        var jsonCours = jsonifierCoursQuestionCourante();
+        var jsonCours = jsonifierCoursSelectionnes("listeAjoutCours");
 
         var typeQuestion = $("#TypeQuestion li input[type=radio]:checked").attr("value");
 
@@ -592,7 +613,7 @@ function modifierQuestion( idUsagerCourant,idQuestion, idProprietaire) {
 
         var jsonReponses = jsonifierReponsesQuestionCourante();
 
-        var jsonCours = jsonifierCoursQuestionCourante();
+        var jsonCours = jsonifierCoursSelectionnes("listeAjoutCours");
 
         var typeQuestion = $("#TypeQuestion li input[type=radio]:checked").attr("value");
 
@@ -636,7 +657,7 @@ function modifierQuestion( idUsagerCourant,idQuestion, idProprietaire) {
     }
 }
 
-function annulerQuestion() {
+function fermerDivDynamique() {
     $(".dFondOmbrage").detach();
 }
 
@@ -692,5 +713,46 @@ function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
         });
 
     }
+}
 
+function ajouterQuiz() {
+    // Prise du titre du quiz dans l'interface.
+    var titreQuiz = $("#titreQuiz").val();
+    // Prise de l'ordre des question
+    var ordreEstAleatoire = !$("#ordreQuestionQuiz").prop("checked");
+    // Prise de la disponibilité du quiz
+    var estDisponible = !$("#disponibiliteQuiz").prop("checked");
+    // Prise des cours sélectionnés
+    var jsonCours = jsonifierCoursSelectionnes("listeCoursQuiz");
+
+    $.ajax({
+        type:"POST",
+        url:'Controleur/AJAX_AjouterQuiz.php',
+        async : false,
+        data: {"titreQuiz":titreQuiz, "ordreEstAleatoire":ordreEstAleatoire, "estDisponible":estDisponible, "jsonCours":jsonCours},
+        dataType: "text",
+        success: function(resultat){
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
+        }
+    });
+}
+
+function supprimerQuiz(idQuiz) {
+    alert("Suppression");
+    /*
+    swal({   title: "Êtes-vous sur?",
+        text: "Cette action va supprimer ce quiz ainsi que toutes ces références. Êtes-vous sur de vouloir continuer?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Supprimer ce quiz",
+        closeOnConfirm: false
+    }, function(aAccepter){
+        if(aAccepter) {
+            // TODO FINIR ICI
+        }
+    });*/
 }
