@@ -4,6 +4,11 @@
     include("../Modele/ModeleQuiz.php");
     session_start();
 
+    if(!isset($_SESSION['idUsager']) || !isset($_SESSION['etat']))
+    {
+        echo "<script> swal('Erreur de connexion','Erreur avec la connection. Veuillez vous reconnecter.', 'error');</script>";
+        exit();
+    }
     if($_SESSION['etat'] == "modifierQuiz")
     {
         $infoQuiz = recupererInfoQuiz($_SESSION['idQuiz']);
@@ -56,6 +61,11 @@
             }
         });
 
+        $("#titreQuiz").focusin(function(e) {
+            $(this).css("background-color", "#d3d3d3");
+        }).focusout(function(e) {
+            $(this).css("background-color", "#E66100");
+        });
 
         $("#ordreQuestionQuiz").button().change(function() {
             if($(this).prop("checked") == true) {
@@ -143,18 +153,18 @@
            <?php
            if($_SESSION['etat'] == 'modifierQuiz')
            {
-               echo "value='Enregistrer' onclick='modifierQuiz(". $_SESSION['idQuiz']. ")' >";
+               echo "value='Enregistrer' onclick='modifierQuiz(". $_SESSION['idQuiz']. ", \"".$_SESSION['idUsager'] ."\")' >";
            }
            else
            {
-               echo "value='Ajouter' onclick='ajouterQuiz()' >";
+               echo "value='Ajouter' onclick='ajouterQuiz(\"".$_SESSION['idUsager'] ."\")' >";
            }
            ?>
     <input type="button" id="BTN_SupprimerQuiz" tabindex="6"
            <?php
             if($_SESSION['etat'] == 'modifierQuiz')
             {
-                echo "value='Supprimer' onclick='supprimerQuiz(". $_SESSION['idQuiz']. ")' >";
+                echo "value='Supprimer' onclick='supprimerQuiz(". $_SESSION['idQuiz']. ", \"". $_SESSION['idUsager'] ."\")' >";
             }
             else
             {

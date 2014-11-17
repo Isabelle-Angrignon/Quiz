@@ -3,6 +3,11 @@
 
 
 $doitArreter = false;
+if(!isset($_POST['idQuiz']))
+{
+    echo "Vous devez entrer l'identifiant du quiz à modifier.";
+    $doitArreter = true;
+}
 if(!isset($_POST['titreQuiz']))
 {
     echo "Vous devez entrer un titre à votre quiz.";
@@ -40,6 +45,7 @@ include("../Modele/ModeleUtilisateurs.php");
 include("../Modele/ModeleQuiz.php");
 include("../Modele/ModeleAssociationQuizCours.php");
 
+$idQuiz = $_POST['idQuiz'];
 $titreQuiz = $_POST['titreQuiz'];
 $ordreEstAleatoire = $_POST['ordreEstAleatoire'];
 $idProprietaire = $_POST['idProprietaire'];
@@ -47,5 +53,5 @@ $estDisponible = $_POST['estDisponible'];
 $jsonCours = $_POST['jsonCours'];
 
 
-ajouterUnQuiz($titreQuiz, $ordreEstAleatoire, $idProprietaire, $estDisponible , $jsonCours);
+modifierUnQuiz($idQuiz, $titreQuiz, $ordreEstAleatoire ,$idProprietaire, $estDisponible , $jsonCours);
 

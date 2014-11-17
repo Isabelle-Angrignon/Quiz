@@ -13,6 +13,13 @@
 
     session_start();
 
+    if(!isset($_SESSION['idUsager']))
+    {
+        // Gestion d'erreur s'il n'y a pas de connexion
+        echo "<script> swal('Erreur de connexion','Erreur avec la connection. Veuillez vous reconnecter.', 'error');</script>";
+        exit();
+    }
+
     if(!isset($_SESSION["etat"]))
     {
         trigger_error("Il n'y a aucun état passé à ce div dynamique (modificationQuestion, nouvelleQuestion, ...)", E_USER_ERROR);

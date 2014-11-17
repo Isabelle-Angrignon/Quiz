@@ -79,7 +79,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     var typeQuiz = $(ui.item).children("div .divProfDansLi").text();
                     updateUlModifQuiz("selonQuiz", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, idQuiz);
                     updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz);
-
                 },
                 remove: function (event, ui) {
                     $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");
@@ -108,7 +107,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 $('#UlModifQuiz').empty();
             }
             addClickEventToQuestions(<?php echo '"'.$_SESSION["idUsager"].'"';  ?>);
-
+            addClickEventToQuiz();
             $("#AjouterQuestion").click( function() {
                 ajouterVariableSessionQuestion("", "nouvelleQuestion");
                 creeFrameDynamique("popupPrincipal", "Vue/dynamique-GererQuestion.php");

@@ -126,7 +126,7 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
             $positionReponse = 0;
             foreach($tableauReponses['reponses'] as $reponse)
             {
-                $estBon = convertEstBonneReponseToTINYINT($reponse['estBonneReponse']);
+                $estBon = convertStringBooleanToTINYINT($reponse['estBonneReponse']);
                 ajouterReponse($bdd, $reponse['enonce'], "", $idQuestion[0], $estBon, ++$positionReponse);
             }
         }
@@ -144,8 +144,6 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
             ajouterLienQuestionsVraiFaux($bdd, $idQuestion[0], $estVrai);
         }
 
-
-        $positionCours = 0;
         // Associer la question à un/plusieurs cours
         foreach($tableauCours['cours'] as $Cours)
         {
@@ -252,10 +250,6 @@ function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours
 
 }
 
-function convertEstBonneReponseToTINYINT($estBonneReponse)
-{
-    return $estBonneReponse=='true'?1:0;
-}
 
 function modifierReponses($bdd, $tableauReponses, $identifiantQuestion, $typeQuestion)
 {
@@ -301,7 +295,7 @@ function modifierReponses($bdd, $tableauReponses, $identifiantQuestion, $typeQue
                 $enonce = $tableauNouvelleReponses->reponses[$x]->enonce;
                 $positionReponse = $tableauNouvelleReponses->reponses[$x]->positionReponse;
                 // Dans la base de donnée, estBonneReponse représente un TINYINT donc on doit le transformer en TINYINT.
-                $estBon = convertEstBonneReponseToTINYINT($tableauNouvelleReponses->reponses[$x]->estBonneReponse);
+                $estBon = convertStringBooleanToTINYINT($tableauNouvelleReponses->reponses[$x]->estBonneReponse);
 
                 modifierReponse($bdd,$idReponse, $enonce,"", $estBon, $positionReponse);    // Modifie les anciennes réponses par rapport à la nouvelle
                 unset($tableauNouvelleReponses->reponses[$x]);
@@ -314,7 +308,7 @@ function modifierReponses($bdd, $tableauReponses, $identifiantQuestion, $typeQue
             $positionReponse = $reponse->positionReponse;
             $idQuestion =  $identifiantQuestion;
             // Dans la base de donnée, estBonneReponse représente un TINYINT donc on doit le transformer en TINYINT.
-            $estBon = convertEstBonneReponseToTINYINT($reponse->estBonneReponse);
+            $estBon = convertStringBooleanToTINYINT($reponse->estBonneReponse);
 
             ajouterReponse($bdd, $enonce, "", $idQuestion, $estBon, $positionReponse);
         }
@@ -325,6 +319,102 @@ function modifierReponses($bdd, $tableauReponses, $identifiantQuestion, $typeQue
     {
         supprimerReponse($bdd, $idAncienneReponse);
     }
+}
+
+
+
+function ajouterUnQuiz($titreQuiz, $ordreEstAleatoire, $idProprietaire, $estDisponible, $jsonCours)
+{
+    try
+    {
+        $bdd = connecterProf();
+        set_error_handler('useless_error_handler');
+        $bdd->beginTransaction();
+
+        $ordreEstAleatoire = convertStringBooleanToTINYINT($ordreEstAleatoire);
+        $estDisponible = convertStringBooleanToTINYINT($estDisponible);
+
+        $idNouveauQuiz = ajouterQuiz($bdd, $titreQuiz, $ordreEstAleatoire, $idProprietaire, $estDisponible);
+
+        // Associer la question à un/plusieurs cours
+        foreach($jsonCours['cours'] as $Cours)
+        {
+            associerQuizCours($bdd, $idNouveauQuiz, $Cours['idCours']);
+        }
+
+        $bdd->commit();
+    }
+    catch(ErrorException $e)
+    {
+        try
+        {
+            //on annule la transation
+            $bdd->rollback();
+
+            echo $e->getMessage();
+        }
+        catch (PDOException $e){echo "Erreur dans le rollback";}
+    }
+    restore_error_handler();
+    unset($bdd);
+
+}
+
+function modifierUnQuiz($idQuiz ,$titreQuiz, $ordreEstAleatoire, $idProprietaire, $estDisponible, $jsonCours)
+{
+    try
+    {
+        $bdd = connecterProf();
+        set_error_handler('useless_error_handler');
+        $bdd->beginTransaction();
+
+        $ordreEstAleatoire = convertStringBooleanToTINYINT($ordreEstAleatoire);
+        $estDisponible = convertStringBooleanToTINYINT($estDisponible);
+
+        modifierQuiz($bdd, $idQuiz, $titreQuiz, $ordreEstAleatoire, $idProprietaire, $estDisponible);
+
+        // Supprimer les liens du quiz avec les cours
+        supprimerLienQuizCours($bdd, $idQuiz);
+        // Associer la question à un/plusieurs cours
+        foreach($jsonCours['cours'] as $Cours)
+        {
+            associerQuizCours($bdd, $idQuiz, $Cours['idCours']);
+        }
+
+        $bdd->commit();
+    }
+    catch(ErrorException $e)
+    {
+        try
+        {
+            //on annule la transation
+            $bdd->rollback();
+
+            echo $e->getMessage();
+        }
+        catch (PDOException $e){echo "Erreur dans le rollback";}
+    }
+    restore_error_handler();
+    unset($bdd);
+
+}
+
+function supprimerUnQuiz($idQuiz)
+{
+    try
+    {
+        supprimerQuiz($idQuiz);
+    }
+    catch(PDOException $e)
+    {
+        echo $e->getMessage();
+    }
+
+}
+
+function convertStringBooleanToTINYINT($stringBoolean)
+{
+    return $stringBoolean=='true'?1:0;
 }
 
 
