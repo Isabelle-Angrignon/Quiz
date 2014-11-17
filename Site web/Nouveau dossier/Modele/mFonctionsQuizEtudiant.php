@@ -8,7 +8,7 @@
 */
 function genererQuestionsAleatoires($cours)
 {
-    $bdd = connecterEtudiant();
+    $bdd = getConnection($_SESSION['typeUsager']);//connecterEtudiant();
 
     if (isset($cours))
     {
