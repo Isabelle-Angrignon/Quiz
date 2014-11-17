@@ -3,6 +3,7 @@
 
 function miseAJourStatsQuestion($idEtudiant, $idQuestion , $idQuiz, $estBon)
 {
+
     $bdd = connecterEtudiant();
     if (isset($idEtudiant) AND isset($idQuestion) AND isset($idQuiz)  AND isset($estBon))
     {

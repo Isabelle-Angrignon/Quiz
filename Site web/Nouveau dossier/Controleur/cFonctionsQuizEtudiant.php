@@ -1,6 +1,5 @@
 <?php
 
-
 /*
     Nom: ListerQuizDansUl
     Par: Isabelle Angrignon copié de Simon Bouchard
@@ -156,19 +155,24 @@ function updateReponseQuestionSession($estBonneReponse)
     {
         array_unshift($_SESSION['bienRepondu'] ,$estBonneReponse );
     }
-
-
 }
 
 function getNomCours()
 {
-    $nomCours = "Nom du cours ?";
-    foreach($_SESSION['listeCours'] as $cours)
+    if($_SESSION['typeQuiz'] == "ALEATOIRE")
     {
-        if ($cours['idCours'] == $_SESSION['idCours'])
+        foreach($_SESSION['listeCours'] as $cours)
         {
-            $nomCours = $cours['codeCours'] . ' ' . $cours['nomCours'];
+            if ($cours['idCours'] == $_SESSION['idCours'])
+            {
+                $nomCours = $cours['codeCours'] . ' ' . $cours['nomCours'];
+            }
         }
+    }
+    else
+    {
+        $cours = recupererCoursQuizEtudiant($_SESSION['idQuiz'], $_SESSION['idUsager']);
+        $nomCours = $cours[0]['codeCours'] . ' ' . $cours[0]['nomCours'];
     }
     return $nomCours;
 }

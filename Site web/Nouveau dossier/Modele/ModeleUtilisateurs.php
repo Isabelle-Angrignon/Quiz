@@ -10,15 +10,19 @@ function getStringConnection()
 // Description: Cette fonction reçoit un type d'usager en paramètre ("etudiant","prof","admin") et retourne la conexion correspondante
 function getConnection($typeUsager)
 {
+    if(!isset($typeUsager))
+    {
+        exit();
+    }
     switch($typeUsager)
     {
-        case "etudiant":
+        case "Etudiant":
             $bdd = connecterEtudiant();
             break;
-        case "prof":
+        case "Prof":
             $bdd = connecterProf();
             break;
-        case "admin":
+        case "Admin":
             $bdd = connecterAdmin();
             break;
     }

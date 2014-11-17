@@ -9,69 +9,64 @@
     background-color: rgba(79, 168, 255, 1);
 }
 
-/* suiviQuiz == Barre d'info de suivi du quiz*/
+/* suiviQuiz == Barre d'info (entete) de suivi du quiz*/
 
 /*format du texte de la barre d'info de suivi du quiz*/
 .suiviQuiz{
-    text-align: center;
+    align-self: center;
     padding: 2px;
     text-decoration:none;
-}
-div.suiviQuiz {
-    width:90%;
-    background-color: rgba(230, 151, 0, 0.67);
     margin: 0 auto;
 }
 
-#divSuiviQuiz {
+#enteteQuiz{
+    padding-top: 20px;
     margin-top: 20px;
-    font-size: 30px;
+    border: solid rgba(51, 51, 51, 0.77) 1px;
+    /* Arrondis de coins*/
     -webkit-border-top-left-radius: 30px;
     -moz-border-radius-topleft: 30px;
     border-top-left-radius: 30px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topright: 5px;
     border-top-right-radius: 5px;
-    padding-top: 20px;
-    border-right :solid rgba(51, 51, 51, 0.77) 1px;
-    border-left :solid rgba(51, 51, 51, 0.77) 1px;
-    border-top :solid rgba(51, 51, 51, 0.77) 1px;
-}
-#labelCours {
-
-}
-
-#divSuiviQuizCentre {
-    font-size: 25px;
-    padding-bottom: 0px;
-    border-right :solid rgba(51, 51, 51, 0.77) 1px;
-    border-left :solid rgba(51, 51, 51, 0.77) 1px;
-}
-
-#labelScore{
-    display: inline-block;
-}
-
-#labelTitre {
-    float: right;
-    padding-right: 10px;
-}
-
-#divSuiviQuiz2{
-    text-align: right;
     -webkit-border-bottom-right-radius: 30px;
     -moz-border-radius-bottomright: 30px;
     border-bottom-right-radius: 30px;
     -webkit-border-bottom-left-radius: 5px;
     -moz-border-radius-bottomleft: 5px;
     border-bottom-left-radius: 5px;
-    border-bottom :solid rgba(51, 51, 51, 0.77) 1px;
-    border-right :solid rgba(51, 51, 51, 0.77) 1px;
-    border-left :solid rgba(51, 51, 51, 0.77) 1px;
+}
+table.suiviQuiz{
+    width:90%;
 }
 
+div.suiviQuiz {
+    width:90%;
+    background-color: rgba(230, 151, 0, 0.67);
+    margin: 0 auto;
+}
+
+#labelCours {
+    font-size: 30px;
+    width: 60%;
+}
+
+#labelScore{
+    font-size: 22px;
+    width: 40%;
+}
+
+#labelTitreQuiz {
+    font-size: 30px;
+    width: 60%;
+}
+
+#labelType {
+    width: 30%;
+}
 #labelProp {
-    padding-right: 10px;
+    width: 30%;
 }
 
 /* mettre une classe pour les éléments de la question ici au besoin*/
@@ -86,7 +81,7 @@ div.suiviQuiz {
 }
 
 #idQuestion{
-    float: left;
+
 }
 #nomProfQuestion{
     float: right;
