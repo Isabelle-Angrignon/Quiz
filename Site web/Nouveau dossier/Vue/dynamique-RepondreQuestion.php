@@ -53,50 +53,54 @@ else{
     });
 </script>
 
+<div id="enteteQuiz" class="suiviQuiz">
+    <table class="suiviQuiz">
+        <tr>
+            <td>
+                <label id="labelCours" class="suiviQuiz">
+                    <?php    echo getNomCours();  ?>
+                </label>
+            </td>
+            <td>
+                <label id="labelScore" class="suiviQuiz">
+                    <?php
+                    if($aleatoire) {
+                        echo($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']);
+                    }
+                    else{
+                        echo($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']) . " de " . $nbQuestionsARepondre;
+                    }
+                    ?>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label id="labelTitreQuiz" class="suiviQuiz">
+                    <?php echo $titreQuiz      ?>
+                </label>
+            </td>
+            <td>
+                <label id="labelType" class="suiviQuiz">
+                    <?php  echo $typeQuiz; ?>
+                </label>
+                <br/>
+                <label id="labelProp" class="suiviQuiz">
+                    <?php
+                    if($aleatoire)
+                    {
+                        echo "Cours de: " . getNomProfDuCoursDeLEtudiant();
+                    }
+                    else
+                    {
+                        echo "Quiz de: " . $nomProf;
+                    }
+                    ?>
+                </label>
+            </td>
+        </tr>
+    </table>
 
-<div id="divSuiviQuiz" class="suiviQuiz" >
-    <label id="labelCours" class="suiviQuiz"><?php
-        if($aleatoire)
-        {
-            echo getNomCours();
-        }
-        else
-        {
-            echo getNomCours() . " </br> " . $titreQuiz;
-        }
-        ?>
-    </label>
-</div>
-<div id="divSuiviQuizCentre" class="suiviQuiz" >
-    <label id="labelScore" class="suiviQuiz">
-        <?php
-        if($aleatoire) {
-            echo($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']);
-        }
-        else{
-            echo($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']) . " sur " . $nbQuestionsARepondre;
-        }
-        ?>
-    </label>
-
-    <label id="labelTitre" class="suiviQuiz">
-        <?php  echo $typeQuiz; ?>
-    </label>
-</div>
-<div id="divSuiviQuiz2" class="suiviQuiz" >
-    <label id="labelProp" class="suiviQuiz">
-        <?php
-        if($aleatoire)
-        {
-            echo "Cours de: " . getNomProfDuCoursDeLEtudiant();
-        }
-        else
-        {
-            echo "Quiz de: " . $nomProf;
-        }
-
-        ?>
-    </label>
 </div>
 
 
