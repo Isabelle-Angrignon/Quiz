@@ -102,3 +102,19 @@ function ListerQuizEtudiant($idEtudiant, $typeQuiz)
 
     return $resultat;
 }
+
+
+function recupererCoursQuizEtudiant($idQuiz, $idEtudiant)
+{
+    $bdd = connecterEtudiant();
+    $requete = $bdd->prepare("CALL recupererCoursQuizEtudiant( ? , ? )");
+    $requete->bindparam(1, $idQuiz, PDO::PARAM_INT,10);
+    $requete->bindparam(2, $idEtudiant, PDO::PARAM_STR,10);
+    $requete->execute();
+    $resultat = $requete->fetchAll();
+
+    $requete->closeCursor();
+    unset($bdd);
+
+    return $resultat;
+}
