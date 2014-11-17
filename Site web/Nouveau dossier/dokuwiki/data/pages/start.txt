@@ -1,7 +1,0 @@
-{{:logo_qiz.png?nolink&300 |}}  ====== Index ======
-
-[[https://www.dokuwiki.org/fr:dokuwiki | Aide Docuwiki]]
-
-[[intro | Introduction]] 
-
-[[regles |Règles de la structure de BD ]] 
