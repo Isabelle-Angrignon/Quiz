@@ -130,6 +130,7 @@ function resetVarSessionQuiz()
     $_SESSION['bonnesReponses'] = 0;
 }
 
+//Traduit litéralement le true et false en 1 et 0.  On a besoin de int plus loin pour la compilation du score
 function gererReponse($estBonneReponse)
 {
     if($estBonneReponse)

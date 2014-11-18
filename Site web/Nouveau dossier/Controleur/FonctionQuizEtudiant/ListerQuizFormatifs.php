@@ -1,28 +1,25 @@
 <?php
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  SetIdCoursSession.php
+//  ListerQuizFormatifs.php
 //  Fait par : Isabelle Angrignon
 //  Commenté le : 18/11/2014
 //
-//  But : Met la variable identifiant le idCours passé en POST dans la variable de session pour réféerence future
-//        Remet ensuite les variables de session liées au Quiz à "vide"
+//  But : Génere et retourne la liste des quiz formatifs pour un cours spécifiques ou pour tous les cours de l'étudiant
 //
-//  POST: 'selectCours' = le idCours
+//  POST: aucun, tout vient des variables de session
 //
-//  Session :  'idCours' : Le nom le dit
+//  Session :  'idCours' et "idUsager"
 //
-//  Sortie :  int 1|0 pour identifier si un cours est sélectionné ou non.  Le menu cours ayant l'item "Tous les cours"
-//            en position "0".
+//  Sortie :  un json  qui contient la liste des quiz comportant au moins le idQuiz et le titre de chaque quiz.
+//            Voir méthodes appelées pour plus de détails
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 include("..//Utilitaires.php");
 include("..//..//Modele/ModeleUtilisateurs.php");
 include("..//..//Modele/ModeleUsagers.php");
 include("..//..//Modele/mFonctionsQuizEtudiant.php");
-/*
-include("..//cFonctionsQuizEtudiant.php");
-include("..//..//Modele/ModeleQuestions.php");*/
+
 demarrerSession();
 redirigerSiNonConnecte('Etudiant');
 
@@ -41,10 +38,5 @@ if (isset($liste) && $liste != "" )
 {
     echo $liste;
 }
-else
-{
-    echo '<script>alert ("Pas de quiz!")</script>';
-}
-
 
 
