@@ -38,11 +38,19 @@ function addClickEventToQuiz() {
     });
 }
 
+function updateAutoSizeTextArea() {
+    $('textarea').each(function () {
+        h(this);
+    }).on('input', function () {
+        h(this);
+    });
+}
+
 function ajouterReponsesViaJSON(json) {
     for(var i = 0; i < dictionnaireReponsesChoixMulti.reponses.length; ++i) {
         ajouterNouvelleReponse(json.reponses[i].estBonneReponse);
-        $("#Ul_Reponses li:last-child").children("input").attr("value", json.reponses[i].idReponse);
-        $("#Ul_Reponses li:last-child").children(".reponsesQuestion").text(json.reponses[i].enonce);
+        $("#Ul_Reponses li:last-child").children("input[type=text]").attr("value", json.reponses[i].idReponse);
+        $("#Ul_Reponses li:last-child").children(".reponsesQuestion").val(json.reponses[i].enonce);
     }
 }
 
@@ -257,11 +265,11 @@ function ajouterReponsesVraiFaux() {
 
         $("#Ul_Reponses li").ready(function() {
             // Réponse vrai
-            $("#Ul_Reponses li:first-child").children(".reponsesQuestion").text("Vrai");
+            $("#Ul_Reponses li:first-child").children(".reponsesQuestion").val("Vrai");
             $("#Ul_Reponses li:first-child").children("input[type=radio]").attr("value",1);
 
             // Réponse faux
-            $("#Ul_Reponses li:nth-child(2)").children(".reponsesQuestion").text("Faux");
+            $("#Ul_Reponses li:nth-child(2)").children(".reponsesQuestion").val("Faux");
             $("#Ul_Reponses li:nth-child(2)").children("input[type=radio]").attr("value",0);
 
             enleverModificationReponses();
@@ -308,6 +316,17 @@ function ajouterNouvelleReponse(estBonneReponse) {
         async:false,
         success: function(resultat) {
             $("#Ul_Reponses").append(resultat);
+            updateAutoSizeTextArea();
+
+            // Toggle la classe qui permet de supprimer une réponse.
+            $(".reponsesQuestion").focusin(function() {
+                $(this).addClass("Reponsefocused");
+            }).focusout(function(event) {
+                if($(event.relatedTarget).attr("id") != "BTN_SupprimerReponse") {
+                    $(this).removeClass("Reponsefocused");
+                }
+            });
+
         }
     });
 }
@@ -461,7 +480,7 @@ function jsonifierReponsesQuestionCourante() {
             estCoche = true;
         }
         // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
-        reponsesEnString += '{"enonce":"'+$(this).children("div").text().replace(/[\"]/g, '\\"')+'", "estBonneReponse":"' + estCoche + '",' +
+        reponsesEnString += '{"enonce":"'+$(this).children(".reponsesQuestion").val()+'", "estBonneReponse":"' + estCoche + '",' +
                             '"idReponse":"' + $(this).children("input[type=radio]").attr("value") + '", "positionReponse":"'+ ++position +'"},';
     });
 
@@ -531,10 +550,9 @@ function jsonifierTypeQuizAssQuestionCourante() {
 }
 
 function getJSONEnonceQuestion(idCreateur, idQuestion ) {
-    var enonce = document.getElementById("EnonceQuestion").textContent;
+    var enonce = $("#EnonceQuestion").val();
 
     // Par défaut, les furteurs tels que chrome et firefox ajoutent 13 caractères au début du texte d'un contentEditable élément.
-    enonce = enonce.replace(/[\s]*/, "");
     // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
     enonce = enonce.replace(/[\"]/g, '\\"');
     enonce = enonce.trim();

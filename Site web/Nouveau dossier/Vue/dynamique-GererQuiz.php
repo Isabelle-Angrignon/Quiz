@@ -62,7 +62,7 @@
         });
 
         $("#titreQuiz").focusin(function(e) {
-            $(this).css("background-color", "#d3d3d3");
+            $(this).css("background-color", "rgba(236, 99, 0, 0.62)");
         }).focusout(function(e) {
             $(this).css("background-color", "#E66100");
         });

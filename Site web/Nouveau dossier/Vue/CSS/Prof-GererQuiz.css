@@ -75,7 +75,7 @@ fieldset {
     text-align:right;
 }
 
-.Reponsefocused[contentEditable=true]{
+textarea.Reponsefocused{
     background-color:white;
 }
 
@@ -142,22 +142,29 @@ fieldset {
 
 #EnonceQuestion {
     background-color:#E66100;
-    width:480px;
-    max-height:200px;
+    width:100%;
+    max-height: 200px;
     overflow-y:auto;
     overflow-x:hidden;
     font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:18px;
     border:1px solid black;
     border-radius:10px;
     padding:10px;
     display:block;
     outline: none;
+    resize:none;
 }
 
-.enonceVide:before {
-    content: attr(placeholder);
-    color: white;
+/* Change la couleur du placeholder du titre d'un quiz lors de sa modification ou sa création. */
+::-webkit-input-placeholder{
+    color: rgb(255,255,255);
 }
+
+::-moz-placeholder {
+    color: rgb(255,255,255);
+}
+
 
 
 #reponseConteneur {
@@ -168,13 +175,13 @@ fieldset {
     border-radius:10px;
     margin-top:20px;
     padding:10px;
+    width: 100%;
 }
 
 #reponseConteneur ul li input[type=radio] {
     width:20px;
     height:20px;
     vertical-align: middle;
-    margin-top:-3px;
 }
 
 #reponseConteneur li {
@@ -187,10 +194,13 @@ fieldset {
 .reponsesQuestion {
     background-color:#d3d3d3;
     width:90%;
-    min-height:20px;
+    max-height:100px;
     border:solid darkgray 1px;
     display:inline-block;
     vertical-align: top;
+    resize:none;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:16px;
 }
 
 #Ul_Reponses {
@@ -226,14 +236,12 @@ fieldset {
 
 #ActionQuestion {
     width:100%;
+    text-align:right;
 }
 #BTN_ConfirmerQuestion {
-    float:right;
-    margin-right:40px;
 }
 
 #BTN_SupprimerQuestion {
-    float:right;
     margin-right:20px;
 }
 
@@ -261,15 +269,6 @@ fieldset {
 #titreQuiz:focus{
     outline: 0;
 }
-/* Change la couleur du placeholder du titre d'un quiz lors de sa modification ou sa création. */
-#titreQuiz::-webkit-input-placeholder {
-    color: rgb(255,255,255);
-}
-
-#titreQuiz::-moz-placeholder {
-    color: rgb(255,255,255);
-}
-/*-------------------------------------------------------------------------------------------- */
 
 #divDynamiqueQuiz #paramQuiz .ui-widget-content {
     background: #d3d3d3;
