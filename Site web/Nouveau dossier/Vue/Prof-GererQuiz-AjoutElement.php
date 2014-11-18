@@ -44,5 +44,5 @@ if(isset($_POST['session']))
 
 function nouveauInputReponses($typeInput, $aCocher) {
     $aCocher == 1? $checked="checked" : $checked="";
-    echo "<li class='ui-sortable-handle ui-sortable'><input type='".$typeInput."' name='reponses' value='0' ".$checked."><div class='reponsesQuestion' contenteditable='true'></div></li>";
+    echo "<li class='ui-sortable-handle ui-sortable'><input type='".$typeInput."' name='reponses' value='0' ".$checked."><textarea class='reponsesQuestion' rows='1' placeholder='Entrer une réponse ici...'></textarea></li>";
 }

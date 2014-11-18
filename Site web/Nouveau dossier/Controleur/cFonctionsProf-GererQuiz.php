@@ -85,7 +85,7 @@ function prendreTypeQuizAssocie($idQuestion)
 function creerInputReponse($typeInput, $nomDuGroupe, $valeur, $textAffiche, $isChecked)
 {
     $isChecked? $checked = "checked":$checked="";
-    echo "<li><input type='".$typeInput."' name=".$nomDuGroupe." value=".$valeur." ".$checked."><div class='reponsesQuestion' contenteditable='true'>".$textAffiche."</div></li>";
+    echo "<li><input type='".$typeInput."' name=".$nomDuGroupe." value=".$valeur." ".$checked."><textarea class='reponsesQuestion' rows='1' placeholder='Entrer une réponse ici...'>".$textAffiche."</textarea></li>";
 }
 
 function creerInputGenerique($typeInput, $nomDuGroupe,$valeur,$textAffiche)
