@@ -1,16 +1,17 @@
 <?php
 // Nom: remplirListeQuestions
-// Par: Mathieu Dumoulin
+// Par: Mathieu Dumoulin, modifié par Isabelle ANgrignon, ajouté filtreEnoncé
 // Intrants: $idCours = identifiant du cours en question.
 //           $idProprietaire = identifiant du professeur en question
 //           $triage = le type de triage à effectuer
+//           $
 // Extrants: Le résultat de la procédure, sous forme de JSON
 // Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestions() et envoie la réponse à la fonction javascript traiterJSONQuestions
-function remplirListeQuestions($idCours, $idProprietaire, $triage = 'default')
+function remplirListeQuestions($idCours, $idProprietaire, $triage = 'default', $filtreEnonce = "")
 {
     if($triage == 'default')
     {
-        $resultatTriage = trieParDefaultQuestions($idCours, $idProprietaire);
+        $resultatTriage = trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce);
     }
     echo "<script>traiterJSONQuestions(" . $resultatTriage .", 'UlQuestion');</script>";
 }

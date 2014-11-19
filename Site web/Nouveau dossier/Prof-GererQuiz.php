@@ -77,8 +77,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     var idQuiz = $(ui.item).attr("id");
                     var idCours = $("#DDL_Cours option:selected").attr("value");
                     var typeQuiz = $(ui.item).children("div .divProfDansLi").text();
-                    updateUlModifQuiz("selonQuiz", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, idQuiz);
-                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz);
+                    var filtreEnonce = "q";///////////todo modif en cours....
+                    updateUlModifQuiz("selonQuiz", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, idQuiz, filtreEnonce);
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz, filtreEnonce);
                 },
                 remove: function (event, ui) {
                     $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");

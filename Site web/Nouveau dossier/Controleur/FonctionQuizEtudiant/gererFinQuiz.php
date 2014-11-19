@@ -1,23 +1,21 @@
 <?php
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// todo remplacer commentaires
+//
 //  gererFinQuiz.php
 //  Fait par : Isabelle Angrignon
 //  Commenté le : 18/11/2014
 //
 //  But : 1- S'occupe de retourner un string formaté pour afficher le score final
-//        2- Met à jour les stats si le typr dr quiz le demande (Formatif pour l'instant)
-//        3- Vide les variables de session reliées au quiz
-//
+//        2- Met à jour les stats si le type de quiz le demande (Formatif seulement pour l'instant)
+//        3- Vide les variables de session reliées au quiz//
 //
 //  POST:  aucun
 //
 //  Session :  'bonnesReponses' = int
 //              'questionsRepondues' =  int
-//
 //              'typeQuiz' = ALEATOIRE ou FORMATIF
 //
-//  Sortie :  int 1|0 selon qu'on a obtenu une liste de questions pour ce quiz
+//  Sortie :  aucun
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 include("..//Utilitaires.php");
