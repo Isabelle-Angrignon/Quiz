@@ -32,7 +32,7 @@ redirigerSiNonConnecte('Etudiant');
 $idQuiz = $_POST['idQuiz'];
 $ordeQuestionsEstAleatoire = $_POST['ordreQuestionsEstAleatoire'];
 
-//devra fair un switch case selon le type de quiz...
+
 $Liste = genererQuestionsQuiz($idQuiz);
 
 if (isset($Liste) && !empty($Liste) && isset($ordeQuestionsEstAleatoire))
