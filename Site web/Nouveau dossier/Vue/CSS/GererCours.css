@@ -135,7 +135,16 @@ fieldset {
     width:45%;
     float: right;
 }
-#BTN_GestionGoupe{
+.BTN_Holder{
     display: inline-block;
     width: 100%;
+}
+
+#BTN_Eleve{
+    width:45%;
+    float: left;
+}
+#BTN_EleveReinitialiser{
+    width:45%;
+    float: right;
 }
