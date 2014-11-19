@@ -38,6 +38,37 @@ function addClickEventToQuiz() {
     });
 }
 
+function addEventsToReponses() {
+    $(".reponsesQuestion").off("focusin").off("focusout");
+    $(".reponsesQuestion").focusin(function() {
+        $(this).addClass("Reponsefocused");
+    }).focusout(function(event) {
+        if($(event.relatedTarget).attr("id") != "BTN_SupprimerReponse") {
+            $(this).removeClass("Reponsefocused");
+        }
+    });
+
+    $(".reponsesQuestion").off("keydown");
+    $(".reponsesQuestion").keydown(function(e) {
+        // Si c'est shift+enter qui est appuyer
+        if(e.shiftKey == true ) {
+
+            if(e.which == 13) {
+                $("#BTN_AjouterReponse").click();
+                e.preventDefault();
+            }
+            else if(e.which == 46) {
+                $("#BTN_SupprimerReponse").click();
+                e.preventDefault();
+            }
+        }
+        else if(e.ctrlKey == true && e.which != 17) {
+            alert(e.which);
+        }
+    });
+
+}
+
 function updateAutoSizeTextArea() {
     $('textarea').each(function () {
         h(this);
@@ -52,6 +83,7 @@ function ajouterReponsesViaJSON(json) {
         $("#Ul_Reponses li:last-child").children("input[type=text]").attr("value", json.reponses[i].idReponse);
         $("#Ul_Reponses li:last-child").children(".reponsesQuestion").val(json.reponses[i].enonce);
     }
+    addEventsToReponses();
 }
 
 function traiterJSONQuestions(resultat, idParent) {
@@ -286,7 +318,7 @@ function reponsesSontValides() {
     var uneBonneReponse = false;
     $("#Ul_Reponses li").each(function() {
         // Si j'ai une réponse qui est vide, mes réponses ne sont pas valides.
-        if($(this).children(".reponsesQuestion").text().trim() == "")  {
+        if($(this).children(".reponsesQuestion").val().trim() == "")  {
             reponsesSontNonVides = false;
         }
         // Si j'ai au moins une réponse qui est Vrai
@@ -317,21 +349,15 @@ function ajouterNouvelleReponse(estBonneReponse) {
         success: function(resultat) {
             $("#Ul_Reponses").append(resultat);
             updateAutoSizeTextArea();
-
-            // Toggle la classe qui permet de supprimer une réponse.
-            $(".reponsesQuestion").focusin(function() {
-                $(this).addClass("Reponsefocused");
-            }).focusout(function(event) {
-                if($(event.relatedTarget).attr("id") != "BTN_SupprimerReponse") {
-                    $(this).removeClass("Reponsefocused");
-                }
-            });
+            addEventsToReponses();
+            $("#Ul_Reponses li:last-child").children(".reponsesQuestion").focus();
 
         }
     });
 }
 
 function supprimerReponseCourante() {
+    var aRetirerClasseReponsefocused = false;
     if($("#Ul_Reponses").children("li").length == 1) {
         swal("Oups", "Vous ne pouvez pas avoir de question sans aucune réponse", "error");
     }
@@ -339,11 +365,27 @@ function supprimerReponseCourante() {
         swal("Oups", "Veuillez sélectionner une réponse pour la supprimer.", "warning");
     }
     else {
+        var indexReponseCourrante = $(".Reponsefocused").parent("li").index();
+
+        var indexNouveauFocus = indexReponseCourrante;
+        // Ici == corresponderait au dernier élément de la liste. >= juste pour assurer et prévenir les bugs.
+        if(indexNouveauFocus >=  $("#Ul_Reponses").children("li").length - 1) {
+            --indexNouveauFocus;
+        }
+
         // .remove() gère automatiquement de supprimer la classe de l'élément (en supprimant l'élément)
         $(".Reponsefocused").parent().remove();
+        // Empêche la suppression de la classe Reponsefocused du nouvel élément focus.
+        aSupprimerClasseReponsefocused = true
+
+
+        $("#Ul_Reponses").children("li:nth-child(" + (indexNouveauFocus+1) + ")").children(".reponsesQuestion").focus();
     }
-    // Si l'élément a déjà été supprimé, le sélecteur ne va correspondre à aucun élément et cette commande ne va pas être éxécutée.
-    $(".Reponsefocused").removeClass("Reponsefocused");
+    if(!aSupprimerClasseReponsefocused)  {
+        // Si l'élément a déjà été supprimé, le sélecteur ne va correspondre à aucun élément et cette commande ne va pas être éxécutée.
+        $(".Reponsefocused").removeClass("Reponsefocused");
+    }
+
 
 }
 
@@ -556,7 +598,8 @@ function getJSONEnonceQuestion(idCreateur, idQuestion ) {
     // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
     enonce = enonce.replace(/[\"]/g, '\\"');
     enonce = enonce.trim();
-    var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"' + idCreateur + '"';
+    var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"' + idCreateur + '", "lienWeb":"'
+                       + $("#conteneurLienWeb input[type=text]").val() + '", "ordreReponsesAleatoire":"' + !$("#ordreReponsesQuestion").prop("checked") + '"';
     if(idQuestion != null) {
         jsonQuestion +=', "idQuestion":"'+ idQuestion+'"';
     }
@@ -566,9 +609,10 @@ function getJSONEnonceQuestion(idCreateur, idQuestion ) {
     return jsonQuestion;
 }
 
-function ajouterQuestion(idCreateur) {
+function ajouterQuestion(idCreateur, continuer) {
     if( reponsesSontValides()) {
         var jsonQuestion = getJSONEnonceQuestion(idCreateur);
+
 
         var jsonReponses = jsonifierReponsesQuestionCourante();
 
@@ -592,7 +636,14 @@ function ajouterQuestion(idCreateur) {
                     swal("Erreur !", resultat, "error");
                 }
                 else {
-                    $(".dFondOmbrage").detach();
+                    if(continuer == null) {
+                        $(".dFondOmbrage").detach();
+                    }
+                    else {
+                        viderHTMLfromElement("popupPrincipal");
+                        insererHTMLfromPHP("popupPrincipal", "Vue/dynamique-GererQuestion.php");
+                    }
+
                     var cours = $("#DDL_Cours option:selected").attr("value");
 
                     // Gestion de l'affichage des questions dans les listes

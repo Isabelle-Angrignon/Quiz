@@ -114,10 +114,11 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
 
 
         isset($tableauTypeQuizAssocie)? $estDiponible = 1: $estDiponible = 0;
+        $ordreReponsesTINYINT = convertStringBooleanToTINYINT($tableauDeQuestion['ordreReponsesAleatoire']);
         // Ajouter la question dans la base de données
         $idQuestion = ajouterQuestion($bdd, $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
-                    /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
-                    $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null, $estDiponible);
+                    /*$tableauDeQuestion['difficulte']*/ "1- Facile",$ordreReponsesTINYINT ,
+                    $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], $tableauDeQuestion['lienWeb'], $estDiponible);
 
 
         // Ajouter les réponses de cette question dans la base de données
@@ -190,9 +191,11 @@ function modifierUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours
 
         // Modifier la question dans la base de données
         isset($tableauTypeQuizAssocie)? $estDiponible = 1: $estDiponible = 0;
+        $ordreReponsesTINYINT = convertStringBooleanToTINYINT($tableauDeQuestion['ordreReponsesAleatoire']);
+
         modifierQuestion($bdd, $tableauDeQuestion['idQuestion'], $tableauDeQuestion['enonceQuestion'], /*$tableauDeQuestion['imageQuestion']*/ null,
-           /*$tableauDeQuestion['difficulte']*/ "1- Facile", /*$tableauDeQuestion['ordreReponsesAleatoire']*/ 0,
-           $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], /*$tableauDeQuestion['referenceWeb']*/ null, $estDiponible);
+           /*$tableauDeQuestion['difficulte']*/ "1- Facile", $ordreReponsesTINYINT,
+           $typeQuestion, $tableauDeQuestion['idUsager_Proprietaire'], $tableauDeQuestion['lienWeb'], $estDiponible);
 
         // Ajouter les réponses de cette question dans la base de données
         modifierReponses($bdd, $tableauReponses, $tableauDeQuestion['idQuestion'], $typeQuestion);

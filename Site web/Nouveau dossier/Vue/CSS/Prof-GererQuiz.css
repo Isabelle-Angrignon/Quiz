@@ -80,11 +80,13 @@ textarea.Reponsefocused{
 }
 
 #BTN_SupprimerReponse {
-    float:right;
+    vertical-align: top;
+    margin-left:5px;
 }
 
 #BTN_AjouterReponse {
-    vertical-align: top;
+    float:right;
+    margin-right:15px;
 }
 
 #AjouterQuestion, #ajouterQuiz {
@@ -138,6 +140,7 @@ textarea.Reponsefocused{
 #QuestionConteneur {
     display:inline-block;
     width:50%;
+    margin-left: 2%;
 }
 
 #EnonceQuestion {
@@ -156,16 +159,34 @@ textarea.Reponsefocused{
     resize:none;
 }
 
-/* Change la couleur du placeholder du titre d'un quiz lors de sa modification ou sa création. */
-::-webkit-input-placeholder{
-    color: rgb(255,255,255);
-}
-
-::-moz-placeholder {
+/* Change la couleur du placeholder */
+#titreQuiz::-webkit-input-placeholder, #EnonceQuestion::-webkit-input-placeholder {
     color: rgb(255,255,255);
 }
 
 
+#titreQuiz::-moz-placeholder,#EnonceQuestion::-moz-placeholder {
+    color: rgb(255,255,255);
+}
+
+.reponsesQuestion::-webkit-input-placeholder, #conteneurLienWeb input[type=text]::-webkit-input-placeholder {
+    color: rgb(140, 138, 137);
+}
+
+
+.reponsesQuestion::-moz-placeholder,#conteneurLienWeb input[type=text]::-moz-placeholder {
+    color: rgb(140, 138, 137);
+}
+
+
+#titreReponses, #lienWebQuestion {
+    width:100%;
+    text-align:center;
+}
+
+#titreReponses h2 {
+    margin:0;
+}
 
 #reponseConteneur {
     background-color:rgba(125, 171, 211, 1);
@@ -189,6 +210,7 @@ textarea.Reponsefocused{
 }
 .dDivPrincipale {
     padding:10px;
+    margin-top:5%;
 }
 
 .reponsesQuestion {
@@ -206,6 +228,26 @@ textarea.Reponsefocused{
 #Ul_Reponses {
     list-style: none;
     padding-left:0;
+}
+
+#conteneurLienWeb {
+    width:100%;
+    padding:10px;
+    background-color:rgba(125, 171, 211, 1);
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border:1px solid black;
+    border-radius:10px;
+    margin-top:20px;
+}
+
+#lienWebQuestion h2 {
+    margin:0;
+}
+
+#conteneurLienWeb input[type=text] {
+    width: 100%;
+    font-family:inherit;
+    font-size:14px;
 }
 
 #parametresQuestion {
@@ -234,15 +276,64 @@ textarea.Reponsefocused{
     cursor:default;
 }
 
-#ActionQuestion {
-    width:100%;
-    text-align:right;
-}
-#BTN_ConfirmerQuestion {
+#identifiantQuestion {
+    padding:10px;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border:1px solid black;
+    border-radius:10px;
+    font-weight:normal;
+    width: 300px;
+    margin-right:25px;
+    margin-top:-45px;
+    float:right;
+    text-align:center;
 }
 
-#BTN_SupprimerQuestion {
-    margin-right:20px;
+
+#ordreReponsesQuestion+label {
+    float: right;
+    margin-top: -35px;
+    margin-right: 15px;
+    width: 120px;
+}
+
+
+#ActionQuestion {
+    width:97.5%;
+    text-align:right;
+    margin-top:50px;
+    margin-bottom:20px;
+}
+
+#BTN_ConfirmerQuestion {
+    width:20%;
+}
+
+#BTN_ContinuerAjout {
+    margin-left:20px;
+}
+
+#BTN_SupprimerQuestion{
+    margin-left:20px;
+    background:#E66100;
+    float:left;
+}
+
+#BTN_SupprimerQuestion:hover{
+    background: rgba(236, 99, 0, 0.70);
+    border:solid black 1px;
+}
+
+.BTN_SousBouton {
+    background-color: white;
+    border:solid black 2px;
+    border-radius:5px;
+    font-size:16px;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+}
+
+.BTN_SousBouton:hover {
+    background-color:#E4E4E4;
 }
 
 /* --------------------- Div Dynamique pour GererQuiz ----------------------- */
@@ -302,3 +393,4 @@ textarea.Reponsefocused{
 #disponibiliteQuiz + label {
     width:50%;
 }
+

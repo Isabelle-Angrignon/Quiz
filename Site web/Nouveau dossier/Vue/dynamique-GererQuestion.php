@@ -29,6 +29,8 @@
         $maQuestion = getQuestion($_SESSION["idQuestion"]);
         $enonceQuestion = $maQuestion[0]["enonceQuestion"];
         $typeQuestion = $maQuestion[0]["typeQuestion"];
+        $referenceWeb = $maQuestion[0]["referenceWeb"];
+        $ordreReponsesAleatoire = $maQuestion[0]["ordreReponsesAleatoire"];
     }
 
 ?>
@@ -41,19 +43,21 @@
             return;
         }
         $(this).sortable( "option", "disabled", true );
-        // Ici j'utilise l'event focusout car, contrairement à ce que blur fait, focusout est déclanché
-        // lorsque l'élément en question perd son focus sur un de ses enfants
+        $(this).sortable("option", "cancel", ".fixed");
+    // Ici j'utilise l'event focusout car, contrairement à l'event blur, focusout est déclanché
+    // lorsque l'élément en question perd son focus sur un de ses enfants
     }).focusout(function(){
         $(this).sortable( 'option', 'disabled', false);
+        $(this).sortable("option", "cancel", "");
     });
 
-    $(".reponsesQuestion").focusin(function() {
-        $(this).addClass("Reponsefocused");
-    }).focusout(function(event) {
-        if($(event.relatedTarget).attr("id") != "BTN_SupprimerReponse") {
-            $(this).removeClass("Reponsefocused");
-        }
+    $("#EnonceQuestion").focusin(function() {
+        $(this).css("background-color", "rgba(236, 99, 0, 0.62)");
+    }).focusout(function() {
+        $(this).css("background-color", "#E66100");
     });
+
+    addEventsToReponses();
 
 
     $("#parametresQuestion").accordion({
@@ -102,15 +106,42 @@
     updateAutoSizeTextArea();
     // ----------------------------------------------------------------- //
 
+
     $("#BTN_ConfirmerQuestion").button();
     $("#BTN_SupprimerQuestion").button();
+    $("#BTN_ContinuerAjout").button();
+
+    $("#ordreReponsesQuestion").button().change(function() {
+        if($(this).prop("checked") == true) {
+            $(this).next("label").children("span").text("Fixe");
+        }
+        else {
+            $(this).next("label").children("span").text("Aléatoire");
+        }
+    });
+
+    $("#ordreReponsesQuestion+label").disableSelection();
 
 </script>
 <div id="QuestionConteneur">
     <textarea id="EnonceQuestion" rows='1' placeholder="Entrer un énoncé ici..."><?php echo isset($enonceQuestion)?$enonceQuestion:""; ?></textarea>
     <div id="reponseConteneur">
-        <ul id="Ul_Reponses">
 
+        <span id="titreReponses">
+            <h2>Réponses</h2>
+            <input type="checkbox" id="ordreReponsesQuestion"
+            <?php if($_SESSION['etat'] == "modifierQuestion" && $ordreReponsesAleatoire == 1)
+            {
+                echo "><label for='ordreReponsesQuestion'>Aléatoire</label>";
+            }
+            else
+            {
+                echo "checked><label for='ordreReponsesQuestion'>Fixe</label>";
+            }
+            ?>
+        </span>
+        <hr/>
+        <ul id="Ul_Reponses">
         <?php
         if($_SESSION["etat"] == "modifierQuestion")
         {
@@ -122,8 +153,19 @@
         }
         ?>
         </ul>
-        <input type="button" id="BTN_AjouterReponse" onclick="ajouterNouvelleReponse()"  value="Ajouter une réponse">
-        <input type="button" id="BTN_SupprimerReponse" onclick="supprimerReponseCourante()" value="Supprimer une réponse">
+        <input type="button" id="BTN_AjouterReponse"  class="BTN_SousBouton" onclick="ajouterNouvelleReponse()"  value="Ajouter une réponse">
+        <input type="button" id="BTN_SupprimerReponse" class="BTN_SousBouton" onclick="supprimerReponseCourante()" value="Supprimer une réponse">
+    </div>
+    <div id="conteneurLienWeb">
+        <span id="lienWebQuestion"><h2>Lien web</h2><hr/></span>
+        <input type="text" name="lienWeb" placeholder="Sera visible aux élèves s'ils ont une mauvaise réponse à cette question."
+            <?php
+                if($_SESSION["etat"] == "modifierQuestion")
+                {
+                    echo 'value="'. $referenceWeb .'"';
+                }
+            ?>
+            >
     </div>
 </div>
 <div id="parametresQuestion">
@@ -172,6 +214,7 @@
         </ul>
     </div>
 </div>
+<?php if(isset($_SESSION['idQuestion']) && $_SESSION["etat"] == "modifierQuestion") { echo "<div id='identifiantQuestion'> Id : " . $_SESSION['idQuestion'] . "</div>"; }?>
 <div id="ActionQuestion">
     <input type="button" id="BTN_ConfirmerQuestion" value=
     <?php
@@ -180,14 +223,14 @@
             $UsagerCourrant = $_SESSION['idUsager'];
             $idQuestion = $_SESSION['idQuestion'];
             isset($_SESSION['idProprietaire']) ? $Proprietaire = $_SESSION['idProprietaire'] : $Proprietaire = "";
-            echo "Modifier onclick='modifierQuestion(\"".$UsagerCourrant."\",\"". $idQuestion."\", \"". $Proprietaire ."\")'";
+            echo "Modifier onclick='modifierQuestion(\"".$UsagerCourrant."\",\"". $idQuestion."\", \"". $Proprietaire ."\")'>";
         }
         elseif( $_SESSION["etat"] == "nouvelleQuestion")
         {
-            echo "Ajouter onclick='ajouterQuestion(\"".$_SESSION['idUsager']."\")'";
+            echo "Ajouter onclick='ajouterQuestion(\"".$_SESSION['idUsager']."\")'>";
+            echo "<input type='button' id='BTN_ContinuerAjout' value='Ajouter et continuer' onclick='ajouterQuestion(\"".$_SESSION['idUsager']."\", \"continuer\")'>";
         }
     ?>
-    >
     <input type="button" id="BTN_SupprimerQuestion" value=
     <?php
         if($_SESSION["etat"] == "modifierQuestion")

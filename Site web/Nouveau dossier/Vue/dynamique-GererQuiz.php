@@ -100,15 +100,15 @@
     <div tabindex="2">
         <ul>
             <input type="checkbox" id="ordreQuestionQuiz"
-                <?php if($_SESSION['etat'] == "modifierQuiz" && $ordreQuestionsAleatoire == 0)
-                {
-                    echo "checked><label for='ordreQuestionQuiz'>Fixe</label>";
-                }
-                else
-                {
-                    echo "><label for='ordreQuestionQuiz'>Aléatoire</label>";
-                }
-                ?>
+            <?php if($_SESSION['etat'] == "modifierQuiz" && $ordreQuestionsAleatoire == 0)
+            {
+                echo "checked><label for='ordreQuestionQuiz'>Fixe</label>";
+            }
+            else
+            {
+                echo "><label for='ordreQuestionQuiz'>Aléatoire</label>";
+            }
+            ?>
         </ul>
     </div>
     <h3>Disponibilité</h3>
