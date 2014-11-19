@@ -188,6 +188,13 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP) {
 	document.body.appendChild(fondOmbrage);
 	fondOmbrage.appendChild(divPrincipale);
 
+    $(document).keydown(function(e) {
+        if(e.which == 27) {
+            $("#dFondOmbrage").remove();
+            $(document).off("keydown");
+        }
+    });
+
     if(pathFichierPHP != null) {
         insererHTMLfromPHP(idDivPrincipal, pathFichierPHP);
     }

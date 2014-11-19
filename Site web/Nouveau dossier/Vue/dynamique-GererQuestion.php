@@ -54,7 +54,7 @@
     $("#EnonceQuestion").focusin(function() {
         $(this).css("background-color", "rgba(255, 255, 255, 0.62)");
     }).focusout(function() {
-        $(this).css("background-color", "#E66100");
+        $(this).css("background-color", "inherit");
     });
 
     addEventsToReponses();
@@ -104,6 +104,20 @@
         $(e).css({'height':'auto'}).height(e.scrollHeight);
     }
     updateAutoSizeTextArea();
+    // Ajoute la gestion des hotkeys sur le div dynamique.
+    $(document).keydown(function(e) {
+        if(e.ctrlKey == true) {
+            // e.which == s
+            if(e.which == 83) {
+                setTimeout(function() {
+                    $("#BTN_ConfirmerQuestion").click();
+                }, 0);
+                $(document).off("keydown");
+                e.preventDefault();
+            }
+        }
+    });
+
     // ----------------------------------------------------------------- //
 
 
