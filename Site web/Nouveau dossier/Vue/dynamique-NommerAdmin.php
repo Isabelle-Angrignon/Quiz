@@ -23,7 +23,7 @@
     $('#soumettre').click(function(){
         if($('#TB_DA').val().length != 0 && $('#TB_DA').val().length <= 10 && $('#TB_DA').val()[0] == "4") {
 
-           ChercherUsagerAjax($('#TB_DA').val(),nommerAdminAjax);
+           ChercherUsagerAjax($('#TB_DA').val(),nommerAdminAjax," dont vous souhaitez rendre administrateur ?");
 
         }
         else{

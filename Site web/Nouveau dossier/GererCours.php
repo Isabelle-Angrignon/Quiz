@@ -138,6 +138,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
      $( "#BTN_Eleve" ).click(function() {
          creeFrameDynamique('divDynamique','Vue/dynamique-CreerEtudiants.php');
      });
+     $('#UlEtudiants').children().dblclick(function(){
+        ChercherUsagerAjax($(this).attr("id"),reinitialiserMotDePasse," sur qui vous voulez réinitialiser le mot de passe ?");
+     });
  </script>
 
 </body>

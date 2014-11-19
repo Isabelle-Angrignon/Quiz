@@ -8,11 +8,14 @@
 $(function() {
     // Ce bout de code sert à "resize" le menu selon le nombre d'enfant (de balise <a> ) qu'il contient
     $("nav").ready(function() {
-        var nbElement = $("nav a").length;
-        var format = 100/nbElement;
-        $("nav a").each( function() {
-            $(this).width(format + "%");
+        $("nav").each(function() {
+            var nbElement = $(this).children("a").length;
+            var format = 100/nbElement;
+            $(this).children("a").each( function() {
+                $(this).width(format + "%");
+            });
         });
+
     });
 });
 // Nom : ajouterOption_ToSelect
@@ -280,7 +283,7 @@ function viderHTMLfromElement(idElement) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function ChercherUsagerAjax(idUsager , functionOnTrue) {
+function ChercherUsagerAjax(idUsager , functionOnTrue, texte) {
         $.ajax({
             type: 'POST',
             url: "Controleur/ChercherUsager.php",
@@ -289,7 +292,7 @@ function ChercherUsagerAjax(idUsager , functionOnTrue) {
             success: function(resultat) {
                 if(!resultat.hasOwnProperty('echec') ) {
                     swal({   title: "Êtes-vous sur?",
-                        text: "Est-ce bien "+resultat.prenom + " " + resultat.nom +" sur qui vous voulez entreprendre cette action ?",
+                        text: "Est-ce bien "+resultat.prenom + " " + resultat.nom + texte,
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#DD6B55",
@@ -317,6 +320,35 @@ function ListerStatsAjax() {
         dataType: "text",
         success: function(resultat) {
             alert(resultat);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+// reintialiserMotDePasse
+// Fait par : Simon Bouchard
+// Commencer le : 12/11/2014
+// Cette fonction est un appel ajax permettant de réinitialiser un mot de passe
+// Fichier appelé :RéinitialiserMotDePasse.php
+// Réaction : Affiche un swal qui indique la réussite ou l'échec de l'opération
+// Intrant : Le numéro de DA de l'usager dont le mot de passe doit être réinitialiser
+function reinitialiserMotDePasse(numeroDA) {
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/ReinitialiserMotDePasse.php",
+        data: {"numeroDA" :numeroDA},
+        dataType: "text",
+        success: function(resultat) {
+            if (resultat == 0) {
+                swal({   title: "Erreur!",   text: "Le mot de passe est déjà le mot de passe par défaut",   type: "error"});
+                $("#TB_DA").val("");
+            }
+            else if (resultat == 1)
+            {
+                swal({   title: "Opération réussie!",   text: "Reinitialisation de mot de passe réussi",   type: "success"});
+            }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);

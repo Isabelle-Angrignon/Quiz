@@ -35,6 +35,7 @@ include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
             <li id="supprimerCompte" class="ui-state-default padding">Supprimer un compte</li>
             <li id="nommerAdmin" class="ui-state-default padding ">Nommer un nouvel administateur</li>
             <li id="modifierCours" class="ui-state-default padding ">Modifier un cours</li>
+            <li id="info" class="ui-state-default padding ">Information</li>
         </ul>
 
     </div>
@@ -59,6 +60,9 @@ include("Vue/Template/MenuProf.php");   // ou MenuEtudiant.php
     });
     $('#nommerAdmin').click(function(){
         CreerDeploiement('Vue/dynamique-NommerAdmin.php');
+    });
+    $('#info').click(function(){
+        CreerDeploiement('Vue/dynamique-InfoAdmin.php');
     });
 
 </script>
