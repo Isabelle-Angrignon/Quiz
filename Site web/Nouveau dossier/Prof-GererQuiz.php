@@ -132,11 +132,17 @@ Description: Cette interface représente l'interface principale d'un professeur 
 ?>
 
 <div class="contenu">
-    <fieldset><select id="DDL_Cours">
+    <div id="SectionFiltre">
+        <fieldset>
+    <select id="DDL_Cours">
             <?php
             ListerCoursDansSelect("DDL_Cours", false);
             ?>
-        </select></fieldset>
+        </select>
+        <input type="text" id="TB_Filtre">
+        <input type="button" id="BTN_Filtre" value="Filtrer">
+        </fieldset>
+    </div>
     <div id="LBL_ListesGererQuiz">
         <label id="GererQuiz" for="ListeQuiz">Mes quiz</label>
         <label id="ModifierQuiz" for="ListeModifQuiz">Modifier un quiz ici</label>
