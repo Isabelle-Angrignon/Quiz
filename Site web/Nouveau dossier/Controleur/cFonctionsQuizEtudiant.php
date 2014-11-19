@@ -1,4 +1,17 @@
 <?php
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  cFonctionsQuizEtudiant.php
+//  Fait par : Isabelle Angrignon
+//  Commenté le : 18/11/2014
+//
+//  Contenu : Définitions de différentes fonctions "contrôleur" appelées par des pages php.  Elles sont toutes reliées à la page
+//        "Etudiant-Accueil.php", son divDynamique "dynamique-RepondreQuestion.php" ou toute autre page découlant de celles-ci.
+//         Elles sont donc toutes liées à la génération de listes de quiz pour un étudiant, ou la génération d'un quiz
+//         et la gestion de ses réponses.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /*
     Nom: ListerQuizDansUl
@@ -7,8 +20,6 @@
     Description: Cette fonction génère autant de balise "li" qu'il y a de quiz à afficher
     Pour un type donnée, selon le cours et l'étudiant
 */
-
-
 function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz, $classe)
 {
     if ($idCours == 0)
@@ -59,7 +70,6 @@ function genererChoixDeReponses($idQuestion, $typeQuestion, $ordreReponse)
     Date: 08/10/2014
     Description: Cette fonction structure l'affichage des réponses de type vrai ou faux.
 */
-
 function genererReponsesVF($idQuestion)
 {
     $listeReponses = recupererReponsesVraiFaux($idQuestion);
@@ -76,6 +86,8 @@ function genererReponsesVF($idQuestion)
     GenererLiSelectReponse('UlChoixReponse', 'Vrai', '1' );
     GenererLiSelectReponse('UlChoixReponse', 'Faux', '0' );
 }
+
+
 function genererReponsesCMU($idQuestion, $ordreReponse)
 {
     //appeler une méthode qui récupère la liste des questions de la bd
