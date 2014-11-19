@@ -68,11 +68,13 @@ function trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce)
 // Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestionsSelonQuiz()
 function listerQuestionsDunQuiz($idQuiz, $idProprietaire, $filtreEnonce)
 {
+    $filtreEnonce = '%'.$filtreEnonce.'%';
     $bdd = connecterProf();
-    $requete = $bdd->prepare("CALL listerQuestionsSelonQuiz(?,?)");
+    $requete = $bdd->prepare("CALL listerQuestionsSelonQuiz(?,?,?)");
 
     $requete->bindParam(1, $idQuiz, PDO::PARAM_INT);
     $requete->bindParam(2, $idProprietaire, PDO::PARAM_STR, 10);
+    $requete->bindParam(3, $filtreEnonce, PDO::PARAM_STR, 32);
 
     $requete->execute();
     $resultat = $requete->fetchAll();
@@ -91,13 +93,15 @@ function listerQuestionsDunQuiz($idQuiz, $idProprietaire, $filtreEnonce)
 // Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestionsSelonQuiz()
 function listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours, $typeQuiz, $filtreEnonce)
 {
+    $filtreEnonce = '%'.$filtreEnonce.'%';
     $bdd = connecterProf();
-    $requete = $bdd->prepare("CALL listerQuestionsPasDansQuiz(?,?,?,?)");
+    $requete = $bdd->prepare("CALL listerQuestionsPasDansQuiz(?,?,?,?,?)");
 
     $requete->bindParam(1, $idQuiz, PDO::PARAM_INT);
     $requete->bindParam(2, $idProprietaire, PDO::PARAM_STR, 10);
     $requete->bindParam(3, $idCours, PDO::PARAM_INT);
     $requete->bindParam(4, $typeQuiz, PDO::PARAM_STR,20);
+    $requete->bindParam(5, $filtreEnonce, PDO::PARAM_STR, 32);
 
     $requete->execute();
     $resultat = $requete->fetchAll();
