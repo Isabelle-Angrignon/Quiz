@@ -23,7 +23,7 @@
 include("..//Utilitaires.php");
 include("..//..//Modele/ModeleUtilisateurs.php");
 include("..//..//Modele/ModeleUsagers.php");
-
+include("..//cFonctionsQuizEtudiant.php");
 include("..//..//Modele/ModeleStatistiques.php");
 demarrerSession();
 redirigerSiNonConnecte('Etudiant');

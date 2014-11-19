@@ -151,7 +151,7 @@ function resetVarSessionQuiz()
     unset($_SESSION['infoQuestion'] );
     unset($_SESSION['idQuestion'] );
     unset($_SESSION['listeQuestionRepondues']);
-    unset($_SESSION['bienRepondu']);
+    unset($_SESSION['listeResultats']);
 
     $_SESSION['questionsRepondues'] = 0;
     $_SESSION['bonnesReponses'] = 0;
@@ -190,13 +190,13 @@ function gererReponse($estBonneReponse)
 function updateReponseQuestionSession($estBonneReponse)
 {
     $reponse['resultat'] = $estBonneReponse;
-    if (!isset($_SESSION['bienRepondu']))
+    if (!isset($_SESSION['listeResultats']))
     {
-        $_SESSION['bienRepondu'][0] = $estBonneReponse;
+        $_SESSION['listeResultats'][0] = $estBonneReponse;
     }
     else
     {
-        array_unshift($_SESSION['bienRepondu'] ,$estBonneReponse );
+        array_unshift($_SESSION['listeResultats'] ,$estBonneReponse );
     }
 }
 
@@ -247,4 +247,40 @@ function getNomProfDuCoursDeLEtudiant()
     return $nomProf;
 }
 
+/*
+    Nom: miseAJourStatsQuiz
+    Par: Isabelle Angrignon
+    Date: octobre ou novembre 2014
+    Description: Récupère les questions et leur réponses et met les stats a jour pour chaque question
+*/
+function miseAJourStatsQuiz()
+{
+    $idQuiz = $_SESSION['idQuiz'];
+    $idEtudiant = $_SESSION['idUsager'];
+
+    if (isset($_SESSION['listeQuestionRepondues']) AND isset($_SESSION['listeResultats']) )
+    {
+        $listeQuestions = $_SESSION['listeQuestionRepondues'];
+        $listeResultats =  $_SESSION['listeResultats'];
+
+        //S'assurer qu'on abien compilé toutes les réponses à toutes les questions
+        if(count($listeQuestions) == count($listeResultats))
+        {
+            //passer chaque élément de quaque liste dans la miseAJourStats
+            while (count($listeQuestions) >= 1)
+            {
+                $question = array_shift($listeQuestions);
+                $resultat = array_shift($listeResultats);
+                miseAJourStatsQuestion($idEtudiant, $question, $idQuiz, $resultat );
+            }
+        }
+        else
+        {
+            echo "oups, problème à la compilation des statistiques...";
+        }
+    }
+    else{
+        echo "Pas de questions répondues";
+    }
+}
 ?>
