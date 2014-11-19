@@ -3,7 +3,7 @@
 
 
 
-    <p class="titre">Réinitialisation d'un compte</p>
+    <p class="titre">Réinitialisation d'un Étudiant</p>
     <hr>
     <div class="conteneur" >
         <div class="gauche">
@@ -21,7 +21,7 @@
 <script>
     $('#soumettre').button();
     $('#soumettre').click(function(){
-        if($('#TB_DA').val().length != 0 && $('#TB_DA').val().length <= 10) {
+        if($('#TB_DA').val().length != 0 && $('#TB_DA').val().length <= 10 && $('#TB_DA').val()[0] != '4') {
 
             ChercherUsagerAjax($('#TB_DA').val(),reinitialiserMotDePasse, " sur qui vous voulez réinitialiser le mot de passe ?");
 

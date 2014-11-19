@@ -58,6 +58,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                   remplirUIEtudiantCoursAjax($(ui.item).attr('id'));
                   $('#BTN_GestionGoupe').show();
                   $('#BTN_Cours').hide();
+                  AjouterClickEventSurEtudiant();
 
               },
               remove: function (event, ui) {
@@ -68,6 +69,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                   ListerEtudiantAjax();
                   $('#BTN_GestionGoupe').hide();
                   $('#BTN_Cours').show();
+                  AjouterClickEventSurEtudiant();
               }
 
           });
@@ -105,7 +107,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 			<ul id="UlModifGroupe">
 
 			</ul>
-            <div id="BTN_GestionGoupe">
+            <div id="BTN_GestionGoupe" class="btn_holder">
                 <div id="BTN_CSV"class="ListeDivElementStyle BoutonDiv">CSV</div>
                 <div id="BTN_Vider"class="ListeDivElementStyle BoutonDiv">Vider</div>
             </div>
@@ -114,7 +116,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
 			<ul id="UlEtudiants">
             <?php InsererEleves(); ?>
 			</ul>
-			<div id="BTN_Eleve" class="ListeDivElementStyle BoutonDiv">Ajouter un étudiant</div>
+            <div class="BTN_Holder">
+			    <div id="BTN_Eleve" class="ListeDivElementStyle BoutonDiv">Ajouter</div>
+                <div id="BTN_EleveReinitialiser" class="ListeDivElementStyle BoutonDiv">Reinit. MDP</div>
+            </div>
 		</div>
 	</div>
 	
@@ -138,9 +143,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
      $( "#BTN_Eleve" ).click(function() {
          creeFrameDynamique('divDynamique','Vue/dynamique-CreerEtudiants.php');
      });
-     $('#UlEtudiants').children().dblclick(function(){
-        ChercherUsagerAjax($(this).attr("id"),reinitialiserMotDePasse," sur qui vous voulez réinitialiser le mot de passe ?");
+     $( "#BTN_EleveReinitialiser" ).click(function() {
+         creeFrameDynamique('divDynamique','Vue/dynamique-ReinitialiserMotDePasseEtudiant.php');
      });
+
  </script>
 
 </body>
