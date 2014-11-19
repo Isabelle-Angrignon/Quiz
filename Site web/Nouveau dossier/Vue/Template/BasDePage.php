@@ -1,7 +1,9 @@
 <div id="bdp">
-	<div>
-		<p id="bdpAPropos"><a href="APropos.php">À propos</a></p>
-		<p id="bdpFAQ"><a href="FAQ.php">F.A.Q.</a></p>
-        <p id="bdpDevelopeur"><a href="Developeur.php">Dévelopeur</a></p>
-	</div>
+        <nav id="navbdp">
+		<a href="APropos.php" class="NavBar">À propos</a>
+		<a href="FAQ.php" class="NavBar">F.A.Q.</a>
+        <a href="Developeur.php" class="NavBar">Développeur</a>
+        <a href="https://docs.google.com/document/d/1F_JO7jholgO1Yg9DbdP0nlx3YrRiEFGJEE0jzbvhEqs/edit"
+        class="NavBar" target="_blank">Documentation</a>
+        </nav>
 </div>

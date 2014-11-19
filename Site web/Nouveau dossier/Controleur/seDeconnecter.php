@@ -14,7 +14,7 @@
 include("Utilitaires.php");
 demarrerSession();
 redirigerSiNonConnecte('Usager');
-session_destroy();
+session_destroy();  // supprime le fichier de session
 header('location: ../index.php');
 
 

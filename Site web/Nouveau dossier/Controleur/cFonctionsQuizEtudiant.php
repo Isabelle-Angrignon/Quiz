@@ -1,4 +1,17 @@
 <?php
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  cFonctionsQuizEtudiant.php
+//  Fait par : Isabelle Angrignon
+//  Commenté le : 18/11/2014
+//
+//  Contenu : Définitions de différentes fonctions "contrôleur" appelées par des pages php.  Elles sont toutes reliées à la page
+//        "Etudiant-Accueil.php", son divDynamique "dynamique-RepondreQuestion.php" ou toute autre page découlant de celles-ci.
+//         Elles sont donc toutes liées à la génération de listes de quiz pour un étudiant, ou la génération d'un quiz
+//         et la gestion de ses réponses.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /*
     Nom: ListerQuizDansUl
@@ -7,8 +20,6 @@
     Description: Cette fonction génère autant de balise "li" qu'il y a de quiz à afficher
     Pour un type donnée, selon le cours et l'étudiant
 */
-
-
 function ListerQuizDansUl($idUl, $idEtudiant, $idCours, $typeQuiz, $classe)
 {
     if ($idCours == 0)
@@ -59,7 +70,6 @@ function genererChoixDeReponses($idQuestion, $typeQuestion, $ordreReponse)
     Date: 08/10/2014
     Description: Cette fonction structure l'affichage des réponses de type vrai ou faux.
 */
-
 function genererReponsesVF($idQuestion)
 {
     $listeReponses = recupererReponsesVraiFaux($idQuestion);
@@ -76,10 +86,17 @@ function genererReponsesVF($idQuestion)
     GenererLiSelectReponse('UlChoixReponse', 'Vrai', '1' );
     GenererLiSelectReponse('UlChoixReponse', 'Faux', '0' );
 }
+
+/*
+    Nom: genererReponsesCMU
+    Par: Isabelle Angrignon
+    Date: octobre ou novembre 2014
+    Description: Cette fonction structure l'affichage des réponses de type choix multiples à réponse unique
+*/
 function genererReponsesCMU($idQuestion, $ordreReponse)
 {
     //appeler une méthode qui récupère la liste des questions de la bd
-    //si l'ordre des  $listeReponses = rréponses est aléatoire, shuffle les réponses
+    //si l'ordre des réponses est aléatoire, on shuffle les réponses
     $listeReponses = recupererReponsesAQuestion($idQuestion);
 
     if($ordreReponse == 1)
@@ -102,7 +119,13 @@ function genererReponsesCMU($idQuestion, $ordreReponse)
     }
 }
 
-
+/*
+    Nom: resetVarSessionScoreAffiche
+    Par: Isabelle Angrignon
+    Date: octobre ou novembre 2014
+    Description: Crée et met à 0 les variable de session 'questionsRepondues' et 'bonnesReponses' s'il s'agit
+                du premier affichage du score dans l'entête de question.
+*/
 function resetVarSessionScoreAffiche()
 {
     if(!isset($_SESSION['questionsRepondues']))
@@ -115,7 +138,12 @@ function resetVarSessionScoreAffiche()
     }
 }
 
-
+/*
+    Nom: resetVarSessionScoreAffiche
+    Par: Isabelle Angrignon
+    Date: octobre ou novembre 2014
+    Description: Supprime les variables de session reliées aux questions et met à 0 celles de l'affichage
+*/
 function resetVarSessionQuiz()
 {
     unset($_SESSION['listeQuestions'] );
@@ -123,13 +151,20 @@ function resetVarSessionQuiz()
     unset($_SESSION['infoQuestion'] );
     unset($_SESSION['idQuestion'] );
     unset($_SESSION['listeQuestionRepondues']);
-    unset($_SESSION['bienRepondu']);
+    unset($_SESSION['listeResultats']);
 
-    //Pour affichage html dans le pop-up de questions
     $_SESSION['questionsRepondues'] = 0;
     $_SESSION['bonnesReponses'] = 0;
 }
 
+/*
+    Nom: gererReponse
+    Par: Isabelle Angrignon
+    Date: octobre ou novembre 2014
+    Description: Traduit litéralement le true et false en 1 et 0.  On a besoin de int plus loin pour la
+                 compilation du score.  En profite pour mettre à jour une variable de session via
+                 la méthode  "updateReponseQuestionSession".
+*/
 function gererReponse($estBonneReponse)
 {
     if($estBonneReponse)
@@ -144,19 +179,35 @@ function gererReponse($estBonneReponse)
     }
 }
 
+/*
+    Nom: updateReponseQuestionSession
+    Par: Isabelle Angrignon
+    Date: octobre ou novembre 2014
+    Description: Met à jour la variable de session qui contient une liste de tous les résultats du quiz
+                les résultats sont insérés en position 0 de la liste par un unshift.  Ainsi, les réponses sont aux mêmes
+                positions que les idQuestions équivalentes dans la variable 'listeQuestionsRepondues'
+*/
 function updateReponseQuestionSession($estBonneReponse)
 {
     $reponse['resultat'] = $estBonneReponse;
-    if (!isset($_SESSION['bienRepondu']))
+    if (!isset($_SESSION['listeResultats']))
     {
-        $_SESSION['bienRepondu'][0] = $estBonneReponse;
+        $_SESSION['listeResultats'][0] = $estBonneReponse;
     }
     else
     {
-        array_unshift($_SESSION['bienRepondu'] ,$estBonneReponse );
+        array_unshift($_SESSION['listeResultats'] ,$estBonneReponse );
     }
 }
 
+/*
+    Nom: getNomCours
+    Par: Isabelle Angrignon
+    Date: octobre ou novembre 2014
+    Description: Récupère le nom du cours à afficher dans l'entête de question.  Il s'agit du cours sélectionné dans
+                le menu si on a cliqué sur un quiz aléatoire et du cours associé au quiz qui est cliqué et auquel
+                l'étudiant est inscrit s'il s'agit d'un quiz formatif.
+*/
 function getNomCours()
 {
     if($_SESSION['typeQuiz'] == "ALEATOIRE")
@@ -177,6 +228,12 @@ function getNomCours()
     return $nomCours;
 }
 
+/*
+    Nom: getNomProfDuCoursDeLEtudiant
+    Par: Isabelle Angrignon
+    Date: octobre ou novembre 2014
+    Description: Récupère le nom du prof de la variable listeCours
+*/
 function getNomProfDuCoursDeLEtudiant()
 {
     $nomProf = "Nom du prof ?";
@@ -190,5 +247,40 @@ function getNomProfDuCoursDeLEtudiant()
     return $nomProf;
 }
 
+/*
+    Nom: miseAJourStatsQuiz
+    Par: Isabelle Angrignon
+    Date: octobre ou novembre 2014
+    Description: Récupère les questions et leur réponses et met les stats a jour pour chaque question
+*/
+function miseAJourStatsQuiz()
+{
+    $idQuiz = $_SESSION['idQuiz'];
+    $idEtudiant = $_SESSION['idUsager'];
 
+    if (isset($_SESSION['listeQuestionRepondues']) AND isset($_SESSION['listeResultats']) )
+    {
+        $listeQuestions = $_SESSION['listeQuestionRepondues'];
+        $listeResultats =  $_SESSION['listeResultats'];
+
+        //S'assurer qu'on abien compilé toutes les réponses à toutes les questions
+        if(count($listeQuestions) == count($listeResultats))
+        {
+            //passer chaque élément de quaque liste dans la miseAJourStats
+            while (count($listeQuestions) >= 1)
+            {
+                $question = array_shift($listeQuestions);
+                $resultat = array_shift($listeResultats);
+                miseAJourStatsQuestion($idEtudiant, $question, $idQuiz, $resultat );
+            }
+        }
+        else
+        {
+            echo "oups, problème à la compilation des statistiques...";
+        }
+    }
+    else{
+        echo "Pas de questions répondues";
+    }
+}
 ?>

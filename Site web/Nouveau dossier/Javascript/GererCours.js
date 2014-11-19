@@ -1,8 +1,18 @@
-﻿//GererCours.js
-// Fait par : Simon Bouchard
-// Fait le : 2014-10-13
-// Contient toutes les fonctions spécifiques a gerer Cours
+﻿///////////////////////////////////////////////////////////////////////////
+//
+//  GererCours.js
+//  Fait par : Simon Bouchard
+//  Fait le : 2014-10-13
+//  Contient toutes les fonctions spécifiques a gerer Cours
+//
+///////////////////////////////////////////////////////////////////////////
 
+// remplirUIModifGroupeAjax
+// fait par : Simon Bouchard
+// Commenter le : 17/11/2014
+// Liste tout les élèves d'un cours et les insère dans le UI UIModifGroupe de la page gérer cours
+// Intrant : L'id du cours
+// Extrant : Aucun
 function remplirUIModifGroupeAjax(Cours) {
     $.ajax({
         type: 'POST',
@@ -20,7 +30,13 @@ function remplirUIModifGroupeAjax(Cours) {
         }
     });
 }
-
+//remplirUIEtudiantCoursAjax
+// Fait par : Simon Bouchard
+// Commenter le : 17/11/2014
+// Lister tout le étudiants qui ne sont pas dans le cours spécifier comme intrant et les liste dans le
+// UiEtudiants de la page gérer cours
+// Intrant : L'id du cours
+// Extrant : Aucun
 function remplirUIEtudiantCoursAjax(Cours) {
     $.ajax({
         type: 'POST',
@@ -39,6 +55,12 @@ function remplirUIEtudiantCoursAjax(Cours) {
     });
 }
 
+//ListerEtudiantAjax
+// Fait par : Simon Bouchard
+// Commenter le : 17/11/2014
+// Liste tout les étudiants et le ajoute dans le UIEtudiants de la page gérer cours
+// Intrant : Aucun
+// Extrant : aucun
 function ListerEtudiantAjax() {
     $.ajax({
         type: 'GET',
@@ -56,6 +78,13 @@ function ListerEtudiantAjax() {
     });
 }
 
+// inscrireEtudiantCoursAjax
+// Fait par : Simon Bouchard
+// Commenter le : 17/11/2014
+// permet d'inscrire un étudiant a un cours , si l'étudiant n'existe pas alors il sera créer
+// Intrant : id de l'eleve , le nom de l'étudiant , le prénom de l'étudiant ainsi de l'id du cours
+// ou il doit être inscrit
+// extrant : Aucun
 function inscrireEtudiantCoursAjax(idEleve,nomEleve,prenomEleve,Cours) {
     $.ajax({
         type: 'POST',
@@ -63,7 +92,6 @@ function inscrireEtudiantCoursAjax(idEleve,nomEleve,prenomEleve,Cours) {
         data: {"idCours" :Cours, "idE":idEleve,"nom" : nomEleve,"prenom" : prenomEleve },
         dataType: "html",
         success: function(resultat) {
-           // alert(resultat);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
@@ -71,6 +99,12 @@ function inscrireEtudiantCoursAjax(idEleve,nomEleve,prenomEleve,Cours) {
     });
 }
 
+// desinscrireEtudiantCoursAjax
+// Fait par : Simon Bouchard
+// Commenter le : 17/11/2014
+// Permet de désinscrire un étudiant d'un cours spécifié en intrant
+// Intrant : id de l'étudiant a inscrire , id du cours dans lequel l'étudiant doit être inscrit
+// Extrant : Aucun
 function desinscrireEtudiantCoursAjax(idEleve,Cours) {
     $.ajax({
         type: 'POST',
@@ -86,6 +120,12 @@ function desinscrireEtudiantCoursAjax(idEleve,Cours) {
     });
 }
 
+// creerEtudiantCoursAjax
+// Fait par : Simon Bouchard
+// Commenter le : 17/11/2014
+// Permet de créer un étudiant dans la base de données
+// intrant : id de l'étudiant , nom de l'étudiant , prénom de l'étudiant
+// Extrant : réussite ou échec de l'opération
 function creerEtudiantCoursAjax(idEleve,nom,prenom) {
     $.ajax({
         type: 'POST',
@@ -109,6 +149,12 @@ function creerEtudiantCoursAjax(idEleve,nom,prenom) {
     });
 }
 
+// ajouterCoursAjax
+// Fait par : Simon Bouchard
+// Commenter le : 17/11/2014
+// Crée un nouveau cours
+// Intrant : le nom du cours , le code du cours
+// Extrant : Aucun
 function ajouterCoursAjax(nom,code) {
     $.ajax({
         type: 'POST',
@@ -122,6 +168,12 @@ function ajouterCoursAjax(nom,code) {
     });
 }
 
+// ListerCoursAjax
+// Fait par : Simon Bouchard
+// Commenter le : 17/11/2014
+// Liste tout les cours dans le programme et les insère dans la liste UICours
+// Intrant : Aucun
+// Extrant : Aucun
 function ListerCoursAjax() {
     $.ajax({
         type: 'POST',
@@ -138,6 +190,13 @@ function ListerCoursAjax() {
         }
     });
 }
+
+// desinscrireToutEtudiantCoursAjax
+// Fait par : Simon Bouchard
+// Commenter le : 17/11/2014
+// Méthode qui permet de désinscrire tout les étudiants d'un cours
+// Intrant : L'id du cours duquel on veut désinscrire les étudiants
+// Exrant : aucun
 function desinscrireToutEtudiantCoursAjax(Cours) {
     $.ajax({
         type: 'POST',
@@ -145,10 +204,10 @@ function desinscrireToutEtudiantCoursAjax(Cours) {
         data: {"idCours" :Cours},
         dataType: "html",
         success: function(resultat) {
-            // alert(resultat);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
         }
     });
 }
+

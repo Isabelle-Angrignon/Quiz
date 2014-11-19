@@ -1,4 +1,20 @@
 <?php
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  getOrdreQuestionsEstAleatoire.php
+//  Fait par : Isabelle Angrignon
+//  Commenté le : 18/11/2014
+//
+//  But : Récupère simplement une valeur d'une variable de session
+//
+//  POST:  aucun
+//
+//  Session :  'ordreQuestionsEstAleatoire' = int 1|0
+//
+//  Sortie :  int 1|0
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
 include("..//Utilitaires.php");
 demarrerSession();
 redirigerSiNonConnecte('Etudiant');

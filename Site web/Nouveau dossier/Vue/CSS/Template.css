@@ -108,7 +108,6 @@ div#enteteSite{
 	margin: 0 auto;
 	position: relative;
     background-color:rgb(73,128,209);
-	border: 2px black solid;
 	text-align: center;
 }
 
@@ -122,17 +121,9 @@ div#enteteSite{
 	position: relative;
 	cursor:pointer;
 }
-#bdpAPropos{
-	float: left;
-}
-
-#bdpFAQ{
-	margin-left: 40%;
-	float: left;
-}
-
-#bdpDevelopeur{
-	float: right;
+#navbdp{
+    margin-left: 0px;
+    width: 100%;
 }
 
 /*------------------------------------------------ Objets fréquemment utilisés ---------------------------------------*/

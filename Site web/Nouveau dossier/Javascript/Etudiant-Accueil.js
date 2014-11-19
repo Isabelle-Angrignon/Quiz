@@ -63,7 +63,13 @@ function ouvrirUnQuizFormatif(idQuiz){
         swal({ title: "Désolé",   text: "Il n'y a aucune question dans ce quiz.",   type: "warning",   confirmButtonText: "Dac!" });
     }
 }
-//todo commentaires
+
+// Par: Isabelle Angrignon
+// Nom: getOrdreQuestionEstAleatoire
+// But:  Récupère la valeur de la variable de session qui dit si l'ordre des questions est aléatoire ou non)
+//       pour un quiz passé en paramètre
+// Intrants: idQuiz: unsigned int(10), clé primaire du quiz de la table Quiz
+// Extrants: ordre: int 0|1 (1 = aleatoire)
 function getOrdreQuestionEstAleatoire(idQuiz){
     var ordre = 0;
     $.ajax({
@@ -252,81 +258,88 @@ function genererQuestionsAleatoires(){
 //          Si répondu, on appelle "continuerQuiz" qui s'occupe de la suite des choses.
 //      3 - Met à jour le score affiché.
 // Intrants:  résultat int 1|0
+//            lien (hypertext) string:  vers les notes de cours reliées à la question répondue affiché en cas de
+//            mauvaise réponse en mode aléatoire seulement
+//            typeQuiz: enum parmi "ALEATOIRE", "FORMATIF", ou autre éventuellement
 // Extrants: aucun
 function traiterResultatReponse(resultat, lien, typeQuiz){
-    var close  = true; //Variable pour dire au sweetalert de réponse de se fermer après qu'on ait cliqué ok.
+
+    var close  = true; //Variable pour dire au sweetalert de "réponse" de se fermer après qu'on ait cliqué ok.
     // si c'est la dernière question, alors on va afficher un autre sweetalert pour le score final donc,
-    //la variable close doit être à false.
+    //la variable close devra être mise à false sinon on ne verra pas les deux alertes.
+    if (estDerniereQuestion() == 1){ close =false; }//valide que la dernière question a été chargée dans la page
 
-    //valide que la dernière question a été chargée dans la page
-    if (estDerniereQuestion() == 1){ close =false; }
-
-    //récupère le lien de référence aux notes de cours
-
+    //Gestion des 4 cas de réponses possibles: 1, 0, X ou non répondu; 1 = bonne réponse, 0 = erreur, x= erreur de correction
     if(resultat == 1) {
-        swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",
-            confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
-    }
-    else if(resultat == 0) {
-
-        // ajouter un ajax pour récupérer le lien hypertext de la question si il y en a une.
-        if(lien == null || lien == "" || typeQuiz != "ALEATOIRE"){
-            swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",
-                confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
-        }
-        else{
-            swal({  title: "Oups!",
-                    text: "Mauvaise réponse!  Voulez-vous continuer ou réviser?",
-                    type: "error",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Continuer quand même...",
-                    cancelButtonText: "Aller réviser!",
-                    closeOnConfirm: close,
-                    closeOnCancel: true },
-                    function(isConfirm) {
-                        if (isConfirm) {
-                            continuerQuiz();
-                        }
-                        else {
-                           /*todo  redirect */
-                            window.open(lien);
-                        }
-                    });
-        }
-    }
-    else if(resultat == 'X') {
-        swal({   title: "Oh la la!",   text: " Une erreur s'est produite au moment de la validation. ",   type: "warning",   confirmButtonText: "Dac!" });
-    }
-    else {
-        swal({   title: "Oups!",   text: "Répondez d'abord à la question!",   type: "error",
-            confirmButtonText: "Dac!" });
-    }
-    //retour de validation si question répondue...
-    if (resultat == 1 || resultat == 0) {
-       // estRepondu = 1;
+        swalBonneReponse(close);
         updateScoreAffiche(resultat);
     }
-}
-//todo commentaires
-function estDerniereQuestion(){
-    var lien = "";
-    $.ajax({
-        type:"POST",
-        url:"Controleur/FonctionQuizEtudiant/estDerniereQuestion.php",
-        async : !1,
-        success: function(res) {
-            estDerniere = res;
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
+    else if(resultat == 0) {
+        //On affiche le lien hypertext que si: il y en a un, la réponse est mauvaise et on est en type de quiz aléatoire
+        if(lien == null || lien == "" || typeQuiz != "ALEATOIRE"){
+            swalMauvaiseReponse(close);
         }
-    });
-    return lien;
+        else{
+            swalMauvaiseReponseLien(close,lien);
+        }
+        updateScoreAffiche(resultat);
+    }
+    else if(resultat == 'X') {
+        swalErreurDeCorrection();
+    }
+    else {
+        swalQuestionNonRepondue();
+    }
 }
 
-//todo continuer commentaires
-function gererQuestionRepondue(continuerQuiz, lien, typeQuiz) {
+// Différents messages "SweetAlert" selon la réponse et la situation de quiz.
+// Dans le cas ou il y a eu réponse,on appelle la méthode continuerQuiz.
+//Pouyr bonne ou mauvaise réponse, on prend un bool pour dire si on ferme le sweetAlert ou non après affichage selon
+// qu'on aura une autre alerte a afficher.
+function swalBonneReponse(close){
+    swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",
+        confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
+}
+function swalMauvaiseReponse(close){
+    swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",
+        confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
+}
+function swalMauvaiseReponseLien(close, lien){
+    swal({  title: "Oups!",
+            text: "Mauvaise réponse!  Voulez-vous continuer ou réviser?",
+            type: "error",
+            showCancelButton: true,
+            confirmButtonColor: "#FFA64F",// couleur par défaut était "#DD6B55", orange swal....
+            confirmButtonText: "Continuer",
+            cancelButtonText: "Réviser!",
+            closeOnConfirm: close,
+            closeOnCancel: true },
+        function(isConfirm) {
+            if (isConfirm) {
+                continuerQuiz();
+            }
+            else {
+                window.open(lien);
+            }
+        });
+}
+function swalErreurDeCorrection(){
+    swal({   title: "Oh la la!",   text: " Une erreur s'est produite au moment de la validation. ",
+        type: "warning",   confirmButtonText: "Dac!" });
+}
+function swalQuestionNonRepondue(){
+    swal({   title: "Oups!",   text: "Répondez d'abord à la question!",   type: "error",
+        confirmButtonText: "Dac!" });
+}
+
+// Par: Isabelle Angrignon
+// Nom: gererQuestionRepondue
+// But:  Envoi la réponse cliquée par ajax au test de validation de la réponse et retourne le résultat à la fonction
+//      traiterResultatReponse
+// Intrants: un lien hypertexte lié à la question
+//           le type de quiz parmi: "ALEATOIRE", "FORMATIF" ou autre éventuellement
+// Extrants: auncun
+function gererQuestionRepondue(lien, typeQuiz) {
 
     //Récupérer le id de la réponse cliquée
     var idReponse;
@@ -350,6 +363,12 @@ function gererQuestionRepondue(continuerQuiz, lien, typeQuiz) {
     });
 }
 
+// Par: Isabelle Angrignon
+// Nom: estDerniereQuestion
+// But:  Vérifie la valeur de la variable de session qui dit combien il reste de questions au quiz et
+//       retourne 1 si on est rendu à la dernière question
+// Intrants: aucun
+// Extrants: estDerniere int 0|1
 function estDerniereQuestion(){
     var estDerniere = 0;
     $.ajax({
@@ -366,6 +385,12 @@ function estDerniereQuestion(){
     return estDerniere;
 }
 
+// Par: Isabelle Angrignon
+// Nom: updateScoreAffiche
+// But:  Par ajax, envoie le résultat obtenu à la méthode php qui gère les variables de session appropriées et génère
+//      le message de score à afficher dans l'entête de quiz.
+// Intrants: le résultat int 0|1
+// Extrants: aucun
 function updateScoreAffiche(resultat){
     $.ajax({
         type:"POST",
@@ -382,10 +407,15 @@ function updateScoreAffiche(resultat){
     });
 }
 
+// Par: Isabelle Angrignon
+// Nom: chargerNouvelleQuestion
+// But:  1- par ajax, on charge les éléments de la prochaine question via les variable de session
+//       2- on réinsert les nouvelles infos de la nouvelle question dans le div dynamique
+// Intrants: aucun
+// Extrants: aucun
 function chargerNouvelleQuestion(){
 
-   // viderHTMLfromElement('QuestionAleatoire');
-    viderHTMLfromElement('QuestionAleatoire');
+    //viderHTMLfromElement('QuestionAleatoire');
     $.ajax({
         type:"POST",
         url:"Controleur/FonctionQuizEtudiant/chargerNouvelleQuestion.php",
@@ -400,15 +430,25 @@ function chargerNouvelleQuestion(){
     });
 }
 
+// Par: Isabelle Angrignon
+// Nom: continuerQuiz
+// But: Gestion de la suite du quiz après une réponse.
+// Intrants: aucun
+// Extrants: aucun
 function continuerQuiz() {
     if (quizTermine() == 1) {
         gererFinQuiz();
     }
     else {
-        chargerNouvelleQuestion();//dans la session
+        chargerNouvelleQuestion();//dans la session et la page
     }
 }
 
+// Par: Isabelle Angrignon
+// Nom: quizTermine
+// But: par ajax, vérifie si le quiz est terminé et retourne 1 ou 0
+// Intrants: aucun
+// Extrants: termine int 1|0
 function quizTermine(){
     var termine = 0;
     $.ajax({
@@ -425,6 +465,11 @@ function quizTermine(){
     return termine;
 }
 
+// Par: Isabelle Angrignon
+// Nom: gererFinQuiz
+// But: par ajax, fait la gestion des variables de session reliées au quiz et génère l'affichage du message de score total
+// Intrants: aucun
+// Extrants: aucun
 function gererFinQuiz(){
     $.ajax({
         type:"POST",

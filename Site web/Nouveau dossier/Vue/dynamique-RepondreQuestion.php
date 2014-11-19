@@ -48,7 +48,7 @@ else{
             var lien = "<?php echo $_SESSION["infoQuestion"][0]['referenceWeb']; ?>";
             lien = lien!=null?lien:"";
             var typeQuiz = "<?php echo $_SESSION["typeQuiz"]; ?>";
-            gererQuestionRepondue(continuerQuiz, lien, typeQuiz );
+            gererQuestionRepondue(lien, typeQuiz );
         });
     });
 </script>
@@ -77,7 +77,7 @@ else{
         <tr>
             <td>
                 <label id="labelTitreQuiz" class="suiviQuiz">
-                    <?php echo $titreQuiz      ?>
+                    <?php if(!$aleatoire){ echo $titreQuiz; } ?>
                 </label>
             </td>
             <td>
