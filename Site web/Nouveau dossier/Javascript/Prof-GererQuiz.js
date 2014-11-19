@@ -63,7 +63,7 @@ function addEventsToReponses() {
             }
         }
         else if(e.ctrlKey == true && e.which != 17) {
-            alert(e.which);
+            // alert(e.which);  todo à implémenter le promenage avec flèche dans les réponses
         }
     });
 

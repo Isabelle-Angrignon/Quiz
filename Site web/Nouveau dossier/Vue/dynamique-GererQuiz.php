@@ -88,6 +88,18 @@
         $("#BTN_EnregistrerQuiz").button();
         $("#BTN_SupprimerQuiz").button();
 
+        $(document).keydown(function(e) {
+            if(e.ctrlKey == true) {
+                // e.which == s
+                if(e.which == 83) {
+                    setTimeout(function() {
+                        $("#BTN_EnregistrerQuiz").click();
+                    }, 0);
+                    $(document).off("keydown");
+                    e.preventDefault();
+                }
+            }
+        });
     });
 
 </script>
