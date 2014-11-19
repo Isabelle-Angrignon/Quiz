@@ -43,12 +43,14 @@ function recupererElementsQuestion($idQuestion)
 // Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestions()
 function trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce)
 {  // todo premier modifié....
+
+    $filtreEnonce = '%'.$filtreEnonce.'%';
     $bdd = connecterProf();
     $requete = $bdd->prepare("CALL listerQuestions(?,?,?)");
 
     $requete->bindParam(1, $idCours, PDO::PARAM_INT,10);
     $requete->bindParam(2, $idProprietaire, PDO::PARAM_STR, 10);
-    $requete->bindParam(3, $filtreEnonce, PDO::PARAM_STR, 30);
+    $requete->bindParam(3, $filtreEnonce, PDO::PARAM_STR, 32);
 
     $requete->execute();
     $resultat = $requete->fetchAll();
