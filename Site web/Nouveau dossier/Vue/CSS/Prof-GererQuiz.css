@@ -11,10 +11,11 @@ fieldset {
 	margin-top:30px;
 	margin-left:3%;
 	padding:0;
+    width: 70%;
 }
 
 #DDL_Cours {
-	width:100%;
+    margin-top: 2%;
 }
 
 
@@ -405,3 +406,24 @@ textarea.Reponsefocused{
     width:50%;
 }
 
+#SectionFiltre{
+    display: inline-block;
+    width: 100%;
+}
+#BTN_Filtre{
+    border:solid black 2px;
+    background-color:white;
+    border-radius:15px;
+    width: 75px;
+    text-align: center;
+    cursor:pointer;
+    vertical-align: 80%;
+    margin-left: 1%;
+}
+#BTN_Filtre:hover{
+    background-color:#E4E4E4;
+}
+#TB_Filtre{
+    vertical-align: 80%;
+    margin-left: 7%;
+}

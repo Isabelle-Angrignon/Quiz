@@ -142,12 +142,12 @@ function updateUlQuiz(idCours, idProprietaire) {
 
 }
 
-function updateUlModifQuiz(triage,usagerCourant,idQuiz) {
+function updateUlModifQuiz(triage,usagerCourant,idQuiz, filtreEnonce) {
     $("#UlModifQuiz li").remove();
     $.ajax({
         type: 'POST',
         url: 'Controleur/ListerQuestions.php',
-        data: {"Triage":triage , "idProprietaire":usagerCourant, "idQuiz":idQuiz},
+        data: {"Triage":triage , "idProprietaire":usagerCourant, "idQuiz":idQuiz, "filtreEnonce":filtreEnonce},
         dataType: "json",
         async:false,
         success: function(resultat) {
@@ -161,12 +161,13 @@ function updateUlModifQuiz(triage,usagerCourant,idQuiz) {
     });
 }
 
-function updateUlQuestion(idCours, usagerCourant, triage, idQuiz, typeQuiz) {
+function updateUlQuestion(idCours, usagerCourant, triage, idQuiz, typeQuiz, filtreEnonce) {
     $("#UlQuestion li").remove();
     $.ajax({
         type: 'POST',
         url: 'Controleur/ListerQuestions.php',
-        data: {"Triage":triage, "idCours":idCours , "idProprietaire":usagerCourant, "idQuiz":idQuiz, "typeQuiz":typeQuiz},
+        data: {"Triage":triage, "idCours":idCours , "idProprietaire":usagerCourant, "idQuiz":idQuiz, "typeQuiz":typeQuiz,
+                "filtreEnonce":filtreEnonce},
         dataType: "json",
         success: function(resultat) {
             traiterJSONQuestions(resultat, "UlQuestion");
