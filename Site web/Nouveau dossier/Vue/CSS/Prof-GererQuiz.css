@@ -143,9 +143,24 @@ textarea.Reponsefocused{
     margin-left: 2%;
 }
 
-#EnonceQuestion {
+#conteneurEnonceQuestion {
+    font-family:"Comic Sans MS", cursive, sans-serif;
     background-color:#E66100;
     width:100%;
+    padding:10px;
+    text-align:center;
+    border-radius: 10px;
+}
+
+#conteneurEnonceQuestion h2 {
+    margin-top:0;
+    margin-bottom:10px;
+}
+
+
+#EnonceQuestion {
+    background-color:inherit;
+    width:96%;
     max-height: 200px;
     overflow-y:auto;
     overflow-x:hidden;
@@ -278,12 +293,8 @@ textarea.Reponsefocused{
 
 #identifiantQuestion {
     padding:10px;
-    font-family:"Comic Sans MS", cursive, sans-serif;
     border:1px solid black;
     border-radius:10px;
-    font-weight:normal;
-    width: 300px;
-    margin-right:25px;
     margin-top:-45px;
     float:right;
     text-align:center;

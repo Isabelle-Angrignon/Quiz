@@ -52,7 +52,7 @@
     });
 
     $("#EnonceQuestion").focusin(function() {
-        $(this).css("background-color", "rgba(236, 99, 0, 0.62)");
+        $(this).css("background-color", "rgba(255, 255, 255, 0.62)");
     }).focusout(function() {
         $(this).css("background-color", "#E66100");
     });
@@ -124,7 +124,12 @@
 
 </script>
 <div id="QuestionConteneur">
-    <textarea id="EnonceQuestion" rows='1' placeholder="Entrer un énoncé ici..."><?php echo isset($enonceQuestion)?$enonceQuestion:""; ?></textarea>
+    <div id="conteneurEnonceQuestion">
+        <h2>Énoncé de la question</h2>
+        <?php if(isset($_SESSION['idQuestion']) && $_SESSION["etat"] == "modifierQuestion") { echo "<div id='identifiantQuestion'> Id : " . $_SESSION['idQuestion'] . "</div>"; }?>
+        <hr/>
+        <textarea id="EnonceQuestion" rows='1' placeholder="Entrer un énoncé ici..."><?php echo isset($enonceQuestion)?$enonceQuestion:""; ?></textarea>
+    </div>
     <div id="reponseConteneur">
 
         <span id="titreReponses">
@@ -214,7 +219,7 @@
         </ul>
     </div>
 </div>
-<?php if(isset($_SESSION['idQuestion']) && $_SESSION["etat"] == "modifierQuestion") { echo "<div id='identifiantQuestion'> Id : " . $_SESSION['idQuestion'] . "</div>"; }?>
+
 <div id="ActionQuestion">
     <input type="button" id="BTN_ConfirmerQuestion" value=
     <?php

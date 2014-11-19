@@ -521,8 +521,11 @@ function jsonifierReponsesQuestionCourante() {
         if($(this).children("input[type=radio]").prop("checked") == true) {
             estCoche = true;
         }
+        var enonce = $(this).children(".reponsesQuestion").val();
+        enonce = modifierChainePourJSON(enonce);
+
         // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
-        reponsesEnString += '{"enonce":"'+$(this).children(".reponsesQuestion").val()+'", "estBonneReponse":"' + estCoche + '",' +
+        reponsesEnString += '{"enonce":"'+enonce +'", "estBonneReponse":"' + estCoche + '",' +
                             '"idReponse":"' + $(this).children("input[type=radio]").attr("value") + '", "positionReponse":"'+ ++position +'"},';
     });
 
@@ -594,10 +597,8 @@ function jsonifierTypeQuizAssQuestionCourante() {
 function getJSONEnonceQuestion(idCreateur, idQuestion ) {
     var enonce = $("#EnonceQuestion").val();
 
-    // Par défaut, les furteurs tels que chrome et firefox ajoutent 13 caractères au début du texte d'un contentEditable élément.
-    // Rend les guillemets en caractère litéraire ce qui empêche les bugs dans le traitement de la chaine. (La chaine est entourée de base d'une paire de guillements)
-    enonce = enonce.replace(/[\"]/g, '\\"');
-    enonce = enonce.trim();
+    enonce = modifierChainePourJSON(enonce);
+
     var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"' + idCreateur + '", "lienWeb":"'
                        + $("#conteneurLienWeb input[type=text]").val() + '", "ordreReponsesAleatoire":"' + !$("#ordreReponsesQuestion").prop("checked") + '"';
     if(idQuestion != null) {
@@ -607,6 +608,11 @@ function getJSONEnonceQuestion(idCreateur, idQuestion ) {
     jsonQuestion = JSON.parse(jsonQuestion);
 
     return jsonQuestion;
+}
+
+function modifierChainePourJSON(chaine) {
+    // Rend littéraire les new lines (\n), les guillemets (") de la chaine ainsi que les blancs qui sont à ses extrémités
+    return chaine.replace(/[\"]/g, '\\"').replace(/[\n]/g, '\\n').trim();
 }
 
 function ajouterQuestion(idCreateur, continuer) {
