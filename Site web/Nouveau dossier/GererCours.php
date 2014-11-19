@@ -58,7 +58,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
                   remplirUIEtudiantCoursAjax($(ui.item).attr('id'));
                   $('#BTN_GestionGoupe').show();
                   $('#BTN_Cours').hide();
-                  AjouterClickEventSurEtudiant();
 
               },
               remove: function (event, ui) {
@@ -69,7 +68,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
                   ListerEtudiantAjax();
                   $('#BTN_GestionGoupe').hide();
                   $('#BTN_Cours').show();
-                  AjouterClickEventSurEtudiant();
               }
 
           });
