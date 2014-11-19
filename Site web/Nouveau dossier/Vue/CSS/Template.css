@@ -109,6 +109,9 @@ div#enteteSite{
 	position: relative;
     background-color:rgb(73,128,209);
 	text-align: center;
+    border-bottom: outset;
+    border-left:  inset;
+    border-right:  outset;
 }
 
 #bdp div{
