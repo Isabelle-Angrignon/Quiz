@@ -309,9 +309,9 @@ function swalMauvaiseReponseLien(close, lien){
             text: "Mauvaise réponse!  Voulez-vous continuer ou réviser?",
             type: "error",
             showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Continuer quand même...",
-            cancelButtonText: "Aller réviser!",
+            confirmButtonColor: "#FFA64F",// couleur par défaut était "#DD6B55", orange swal....
+            confirmButtonText: "Continuer",
+            cancelButtonText: "Réviser!",
             closeOnConfirm: close,
             closeOnCancel: true },
         function(isConfirm) {
@@ -331,9 +331,6 @@ function swalQuestionNonRepondue(){
     swal({   title: "Oups!",   text: "Répondez d'abord à la question!",   type: "error",
         confirmButtonText: "Dac!" });
 }
-
-
-
 
 // Par: Isabelle Angrignon
 // Nom: gererQuestionRepondue

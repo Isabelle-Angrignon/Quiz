@@ -30,11 +30,17 @@ function genererQuestionsAleatoires($cours)
         }
         $requete->closeCursor();
     }
-    unset($bdd);// fermer connection bd
+    unset($bdd);
 
     return null;
 }
 
+/*
+    Nom: genererQuestionsQuiz
+    Par: Isabelle Angrignon
+    Description: Cette fonction communique à la BD et récupère La liste des questions pour un quiz donné.
+                La liste est retournée.
+*/
 function genererQuestionsQuiz($idQuiz)
 {
     $bdd = connecterEtudiant();
@@ -59,7 +65,7 @@ function genererQuestionsQuiz($idQuiz)
         }
         $requete->closeCursor();
     }
-    unset($bdd);// fermer connection bd
+    unset($bdd);
 
     return null;
 }
@@ -87,7 +93,12 @@ function ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz)
 
     return $resultat;
 }
-
+/*
+    Nom: ListerQuizEtudiant
+    Par: Isabelle Angrignon
+    Description: Cette fonction communique à la BD et récupère La liste de tous les Quiz d'un type donné
+                pour tous les cours auquel un étudiant est inscrit.
+*/
 function ListerQuizEtudiant($idEtudiant, $typeQuiz)
 {
     $bdd = connecterEtudiant();
@@ -103,7 +114,12 @@ function ListerQuizEtudiant($idEtudiant, $typeQuiz)
     return $resultat;
 }
 
-
+/*
+    Nom: recupererCoursQuizEtudiant
+    Par: Isabelle Angrignon
+    Description: Cette fonction communique à la BD et récupère Le nom du cours auquel est inscrit l'étudiant et pour le
+                quiz qu'il a choisi.
+*/
 function recupererCoursQuizEtudiant($idQuiz, $idEtudiant)
 {
     $bdd = connecterEtudiant();

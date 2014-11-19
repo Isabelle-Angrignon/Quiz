@@ -77,7 +77,7 @@ else{
         <tr>
             <td>
                 <label id="labelTitreQuiz" class="suiviQuiz">
-                    <?php echo $titreQuiz      ?>
+                    <?php if(!$aleatoire){ echo $titreQuiz; } ?>
                 </label>
             </td>
             <td>
