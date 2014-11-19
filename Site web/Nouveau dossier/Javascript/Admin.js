@@ -25,34 +25,7 @@ function CreerDeploiement(path){
 
 }
 
-// reintialiserMotDePasse
-// Fait par : Simon Bouchard
-// Commencer le : 12/11/2014
-// Cette fonction est un appel ajax permettant de réinitialiser un mot de passe
-// Fichier appelé :RéinitialiserMotDePasse.php
-// Réaction : Affiche un swal qui indique la réussite ou l'échec de l'opération
-// Intrant : Le numéro de DA de l'usager dont le mot de passe doit être réinitialiser
-function reinitialiserMotDePasse(numeroDA) {
-    $.ajax({
-        type: 'POST',
-        url: "Controleur/ReinitialiserMotDePasse.php",
-        data: {"numeroDA" :numeroDA},
-        dataType: "text",
-        success: function(resultat) {
-            if (resultat == 0) {
-                swal({   title: "Erreur!",   text: "Le mot de passe est déjà le mot de passe par défaut",   type: "error"});
-                $("#TB_DA").val("");
-            }
-            else if (resultat == 1)
-            {
-                swal({   title: "Opération réussite!",   text: "Reinitialisation de mot de passe réussi",   type: "success"});
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
-        }
-    });
-}
+
 
 // Supprimer un Compte
 // Fait par : Simon Bouchard
