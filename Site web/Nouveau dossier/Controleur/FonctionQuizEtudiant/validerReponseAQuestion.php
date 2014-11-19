@@ -30,7 +30,7 @@ $idQuestion = $_SESSION['infoQuestion'][0]['idQuestion'];//meme si il n'y a g'un
 switch( $_SESSION['infoQuestion'][0]['typeQuestion']){
 
     case "VRAI_FAUX":
-        echo gererReponse($_SESSION['listeReponses'][0]['reponseEstVrai'] == $idReponse);
+        echo gererReponse($_SESSION['listeReponses'][0]['reponseEstVrai'] == (int)$idReponse);//cast empeche injection de "id || true"
         break;
 
     case "CHOIX_MULTI_UNIQUE":
@@ -43,7 +43,7 @@ switch( $_SESSION['infoQuestion'][0]['typeQuestion']){
             }
         }
 
-        echo gererReponse($bonneRep == $idReponse);
+        echo gererReponse($bonneRep == (int)$idReponse);//cast empeche injection de "id || true"
         break;
 
     //ajouter autres types de questions ici

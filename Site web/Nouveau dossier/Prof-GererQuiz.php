@@ -78,6 +78,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     var idCours = $("#DDL_Cours option:selected").attr("value");
                     var typeQuiz = $(ui.item).children("div .divProfDansLi").text();
                     var filtreEnonce = "";///////////todo modif en cours....
+                    $("#TB_Filtre").val("");
                     updateUlModifQuiz("selonQuiz", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, idQuiz, filtreEnonce);
                     updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz, filtreEnonce);
                 },
@@ -87,10 +88,24 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     $('#UlModifQuiz').empty();
                     $('#UlQuestion').empty();
                     var idCours = $("#DDL_Cours option:selected").attr("value");
+                    $("#TB_Filtre").val("");
                     updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "default");
                 }
             }).disableSelection();
 
+            $("#BTN_Filtre").click(function () {
+                var idCours = $("#DDL_Cours option:selected").attr("value");
+                var typeQuiz = $("#QuizDropZone").children("li").children("div .divProfDansLi").text();
+                var idQuiz = $("#QuizDropZone").children("li").attr("id");
+                var filtreEnonce = $("#TB_Filtre").val();///////////todo modif en cours....
+                // Si il n'y a aucun quiz en modification
+                if($("#QuizDropZone").children("li").length == 0) {
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "default", null, null, filtreEnonce );
+                }
+                else {
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz, filtreEnonce);
+                }
+            });
 
             $("#DDL_Cours").selectmenu({
                 width:400,
@@ -128,7 +143,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <?php
     include("Vue/Template/EnteteSite.php");
     include("Vue/Template/MenuProf.php");
-
+//
 ?>
 
 <div class="contenu">

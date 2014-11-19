@@ -37,7 +37,7 @@
     {
         if($idQuiz != "" && isset($idProprietaire))
         {
-            $resultatTriage = listerQuestionsDunQuiz($idQuiz, $idProprietaire, $filtreEnonce);
+            $resultatTriage = listerQuestionsDunQuiz($idQuiz, $idProprietaire);
         }
         else
         {

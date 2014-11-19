@@ -66,15 +66,13 @@ function trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce)
 // Intrants: $idQuiz = identifiant du quiz qui contient les questions voulues. $idProprietaire = identifiant du professeur en question
 // Extrants: Le résultat de la procédure, sous forme de JSON
 // Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestionsSelonQuiz()
-function listerQuestionsDunQuiz($idQuiz, $idProprietaire, $filtreEnonce)
+function listerQuestionsDunQuiz($idQuiz, $idProprietaire)
 {
-    $filtreEnonce = '%'.$filtreEnonce.'%';
     $bdd = connecterProf();
-    $requete = $bdd->prepare("CALL listerQuestionsSelonQuiz(?,?,?)");
+    $requete = $bdd->prepare("CALL listerQuestionsSelonQuiz(?,?)");
 
     $requete->bindParam(1, $idQuiz, PDO::PARAM_INT);
     $requete->bindParam(2, $idProprietaire, PDO::PARAM_STR, 10);
-    $requete->bindParam(3, $filtreEnonce, PDO::PARAM_STR, 32);
 
     $requete->execute();
     $resultat = $requete->fetchAll();
