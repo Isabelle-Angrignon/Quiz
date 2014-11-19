@@ -8,11 +8,14 @@
 $(function() {
     // Ce bout de code sert à "resize" le menu selon le nombre d'enfant (de balise <a> ) qu'il contient
     $("nav").ready(function() {
-        var nbElement = $("nav a").length;
-        var format = 100/nbElement;
-        $("nav a").each( function() {
-            $(this).width(format + "%");
+        $("nav").each(function() {
+            var nbElement = $(this).children("a").length;
+            var format = 100/nbElement;
+            $(this).children("a").each( function() {
+                $(this).width(format + "%");
+            });
         });
+
     });
 });
 // Nom : ajouterOption_ToSelect
@@ -344,7 +347,7 @@ function reinitialiserMotDePasse(numeroDA) {
             }
             else if (resultat == 1)
             {
-                swal({   title: "Opération réussite!",   text: "Reinitialisation de mot de passe réussi",   type: "success"});
+                swal({   title: "Opération réussie!",   text: "Reinitialisation de mot de passe réussi",   type: "success"});
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {

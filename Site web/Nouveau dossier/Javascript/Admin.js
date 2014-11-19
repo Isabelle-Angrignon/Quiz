@@ -48,7 +48,7 @@ function supprimerUnCompte(numeroDA){
             }
             else if (resultat == 1)
             {
-                swal({   title: "Opération réussite!",   text: "Le compte a bel et bien été supprimer",   type: "success"});
+                swal({   title: "Opération réussie!",   text: "Le compte a bel et bien été supprimer",   type: "success"});
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -77,7 +77,7 @@ function nommerAdminAjax(numeroDA){
             }
             else if (resultat == 1)
             {
-                swal({   title: "Opération réussite!",   text: "Le professeur a été augmenté au rang d'admin",   type: "success"});
+                swal({   title: "Opération réussie!",   text: "Le professeur a été augmenté au rang d'admin",   type: "success"});
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {

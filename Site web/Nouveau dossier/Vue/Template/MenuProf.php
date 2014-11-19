@@ -2,8 +2,8 @@
 <nav class="fixed">
 	<a href='Prof-GererQuiz.php' class='NavBar'>Mes quiz et questions</a>
 	<a href='GererCours.php' class='NavBar'>Mes cours</a>
-    <a href='#' class='NavBar' id="stats">Statistiques</a>
     <a href="GererSonCompte.php" class="NavBar">Mon Compte</a>
+    <a href='#' class='NavBar' id="stats">Statistiques</a>
     <a href="https://docs.google.com/document/d/1F_JO7jholgO1Yg9DbdP0nlx3YrRiEFGJEE0jzbvhEqs/edit"
        class="NavBar" target="_blank">Documentation</a>
     <?php
