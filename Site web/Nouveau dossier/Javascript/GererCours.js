@@ -210,14 +210,3 @@ function desinscrireToutEtudiantCoursAjax(Cours) {
         }
     });
 }
-
-function AjouterClickEventSurEtudiant(){
-    $('#UlEtudiants').children().unbind('dblclick');
-    $('#UlModifGroupe').children().unbind('dblclick');
-    $('#UlEtudiants').children().dblclick(function(){
-        ChercherUsagerAjax($(this).attr("id"),reinitialiserMotDePasse," sur qui vous voulez réinitialiser le mot de passe ?");
-    });
-    $('#UlModifGroupe').children().dblclick(function(){
-        ChercherUsagerAjax($(this).attr("id"),reinitialiserMotDePasse," sur qui vous voulez réinitialiser le mot de passe ?");
-    });
-}
