@@ -44,6 +44,8 @@ fieldset {
 	vertical-align:middle;
     border:dashed black 1px;
     text-align: center;
+    max-height: 50px;
+    overflow: hidden;
 }
 
 #QuizDropZone li {
@@ -54,6 +56,8 @@ fieldset {
     padding-left:20px;
     font-weight:100;
     padding-right:12px;
+    max-height: 50px;
+    overflow: hidden;
 }
 
 #QuizDropZone li span {
