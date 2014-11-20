@@ -180,7 +180,7 @@
             }
             else
             {
-                echo "value='annuler' onclick='fermerDivDynamique()' >";
+                echo "value='Annuler' onclick='fermerDivDynamique()' >";
             }
            ?>
 

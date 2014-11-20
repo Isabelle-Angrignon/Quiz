@@ -56,11 +56,13 @@ div#enteteSite{
     vertical-align: top;
     float:right;;
     background-color: #eceef0;
-    padding-left: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
     border: solid black 3px;
     border-radius:3px;
     margin:1px;
     cursor:pointer;
+    text-align: center;
 }
 #BTN_Deconnecter:hover{
     background-color: #e69700;

@@ -41,7 +41,6 @@ function supprimerUnCompte(numeroDA){
         data: {"numeroDA" :numeroDA},
         dataType: "text",
         success: function(resultat) {
-            alert(resultat);
             if (resultat == 0) {
                 swal({   title: "Erreur!",   text: "Une érreur est survenue",   type: "error"});
                 $("#TB_DA").val("");
@@ -70,9 +69,8 @@ function nommerAdminAjax(numeroDA){
         data: {"numeroDA" :numeroDA},
         dataType: "text",
         success: function(resultat) {
-            alert(resultat);
             if (resultat == 0) {
-                swal({   title: "Erreur!",   text: "Une érreur est survenue",   type: "error"});
+                swal({   title: "Operation impossible!",   text: "Cet utilisateur est déjà un administrateur",   type: "warning"});
                 $("#TB_DA").val("");
             }
             else if (resultat == 1)

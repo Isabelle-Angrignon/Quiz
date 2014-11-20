@@ -53,7 +53,12 @@
         </div>
 
     </div>
-    <script>$("#btnConnexion").button();</script>
+    <script>
+        $("#btnConnexion").button();
+        $(document).ready(function(){
+            $("#TBNomUsager").focus();
+        });
+    </script>
 	
 	<?php
 		include("Vue/Template/BasDePage.php");
