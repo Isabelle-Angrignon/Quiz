@@ -151,6 +151,29 @@ function ajouterLi_AvecDiv(idUl, element,idElement, estThemeJqueryUI, texteDiv, 
 
     document.getElementById(idUl).appendChild(liTag);
 }
+function ajouterLi_AvecDiv_V2(idUl, element,idElement, estThemeJqueryUI, texteDiv, classDiv, donneeAGarder) {
+    // Initialisation du li
+    var liTag = document.createElement("li");
+    liTag.Value = element;
+    liTag.setAttribute("id", idElement);
+    if (estThemeJqueryUI) {
+        liTag.setAttribute("class", "ui-state-default");
+    }
+    liTag.appendChild(document.createTextNode(element));
+    // Initialisation du div qui va dans le li
+    var divDansLi = document.createElement("div");
+    divDansLi.setAttribute("class", classDiv);
+    divDansLi.appendChild(document.createTextNode(texteDiv));
+    divDansLi.setAttribute("placeholder", donneeAGarder);
+    // Ajout du div dans le li
+    liTag.appendChild(divDansLi);
+    document.getElementById(idUl).appendChild(liTag);
+    // 29 est le nombre de caractère que l'on permet
+    if(element.length > 29) {
+        $(liTag).css("padding-top", "5px");
+        $(liTag).css("height", "50px");
+    }
+}
 
 // creeBaliseAvecClasse(baliseACreer, classe)
 // Par Mathieu Dumoulin
@@ -360,5 +383,32 @@ function reinitialiserMotDePasse(numeroDA) {
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
         }
+    });
+}
+
+
+
+function setVarSessionAjax(clee,valeur){
+    $.ajax({
+        type: 'POST',
+        url: "Controleur/setVarSession.php",
+        data: {"clee" :clee,"valeur":valeur},
+        dataType: "text",
+        async : !1,
+        success: function(resultat) {
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
+        }
+    });
+}
+
+function getVarSessionAjax(clee){
+    return $.ajax({
+        type: 'POST',
+        url: "Controleur/getVarSession.php",
+        data: {"clee" :clee},
+        dataType: "text",
+        async : !1
     });
 }

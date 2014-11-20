@@ -21,7 +21,7 @@ function remplirUIModifGroupeAjax(Cours) {
         dataType: "json",
         success: function(resultat) {
             for(var i = 0; i < resultat.length; ++i) {
-                ajouterLi_AvecDiv("UlModifGroupe",resultat[i].nom + " " + resultat[i].prenom,
+                ajouterLi_AvecDiv_V2("UlModifGroupe",resultat[i].nom + " " + resultat[i].prenom,
                     resultat[i].idUsager, true,resultat[i].idUsager,"divDansLi", "allo");
             }
         },
@@ -45,7 +45,7 @@ function remplirUIEtudiantCoursAjax(Cours) {
         dataType: "json",
         success: function(resultat) {
             for(var i = 0; i < resultat.length; ++i) {
-              ajouterLi_AvecDiv("UlEtudiants",resultat[i].nom + " " + resultat[i].prenom,
+              ajouterLi_AvecDiv_V2("UlEtudiants",resultat[i].nom + " " + resultat[i].prenom,
                     resultat[i].idUsager, true,resultat[i].idUsager,"divDansLi", "");
             }
         },
@@ -68,7 +68,7 @@ function ListerEtudiantAjax() {
         dataType: "json",
         success: function(resultat) {
             for(var i = 0; i < resultat.length; ++i) {
-                ajouterLi_AvecDiv("UlEtudiants",resultat[i].nom + " " +
+                ajouterLi_AvecDiv_V2("UlEtudiants",resultat[i].nom + " " +
                 resultat[i].prenom, resultat[i].idUsager, true,resultat[i].idUsager,"divDansLi", "");
             }
         },
