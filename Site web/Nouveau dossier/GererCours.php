@@ -50,7 +50,15 @@ Description: Cette interface représente l'interface principale d'un professeur 
               connectWith: "#UlCours",
               revert: 150,
               receive: function (event, ui) {
-                  $("#UlCours").sortable("option", "connectWith", false);
+                  if($("#QuizDropZone").children().length == 2)
+                  {
+                      $("#QuizDropZone").children().each(function() {
+                            if($(this).text() != $(ui.item).text()){
+                                $(this).appendTo("#UlCours");
+                            }
+                      });
+                  }
+                  //$("#UlCours").sortable("option", "connectWith", false);
                   $("#UlEtudiants").sortable("option", "dropOnEmpty", true);
                   $('#UlModifGroupe').empty();
                   $('#UlEtudiants').empty();
@@ -133,10 +141,19 @@ Description: Cette interface représente l'interface principale d'un professeur 
          creeFrameDynamique('divDynamique','Vue/dynamique-CSV.php');
      });
      $( "#BTN_Vider" ).click(function() {
-         desinscrireToutEtudiantCoursAjax($("#QuizDropZone").find("li").attr("id"));
-         $('#UlModifGroupe').empty();
-         $('#UlEtudiants').empty();
-         ListerEtudiantAjax();
+         swal({   title: "Êtes-vous sur?",
+             text: "Êtes-vous sur de vouloir vider tout les étudiants de ce cours ?",
+             type: "warning",
+             showCancelButton: true,
+             confirmButtonColor: "#DD6B55",
+             confirmButtonText: "GO ! ",
+         }, function(){
+             desinscrireToutEtudiantCoursAjax($("#QuizDropZone").find("li").attr("id"));
+             $('#UlModifGroupe').empty();
+             $('#UlEtudiants').empty();
+             ListerEtudiantAjax();
+         });
+
      });
      $( "#BTN_Eleve" ).click(function() {
          creeFrameDynamique('divDynamique','Vue/dynamique-CreerEtudiants.php');
