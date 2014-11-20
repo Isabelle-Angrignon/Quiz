@@ -24,6 +24,14 @@ redirigerSiNonConnecte('Etudiant');
 
 $reussi = $_POST['resultat'];
 
+if(isset($_SESSION['listeQuestions']) && isset( $_SESSION['listeQuestionRepondues'] )){
+    $nbQuestionsARepondre = count($_SESSION['listeQuestions']) + count($_SESSION['listeQuestionRepondues']);
+}
+else{
+    $nbQuestionsARepondre = "?";
+}
+
+
 if (!isset($_SESSION['questionsRepondues']))
 {
     $_SESSION['questionsRepondues'] = 1;
@@ -49,6 +57,16 @@ else
     $_SESSION['bonnesReponses'] += $reussi;
 }
 
-echo $_SESSION['bonnesReponses'] . ' / ' .  $_SESSION['questionsRepondues'];
+
+if (isset($_SESSION['typeQuiz']) && $_SESSION['typeQuiz']!= "ALEATOIRE")
+{
+    echo($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']) . " de " . $nbQuestionsARepondre;
+}
+else
+{
+    echo $_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues'];
+}
+
+
 
 
