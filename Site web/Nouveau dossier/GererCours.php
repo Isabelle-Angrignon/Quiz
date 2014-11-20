@@ -69,7 +69,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
               },
               remove: function (event, ui) {
-                  $("#UlCours").sortable("option", "connectWith", "#QuizDropZone");
+                  //$("#UlCours").sortable("option", "connectWith", "#QuizDropZone");
                   $("#UlEtudiants").sortable("option", "dropOnEmpty", false);
                   $('#UlModifGroupe').empty();
                   $('#UlEtudiants').empty();
