@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="710427705">
-    <data-source source="LOCAL" name="MySQL - projetquiz@127.0.0.1" uuid="f0cb4f12-3eb6-4043-9c95-f42463b25246">
+  <component name="DataSourceManagerImpl" format="xml" hash="1250655142">
+    <data-source source="LOCAL" name="MySQL - projetquiz@172.17.104.99" uuid="f0cb4f12-3eb6-4043-9c95-f42463b25246">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1:3306/projetquiz</jdbc-url>
-      <user-name>Admin</user-name>
-      <user-password>dfcbdfcedfc7dfc3dfc4</user-password>
+      <jdbc-url>jdbc:mysql://172.17.104.99:8080/projetquiz</jdbc-url>
       <driver-properties>
         <property name="zeroDateTimeBehavior" value="convertToNull" />
         <property name="tinyInt1isBit" value="false" />

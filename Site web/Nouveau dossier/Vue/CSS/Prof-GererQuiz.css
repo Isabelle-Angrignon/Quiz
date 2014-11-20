@@ -6,18 +6,52 @@
 */
 
 /* CSS propre au drop down list des cours */
+
+#SectionFiltre{
+    display: inline-block;
+    width: 100%;
+}
+
 fieldset {
 	border:0;
 	margin-top:30px;
 	margin-left:3%;
 	padding:0;
-    width: 70%;
+    width: 63%;
+    display: inline-block;
 }
 
 #DDL_Cours {
     margin-top: 2%;
 }
 
+#filtres{
+    vertical-align: 80%;
+    width: 31%;
+    display: inline-block;
+
+}
+
+#BTN_Filtre{
+    border:solid black 2px;
+    background-color:white;
+    border-radius:15px;
+    width: 75px;
+    text-align: center;
+    cursor:pointer;
+    margin-left: 1%;
+}
+#BTN_Filtre:hover{
+    background-color:#E4E4E4;
+}
+#TB_Filtre{
+    width: 150px;
+}
+
+#TB_FiltreID{
+    margin-right: 1%;
+    width: 35px;
+}
 
 /* CSS propre aux listes principales */
 #ListeQuiz {
@@ -406,24 +440,3 @@ textarea.Reponsefocused{
     width:50%;
 }
 
-#SectionFiltre{
-    display: inline-block;
-    width: 100%;
-}
-#BTN_Filtre{
-    border:solid black 2px;
-    background-color:white;
-    border-radius:15px;
-    width: 75px;
-    text-align: center;
-    cursor:pointer;
-    vertical-align: 80%;
-    margin-left: 1%;
-}
-#BTN_Filtre:hover{
-    background-color:#E4E4E4;
-}
-#TB_Filtre{
-    vertical-align: 80%;
-    margin-left: 7%;
-}

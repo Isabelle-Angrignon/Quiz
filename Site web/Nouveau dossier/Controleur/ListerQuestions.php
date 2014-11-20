@@ -15,17 +15,18 @@
     isset($_POST['idQuiz'])?$idQuiz = $_POST['idQuiz']: $idQuiz = "";
     isset($_POST['typeQuiz'])?$typeQuiz = $_POST['typeQuiz']: $typeQuiz = "";
     isset($_POST['filtreEnonce'])?$filtreEnonce = $_POST['filtreEnonce']: $filtreEnonce="";
+    isset($_POST['filtreId'])?$filtreId = $_POST['filtreId']: $filtreId="";
 
     $resultatTriage;
     if($triage == 'default')
     {
-        $resultatTriage = trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce);
+        $resultatTriage = trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce, $filtreId);
     }
     else if($triage == "pasDansCeQuiz")
     {
         if($idQuiz != "" && isset($idProprietaire) && $idCours != "" && $typeQuiz != "")
         {
-            $resultatTriage = listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours, $typeQuiz, $filtreEnonce );
+            $resultatTriage = listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours, $typeQuiz, $filtreEnonce, $filtreId);
         }
         else
         {

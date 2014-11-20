@@ -7,11 +7,11 @@
 //           $
 // Extrants: Le résultat de la procédure, sous forme de JSON
 // Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestions() et envoie la réponse à la fonction javascript traiterJSONQuestions
-function remplirListeQuestions($idCours, $idProprietaire, $triage = 'default', $filtreEnonce = "")
+function remplirListeQuestions($idCours, $idProprietaire, $triage = 'default', $filtreEnonce = "", $filtreId = 0)
 {
     if($triage == 'default')
     {
-        $resultatTriage = trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce);
+        $resultatTriage = trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce, $filtreId);
     }
     echo "<script>traiterJSONQuestions(" . $resultatTriage .", 'UlQuestion');</script>";
 }

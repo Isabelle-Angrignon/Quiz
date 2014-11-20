@@ -77,10 +77,9 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     var idQuiz = $(ui.item).attr("id");
                     var idCours = $("#DDL_Cours option:selected").attr("value");
                     var typeQuiz = $(ui.item).children("div .divProfDansLi").text();
-                    var filtreEnonce = "";///////////todo modif en cours....
                     $("#TB_Filtre").val("");
-                    updateUlModifQuiz("selonQuiz", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, idQuiz, filtreEnonce);
-                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz, filtreEnonce);
+                    updateUlModifQuiz("selonQuiz", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, idQuiz);
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz);
                 },
                 remove: function (event, ui) {
                     $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");
@@ -98,12 +97,13 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 var typeQuiz = $("#QuizDropZone").children("li").children("div .divProfDansLi").text();
                 var idQuiz = $("#QuizDropZone").children("li").attr("id");
                 var filtreEnonce = $("#TB_Filtre").val();///////////todo modif en cours....
+                var filtreId = $("#TB_FiltreID").val();
                 // Si il n'y a aucun quiz en modification
                 if($("#QuizDropZone").children("li").length == 0) {
-                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "default", null, null, filtreEnonce );
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "default", null, null, filtreEnonce, filtreId );
                 }
                 else {
-                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz, filtreEnonce);
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz, filtreEnonce, filtreId);
                 }
             });
 
@@ -149,15 +149,16 @@ Description: Cette interface représente l'interface principale d'un professeur 
 <div class="contenu">
     <div id="SectionFiltre">
         <fieldset>
-    <select id="DDL_Cours">
-            <?php
-            ListerCoursDansSelect("DDL_Cours", false);
-            ?>
-        </select>
-        <input type="text" id="TB_Filtre">
-        <input type="button" id="BTN_Filtre" value="Filtrer">
+            <select id="DDL_Cours">
+                    <?php  ListerCoursDansSelect("DDL_Cours", false); ?>
+             </select>
         </fieldset>
+        <div id="filtres">
+            id: <input type="text" id="TB_FiltreID"> Énoncé: <input type="text" id="TB_Filtre"> <input type="button" id="BTN_Filtre" value="Filtrer">
+        </div>
+
     </div>
+
     <div id="LBL_ListesGererQuiz">
         <label id="GererQuiz" for="ListeQuiz">Mes quiz</label>
         <label id="ModifierQuiz" for="ListeModifQuiz">Modifier un quiz ici</label>

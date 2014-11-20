@@ -41,16 +41,18 @@ function recupererElementsQuestion($idQuestion)
 // Intrants: $idCours = identifiant du cours en question. $idProprietaire = identifiant du professeur en question
 // Extrants: Le résultat de la procédure, sous forme de JSON
 // Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestions()
-function trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce)
+function trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce, $filtreId)
 {  // todo premier modifié....
 
     $filtreEnonce = '%'.$filtreEnonce.'%';
+    $filtreId==""?$filtreId=0:$filtreId=$filtreId;
     $bdd = connecterProf();
-    $requete = $bdd->prepare("CALL listerQuestions(?,?,?)");
+    $requete = $bdd->prepare("CALL listerQuestions(?,?,?,?)");
 
     $requete->bindParam(1, $idCours, PDO::PARAM_INT,10);
     $requete->bindParam(2, $idProprietaire, PDO::PARAM_STR, 10);
     $requete->bindParam(3, $filtreEnonce, PDO::PARAM_STR, 32);
+    $requete->bindParam(4, $filtreId, PDO::PARAM_INT,10);
 
     $requete->execute();
     $resultat = $requete->fetchAll();
@@ -89,7 +91,7 @@ function listerQuestionsDunQuiz($idQuiz, $idProprietaire)
 //           $idCours = identifiant du cours qui est sélectionné dans la DDL.  $typeQuiz = type du quiz qui est présentement en cours de modification
 // Extrants: Le résultat de la procédure, sous forme de JSON
 // Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestionsSelonQuiz()
-function listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours, $typeQuiz, $filtreEnonce)
+function listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours, $typeQuiz, $filtreEnonce, $filtreId)
 {
     $filtreEnonce = '%'.$filtreEnonce.'%';
     $bdd = connecterProf();

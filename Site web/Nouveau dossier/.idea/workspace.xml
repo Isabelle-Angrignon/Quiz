@@ -30,6 +30,14 @@
         <option name="myItemId" />
         <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
       </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - projetquiz@172.17.104.99" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="projetquiz" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
     </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
@@ -38,103 +46,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="dynamique-RepondreQuestion.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Vue/dynamique-RepondreQuestion.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-21.384615" vertical-offset="141" max-vertical-offset="2686">
+              <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Prof-GererQuiz.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Prof-GererQuiz.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="2567">
-              <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+            <state vertical-scroll-proportion="-32.11111" vertical-offset="0" max-vertical-offset="3417">
+              <caret line="102" column="29" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GenererQuestionsAleatoires.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GenererQuestionsAleatoires.php">
+      <file leaf-file-name="Prof-GererQuiz.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Javascript/Prof-GererQuiz.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1139">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15300">
+              <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GererCours.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GererCours.php">
+      <file leaf-file-name="ListerQuestions.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Controleur/ListerQuestions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.203704" vertical-offset="1541" max-vertical-offset="2499">
-              <caret line="104" column="36" selection-start-line="104" selection-start-column="36" selection-end-line="104" selection-end-column="36" />
+            <state vertical-scroll-proportion="-15.923077" vertical-offset="62" max-vertical-offset="935">
+              <caret line="28" column="130" selection-start-line="28" selection-start-column="130" selection-end-line="28" selection-end-column="130" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuProf.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Vue/Template/MenuProf.php">
+      <file leaf-file-name="ModeleQuestions.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Modele/ModeleQuestions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.060642093" vertical-offset="0" max-vertical-offset="841">
-              <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+            <state vertical-scroll-proportion="-10.307693" vertical-offset="463" max-vertical-offset="3927">
+              <caret line="43" column="60" selection-start-line="43" selection-start-column="60" selection-end-line="43" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuEtudiant.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vue/Template/MenuEtudiant.php">
+      <file leaf-file-name="projetquiz.listerQuestions" pinned="false" current-in-tab="true">
+        <entry file="dbDummy://dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..listerQuestions">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="187">
-              <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Utilitaires.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controleur/Utilitaires.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.038462" vertical-offset="255" max-vertical-offset="2278">
-              <caret line="41" column="39" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Utilitaires.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vue/Template/Utilitaires.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="25.692308" vertical-offset="668" max-vertical-offset="1496">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InclusionTemplate.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vue/Template/InclusionTemplate.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="238">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GererSonCompte.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GererSonCompte.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.346153" vertical-offset="153" max-vertical-offset="1921">
-              <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
-              <folding>
-                <marker date="1413151329558" expanded="true" signature="843:908" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1207">
-              <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.559415" vertical-offset="0" max-vertical-offset="547">
+              <caret line="18" column="101" selection-start-line="18" selection-start-column="101" selection-end-line="18" selection-end-column="101" />
               <folding />
             </state>
           </provider>
@@ -150,30 +116,73 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="chrome-extension://dajedkncpodkggklbegccjpmnglmnflm/chrome_sbi_compiled.js" />
-        <option value="$PROJECT_DIR$/Vue/Utilitaires.php" />
-        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..ajouterUsager" />
-        <option value="dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..usagers" />
-        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..insererTag" />
-        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..inscrireEtudiantCours" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..associerQuestionCours" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..associerQuizCours" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..supprimerQuestion" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..associerQuizQuestion" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..modifierReponse" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..modifierQuestion" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..miseAJourStats" />
+        <option value="$PROJECT_DIR$/Modele/ModeleQuiz.php" />
+        <option value="$PROJECT_DIR$/Vue/CSS/DynamiqueQuestionARepondre.css" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..recupererInfoQuiz" />
+        <option value="dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..statsglobales" />
+        <option value="$PROJECT_DIR$/Modele/ModeleReponses.php" />
+        <option value="$PROJECT_DIR$/Modele/ModeleUtilisateurs.php" />
+        <option value="$PROJECT_DIR$/Controleur/AJAX_ModifierQuestion.php" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/verifierSiQuizTermine.php" />
+        <option value="dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..vueprofparcour" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/SetIdCoursSession.php" />
+        <option value="$PROJECT_DIR$/Controleur/Utilitaires.php" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/ListerQuizFormatifs.php" />
+        <option value="dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..associationpreferencedroits" />
+        <option value="$PROJECT_DIR$/Controleur/seDeconnecter.php" />
+        <option value="$PROJECT_DIR$/Controleur/cFonctionsCours.php" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/updateScoreAffiche.php" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/setInfoQuizSession.php" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/listerQuestionsFormatif.php" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/GenererQuestionsAleatoires.php" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/estDerniereQuestion.php" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/chargerNouvelleQuestion.php" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/getOrdreQuestionsEstAleatoire.php" />
+        <option value="$PROJECT_DIR$/Modele/ModeleStatistiques.php" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..listerQuizEtudiant" />
+        <option value="$PROJECT_DIR$/Modele/mFonctionsQuizEtudiant.php" />
+        <option value="$PROJECT_DIR$/Vue/dynamique-RepondreQuestion.php" />
+        <option value="$PROJECT_DIR$/Vue/CSS/Etudiant-Accueil.css" />
+        <option value="$PROJECT_DIR$/Javascript/Etudiant-Accueil.js" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..listerQuestionVraiFauxSelonQuestion" />
+        <option value="$PROJECT_DIR$/Vue/dynamique-ReinitMdPEtudiant.php" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/gererFinQuiz.php" />
         <option value="db-console:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/" />
-        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..genererQuestionsAleatoires" />
-        <option value="$PROJECT_DIR$/Etudiant-Accueil.php" />
-        <option value="$PROJECT_DIR$/CSS/Etudiant-Accueil.css" />
-        <option value="$PROJECT_DIR$/MainTest.php" />
-        <option value="$PROJECT_DIR$/Vue/PHP de base/MenuProf.php" />
-        <option value="$PROJECT_DIR$/Javascript/Generique.js" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..listerQuestionsPasDansQuiz" />
+        <option value="$PROJECT_DIR$/Controleur/cFonctionsQuizEtudiant.php" />
+        <option value="$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/validerReponseAQuestion.php" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..listerQuestionsSelonQuiz" />
+        <option value="$PROJECT_DIR$/Vue/CSS/Prof-GererQuiz.css" />
         <option value="$PROJECT_DIR$/Prof-GererQuiz.php" />
-        <option value="$PROJECT_DIR$/Modele/Fonctions.php" />
-        <option value="$PROJECT_DIR$/Vue/Template/MenuEtudiant.php" />
-        <option value="$PROJECT_DIR$/Vue/Template/MenuProf.php" />
+        <option value="$PROJECT_DIR$/Javascript/Prof-GererQuiz.js" />
+        <option value="$PROJECT_DIR$/Controleur/ListerQuestions.php" />
+        <option value="dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..questions" />
+        <option value="$PROJECT_DIR$/Modele/ModeleQuestions.php" />
+        <option value="$PROJECT_DIR$/Controleur/cFonctionsProf-GererQuiz.php" />
+        <option value="dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..listerQuestions" />
       </list>
     </option>
   </component>
+  <component name="NamedScopeManager">
+    <scope name="quizCode" pattern="file[Nouveau dossier]:*/&amp;&amp;!file[Nouveau dossier]:.idea//*&amp;&amp;!file[Nouveau dossier]:.metadata//*&amp;&amp;!file[Nouveau dossier]:_vti_cnf//*&amp;&amp;!file[Nouveau dossier]:dokuwiki//*&amp;&amp;!file[Nouveau dossier]:Images//*&amp;&amp;!file[Nouveau dossier]:jquery-ui-1.11.1.custom//*&amp;&amp;!file[Nouveau dossier]:jquery-ui-1.11.2.custom//*&amp;&amp;!file[Nouveau dossier]:QuizInfo//*&amp;&amp;!file[Nouveau dossier]:sweetalert-master//*&amp;&amp;!file[Nouveau dossier]:Vue/Template/_vti_cnf//*&amp;&amp;!file[Nouveau dossier]:Vue/Images//*&amp;&amp;!file[Nouveau dossier]:Vue/CSS/_vti_cnf//*&amp;&amp;!file[Nouveau dossier]:Modele/_vti_cnf//*&amp;&amp;!file[Nouveau dossier]:Javascript/_vti_cnf//*&amp;&amp;!file:Javascript/jquery.min.js&amp;&amp;!file[Nouveau dossier]:Controleur/_vti_cnf//*" />
+  </component>
+  <component name="PhpDebugGeneral" break_at_first_line="true" hide_empty_superglobals="false" />
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost" name="ApacheIsa" port="83" />
+    </servers>
+  </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.5" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="1358" />
+    <option name="y" value="-563" />
     <option name="width" value="1696" />
     <option name="height" value="1026" />
   </component>
@@ -203,7 +212,17 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scope">
+        <subPane subId="Problems" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -250,7 +269,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Template" />
+              <option name="myItemId" value="CSS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Nouveau dossier" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Nouveau dossier" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Javascript" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -268,17 +301,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Nouveau dossier" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Nouveau dossier" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controleur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FonctionQuizEtudiant" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="options.lastSelected" value="Configurable.PHP.Servers" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="TODO_SCOPE" value="quizCode" />
+    <property name="database.results.filters.show" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Isabelle\Documents\GitHub\Quiz\Site web\Nouveau dossier\Vue" />
+      <recent name="C:\Users\Isabelle\Documents\GitHub\Quiz\Site web\Nouveau dossier\Controleur\FonctionQuizEtudiant" />
+    </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.php">
     <configuration default="false" name="Utilitaires.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Nouveau dossier/Vue/Utilitaires.php">
@@ -293,26 +355,55 @@
     <configuration default="true" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server">
       <method />
     </configuration>
+    <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application">
+      <method />
+    </configuration>
     <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug">
       <method />
     </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
+    <configuration default="true" type="com.intellij.database.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
+      <method />
+    </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
       <method />
     </configuration>
     <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
-    <configuration default="false" name="index.php" type="JavascriptDebugType" factoryName="JavaScript Debug" nameIsGenerated="true" uri="http://localhost:63342/Nouveau dossier/index.php">
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <pass-parent-env-vars>false</pass-parent-env-vars>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="index.php" type="JavascriptDebugType" factoryName="JavaScript Debug" nameIsGenerated="true" uri="http://127.0.0.1:83/index.php">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
       <method />
     </configuration>
-    <list size="2">
+    <configuration default="false" name="PHPxDebug" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="ApacheIsa" start_url="/ProjetQuiz/">
+      <RunnerSettings RunnerId="PhpRunner" />
+      <RunnerSettings RunnerId="PhpWebAppDebugRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpWebAppDebugRunner" />
+      <method />
+    </configuration>
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.index.php" />
-      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.Utilitaires.php" />
+      <item index="1" class="java.lang.String" itemvalue="PHP Web Application.PHPxDebug" />
+      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.Utilitaires.php" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -333,32 +424,52 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="2">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="1358" y="-563" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22797619" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30201343" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20904645" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1125" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43913043" sideWeight="0.46130952" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21149144" sideWeight="0.49944136" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22035794" sideWeight="0.53869045" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29944134" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18154034" sideWeight="0.5005587" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.4795764" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24409449" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36129755" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48703703" sideWeight="0.51966715" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43913043" sideWeight="0.53869045" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4503937" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -382,215 +493,455 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="11" />
+      <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Prof-GererQuiz.php">
+    <entry file="file://$PROJECT_DIR$/Controleur/lierQuizQuestion.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2567">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1207">
-          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Javascript/Generique.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1207" max-vertical-offset="3213">
-          <caret line="74" column="1" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prof-GererQuiz.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="2261">
-          <caret line="46" column="40" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Javascript/Generique.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1360" max-vertical-offset="1530">
-          <caret line="80" column="67" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Etudiant-Accueil.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="573">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prof-GererQuiz.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2125">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+    <entry file="uml://DATABASE/f0cb4f12-3eb6-4043-9c95-f42463b25246.schema:projetquiz">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>DATABASE</ID>
+          <OriginalElement>f0cb4f12-3eb6-4043-9c95-f42463b25246.schema:projetquiz</OriginalElement>
+          <nodes>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.usagers</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.statsquestionetudiantquiz</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.typesquestion</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.statsglobales</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.tags</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.typesquiz</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.quiz</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.droits</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.associationsdroitsquestionsprof</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.questions</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.associationstagquestion</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.associationsquizquestion</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.preferencesquestionprof</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.associationquestioncours</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.questionsvraifaux</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.associationprofesseurcours</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.associationquizcours</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.reponses</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.associationtypequizquestions</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.difficultesquestion</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.associationpreferencedroits</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.cours</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.codesderreur</node>
+            <node x="" y="">f0cb4f12-3eb6-4043-9c95-f42463b25246.table:projetquiz.inscriptionsetudiantcours</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="359.0" y="-1822.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Columns</Category>
+            <Category>Key columns</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Javascript/Generique.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1581">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
+    <entry file="dbDummy://dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..associationpreferencedroits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Etudiant-Accueil.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prof-GererQuiz.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Javascript/Generique.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1173">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
+    <entry file="file://$PROJECT_DIR$/Controleur/cFonctionsCours.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Etudiant-Accueil.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Javascript/Generique.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1207" max-vertical-offset="3213">
-          <caret line="74" column="1" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1207">
-          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prof-GererQuiz.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="2567">
-          <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenererQuestionsAleatoires.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1139">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vue/Template/InclusionTemplate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="890">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vue/Template/Utilitaires.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="25.692308" vertical-offset="668" max-vertical-offset="1496">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GererCours.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.203704" vertical-offset="1541" max-vertical-offset="2499">
-          <caret line="104" column="36" selection-start-line="104" selection-start-column="36" selection-end-line="104" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vue/Template/MenuEtudiant.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="187">
-          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-          <folding />
+        <state vertical-scroll-proportion="0.31211752" vertical-offset="0" max-vertical-offset="1241">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Controleur/Utilitaires.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.038462" vertical-offset="255" max-vertical-offset="2278">
-          <caret line="41" column="39" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.3083434" vertical-offset="0" max-vertical-offset="3060">
+          <caret line="24" column="9" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/seDeconnecter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10119048" vertical-offset="0" max-vertical-offset="840">
+          <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modele/ModeleQuiz.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34285715" vertical-offset="69" max-vertical-offset="2601">
+          <caret line="24" column="9" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GererSonCompte.php">
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/ListerQuizFormatifs.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.346153" vertical-offset="153" max-vertical-offset="1921">
-          <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.18796068" vertical-offset="0" max-vertical-offset="816">
+          <caret line="9" column="52" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/estDerniereQuestion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.062653564" vertical-offset="0" max-vertical-offset="814">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/chargerNouvelleQuestion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35503685" vertical-offset="0" max-vertical-offset="1037">
+          <caret line="17" column="115" selection-start-line="17" selection-start-column="115" selection-end-line="17" selection-end-column="115" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/updateScoreAffiche.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15044248" vertical-offset="0" max-vertical-offset="1020">
+          <caret line="7" column="87" selection-start-line="7" selection-start-column="87" selection-end-line="7" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/setInfoQuizSession.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.021491783" vertical-offset="0" max-vertical-offset="952">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/SetIdCoursSession.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19342604" vertical-offset="0" max-vertical-offset="833">
+          <caret line="9" column="2" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/listerQuestionsFormatif.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2579014" vertical-offset="0" max-vertical-offset="1173">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/verifierSiQuizTermine.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10745891" vertical-offset="0" max-vertical-offset="791">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/GenererQuestionsAleatoires.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54299754" vertical-offset="0" max-vertical-offset="814">
+          <caret line="44" column="38" selection-start-line="44" selection-start-column="38" selection-end-line="44" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/getOrdreQuestionsEstAleatoire.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16707617" vertical-offset="0" max-vertical-offset="814">
+          <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/ListerStats.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modele/ModeleQuestionsVraiFaux.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1564">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..statsglobales">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
+          <caret line="1" column="1" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..listerQuizEtudiant">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="603">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modele/mFonctionsQuizEtudiant.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.7712305" vertical-offset="0" max-vertical-offset="2397">
+          <caret line="128" column="24" selection-start-line="128" selection-start-column="24" selection-end-line="128" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modele/ModeleStatistiques.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7741348" vertical-offset="0" max-vertical-offset="765">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modele/ModeleEtudiants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vue/CSS/DynamiqueQuestionARepondre.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2601">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vue/CSS/Etudiant-Accueil.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="519" max-vertical-offset="1224">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vue/Images/GererCompte.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FAQ.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.67509025" vertical-offset="0" max-vertical-offset="1139">
+          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..typesquestion">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Etudiant-Accueil.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7071057" vertical-offset="153" max-vertical-offset="1972">
+          <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..listerQuestionVraiFauxSelonQuestion">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="603">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/gererFinQuiz.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05964912" vertical-offset="0" max-vertical-offset="1224">
+          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..cours">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..associationquestioncours">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="491">
+          <caret line="0" column="41" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..listerQuestionsPasDansQuiz">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7586207" vertical-offset="0" max-vertical-offset="340">
+          <caret line="3" column="131" selection-start-line="3" selection-start-column="131" selection-end-line="3" selection-end-column="131" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..usagers">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/FonctionQuizEtudiant/validerReponseAQuestion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.307692" vertical-offset="0" max-vertical-offset="748">
+          <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Javascript/Etudiant-Accueil.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3625" vertical-offset="4353" max-vertical-offset="8398">
+          <caret line="268" column="32" selection-start-line="268" selection-start-column="32" selection-end-line="268" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..listerQuestionsSelonQuiz">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.6896553" vertical-offset="0" max-vertical-offset="272">
+          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/cFonctionsQuizEtudiant.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11371841" vertical-offset="2470" max-vertical-offset="4760">
+          <caret line="160" column="21" selection-start-line="160" selection-start-column="21" selection-end-line="160" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vue/dynamique-RepondreQuestion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.384615" vertical-offset="141" max-vertical-offset="2686">
+          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/ListerQuestions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.923077" vertical-offset="62" max-vertical-offset="935">
+          <caret line="28" column="130" selection-start-line="28" selection-start-column="130" selection-end-line="28" selection-end-column="130" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..questions">
+      <provider editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="772">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modele/ModeleQuestions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.307693" vertical-offset="463" max-vertical-offset="3927">
+          <caret line="43" column="60" selection-start-line="43" selection-start-column="60" selection-end-line="43" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Javascript/Prof-GererQuiz.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15300">
+          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controleur/cFonctionsProf-GererQuiz.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53817505" vertical-offset="0" max-vertical-offset="7769">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
-            <marker date="1413151329558" expanded="true" signature="843:908" placeholder="..." />
+            <element signature="e#6#35#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vue/Template/MenuProf.php">
+    <entry file="file://$PROJECT_DIR$/Vue/CSS/Prof-GererQuiz.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.060642093" vertical-offset="0" max-vertical-offset="841">
-          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.310219" vertical-offset="153" max-vertical-offset="7616">
+          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Prof-GererQuiz.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-32.11111" vertical-offset="0" max-vertical-offset="3417">
+          <caret line="102" column="29" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbprocedure:/b239c44b/f0cb4f12-3eb6-4043-9c95-f42463b25246/projetquiz..listerQuestions">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.559415" vertical-offset="0" max-vertical-offset="547">
+          <caret line="18" column="101" selection-start-line="18" selection-start-column="101" selection-end-line="18" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>quizCode</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+          <order>
+            <scope name="quizCode" />
+          </order>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 
