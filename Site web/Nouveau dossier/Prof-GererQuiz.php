@@ -70,7 +70,15 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 revert: 150,
                 helper : 'clone',
                 receive: function (event, ui) {
-                    $("#UlQuiz").sortable("option", "connectWith", false);
+                    //$("#UlQuiz").sortable("option", "connectWith", false);
+                    if($("#QuizDropZone").children().length == 2)
+                    {
+                        $("#QuizDropZone").children().each(function() {
+                            if($(this).text() != $(ui.item).text()){
+                                $(this).appendTo("#UlQuiz");
+                            }
+                        });
+                    }
                     $("#UlQuestion").sortable("option", "dropOnEmpty", true);
                     $('#UlModifQuiz').empty();
                     $('#UlQuestion').empty();
@@ -82,7 +90,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz);
                 },
                 remove: function (event, ui) {
-                    $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");
+                   // $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");
                     $("#UlQuestion").sortable("option", "dropOnEmpty", false);
                     $('#UlModifQuiz').empty();
                     $('#UlQuestion').empty();
