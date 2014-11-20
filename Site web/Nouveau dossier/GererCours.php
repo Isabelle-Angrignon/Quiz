@@ -164,15 +164,17 @@ Description: Cette interface représente l'interface principale d'un professeur 
      });
      $(document).ready(function(){
          getVarSessionAjax("coursActuel").success(function(idChargement){
-             var selecteur = "li#"+idChargement.trim();
-             $(selecteur).appendTo("#QuizDropZone");
-             $("#UlEtudiants").sortable("option", "dropOnEmpty", true);
-             $('#UlModifGroupe').empty();
-             $('#UlEtudiants').empty();
-             remplirUIModifGroupeAjax($(selecteur).attr('id'));
-             remplirUIEtudiantCoursAjax($(selecteur).attr('id'));
-             $('#BTN_GestionGoupe').show();
-             $('#BTN_Cours').hide();
+             if(idChargement.trim() != "undefined") {
+                 var selecteur = "li#" + idChargement.trim();
+                 $(selecteur).appendTo("#QuizDropZone");
+                 $("#UlEtudiants").sortable("option", "dropOnEmpty", true);
+                 $('#UlModifGroupe').empty();
+                 $('#UlEtudiants').empty();
+                 remplirUIModifGroupeAjax($(selecteur).attr('id'));
+                 remplirUIEtudiantCoursAjax($(selecteur).attr('id'));
+                 $('#BTN_GestionGoupe').show();
+                 $('#BTN_Cours').hide();
+             }
          });
 
      })
