@@ -50,6 +50,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
               connectWith: "#UlCours",
               revert: 150,
               receive: function (event, ui) {
+                  setVarSessionAjax("coursActuel",$(ui.item).attr('id'));
                   if($("#QuizDropZone").children().length == 2)
                   {
                       $("#QuizDropZone").children().each(function() {
@@ -69,7 +70,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
               },
               remove: function (event, ui) {
-                  //$("#UlCours").sortable("option", "connectWith", "#QuizDropZone");
+                  setVarSessionAjax("coursActuel","undefined");
                   $("#UlEtudiants").sortable("option", "dropOnEmpty", false);
                   $('#UlModifGroupe').empty();
                   $('#UlEtudiants').empty();
@@ -146,7 +147,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
              type: "warning",
              showCancelButton: true,
              confirmButtonColor: "#DD6B55",
-             confirmButtonText: "GO ! ",
+             confirmButtonText: "GO ! "
          }, function(){
              desinscrireToutEtudiantCoursAjax($("#QuizDropZone").find("li").attr("id"));
              $('#UlModifGroupe').empty();
@@ -161,6 +162,20 @@ Description: Cette interface représente l'interface principale d'un professeur 
      $( "#BTN_EleveReinitialiser" ).click(function() {
          creeFrameDynamique('divDynamique','Vue/dynamique-ReinitialiserMotDePasseEtudiant.php');
      });
+     $(document).ready(function(){
+         getVarSessionAjax("coursActuel").success(function(idChargement){
+             var selecteur = "li#"+idChargement.trim();
+             $(selecteur).appendTo("#QuizDropZone");
+             $("#UlEtudiants").sortable("option", "dropOnEmpty", true);
+             $('#UlModifGroupe').empty();
+             $('#UlEtudiants').empty();
+             remplirUIModifGroupeAjax($(selecteur).attr('id'));
+             remplirUIEtudiantCoursAjax($(selecteur).attr('id'));
+             $('#BTN_GestionGoupe').show();
+             $('#BTN_Cours').hide();
+         });
+
+     })
 
  </script>
 

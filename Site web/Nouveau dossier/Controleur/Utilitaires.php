@@ -129,7 +129,7 @@ function GenererLi($idUi , $valeur , $idLi)
 
 function GenererLi_V2($idUi , $valeur , $idLi, $textDiv , $classDiv)
 {
-    echo '<script>ajouterLi_AvecDiv( "'. $idUi . '" , "'.$valeur.'" ,"'.$idLi.'", true , "'.$textDiv .'", "'. $classDiv .'");</script>';
+    echo '<script>ajouterLi_AvecDiv_V2( "'. $idUi . '" , "'.$valeur.'" ,"'.$idLi.'", true , "'.$textDiv .'", "'. $classDiv .'");</script>';
 }
 
 //fonction php qui appelle simplement la version javascript pour creer les éléements d'une liste "selectable" de réponse
