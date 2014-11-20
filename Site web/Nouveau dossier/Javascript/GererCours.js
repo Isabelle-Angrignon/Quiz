@@ -134,7 +134,7 @@ function creerEtudiantCoursAjax(idEleve,nom,prenom) {
         dataType: "text",
         success: function(resultat){
             if(resultat == 1) {
-            swal({title:"Réussite" ,type:"success", text:"L'usager a été créer"});
+            swal({title:"Réussie" ,type:"success", text:"L'usager a été créé"});
                 $("#TB_NumeroDA").val("");
                 $("#TB_Nom").val("");
                 $("#TB_Prenom").val("");
