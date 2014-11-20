@@ -105,15 +105,18 @@
     }
     updateAutoSizeTextArea();
     // Ajoute la gestion des hotkeys sur le div dynamique.
+    $(document).off("keydown");
     $(document).keydown(function(e) {
         if(e.ctrlKey == true) {
             // e.which == s
             if(e.which == 83) {
-                setTimeout(function() {
-                    $("#BTN_ConfirmerQuestion").click();
-                }, 0);
-                $(document).off("keydown");
-                e.preventDefault();
+                if(!e.shiftKey) {
+                    prevenirDefautDunEvent(e,function() { $("#BTN_ConfirmerQuestion").click(); });
+                    $(document).off("keydown");
+                }
+                else {
+                    prevenirDefautDunEvent(e,function() { $("#BTN_ContinuerAjout").click();});
+                }
             }
         }
     });
@@ -188,6 +191,39 @@
     </div>
 </div>
 <div id="parametresQuestion">
+    <h3>Type de quiz associé</h3>
+    <div>
+        <ul id="TypeQuizAssocie">
+            <?php
+            afficherTypesQuiz();
+            if($_SESSION["etat"] == "modifierQuestion")
+            {
+                $typeQuiz = prendreTypeQuizAssocie($_SESSION['idQuestion']);
+                echo "<script>cocherTypeQuizAssocieSelonQuestion(".json_encode($typeQuiz).");</script>";
+            }
+            else
+            {
+                echo "<script>cocherTypeQuizAssocieParDefaut('TypeQuizAssocie');</script>";
+            }
+            ?>
+        </ul>
+    </div>
+    <h3>Type de question</h3>
+    <div>
+        <ul id="TypeQuestion">
+            <?php
+            afficherTypesQuestions();
+            if($_SESSION["etat"] == "modifierQuestion")
+            {
+                echo "<script>cocherTypeQuestionSelonQuestion('".$typeQuestion."');</script>";
+            }
+            else if($_SESSION["etat"] == "nouvelleQuestion")
+            {
+                echo "<script>cocherRadioButtonAvecValeur('CHOIX_MULTI_UNIQUE');</script>";
+            }
+            ?>
+        </ul>
+    </div>
     <h3>Cours</h3>
     <div>
         <ul id="listeAjoutCours">
@@ -200,35 +236,6 @@
                 {
                     echo "<script>cocherCheckBoxCoursSelonCoursCourant('listeAjoutCours');</script>";
                 }
-            ?>
-        </ul>
-    </div>
-    <h3>Type de question</h3>
-    <div>
-        <ul id="TypeQuestion">
-            <?php
-                afficherTypesQuestions();
-                if($_SESSION["etat"] == "modifierQuestion")
-                {
-                    echo "<script>cocherTypeQuestionSelonQuestion('".$typeQuestion."');</script>";
-                }
-                else if($_SESSION["etat"] == "nouvelleQuestion")
-                {
-                    echo "<script>cocherRadioButtonAvecValeur('CHOIX_MULTI_UNIQUE');</script>";
-                }
-            ?>
-        </ul>
-    </div>
-    <h3>Type de quiz associé</h3>
-    <div>
-        <ul id="TypeQuizAssocie">
-            <?php
-                afficherTypesQuiz();
-            if($_SESSION["etat"] == "modifierQuestion")
-            {
-                $typeQuiz = prendreTypeQuizAssocie($_SESSION['idQuestion']);
-                echo "<script>cocherTypeQuizAssocieSelonQuestion(".json_encode($typeQuiz).");</script>";
-            }
             ?>
         </ul>
     </div>
