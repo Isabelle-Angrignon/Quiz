@@ -245,6 +245,12 @@ function getNomCours()
 function getNomProfDuCoursDeLEtudiant()
 {
     $nomProf = "Nom du prof ?";
+
+    $cours = $_SESSION['listeCours'][$_SESSION['posCoursDansListe']];
+
+    return $cours['prenom'] . ' ' . $cours['nom'];
+
+    /*
     foreach($_SESSION['listeCours'] as $cours)
     {
         if ($cours['idCours'] == $_SESSION['idCours'])
@@ -252,7 +258,7 @@ function getNomProfDuCoursDeLEtudiant()
             $nomProf = $cours['prenom'] . ' ' . $cours['nom'];
         }
     }
-    return $nomProf;
+    return $nomProf;*/
 }
 
 /*

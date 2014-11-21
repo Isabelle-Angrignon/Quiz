@@ -118,13 +118,21 @@ function ouvrirUnQuizAleatoire(){
 // Extrants: coursEstChoisi: int 0|1
 function SetIdCoursSession(){
     var idCours = $("#DDL_Cours option:selected").attr("value");
+    var index = $("#DDL_Cours option:selected").index();
+
+    // Pour une raison création via jQuery-ui qui insert un script entre chaque li,
+    // l'index est par bond de 2: 1, 3, 5, ,7...
+    // On doit donc faire le calcul suivant pour récupérer l'index de position dans la
+    // variable de session"listeCours".  On enlève 1 à la fin pour éliminer l'item "tous les cours" qui n'est pas
+    // dans la variable de session
+    var posCoursDansListe = (index-1)/2 -1;
     var coursEstChoisi = 0;
 
     // Sur click quiz aléatoire, reécupere le id du cours et le met dans session
     $.ajax({
         type:"POST",
         url: 'Controleur/FonctionQuizEtudiant/SetIdCoursSession.php',
-        data:{'selectCours':idCours},
+        data:{'selectCours':idCours, 'posCoursDansListe':posCoursDansListe},
         dataType:"text",
         async : !1,
         success: function(msg){
