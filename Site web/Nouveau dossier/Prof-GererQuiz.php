@@ -70,6 +70,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 revert: 150,
                 helper : 'clone',
                 receive: function (event, ui) {
+                    $(ui.item).off("click");
                     //$("#UlQuiz").sortable("option", "connectWith", false);
                     if($("#QuizDropZone").children().length == 2)
                     {
@@ -90,7 +91,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz);
                 },
                 remove: function (event, ui) {
-                   // $("#UlQuiz").sortable("option", "connectWith", "#QuizDropZone");
+                    addClickEventToQuiz();
                     $("#UlQuestion").sortable("option", "dropOnEmpty", false);
                     $('#UlModifQuiz').empty();
                     $('#UlQuestion').empty();

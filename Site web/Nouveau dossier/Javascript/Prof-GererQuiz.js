@@ -29,8 +29,8 @@ function addClickEventToQuestions(usagerCourant) {
 }
 
 function addClickEventToQuiz() {
-    $("#UlQuiz li, #UlModifQuiz li").off("click");
-    $("#UlQuiz li, #UlModifQuiz li").click( function() {
+    $("#UlQuiz li").off("click");
+    $("#UlQuiz li").click( function() {
         ajouterVariableSessionQuiz($(this).attr("id"), "modifierQuiz");
 
         creeFrameDynamique("divDynamiqueQuiz", "Vue/dynamique-GererQuiz.php");
@@ -178,7 +178,7 @@ function updateUlModifQuiz(triage,usagerCourant,idQuiz, filtreEnonce, filtreId) 
         success: function(resultat) {
             traiterJSONQuestions(resultat, "UlModifQuiz");
             // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
-            addClickEventToQuestions(usagerCourant);
+            addClickEventToQuiz(usagerCourant);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
@@ -651,14 +651,9 @@ function modifierChainePourJSON(chaine) {
 function ajouterQuestion(idCreateur, continuer) {
     if( reponsesSontValides()) {
         var jsonQuestion = getJSONEnonceQuestion(idCreateur);
-
-
         var jsonReponses = jsonifierReponsesQuestionCourante();
-
         var jsonCours = jsonifierCoursSelectionnes("listeAjoutCours");
-
         var typeQuestion = $("#TypeQuestion li input[type=radio]:checked").attr("value");
-
         var jsonTypeQuizAss = jsonifierTypeQuizAssQuestionCourante();
 
 
@@ -718,13 +713,9 @@ function modifierQuestion( idUsagerCourant,idQuestion, idProprietaire) {
     }
     else if(reponsesSontValides()) {
         var jsonQuestion = getJSONEnonceQuestion(idUsagerCourant, idQuestion);
-
         var jsonReponses = jsonifierReponsesQuestionCourante();
-
         var jsonCours = jsonifierCoursSelectionnes("listeAjoutCours");
-
         var typeQuestion = $("#TypeQuestion li input[type=radio]:checked").attr("value");
-
         var jsonTypeQuizAss = jsonifierTypeQuizAssQuestionCourante();
 
 
@@ -848,6 +839,7 @@ function ajouterQuiz(idUsagerProprietaire) {
                 fermerDivDynamique();
                 var idCours = $("#DDL_Cours option:selected").attr("value");
                 updateUlQuiz(idCours, idUsagerProprietaire);
+                retirerQuizDeQuizDropZone(idCours, idUsagerProprietaire);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -881,6 +873,8 @@ function modifierQuiz(idQuiz, idUsagerProprietaire) {
                 fermerDivDynamique();
                 var idCours = $("#DDL_Cours option:selected").attr("value");
                 updateUlQuiz(idCours, idUsagerProprietaire);
+                // Retire le quiz qui est en cour de modification
+                retirerQuizDeQuizDropZone(idCours, idUsagerProprietaire);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -917,12 +911,20 @@ function supprimerQuiz(idQuiz, idUsagerProprietaire) {
                         else {
                             var cours = $("#DDL_Cours option:selected").attr("value");
                             updateUlQuiz(cours, idUsagerProprietaire);
+                            // Retire le quiz qui est en cour de modification
+                            retirerQuizDeQuizDropZone(cours, idUsagerProprietaire);
                         }
                         swal("Félicitation !", "Votre quiz à été supprimée", "success");
                     }
                 }
             });
         }
-
     });
+}
+
+function retirerQuizDeQuizDropZone(idCours, idUsagerCourrant) {
+    // Retire le quiz qui est en cour de modification
+    updateUlQuestion(idCours, idUsagerCourrant,  "default");
+    $("#QuizDropZone").children("li").remove();
+    $("#UlModifQuiz").empty();
 }

@@ -83,7 +83,6 @@ fieldset {
 #QuizDropZone li {
     height:35px;
     border-radius:inherit;
-    cursor:pointer;
     vertical-align:middle;
     padding-top:15px;
     text-align: left;
@@ -178,7 +177,7 @@ textarea.Reponsefocused{
 /* ----------------  Div Dynamique pour GererQuestions ------------------ */
 #QuestionConteneur {
     display:inline-block;
-    width:50%;
+    width:48%;
     margin-left: 2%;
 }
 
@@ -303,13 +302,15 @@ textarea.Reponsefocused{
     font-family:inherit;
     font-size:14px;
 }
-
-#parametresQuestion {
-    width: 35%;
+#sectionDroiteQuestion {
     display: inline-block;
     vertical-align: top;
-    margin-left: 10%;
+    margin-left: 5%;
     height:500px;
+}
+#parametresQuestion {
+    width: 100%;
+    height:350px;
 }
 
 #parametresQuestion .ui-widget-content {
@@ -344,6 +345,12 @@ textarea.Reponsefocused{
     margin-top: -35px;
     margin-right: 15px;
     width: 120px;
+}
+
+#hotKeys {
+    border: solid black 1px;
+    border-radius: 10px;
+    padding: 5px;
 }
 
 

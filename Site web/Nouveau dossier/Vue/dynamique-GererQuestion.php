@@ -190,57 +190,69 @@
             >
     </div>
 </div>
-<div id="parametresQuestion">
-    <h3>Type de quiz associé</h3>
-    <div>
-        <ul id="TypeQuizAssocie">
-            <?php
-            afficherTypesQuiz();
-            if($_SESSION["etat"] == "modifierQuestion")
-            {
-                $typeQuiz = prendreTypeQuizAssocie($_SESSION['idQuestion']);
-                echo "<script>cocherTypeQuizAssocieSelonQuestion(".json_encode($typeQuiz).");</script>";
-            }
-            else
-            {
-                echo "<script>cocherTypeQuizAssocieParDefaut('TypeQuizAssocie');</script>";
-            }
-            ?>
-        </ul>
-    </div>
-    <h3>Type de question</h3>
-    <div>
-        <ul id="TypeQuestion">
-            <?php
-            afficherTypesQuestions();
-            if($_SESSION["etat"] == "modifierQuestion")
-            {
-                echo "<script>cocherTypeQuestionSelonQuestion('".$typeQuestion."');</script>";
-            }
-            else if($_SESSION["etat"] == "nouvelleQuestion")
-            {
-                echo "<script>cocherRadioButtonAvecValeur('CHOIX_MULTI_UNIQUE');</script>";
-            }
-            ?>
-        </ul>
-    </div>
-    <h3>Cours</h3>
-    <div>
-        <ul id="listeAjoutCours">
-            <?php
+<div id="sectionDroiteQuestion">
+    <div id="parametresQuestion">
+        <h3>Type de quiz associé</h3>
+        <div>
+            <ul id="TypeQuizAssocie">
+                <?php
+                afficherTypesQuiz();
                 if($_SESSION["etat"] == "modifierQuestion")
                 {
-                    echo "<script>cocherCheckBoxCoursSelonQuestion(". $_SESSION['idQuestion'].");</script>";
+                    $typeQuiz = prendreTypeQuizAssocie($_SESSION['idQuestion']);
+                    echo "<script>cocherTypeQuizAssocieSelonQuestion(".json_encode($typeQuiz).");</script>";
+                }
+                else
+                {
+                    echo "<script>cocherTypeQuizAssocieParDefaut('TypeQuizAssocie');</script>";
+                }
+                ?>
+            </ul>
+        </div>
+        <h3>Type de question</h3>
+        <div>
+            <ul id="TypeQuestion">
+                <?php
+                afficherTypesQuestions();
+                if($_SESSION["etat"] == "modifierQuestion")
+                {
+                    echo "<script>cocherTypeQuestionSelonQuestion('".$typeQuestion."');</script>";
                 }
                 else if($_SESSION["etat"] == "nouvelleQuestion")
                 {
-                    echo "<script>cocherCheckBoxCoursSelonCoursCourant('listeAjoutCours');</script>";
+                    echo "<script>cocherRadioButtonAvecValeur('CHOIX_MULTI_UNIQUE');</script>";
                 }
-            ?>
-        </ul>
+                ?>
+            </ul>
+        </div>
+        <h3>Cours</h3>
+        <div>
+            <ul id="listeAjoutCours">
+                <?php
+                    if($_SESSION["etat"] == "modifierQuestion")
+                    {
+                        echo "<script>cocherCheckBoxCoursSelonQuestion(". $_SESSION['idQuestion'].");</script>";
+                    }
+                    else if($_SESSION["etat"] == "nouvelleQuestion")
+                    {
+                        echo "<script>cocherCheckBoxCoursSelonCoursCourant('listeAjoutCours');</script>";
+                    }
+                ?>
+            </ul>
+        </div>
+    </div>
+    <div id="hotKeys">
+        <table>
+            <tr><td>Ctrl+s</td><td>Enregistrer les modifications</td></tr>
+            <tr><td>Ctrl+Shift + s</td><td>Ajouter la question et continuer</td></tr>
+            <tr><td>Échap.</td><td>Ferme la fenêtre courrante</td></tr>
+            <tr><td>Shift+Enter</td><td>Sur une réponse, ajoute une nouvelle réponse</td></tr>
+            <tr><td>Shift+Suppr</td><td>Sur une réponse, supprimer cette réponse</td></tr>
+            <tr><td>Ctrl+ArrowUp</td><td>Dans la liste des réponses, navigue vers le haut</td></tr>
+            <tr><td>Ctrl+ArrowDown</td><td>Dans la liste des réponses, navigue vers le haut</td></tr>
+        </table>
     </div>
 </div>
-
 <div id="ActionQuestion">
     <input type="button" id="BTN_ConfirmerQuestion" value=
     <?php
