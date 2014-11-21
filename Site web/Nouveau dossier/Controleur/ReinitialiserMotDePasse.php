@@ -18,7 +18,7 @@ include("Utilitaires.php");
 include("../Modele/ModeleUsagers.php");
 include("../Modele/ModeleUtilisateurs.php");
 demarrerSession();
-redirigerSiNonConnecte('Admin');
+redirigerSiNonConnecte('Prof');
 
 ChangerMotPasse($_POST['numeroDA']);
 
