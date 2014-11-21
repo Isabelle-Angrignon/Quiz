@@ -61,11 +61,13 @@ fieldset {
 }
 
 #ListeModifQuiz {
-	margin-left:11%;
+	margin-left:5%;
+    width:25%;
 }
 
 #ListeModifQuiz ul {
 	height:85%;
+    margin-top: 20px;
 }
 
 #QuizDropZone {
@@ -78,6 +80,8 @@ fieldset {
     cursor:default;
     max-height: 50px;
     overflow: hidden;
+    width: 80%;
+    margin: 0 auto;
 }
 
 #QuizDropZone li {
@@ -99,7 +103,8 @@ fieldset {
 }
 
 #ListeGererQuestions {
-	margin-left:11%;
+	margin-left:5%;
+    width:25%;
 }
 
 #UlQuestion, #UlQuiz {

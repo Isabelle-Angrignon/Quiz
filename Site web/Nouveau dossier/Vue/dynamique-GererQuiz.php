@@ -15,6 +15,13 @@
         $titreQuiz = $infoQuiz['titreQuiz'];
         $ordreQuestionsAleatoire = $infoQuiz['ordreQuestionsAleatoire'];
         $estDisponible = $infoQuiz['estDisponible'];
+        $idProprietaire = $infoQuiz['idUsager_Proprietaire'];
+
+        if($idProprietaire != $_SESSION["idUsager"]) {
+            echo "<script>swal('Oups',
+                'Vous ne disposez pas des droits pour modifier ce quiz. Aucune modification ne sera sauvegardée.',
+                'warning');</script>";
+        }
     }
 ?>
 
@@ -92,11 +99,10 @@
             if(e.ctrlKey == true) {
                 // e.which == s
                 if(e.which == 83) {
-                    setTimeout(function() {
-                        $("#BTN_EnregistrerQuiz").click();
-                    }, 0);
-                    $(document).off("keydown");
-                    e.preventDefault();
+                    prevenirDefautDunEvent(e, function() { $("#BTN_EnregistrerQuiz").click();});
+                    <?php if($idProprietaire == $_SESSION['idUsager']) {
+                        echo '$(document).off("keydown");';
+                    }?>
                 }
             }
         });
@@ -165,7 +171,7 @@
            <?php
            if($_SESSION['etat'] == 'modifierQuiz')
            {
-               echo "value='Enregistrer' onclick='modifierQuiz(". $_SESSION['idQuiz']. ", \"".$_SESSION['idUsager'] ."\")' >";
+               echo "value='Enregistrer' onclick='modifierQuiz(". $_SESSION['idQuiz']. ", \"".$_SESSION['idUsager'] ."\", \"$idProprietaire\")' >";
            }
            else
            {
@@ -176,7 +182,7 @@
            <?php
             if($_SESSION['etat'] == 'modifierQuiz')
             {
-                echo "value='Supprimer' onclick='supprimerQuiz(". $_SESSION['idQuiz']. ", \"". $_SESSION['idUsager'] ."\")' >";
+                echo "value='Supprimer' onclick='supprimerQuiz(". $_SESSION['idQuiz']. ", \"". $_SESSION['idUsager'] ."\", \"$idProprietaire\")' >";
             }
             else
             {

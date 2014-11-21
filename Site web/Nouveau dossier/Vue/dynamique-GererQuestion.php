@@ -112,7 +112,13 @@
             if(e.which == 83) {
                 if(!e.shiftKey) {
                     prevenirDefautDunEvent(e,function() { $("#BTN_ConfirmerQuestion").click(); });
-                    $(document).off("keydown");
+                    <?php
+                    if(isset($_SESSION['idProprietaire']) && $_SESSION['idProprietaire'] == $_SESSION['idUsager'])
+                    {
+                        echo '$(document).off("keydown");';
+                    }
+                    ?>
+
                 }
                 else {
                     prevenirDefautDunEvent(e,function() { $("#BTN_ContinuerAjout").click();});
@@ -247,7 +253,7 @@
             <tr><td>Ctrl+Shift + s</td><td>Ajouter la question et continuer</td></tr>
             <tr><td>Échap.</td><td>Ferme la fenêtre courrante</td></tr>
             <tr><td>Shift+Enter</td><td>Sur une réponse, ajoute une nouvelle réponse</td></tr>
-            <tr><td>Shift+Suppr</td><td>Sur une réponse, supprimer cette réponse</td></tr>
+            <tr><td>Shift+Suppr</td><td>Sur une réponse, supprime cette réponse</td></tr>
             <tr><td>Ctrl+ArrowUp</td><td>Dans la liste des réponses, navigue vers le haut</td></tr>
             <tr><td>Ctrl+ArrowDown</td><td>Dans la liste des réponses, navigue vers le haut</td></tr>
         </table>

@@ -34,7 +34,6 @@ function addClickEventToQuiz() {
         ajouterVariableSessionQuiz($(this).attr("id"), "modifierQuiz");
 
         creeFrameDynamique("divDynamiqueQuiz", "Vue/dynamique-GererQuiz.php");
-
     });
 }
 
@@ -116,8 +115,8 @@ function traiterJSONQuestions(resultat, idParent) {
     var idProprietaire;
     for(var i = 0; i < resultat.length; ++i) {
         enonceDeLaQuestion = resultat[i].enonceQuestion;
-        if(enonceDeLaQuestion.length > 24) {
-            enonceDeLaQuestion = enonceDeLaQuestion.substring(0, 24) + "...";
+        if(enonceDeLaQuestion.length > 30) {
+            enonceDeLaQuestion = enonceDeLaQuestion.substring(0, 30) + "...";
         }
         nomProf = resultat[i].prenom + " " + resultat[i].nom;
         idProprietaire = resultat[i].idUsager_Proprietaire;
@@ -127,7 +126,8 @@ function traiterJSONQuestions(resultat, idParent) {
 
 function traiterJSONQuiz(resultat) {
     var titreQuiz = "";
-    var typeQuiz = "";
+    var idProprietaire = "";
+    var nomProprietaire = "";
 
     if(resultat.length != 0) {
         for(var i = 0; i < resultat.length; ++i) {
@@ -135,12 +135,13 @@ function traiterJSONQuiz(resultat) {
             if(titreQuiz.length > 24) {
                 titreQuiz = titreQuiz.substring(0, 24) + "...";
             }
-            typeQuiz = resultat[i].typeQuiz;
-            ajouterLi_AvecDiv("UlQuiz", titreQuiz, resultat[i].idQuiz, true, typeQuiz, "divProfDansLi");
+            idProprietaire = resultat[i].idUsager_Proprietaire;
+            nomProprietaire = resultat[i].prenom + " " + resultat[i].nom;
+            ajouterLi_AvecDiv("UlQuiz", titreQuiz, resultat[i].idQuiz, true ,nomProprietaire, "divProfDansLi", idProprietaire);
         }
     }
     else {
-        $("#UlQuiz").text("Vous ne disposez d'aucun quiz pour ce cours.");
+        $("#UlQuiz").text("Ce cours ne contient aucun quiz.");
     }
 
 }
@@ -186,12 +187,12 @@ function updateUlModifQuiz(triage,usagerCourant,idQuiz, filtreEnonce, filtreId) 
     });
 }
 
-function updateUlQuestion(idCours, usagerCourant, triage, idQuiz, typeQuiz, filtreEnonce, filtreId) {//todo en cours
+function updateUlQuestion(idCours, usagerCourant, triage, idQuiz, filtreEnonce, filtreId) {//todo en cours
     $("#UlQuestion li").remove();
     $.ajax({
         type: 'POST',
         url: 'Controleur/ListerQuestions.php',
-        data: {"Triage":triage, "idCours":idCours , "idProprietaire":usagerCourant, "idQuiz":idQuiz, "typeQuiz":typeQuiz,
+        data: {"Triage":triage, "idCours":idCours , "idProprietaire":usagerCourant, "idQuiz":idQuiz, "typeQuiz":"FORMATIF",
                 "filtreEnonce":filtreEnonce, "filtreId":filtreId},
         dataType: "json",
         success: function(resultat) {
@@ -686,8 +687,7 @@ function ajouterQuestion(idCreateur, continuer) {
                     }
                     else {
                         var idQuiz = $("#QuizDropZone li:first-child").attr("id");
-                        var typeQuiz = $("#QuizDropZone li:first-child").children("div .divProfDansLi").text();
-                        updateUlQuestion(cours, idCreateur, "pasDansCeQuiz", idQuiz, typeQuiz);
+                        updateUlQuestion(cours, idCreateur, "pasDansCeQuiz", idQuiz);
                         updateUlModifQuiz("selonQuiz", idCreateur, idQuiz);
                     }
                     swal("Félicitation !", "Votre question à été ajoutée", "success");
@@ -739,8 +739,7 @@ function modifierQuestion( idUsagerCourant,idQuestion, idProprietaire) {
                     }
                     else {
                         var idQuiz = $("#QuizDropZone li:first-child").attr("id");
-                        var typeQuiz = $("#QuizDropZone li:first-child").children("div .divProfDansLi").text();
-                        updateUlQuestion(cours, idUsagerCourant, "pasDansCeQuiz", idQuiz, typeQuiz);
+                        updateUlQuestion(cours, idUsagerCourant, "pasDansCeQuiz", idQuiz);
                         updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
                     }
                     swal("Félicitation !", "Votre question à été modifiée", "success");
@@ -763,7 +762,7 @@ function fermerDivDynamique() {
 function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
     if(idUsagerCourant != idProprietaire) {
         swal("Avertissement",
-            "Vous ne pouvez pas supprimer cette question car vous n'êtes  pas le propriétaire. Veuillez contacter le propriétaire si vous voulez la supprimer.",
+            "Vous ne pouvez pas supprimer cette question car vous n'êtes pas le propriétaire. Veuillez contacter le propriétaire si vous voulez la supprimer.",
             "error" );
     }
     else {
@@ -796,8 +795,7 @@ function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
                             }
                             else {
                                 var idQuiz = $("#QuizDropZone li:first-child").attr("id");
-                                var typeQuiz = $("#QuizDropZone li:first-child").children("div .divProfDansLi").text();
-                                updateUlQuestion(cours, idUsagerCourant, "selonQuiz", idQuiz,typeQuiz);
+                                updateUlQuestion(cours, idUsagerCourant, "selonQuiz", idQuiz);
                                 updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
                             }
 
@@ -848,78 +846,94 @@ function ajouterQuiz(idUsagerProprietaire) {
     });
 }
 
-function modifierQuiz(idQuiz, idUsagerProprietaire) {
-    // Prise du titre du quiz dans l'interface.
-    var titreQuiz = $("#titreQuiz").val();
-    // Prise de l'ordre des question
-    var ordreEstAleatoire = !$("#ordreQuestionQuiz").prop("checked");
-    // Prise de la disponibilité du quiz
-    var estDisponible = !$("#disponibiliteQuiz").prop("checked");
-    // Prise des cours sélectionnés
-    var jsonCours = jsonifierCoursSelectionnes("listeCoursQuiz");
+function modifierQuiz(idQuiz, idUsagerCourant, idProprietaire) {
+    if(idProprietaire != idUsagerCourant) {
+        swal("Avertissement",
+            "Vous ne pouvez pas modifier ce quiz car vous n'êtes pas le propriétaire. Veuillez contacter le propriétaire si vous voulez la modifier.",
+            "error" );
+    }
+    else {
+        // Prise du titre du quiz dans l'interface.
+        var titreQuiz = $("#titreQuiz").val();
+        // Prise de l'ordre des question
+        var ordreEstAleatoire = !$("#ordreQuestionQuiz").prop("checked");
+        // Prise de la disponibilité du quiz
+        var estDisponible = !$("#disponibiliteQuiz").prop("checked");
+        // Prise des cours sélectionnés
+        var jsonCours = jsonifierCoursSelectionnes("listeCoursQuiz");
 
-    $.ajax({
-        type:"POST",
-        url:'Controleur/AJAX_ModifierQuiz.php',
-        async : false,
-        data: {"idQuiz":idQuiz, "titreQuiz":titreQuiz, "ordreEstAleatoire":ordreEstAleatoire, "estDisponible":estDisponible, "jsonCours":jsonCours, "idProprietaire":idUsagerProprietaire},
-        dataType: "text",
-        success: function(resultat){
-            if(resultat.trim() != "") {
-                swal("Erreur !", resultat, "error");
+        $.ajax({
+            type:"POST",
+            url:'Controleur/AJAX_ModifierQuiz.php',
+            async : false,
+            data: {"idQuiz":idQuiz, "titreQuiz":titreQuiz, "ordreEstAleatoire":ordreEstAleatoire, "estDisponible":estDisponible, "jsonCours":jsonCours, "idProprietaire":idUsagerCourant},
+            dataType: "text",
+            success: function(resultat){
+                if(resultat.trim() != "") {
+                    swal("Erreur !", resultat, "error");
+                }
+                else {
+                    swal("Félicitation !", "Votre quiz à été modifié", "success");
+                    fermerDivDynamique();
+                    var idCours = $("#DDL_Cours option:selected").attr("value");
+                    updateUlQuiz(idCours, idUsagerCourant);
+                    // Retire le quiz qui est en cour de modification
+                    retirerQuizDeQuizDropZone(idCours, idUsagerCourant);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
             }
-            else {
-                swal("Félicitation !", "Votre quiz à été modifié", "success");
-                fermerDivDynamique();
-                var idCours = $("#DDL_Cours option:selected").attr("value");
-                updateUlQuiz(idCours, idUsagerProprietaire);
-                // Retire le quiz qui est en cour de modification
-                retirerQuizDeQuizDropZone(idCours, idUsagerProprietaire);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            swal("Erreur", jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown, "error"); // À mettre un message pour l'usager disant que l'ajout ne s'est pas effectué correctement.
-        }
-    });
+        });
+    }
+
 }
 
-function supprimerQuiz(idQuiz, idUsagerProprietaire) {
-    swal({   title: "Êtes-vous sur?",
-        text: "Cette action va supprimer ce quiz ainsi que toutes ces références. Êtes-vous sur de vouloir continuer?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Supprimer ce quiz",
-        closeOnConfirm:false
-    }, function(aAccepter){
-        if(aAccepter) {
-            $.ajax({
-                type:"POST",
-                url:'Controleur/AJAX_SupprimerQuiz.php',
-                async : false,
-                data: {"idQuiz":idQuiz},
-                dataType: "text",
-                success: function(resultat){
-                    if(resultat.trim() != "") {
-                        swal("Erreur !", resultat, "error");
-                    }
-                    else {
-                        $(".dFondOmbrage").detach();
-                        if($("#QuizDropZone").children("li").length == 1 && $("#QuizDropZone").children("li").attr("id") == idQuiz) {
-                            $("#QuizDropZone").children("li").remove();
+function supprimerQuiz(idQuiz, idUsagerCourant, idProprietaire) {
+
+    if(idProprietaire != idUsagerCourant) {
+        swal("Avertissement",
+            "Vous ne pouvez pas supprimer ce quiz car vous n'êtes pas le propriétaire. Veuillez contacter le propriétaire si vous voulez le supprimer.",
+            "error" );
+    }
+    else {
+        swal({   title: "Êtes-vous sur?",
+            text: "Cette action va supprimer ce quiz ainsi que toutes ces références. Êtes-vous sur de vouloir continuer?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Supprimer ce quiz",
+            closeOnConfirm:false
+        }, function(aAccepter){
+            if(aAccepter) {
+                $.ajax({
+                    type:"POST",
+                    url:'Controleur/AJAX_SupprimerQuiz.php',
+                    async : false,
+                    data: {"idQuiz":idQuiz},
+                    dataType: "text",
+                    success: function(resultat){
+                        if(resultat.trim() != "") {
+                            swal("Erreur !", resultat, "error");
                         }
                         else {
-                            var cours = $("#DDL_Cours option:selected").attr("value");
-                            updateUlQuiz(cours, idUsagerProprietaire);
-                            // Retire le quiz qui est en cour de modification
-                            retirerQuizDeQuizDropZone(cours, idUsagerProprietaire);
+                            $(".dFondOmbrage").detach();
+                            if($("#QuizDropZone").children("li").length == 1 && $("#QuizDropZone").children("li").attr("id") == idQuiz) {
+                                $("#QuizDropZone").children("li").remove();
+                            }
+                            else {
+                                var cours = $("#DDL_Cours option:selected").attr("value");
+                                updateUlQuiz(cours, idUsagerCourant);
+                                // Retire le quiz qui est en cour de modification
+                                retirerQuizDeQuizDropZone(cours, idUsagerProprietaire);
+                            }
+                            swal("Félicitation !", "Votre quiz à été supprimée", "success");
                         }
-                        swal("Félicitation !", "Votre quiz à été supprimée", "success");
                     }
-                }
-            });
-        }
-    });
+                });
+            }
+        });
+    }
 }
 
 function retirerQuizDeQuizDropZone(idCours, idUsagerCourrant) {
@@ -927,4 +941,8 @@ function retirerQuizDeQuizDropZone(idCours, idUsagerCourrant) {
     updateUlQuestion(idCours, idUsagerCourrant,  "default");
     $("#QuizDropZone").children("li").remove();
     $("#UlModifQuiz").empty();
+}
+
+function verifierEgalite(premiereVar, deuxiemeVar) {
+    return premiereVar == deuxiemeVar;
 }

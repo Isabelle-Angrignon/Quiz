@@ -40,20 +40,40 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 revert: 150,
                 helper : 'clone',
                 receive: function (event, ui) {
-                    var idQuiz = $("#QuizDropZone li:first-child").attr("id");
-                    var idQuestion = $(ui.item).attr("id");
-                    var positionDansQuiz = $(ui.item).index() + 1;
-                    changerOrdreQuestionsDansQuiz();
-                    lierQuestionAQuiz(idQuiz, idQuestion, positionDansQuiz);
+                    var idProprietaire = $("#QuizDropZone").children("li:first-child").children("div").attr("placeholder");
+                    if(!verifierEgalite(idProprietaire, "<?php echo $_SESSION['idUsager']; ?>")) {
+                        $( "#UlQuestion" ).sortable( "cancel" );
+                    }
+                    else {
+                        var idQuiz = $("#QuizDropZone li:first-child").attr("id");
+                        var idQuestion = $(ui.item).attr("id");
+                        var positionDansQuiz = $(ui.item).index() + 1;
+                        changerOrdreQuestionsDansQuiz();
+                        lierQuestionAQuiz(idQuiz, idQuestion, positionDansQuiz);
+                    }
                 },
                 remove: function (event, ui) {
-                    var idQuiz = $("#QuizDropZone li:first-child").attr("id");
-                    var idQuestion = $(ui.item).attr("id");
-                    changerOrdreQuestionsDansQuiz();
-                    supprimerLienQuestionAQuiz(idQuiz, idQuestion);
+                    var idProprietaire = $("#QuizDropZone").children("li:first-child").children("div").attr("placeholder");
+                    if(!verifierEgalite(idProprietaire, "<?php echo $_SESSION['idUsager']; ?>")) {
+                        $( "#UlModifQuiz" ).sortable( "cancel" );
+                    }
+                    else {
+                        var idQuiz = $("#QuizDropZone li:first-child").attr("id");
+                        var idQuestion = $(ui.item).attr("id");
+                        changerOrdreQuestionsDansQuiz();
+                        supprimerLienQuestionAQuiz(idQuiz, idQuestion);
+                    }
+
                 },
                 update: function() {
-                    changerOrdreQuestionsDansQuiz();
+                    var idProprietaire = $("#QuizDropZone").children("li:first-child").children("div").attr("placeholder");
+                    if(!verifierEgalite(idProprietaire, "<?php echo $_SESSION['idUsager']; ?>")) {
+                        $( "#UlModifQuiz" ).sortable( "cancel" );
+                    }
+                    else {
+                        changerOrdreQuestionsDansQuiz();
+                    }
+
                 }
             }).disableSelection();
             $("#UlQuestion").sortable({
@@ -70,8 +90,13 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 revert: 150,
                 helper : 'clone',
                 receive: function (event, ui) {
+                    var idProprietaire = $(ui.item).children("div").attr("placeholder");
+                    if(!verifierEgalite(idProprietaire, "<?php echo $_SESSION['idUsager']; ?>")) {
+                        swal("Avertissement",
+                            "Vous ne pouvez pas modifier ce quiz car vous n'êtes pas le propriétaire. Veuillez contacter le propriétaire si vous voulez la modifier.",
+                            "error" );
+                    }
                     $(ui.item).off("click");
-                    //$("#UlQuiz").sortable("option", "connectWith", false);
                     if($("#QuizDropZone").children().length == 2)
                     {
                         $("#QuizDropZone").children().each(function() {
@@ -85,10 +110,10 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     $('#UlQuestion').empty();
                     var idQuiz = $(ui.item).attr("id");
                     var idCours = $("#DDL_Cours option:selected").attr("value");
-                    var typeQuiz = $(ui.item).children("div .divProfDansLi").text();
                     $("#TB_Filtre").val("");
+                    $("#TB_FiltreId").val("");
                     updateUlModifQuiz("selonQuiz", <?php echo '"'.$_SESSION["idUsager"].'"' ?>, idQuiz);
-                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz);
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz);
                 },
                 remove: function (event, ui) {
                     addClickEventToQuiz();
@@ -110,16 +135,15 @@ Description: Cette interface représente l'interface principale d'un professeur 
 
             $("#BTN_Filtre").click(function () {
                 var idCours = $("#DDL_Cours option:selected").attr("value");
-                var typeQuiz = $("#QuizDropZone").children("li").children("div .divProfDansLi").text();
                 var idQuiz = $("#QuizDropZone").children("li").attr("id");
                 var filtreEnonce = $("#TB_Filtre").val();///////////todo modif en cours....
                 var filtreId = $("#TB_FiltreID").val();
                 // Si il n'y a aucun quiz en modification
                 if($("#QuizDropZone").children("li").length == 0) {
-                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "default", null, null, filtreEnonce, filtreId );
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "default", null, filtreEnonce, filtreId );
                 }
                 else {
-                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, typeQuiz, filtreEnonce, filtreId);
+                    updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>, "pasDansCeQuiz", idQuiz, filtreEnonce, filtreId);
                 }
             });
 
