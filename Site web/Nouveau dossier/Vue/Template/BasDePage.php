@@ -7,7 +7,7 @@
             // Ajout de l'onglet de menu Admin
             if(isset($_SESSION['typeUsager']) && ($_SESSION['typeUsager'] == 'Prof' || $_SESSION['typeUsager'] == 'Admin')) {
                 echo "<a href='https://docs.google.com/document/d/1F_JO7jholgO1Yg9DbdP0nlx3YrRiEFGJEE0jzbvhEqs/edit'
-        class='NavBar' target='_blank'>Documentation</a>";
+                class='NavBar' target='_blank'>Documentation</a>";
             }
             ?>
 
