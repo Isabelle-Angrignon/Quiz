@@ -77,10 +77,12 @@ function genererReponsesVF($idQuestion)
     if (!empty($listeReponses))
     {
         $_SESSION['listeReponses'] = $listeReponses;
+        $_SESSION['idBonneReponse'] = $listeReponses[0]['reponseEstVrai'];//todo modifié
     }
     else
     {
         unset($_SESSION['listeReponses']);
+        unset($_SESSION['idBonneReponse']);//todo modifié
     }
     //générer deux li, un vrai et un faux
     GenererLiSelectReponse('UlChoixReponse', 'Vrai', '1' );
@@ -108,14 +110,19 @@ function genererReponsesCMU($idQuestion, $ordreReponse)
     {
         $_SESSION['listeReponses'] = $listeReponses;
 
-        foreach ($listeReponses as $Row)
+        foreach ($listeReponses as $row)
         {
-            GenererLiSelectReponse('UlChoixReponse', $Row['enonceReponse'], $Row['idReponse']);
+            GenererLiSelectReponse('UlChoixReponse', $row['enonceReponse'], $row['idReponse']);
+            if($row['reponseEstValide'] == 1)
+            {
+                $_SESSION['idBonneReponse'] = $row['idReponse'];//todo ajouté
+            }
         }
     }
     else
     {
         unset($_SESSION['listeReponses']);
+        unset($_SESSION['idBonneReponse']);
     }
 }
 
@@ -148,6 +155,7 @@ function resetVarSessionQuiz()
 {
     unset($_SESSION['listeQuestions'] );
     unset($_SESSION['listeReponses'] );
+    unset($_SESSION['idBonneReponse']);
     unset($_SESSION['infoQuestion'] );
     unset($_SESSION['idQuestion'] );
     unset($_SESSION['listeQuestionRepondues']);
@@ -283,4 +291,5 @@ function miseAJourStatsQuiz()
         echo "Pas de questions répondues";
     }
 }
+
 ?>

@@ -44,7 +44,7 @@ function ouvrirUnQuiz(typeQuiz, idQuiz){
         ouvrirUnQuizFormatif(idQuiz);
     }
     else{
-        swal({ title: "Désolé",   text: "Ce type de quiz n'est pas géré.",   type: "warning",   confirmButtonText: "Dac!" });
+        swal({ title: "Désolé",   text: "Ce type de quiz n'est pas géré.",   type: "warning",   confirmButtonText: "Ok" });
     }
 }
 
@@ -60,7 +60,7 @@ function ouvrirUnQuizFormatif(idQuiz){
         creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php");
     }
     else  {
-        swal({ title: "Désolé",   text: "Il n'y a aucune question dans ce quiz.",   type: "warning",   confirmButtonText: "Dac!" });
+        swal({ title: "Désolé",   text: "Il n'y a aucune question dans ce quiz.",   type: "warning",   confirmButtonText: "Ok" });
     }
 }
 
@@ -102,11 +102,11 @@ function ouvrirUnQuizAleatoire(){
             creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php");
         }
         else {
-            swal({ title: "Désolé",   text: "Il n'y a aucune question aléatoire définie pour ce cours.",   type: "warning",   confirmButtonText: "Dac!" });
+            swal({ title: "Désolé",   text: "Il n'y a aucune question aléatoire définie pour ce cours.",   type: "warning",   confirmButtonText: "Ok" });
         }
     }
     else  {
-        swal({ title: "Oups...",   text: "Vous devez sélectionner un cours spécifique pour générer un quiz aléatoire",   type: "error",   confirmButtonText: "Dac!" });
+        swal({ title: "Oups...",   text: "Vous devez sélectionner un cours spécifique pour générer un quiz aléatoire",   type: "error",   confirmButtonText: "Ok" });
     }
 }
 
@@ -271,13 +271,40 @@ function traiterResultatReponse(resultat, lien, typeQuiz){
 
     //Gestion des 4 cas de réponses possibles: 1, 0, X ou non répondu; 1 = bonne réponse, 0 = erreur, x= erreur de correction
     if(resultat == 1) {
-        swalBonneReponse(close);
+
         updateScoreAffiche(resultat);
+        //recup idBonneReponse
+        getVarSessionAjax("idBonneReponse").success(function(id){
+            //reformater li
+            var selector = "#UlChoixReponse > #"+id.trim();
+            $(selector).css("background", "rgba(40,191,40,0.8)");//Vert
+        });
+        $( "#UlChoixReponse" ).selectable( "disable" );
+        $("#btnValider").hide();
+        $("#btnSuivant").show();
+        $("#btnSuivant").click(function(){
+            continuerQuiz();//todo resurchaerge bouton suivant pour continuer
+            $( "#UlChoixReponse" ).selectable( "enable" );
+        });
+
     }
     else if(resultat == 0) {
-        //On affiche le lien hypertext que si: il y en a un, la réponse est mauvaise et on est en type de quiz aléatoire
+                //On affiche le lien hypertext que si: il y en a un, la réponse est mauvaise et on est en type de quiz aléatoire
         if(lien == null || lien == "" || typeQuiz != "ALEATOIRE"){
-            swalMauvaiseReponse(close);
+            //recup idBonneReponse
+            getVarSessionAjax("idBonneReponse").success(function(id){
+                //reformater li
+                var selector = "#UlChoixReponse > #"+id.trim();
+                $(selector).css("background", "rgba(40,191,40,0.8)");//Vert
+                $("#UlChoixReponse .ui-selected").css("background", "rgba(207,59,29,0.8)");//Rouge
+            });
+            $( "#UlChoixReponse" ).selectable( "disable" );
+            $("#btnValider").hide();
+            $("#btnSuivant").show();
+            $("#btnSuivant").click(function(){
+                continuerQuiz();//todo resurchaerge bouton suivant pour continuer
+                $( "#UlChoixReponse" ).selectable( "enable" );
+            });
         }
         else{
             swalMauvaiseReponseLien(close,lien);
@@ -298,25 +325,37 @@ function traiterResultatReponse(resultat, lien, typeQuiz){
 // qu'on aura une autre alerte a afficher.
 function swalBonneReponse(close){
     swal({   title: "Bravo!",   text: "Bonne réponse!",   type: "success",
-        confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
+        confirmButtonText: "Ok", closeOnConfirm:close},function() { continuerQuiz();});
 }
 function swalMauvaiseReponse(close){
     swal({   title: "Oups!",   text: "Mauvaise réponse!",   type: "error",
-        confirmButtonText: "Dac!", closeOnConfirm:close},function() { continuerQuiz();});
+        confirmButtonText: "Ok", closeOnConfirm:close},function() { continuerQuiz();});
 }
 function swalMauvaiseReponseLien(close, lien){
-    swal({  title: "Oups!",
-            text: "Mauvaise réponse!  Voulez-vous continuer ou réviser?",
+    swal({  title: "Mauvaise réponse!",
+            text: "Votre gentil prof vous suggère de réviser au lien ci-dessous",
             type: "error",
             showCancelButton: true,
-            confirmButtonColor: "#FFA64F",// couleur par défaut était "#DD6B55", orange swal....
-            confirmButtonText: "Continuer",
-            cancelButtonText: "Réviser!",
+            confirmButtonColor: "#FFA64F",
+            confirmButtonText: "Suivant",
+            cancelButtonText: "Réviser",
             closeOnConfirm: close,
             closeOnCancel: true },
         function(isConfirm) {
             if (isConfirm) {
-                continuerQuiz();
+                getVarSessionAjax("idBonneReponse").success(function(id){
+                    //reformater li
+                    var selector = "#UlChoixReponse > #"+id.trim();
+                    $(selector).css("background", "rgba(40,191,40,0.8)");//Vert
+                    $("#UlChoixReponse .ui-selected").css("background", "rgba(207,59,29,0.8)");//Rouge
+                });
+                $( "#UlChoixReponse" ).selectable( "disable" );
+                $("#btnValider").hide();
+                $("#btnSuivant").show();
+                $("#btnSuivant").click(function(){
+                    continuerQuiz();//todo resurchaerge bouton suivant pour continuer
+                    $( "#UlChoixReponse" ).selectable( "enable" );
+                });
             }
             else {
                 window.open(lien);
@@ -324,12 +363,12 @@ function swalMauvaiseReponseLien(close, lien){
         });
 }
 function swalErreurDeCorrection(){
-    swal({   title: "Oh la la!",   text: " Une erreur s'est produite au moment de la validation. ",
-        type: "warning",   confirmButtonText: "Dac!" });
+    swal({   title: "Heu...",   text: " Une erreur s'est produite au moment de la validation.  Les stats ne sont pas compilées ",
+        type: "warning",   confirmButtonText: "Ok" });
 }
 function swalQuestionNonRepondue(){
     swal({   title: "Oups!",   text: "Répondez d'abord à la question!",   type: "error",
-        confirmButtonText: "Dac!" });
+        confirmButtonText: "Ok" });
 }
 
 // Par: Isabelle Angrignon
@@ -477,12 +516,10 @@ function gererFinQuiz(){
         async : !1,
         success: function(msg) {
             $('#dFondOmbrage').remove();
-            swal({title: "Quiz terminé!", text: msg, type: "success", confirmButtonText: "Dac!"});
+            swal({title: "Quiz terminé!", text: msg, type: "success", confirmButtonText: "Ok"});
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
         }
     });
 }
-
-

@@ -65,7 +65,7 @@
     .sweet-alert button:active {
       background-color: #81ccee; }
     .sweet-alert button.cancel {
-      background-color: #D0D0D0; }
+      background-color: #a9a9a9; }  /*todo  original D0D0D0*/
       .sweet-alert button.cancel:hover {
         background-color: #c8c8c8; }
       .sweet-alert button.cancel:active {

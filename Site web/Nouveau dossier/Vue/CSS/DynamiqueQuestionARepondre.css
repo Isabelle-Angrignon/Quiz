@@ -127,10 +127,11 @@ div.suiviQuiz {
 }
 
 #UlChoixReponse .ui-selecting { background: #fec71b; }
+
 #UlChoixReponse .ui-selected {
     border: 1px solid #bebdbd;
     background: #f9f9f9 url("../../jquery-ui-1.11.2.custom/images/ui-bg_highlight-hard_100_f9f9f9_1x100.png") 50% 50% repeat-x;
-    color: #e69700;
+    color: #e69700;  /* vert #44b806; */
     font-weight: bold;
 }
 
@@ -144,5 +145,12 @@ div.suiviQuiz {
 }
 
 #btnSuivant{
-    margin: 20px;
+    background:  rgba(40,191,40,0.8);
+}
+
+#bouttonValider, #bouttonSuivant{
+    text-align: right;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
