@@ -146,7 +146,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
              text: "Êtes-vous sur de vouloir vider tout les étudiants de ce cours ?",
              type: "warning",
              showCancelButton: true,
-             confirmButtonColor: "#DD6B55",
+             confirmButtonColor: "#FFA64F",  /*todo ancien #DD6B55*/
              confirmButtonText: "GO ! "
          }, function(){
              desinscrireToutEtudiantCoursAjax($("#QuizDropZone").find("li").attr("id"));

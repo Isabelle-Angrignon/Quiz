@@ -6,7 +6,7 @@
 //  Commenté le : 18/11/2014
 //
 //  But : Déterminer si une réponse donnée est la bonne réponse à la question posée selon le type de question
-//        et ensuite gérer la réponse
+//        et ensuite gérer la réponse.
 //
 //  POST: idReponse tel que la clé primaire de la table de la bs.  0|1 si c'est une question vrai ou faux
 //
@@ -28,22 +28,15 @@ $idQuestion = $_SESSION['infoQuestion'][0]['idQuestion'];//meme si il n'y a g'un
 
 
 switch( $_SESSION['infoQuestion'][0]['typeQuestion']){
-
+    //pour les autres types de questions, on aura d'autres champs disponibles dans "listeReopnse" ex: si plusieurs bonne reponses
     case "VRAI_FAUX":
-        echo gererReponse($_SESSION['listeReponses'][0]['reponseEstVrai'] == (int)$idReponse);//cast empeche injection de "id || true"
+        echo gererReponse($_SESSION['idBonneReponse'] == (int)$idReponse);//cast empeche injection de "id || true"
+
         break;
 
     case "CHOIX_MULTI_UNIQUE":
-        //trouver la bonne réponse...
-        foreach($_SESSION['listeReponses'] as $reponse)
-        {
-            if($reponse['reponseEstValide']  == 1 )
-            {
-                $bonneRep = $reponse['idReponse'];
-            }
-        }
 
-        echo gererReponse($bonneRep == (int)$idReponse);//cast empeche injection de "id || true"
+        echo gererReponse($_SESSION['idBonneReponse'] == (int)$idReponse);//cast empeche injection de "id || true"
         break;
 
     //ajouter autres types de questions ici

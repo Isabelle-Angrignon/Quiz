@@ -325,7 +325,7 @@ function ChercherUsagerAjax(idUsager , functionOnTrue, texte) {
                         text: "Est-ce bien "+resultat.prenom + " " + resultat.nom + texte,
                         type: "warning",
                         showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
+                        confirmButtonColor: "#FFA64F",/*todo ancien... #DD6B55   */
                         confirmButtonText: "GO ! ",
                         closeOnConfirm:false
                     }, function(){

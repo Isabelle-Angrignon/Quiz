@@ -44,7 +44,9 @@ else{
 
         //bouton valider/suivant...
         $("#btnSuivant").button(); // attache le theme JQueryUI au bouton
-        $("#btnSuivant").click( function() {
+        $("#btnSuivant").hide();
+        $("#btnValider").button(); // attache le theme JQueryUI au bouton
+        $("#btnValider").click( function() {
             var lien = "<?php echo $_SESSION["infoQuestion"][0]['referenceWeb']; ?>";
             lien = lien!=null?lien:"";
             var typeQuiz = "<?php echo $_SESSION["typeQuiz"]; ?>";
@@ -144,8 +146,11 @@ else{
         </ul>
     </div>
 
+    <div id="bouttonValider" class="zoneQuestion">
+        <button type="button" id="btnValider">Valider</button>
+    </div>
     <div id="bouttonSuivant" class="zoneQuestion">
-        <button type="button" id="btnSuivant">Valider & suivant</button>
+        <button type="button" id="btnSuivant">Suivant</button>
     </div>
 </div>
 

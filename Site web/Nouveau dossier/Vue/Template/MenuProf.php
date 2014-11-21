@@ -17,7 +17,7 @@
         text: "Voulez vous télécharger un .csv contenant les statistiques ?",
         type: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
+        confirmButtonColor: "#FFA64F",
         confirmButtonText: "Télécharger",
         closeOnConfirm:true
     }, function(){
