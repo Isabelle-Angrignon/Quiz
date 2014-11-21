@@ -23,6 +23,8 @@ redirigerSiNonConnecte('Etudiant');
 
 //on aura besoin du id de cours dans la gestion du quiz...
 $_SESSION['idCours'] = $_POST['selectCours'];
+$_SESSION['posCoursDansListe'] = $_POST['posCoursDansListe'];
+
 
 //Remet a vide les variables de session reliées au quiz.
 //Tel la liste des questionns et autres.
