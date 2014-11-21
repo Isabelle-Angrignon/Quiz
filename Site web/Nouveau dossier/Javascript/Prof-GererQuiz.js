@@ -50,23 +50,47 @@ function addEventsToReponses() {
 
     $(".reponsesQuestion").off("keydown");
     $(".reponsesQuestion").keydown(function(e) {
+
         // Si c'est shift+enter qui est appuyer
         if(e.shiftKey == true ) {
-
             if(e.which == 13) {
-                $("#BTN_AjouterReponse").click();
-                e.preventDefault();
+                prevenirDefautDunEvent(e, function() { $("#BTN_AjouterReponse").click() });
             }
             else if(e.which == 46) {
-                $("#BTN_SupprimerReponse").click();
-                e.preventDefault();
+                prevenirDefautDunEvent(e, function() { $("#BTN_SupprimerReponse").click() });
             }
         }
-        else if(e.ctrlKey == true && e.which != 17) {
-            // alert(e.which);  todo à implémenter le promenage avec flèche dans les réponses
+        else if(e.ctrlKey == true) {
+            // Si c'est la flèche du haut
+             if(e.which == 38) {
+                 var currentIndex = $(".Reponsefocused").parent("li").index();
+                 if(currentIndex != 0) {
+                     e.preventDefault();
+                     // nth-child à comme minimum 0. index() à comme minimum 1. Alors nth-child = index - 1
+                     $("#Ul_Reponses").children("li:nth-child("+ (currentIndex)+")").children(".reponsesQuestion").focus();
+                 }
+             }
+            else if(e.which == 40) {
+                 var currentIndex = $(".Reponsefocused").parent("li").index();
+                 if(currentIndex != $("#Ul_Reponses li").length + 1) {
+                     e.preventDefault();
+                     // nth-child à comme minimum 0. index() à comme minimum 1. Alors nth-child = index - 1
+                     $("#Ul_Reponses").children("li:nth-child("+ (currentIndex + 2)+")").children(".reponsesQuestion").focus();
+                 }
+             }
         }
     });
 
+}
+
+function prevenirDefautDunEvent(event, fonction, timeout) {
+    if(timeout == null) {
+        setTimeout(function() {fonction();}, 0);
+    }
+    else {
+        setTimeout(function() {fonction();}, timeout);
+    }
+    event.preventDefault();
 }
 
 function updateAutoSizeTextArea() {
@@ -475,11 +499,18 @@ function cocherTypeQuestionSelonQuestion(typeQuestion) {
 // Intrant : typeQuiz = Un JSON comportant représentant tous les types (attribut typeQuiz) de quiz associés à la question
 function cocherTypeQuizAssocieSelonQuestion(typeQuiz) {
     $("#TypeQuizAssocie input[type=checkbox]").each(function() {
+        // Si mon checkbox correspond à un typeQuiz qui est coché
         for(var i = 0; i < typeQuiz.length; ++i) {
             if($(this).attr("value") == typeQuiz[i].typeQuiz) {
                 $(this).prop('checked', true);
             }
         }
+    });
+}
+
+function cocherTypeQuizAssocieParDefaut(idParent) {
+    $("#" + idParent).children("li").each(function() {
+        $(this).children("input[type=checkbox]").prop("checked", true);
     });
 }
 

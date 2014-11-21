@@ -100,6 +100,13 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 }
             }).disableSelection();
 
+            // Ajout de l'évènement keydown sur les filtres (entre autre utilisé pour le enter qui simule le click sur le BTN_Filtre
+            $("#TB_Filtre, #TB_FiltreID").keydown(function(e) {
+                if(e.which == 13) {
+                    $("#BTN_Filtre").click();
+                }
+            });
+
             $("#BTN_Filtre").click(function () {
                 var idCours = $("#DDL_Cours option:selected").attr("value");
                 var typeQuiz = $("#QuizDropZone").children("li").children("div .divProfDansLi").text();
