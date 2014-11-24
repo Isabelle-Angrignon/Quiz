@@ -964,7 +964,7 @@ function supprimerQuiz(idQuiz, idUsagerCourant, idProprietaire) {
                                 var cours = $("#DDL_Cours option:selected").attr("value");
                                 updateUlQuiz(cours, idUsagerCourant);
                                 // Retire le quiz qui est en cour de modification
-                                retirerQuizDeQuizDropZone(cours, idUsagerProprietaire);
+                                retirerQuizDeQuizDropZone(cours, idUsagerCourant);
                             }
                             swal("Félicitation !", "Votre quiz à été supprimée", "success");
                         }
