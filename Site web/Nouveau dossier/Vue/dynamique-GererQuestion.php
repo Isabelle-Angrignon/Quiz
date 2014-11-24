@@ -144,6 +144,15 @@
     });
 
     $("#ordreReponsesQuestion+label").disableSelection();
+    attribuerTabIndexToElemQuestion();
+    $("#BTN_ConfirmerQuestion").keydown(function(e) {
+        if(e.which == 9)
+        {
+            $("#EnonceQuestion").focus();
+            prevenirDefautDunEvent(e, function() {});
+        }
+    });
+
 
 </script>
 <div id="QuestionConteneur">
@@ -151,7 +160,7 @@
         <h2>Énoncé de la question</h2>
         <?php if(isset($_SESSION['idQuestion']) && $_SESSION["etat"] == "modifierQuestion") { echo "<div id='identifiantQuestion'> Id : " . $_SESSION['idQuestion'] . "</div>"; }?>
         <hr/>
-        <textarea id="EnonceQuestion" rows='1' placeholder="Entrer un énoncé ici..."><?php echo isset($enonceQuestion)?$enonceQuestion:""; ?></textarea>
+        <textarea id="EnonceQuestion" rows='1' tabindex="1" placeholder="Entrer un énoncé ici..."><?php echo isset($enonceQuestion)?$enonceQuestion:""; ?></textarea>
     </div>
     <div id="reponseConteneur">
 

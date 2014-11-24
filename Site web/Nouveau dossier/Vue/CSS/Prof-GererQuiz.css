@@ -172,11 +172,11 @@ textarea.Reponsefocused{
 	margin-left:6%;
 }
 #ModifierQuiz{
-	margin-left:7%;
+	margin-left:3%;
 }
 #GererQuestions {
 	float:right;
-	margin-right:2%;
+	margin-right:7%;
 }
 
 /* ----------------  Div Dynamique pour GererQuestions ------------------ */
@@ -356,6 +356,7 @@ textarea.Reponsefocused{
     border: solid black 1px;
     border-radius: 10px;
     padding: 5px;
+    background-color:#d3d3d3;
 }
 
 
@@ -381,6 +382,11 @@ textarea.Reponsefocused{
 }
 
 #BTN_SupprimerQuestion:hover{
+    background: rgba(236, 99, 0, 0.70);
+    border:solid black 1px;
+}
+
+#BTN_SupprimerQuestion:focus{
     background: rgba(236, 99, 0, 0.70);
     border:solid black 1px;
 }
@@ -455,3 +461,17 @@ textarea.Reponsefocused{
     width:50%;
 }
 
+#BTN_SupprimerQuiz {
+    float:left;
+    background:#E66100;
+}
+
+#BTN_SupprimerQuiz:hover{
+    background: rgba(236, 99, 0, 0.70);
+    border:solid black 1px;
+}
+
+#BTN_SupprimerQuiz:focus{
+    background: rgba(236, 99, 0, 0.70);
+    border:solid black 1px;
+}

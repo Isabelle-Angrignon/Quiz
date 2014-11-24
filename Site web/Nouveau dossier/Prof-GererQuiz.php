@@ -60,6 +60,12 @@ Description: Cette interface représente l'interface principale d'un professeur 
                     else {
                         var idQuiz = $("#QuizDropZone li:first-child").attr("id");
                         var idQuestion = $(ui.item).attr("id");
+                        var cours = $("#DDL_Cours option:selected").attr("value");
+                        // Vide les champs de filtre
+                        $("#TB_Filtre").val("");
+                        $("#TB_FiltreID").val("");
+
+
                         changerOrdreQuestionsDansQuiz();
                         supprimerLienQuestionAQuiz(idQuiz, idQuestion);
                     }
@@ -80,7 +86,20 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 revert: 150,
                 connectWith: "#UlModifQuiz",
                 helper : 'clone',
-                dropOnEmpty : false
+                dropOnEmpty : false,
+                receive: function(event,ui) {
+                    if($("#TB_Filtre").val() != "" || $("#TB_FiltreId").val() != "") {
+                        // Enlève le listage par filtre si on retire une question d'un quiz.
+                        // Méthode qui empêche que, lors du filtrage, il y ai des questions qui ne sont pas en lien avec le filtre
+                        // dans la liste des questions.
+                        $("#TB_Filtre").val("");
+                        $("#TB_FiltreId").val("");
+
+                        var idQuiz = $("#QuizDropZone li:first-child").attr("id");
+                        var cours = $("#DDL_Cours option:selected").attr("value");
+                        updateUlQuestion(cours, "<?php echo $_SESSION['idUsager']; ?>", "pasDansCeQuiz", idQuiz);
+                    }
+                }
             }).disableSelection();
 
 
@@ -151,6 +170,8 @@ Description: Cette interface représente l'interface principale d'un professeur 
                 width:400,
                 select: function(event, ui) {
                     var idCours = $("#DDL_Cours option:selected").attr("value");
+                    $("#TB_Filtre").val("");
+                    $("#TB_FiltreID").val("");
                     removeLiFromQuizDropZone();
                     updateUlQuestion( idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>,"default" );
                     updateUlQuiz(idCours, <?php echo '"'.$_SESSION["idUsager"].'"' ?>);

@@ -93,7 +93,7 @@ function listerQuestionsDunQuiz($idQuiz, $idProprietaire)
 // Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestionsSelonQuiz()
 function listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours, $typeQuiz, $filtreEnonce, $filtreId)
 {
-    $filtreEnonce = '%'.$filtreEnonce.'%';
+    $filtreEnonce = @'%'.$filtreEnonce.'%';
     $bdd = connecterProf();
     $requete = $bdd->prepare("CALL listerQuestionsPasDansQuiz(?,?,?,?,?)");
 

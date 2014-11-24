@@ -124,7 +124,11 @@ function traiterJSONQuestions(resultat, idParent) {
     }
 }
 
-function traiterJSONQuiz(resultat) {
+// transformerJSONQuizEnLi
+// Par Mathieu Dumoulin
+// Intrant : resultat : une chaine de type json contenant une liste de quiz. Le nom des clés correspond au nom des colonnes de la table Quiz.
+// Description : Cette fonction ajoute, pour chacune des rangées contenues dans le json resultat, un li représentant un quiz dans la liste des quiz (UlQuiz).
+function transformerJSONQuizEnLi(resultat) {
     var titreQuiz = "";
     var idProprietaire = "";
     var nomProprietaire = "";
@@ -132,6 +136,9 @@ function traiterJSONQuiz(resultat) {
     if(resultat.length != 0) {
         for(var i = 0; i < resultat.length; ++i) {
             titreQuiz = resultat[i].titreQuiz;
+            // Réduit la taille du texte de l'énoncé pour qu'il soit contenable dans une seule rangée d'un li de la liste UlQuiz.
+            // Si les caractères sont tous en majuscule, 24 ne suffit pas comme grandeur de texte et il finit par overflow dehors du li.
+            // Un overflow:hidden à été ajouté à cet effet pour couvrir ce cas dans le css.
             if(titreQuiz.length > 24) {
                 titreQuiz = titreQuiz.substring(0, 24) + "...";
             }
@@ -145,9 +152,15 @@ function traiterJSONQuiz(resultat) {
     }
 
 }
-
+// updateUlQuiz
+// Par Mathieu Dumoulin
+// Intrants : idCours = identifiant du cours sélectionné courrament dans la DDL_Cours.
+//            idProprietaire = identifiant de l'usager propriétaire du quiz
+// Description : Cette fonction met à jour (vide et remplis par la suite) la liste de quiz (UlQuiz) à l'aide d'AJAX.
 function updateUlQuiz(idCours, idProprietaire) {
+    // Enlève le texte contenu dans le UlQuiz (s'il n'y a pas de quiz, un message sous forme de texte apparaît dans l'UlQuiz)
     $("#UlQuiz").text("");
+    // Enlève les li enfants de la liste
     $("#UlQuiz li").remove();
     $.ajax({
         type: 'POST',
@@ -155,8 +168,7 @@ function updateUlQuiz(idCours, idProprietaire) {
         data: {"idCours":idCours , "idProprietaire":idProprietaire},
         dataType: "json",
         success: function(resultat) {
-            traiterJSONQuiz(resultat);
-
+            transformerJSONQuizEnLi(resultat);
             // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
             addClickEventToQuiz();
         },
@@ -167,6 +179,14 @@ function updateUlQuiz(idCours, idProprietaire) {
 
 }
 
+// updateUlModifQuiz
+// Par Mathieu Dumoulin
+// Intrants : triage = Type de triage à appliquer. Voir Controleur/ListerQuestions.php pour connaître les chaines valides.
+//            usagerCourant = identifiant de l'usager courant.
+//            idQuiz = Identifiant du quiz présent dans le QuizDropZone.
+//            filtreEnonce = filtre à appliquer sur l'énoncé des questions. [Optionnel] car parfois pas de filtre.
+//            filtreId =  filtre à appliquer sur l'id des questions. [Optionnel] car parfois pas de filtre.
+// Description : Cette fonction est très similaire à updateUlQuestion. Différences : Le nombre de paramêtres passés ainsi que le nom du parent.
 function updateUlModifQuiz(triage,usagerCourant,idQuiz, filtreEnonce, filtreId) {//todo en cours
     $("#UlModifQuiz li").remove();
     $.ajax({
@@ -186,15 +206,27 @@ function updateUlModifQuiz(triage,usagerCourant,idQuiz, filtreEnonce, filtreId) 
         }
     });
 }
-
-function updateUlQuestion(idCours, usagerCourant, triage, idQuiz, filtreEnonce, filtreId) {//todo en cours
+// updateUlQuestion
+// Par Mathieu Dumoulin
+// Intrants : idCours = identifiant du cours qui est sélectionné dans le DDL_Cours.
+//            usagerCourant = identifiant de l'usager courant.
+//            triage = Type de triage à appliquer. Voir Controleur/ListerQuestions.php pour connaître les chaines valides.
+//            idQuiz = Identifiant du quiz présent dans le QuizDropZone. [Optionnel] car parfois il n'y a pas de quiz dans le QuizDropZone.
+//            filtreEnonce = filtre à appliquer sur l'énoncé des questions. [Optionnel] car parfois pas de filtre.
+//            filtreId =  filtre à appliquer sur l'id des questions. [Optionnel] car parfois pas de filtre.
+// Description : Cette fonction met à jour (vide et remplis par la suite) la liste de questions (UlQuestion) selon les paramètres passés.
+//               à l'aide de AJAX
+function updateUlQuestion(idCours, usagerCourant, triage, idQuiz, filtreEnonce, filtreId) {
+    // Retire les li enfants de la liste UlQuestion
     $("#UlQuestion li").remove();
+
     $.ajax({
         type: 'POST',
         url: 'Controleur/ListerQuestions.php',
         data: {"Triage":triage, "idCours":idCours , "idProprietaire":usagerCourant, "idQuiz":idQuiz, "typeQuiz":"FORMATIF",
                 "filtreEnonce":filtreEnonce, "filtreId":filtreId},
         dataType: "json",
+        async : false,
         success: function(resultat) {
             traiterJSONQuestions(resultat, "UlQuestion");
             // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
@@ -222,6 +254,7 @@ function supprimerLienQuestionAQuiz(idQuiz, idQuestion) {
         type: "post",
         url: 'Controleur/supprimerLienQuizQuestion.php',
         data:  {"idQuiz":idQuiz, "idQuestion":idQuestion},
+        async:false,
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
         }
@@ -357,7 +390,6 @@ function reponsesSontValides() {
     return reponsesSontNonVides && uneBonneReponse;
 }
 
-
 function ajouterNouvelleReponse(estBonneReponse) {
     var aCocher;
     if(estBonneReponse == null) {
@@ -378,6 +410,7 @@ function ajouterNouvelleReponse(estBonneReponse) {
             updateAutoSizeTextArea();
             addEventsToReponses();
             $("#Ul_Reponses li:last-child").children(".reponsesQuestion").focus();
+            attribuerTabIndexToElemQuestion();
 
         }
     });
@@ -412,8 +445,7 @@ function supprimerReponseCourante() {
         // Si l'élément a déjà été supprimé, le sélecteur ne va correspondre à aucun élément et cette commande ne va pas être éxécutée.
         $(".Reponsefocused").removeClass("Reponsefocused");
     }
-
-
+    attribuerTabIndexToElemQuestion();
 }
 
 // cocherCheckBoxCoursSelonQuestion
@@ -680,14 +712,16 @@ function ajouterQuestion(idCreateur, continuer) {
                     }
 
                     var cours = $("#DDL_Cours option:selected").attr("value");
+                    var filtreEnonce = $("#TB_Filtre").val();
+                    var filtreId = $("#TB_FiltreID").val();
 
                     // Gestion de l'affichage des questions dans les listes
                     if($("#QuizDropZone").children("li").length == 0) {
-                        updateUlQuestion( cours, idCreateur, "default");
+                        updateUlQuestion( cours, idCreateur, "default", "", filtreEnonce, filtreId);
                     }
                     else {
                         var idQuiz = $("#QuizDropZone li:first-child").attr("id");
-                        updateUlQuestion(cours, idCreateur, "pasDansCeQuiz", idQuiz);
+                        updateUlQuestion(cours, idCreateur, "pasDansCeQuiz", idQuiz, filtreEnonce, filtreId);
                         updateUlModifQuiz("selonQuiz", idCreateur, idQuiz);
                     }
                     swal("Félicitation !", "Votre question à été ajoutée", "success");
@@ -733,13 +767,16 @@ function modifierQuestion( idUsagerCourant,idQuestion, idProprietaire) {
                 else {
                     $(".dFondOmbrage").detach();
                     var cours = $("#DDL_Cours option:selected").attr("value");
+                    var filtreEnonce = $("#TB_Filtre").val();
+                    var filtreId = $("#TB_FiltreID").val();
+
                     // Gestion de l'affichage des questions dans les listes
                     if($("#QuizDropZone").children("li").length == 0) {
-                        updateUlQuestion( cours, idUsagerCourant, "default");
+                        updateUlQuestion( cours, idUsagerCourant, "default", "", filtreEnonce,filtreId);
                     }
                     else {
                         var idQuiz = $("#QuizDropZone li:first-child").attr("id");
-                        updateUlQuestion(cours, idUsagerCourant, "pasDansCeQuiz", idQuiz);
+                        updateUlQuestion(cours, idUsagerCourant, "pasDansCeQuiz", idQuiz, filtreEnonce,filtreId);
                         updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
                     }
                     swal("Félicitation !", "Votre question à été modifiée", "success");
@@ -788,14 +825,16 @@ function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
                         else {
                             $(".dFondOmbrage").detach();
                             var cours = $("#DDL_Cours option:selected").attr("value");
+                            var filtreEnonce = $("#TB_Filtre").val();
+                            var filtreId = $("#TB_FiltreID").val();
 
                             // Gestion de l'affichage des questions dans les listes
                             if($("#QuizDropZone").children("li").length == 0) {
-                                updateUlQuestion( cours, idUsagerCourant, "default");
+                                updateUlQuestion( cours, idUsagerCourant, "default", "",filtreEnonce, filtreId);
                             }
                             else {
                                 var idQuiz = $("#QuizDropZone li:first-child").attr("id");
-                                updateUlQuestion(cours, idUsagerCourant, "selonQuiz", idQuiz);
+                                updateUlQuestion(cours, idUsagerCourant, "pasDansCeQuiz", idQuiz, filtreEnonce, filtreId);
                                 updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
                             }
 
@@ -945,4 +984,16 @@ function retirerQuizDeQuizDropZone(idCours, idUsagerCourrant) {
 
 function verifierEgalite(premiereVar, deuxiemeVar) {
     return premiereVar == deuxiemeVar;
+}
+
+function attribuerTabIndexToElemQuestion() {
+    // L'enonce possède déjà le tabIndex 1
+    var tabIndex = 1;
+    $("#Ul_Reponses li").each(function() {
+        $(this).children("textarea").attr("tabIndex", ++tabIndex);
+    });
+
+    $("#BTN_SupprimerQuestion").attr("tabIndex", ++tabIndex);
+    $("#BTN_ConfirmerQuestion").attr("tabIndex", ++tabIndex);
+    $("#BTN_ContinuerAjout").attr("tabIndex", ++tabIndex);
 }

@@ -19,7 +19,7 @@ function remplirListeQuestions($idCours, $idProprietaire, $triage = 'default', $
 function remplirListeQuiz($idCours, $idProprietaire)
 {
     $listeQuiz = listerQuizSelonCoursProprietaire($idCours, $idProprietaire);
-    echo "<script>traiterJSONQuiz(" . $listeQuiz .");</script>";
+    echo "<script>transformerJSONQuizEnLi(" . $listeQuiz .");</script>";
 }
 
 

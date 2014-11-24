@@ -37,6 +37,7 @@
                 swal("Erreur","Un quiz doit absolument être liée à un cours." ,"error");
             }
         });
+
         $("#paramQuiz").accordion({
             heightStyle:"content"
         }).disableSelection();/*.children("div").focusin(function(e){
@@ -100,10 +101,18 @@
                 // e.which == s
                 if(e.which == 83) {
                     prevenirDefautDunEvent(e, function() { $("#BTN_EnregistrerQuiz").click();});
-                    <?php if($idProprietaire == $_SESSION['idUsager']) {
+                    <?php if($_SESSION["etat"] == "modifierQuiz" && $idProprietaire == $_SESSION['idUsager']) {
                         echo '$(document).off("keydown");';
                     }?>
                 }
+            }
+        });
+
+        $("#BTN_EnregistrerQuiz").keydown(function(e) {
+            if(e.which == 9)
+            {
+                $("#titreQuiz").focus();
+                prevenirDefautDunEvent(e, function() {});
             }
         });
     });
@@ -167,27 +176,27 @@
 
 </div>
 <div id="validationQuiz">
-    <input type="button" id="BTN_EnregistrerQuiz"  tabindex="5"
-           <?php
-           if($_SESSION['etat'] == 'modifierQuiz')
-           {
-               echo "value='Enregistrer' onclick='modifierQuiz(". $_SESSION['idQuiz']. ", \"".$_SESSION['idUsager'] ."\", \"$idProprietaire\")' >";
-           }
-           else
-           {
-               echo "value='Ajouter' onclick='ajouterQuiz(\"".$_SESSION['idUsager'] ."\")' >";
-           }
-           ?>
-    <input type="button" id="BTN_SupprimerQuiz" tabindex="6"
-           <?php
-            if($_SESSION['etat'] == 'modifierQuiz')
-            {
-                echo "value='Supprimer' onclick='supprimerQuiz(". $_SESSION['idQuiz']. ", \"". $_SESSION['idUsager'] ."\", \"$idProprietaire\")' >";
-            }
-            else
-            {
-                echo "value='Annuler' onclick='fermerDivDynamique()' >";
-            }
-           ?>
 
+    <input type="button" id="BTN_SupprimerQuiz" tabindex="6"
+    <?php
+    if($_SESSION['etat'] == 'modifierQuiz')
+    {
+        echo "value='Supprimer' onclick='supprimerQuiz(". $_SESSION['idQuiz']. ", \"". $_SESSION['idUsager'] ."\", \"$idProprietaire\")' >";
+    }
+    else
+    {
+        echo "value='Annuler' onclick='fermerDivDynamique()' >";
+    }
+    ?>
+    <input type="button" id="BTN_EnregistrerQuiz"  tabindex="5"
+    <?php
+    if($_SESSION['etat'] == 'modifierQuiz')
+    {
+        echo "value='Enregistrer' onclick='modifierQuiz(". $_SESSION['idQuiz']. ", \"".$_SESSION['idUsager'] ."\", \"$idProprietaire\")' >";
+    }
+    else
+    {
+        echo "value='Ajouter' onclick='ajouterQuiz(\"".$_SESSION['idUsager'] ."\")' >";
+    }
+    ?>
 </div>
