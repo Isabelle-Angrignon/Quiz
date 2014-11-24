@@ -57,13 +57,13 @@ function validerUsager()
 	    
 	    $requete = $bdd->prepare("CALL validerUsager(?, ?)");
 	    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
-	    $requete->bindparam(2, $motDePasse , PDO::PARAM_STR,16);
+	    $requete->bindparam(2, $motDePasse , PDO::PARAM_STR,255);
 	       
 	    $requete->execute();
 	    
 	    $infoUsager = $requete->fetch();
 	    
-	    if($infoUsager['nom'] != null)// si ici, il d=faut sauvegarder le idUsager dans la session+ si prof, eleve+
+	    if($infoUsager['nom'] != null)// si ici, il faut sauvegarder le idUsager dans la session+ si prof, eleve+
 	    {
 	    	// mettre le idUsager dans cookie de session
 	    	$_SESSION['idUsager'] = $idUsager;
@@ -121,7 +121,7 @@ function ModifierMotPasse($idUsager, $NouveauMotPasse){
     $bdd = connecterAdmin();
     $requete = $bdd->prepare("CALL ModifierMotDePasse(? , ?)");
     $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
-    $requete->bindparam(2, $NouveauMotPasse, PDO::PARAM_STR,16);
+    $requete->bindparam(2, $NouveauMotPasse, PDO::PARAM_STR,255);
 
     $requete->execute();
 
