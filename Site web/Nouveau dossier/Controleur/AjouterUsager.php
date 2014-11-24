@@ -24,7 +24,7 @@ CreerUsager($_POST['idUsager'], $_POST['nom'],$_POST['prenom']);
 function CreerUsager($idEleve,$nom,$prenom)
 {
     try {
-        $retour = ajouterUsager($idEleve, $nom, $prenom);
+        $retour = ajouterUsager($idEleve,password_hash($idEleve,PASSWORD_BCRYPT) , $nom, $prenom);
         echo $retour;
     }
     catch (PDOException $e){

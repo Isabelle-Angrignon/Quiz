@@ -12,17 +12,18 @@ But: Contient diverses fonctions d'accès à la table usager
 //Permet d'ajouter un usager de base qu'il soit prof ou non. Le numero de commence par 420 dans le cas d'un prof
 //
 
-function ajouterUsager($id, $nom, $prenom)
+function ajouterUsager($id,$Password , $nom, $prenom)
 {
 	// a retirer et mettre connecterProf
     $reussi = 0;
     $bdd = connecterProf();
 	if (isset($id) AND isset($prenom) AND isset($nom))
 	{
-		$requete = $bdd->prepare("CALL ajouterUsager(?, ?, ?)");
+		$requete = $bdd->prepare("CALL ajouterUsager(?, ? , ?, ?)");
 	    $requete->bindparam(1, $id, PDO::PARAM_STR,10);
-	    $requete->bindparam(2, $prenom, PDO::PARAM_STR,30); 
-	    $requete->bindparam(3, $nom, PDO::PARAM_STR,50);
+        $requete->bindparam(2, $Password, PDO::PARAM_STR,255);
+	    $requete->bindparam(3, $prenom, PDO::PARAM_STR,30);
+	    $requete->bindparam(4, $nom, PDO::PARAM_STR,50);
 	       
 	    $requete->execute();
 
@@ -55,15 +56,14 @@ function validerUsager()
 	    $idUsager   = $_POST['nomUsager']; 
 	    $motDePasse = $_POST['motDePasse'];    
 	    
-	    $requete = $bdd->prepare("CALL validerUsager(?, ?)");
+	    $requete = $bdd->prepare("CALL validerUsager(?)");
 	    $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
-	    $requete->bindparam(2, $motDePasse , PDO::PARAM_STR,255);
 	       
 	    $requete->execute();
 	    
 	    $infoUsager = $requete->fetch();
 	    
-	    if($infoUsager['nom'] != null)// si ici, il faut sauvegarder le idUsager dans la session+ si prof, eleve+
+	    if(password_verify($_POST['motDePasse'],$infoUsager['motDePasse']))// si ici, il faut sauvegarder le idUsager dans la session+ si prof, eleve+
 	    {
 	    	// mettre le idUsager dans cookie de session
 	    	$_SESSION['idUsager'] = $idUsager;

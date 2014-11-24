@@ -26,7 +26,7 @@
     redirigerSiNonConnecte('Prof');
 	$nomFichier = UploadFile();
 	LireCSV($nomFichier);
-	unlink('..\FichierCSV\\' . $nomFichier);
+	unlink('C:\\' . $nomFichier);
 	//Fait par Simon Bouchard  
 	//Intrant : Aucun
 	//Extrant : Aucun mais un fichier sera copier dans le répertoire FichierCSV
@@ -43,8 +43,8 @@
 				echo 'Size: ' . ($_FILES['file']['size'] / 1024) . ' kB<br>';
 				echo 'Stored in: ' . $_FILES['file']['tmp_name'] . '<br>';	
 				move_uploaded_file($_FILES['file']['tmp_name'],
-				'C:\Users\QUIZ\Documents\GitHub\Quiz\Site web\Nouveau dossier\FichierCSV\\' . $_FILES['file']['name']);
-				echo 'Stored in: ' . 'C:\Users\QUIZ\Documents\GitHub\Quiz\Site web\Nouveau dossier\FichierCSV\\' . $_FILES['file']['name'];
+				'C:\\' . $_FILES['file']['name']);
+				echo 'Stored in: ' . 'C:\\' . $_FILES['file']['name'];
 	    }
 	    
 	    return $_FILES['file']['name'];
@@ -56,7 +56,7 @@
     // Permet de lire un fichier CSV et d'insérer un élèves / le lier a son cours
     function LireCSV($nomFichier)
     {
-    	$leFichier = fopen('..\\FichierCSV\\' . $nomFichier,'r');
+    	$leFichier = fopen('C:\\' . $nomFichier,'r');
     	$ligne = fgets($leFichier);
     	if (ValiderFichier($ligne))
     	{
@@ -65,7 +65,7 @@
                 try {
                     $ligne = fgets($leFichier);
                     $parametre = explode(';', utf8_encode($ligne));
-                    InscrireEtudiantCours($parametre[2], $parametre[1], $parametre[0], $_POST['cours'], $_SESSION['idUsager']);
+                    InscrireEtudiantCours($parametre[2],password_hash($parametre[2],PASSWORD_BCRYPT) , $parametre[1], $parametre[0], $_POST['cours'], $_SESSION['idUsager']);
                 }
                 catch (PDOException $e)
                 {}

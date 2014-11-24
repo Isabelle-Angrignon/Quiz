@@ -55,17 +55,19 @@ function LireEtudiantPasDansUnCours($idCours, $IdProf)
 
 }
 
-function InscrireEtudiantCours($idEtudiant , $nom , $prenom, $idCours, $idProf)
+function InscrireEtudiantCours($idEtudiant ,$Password , $nom , $prenom, $idCours, $idProf)
 {
     $bdd = connecterProf();
+
     if (isset($idEtudiant) AND isset($prenom) AND isset($nom))
     {
-        $requete = $bdd->prepare("CALL inscrireEtudiantCours(?, ?, ? , ? ,?)");
+        $requete = $bdd->prepare("CALL inscrireEtudiantCours(?, ? , ?, ? , ? ,?)");
         $requete->bindparam(1, $idEtudiant, PDO::PARAM_STR,10);
-        $requete->bindparam(2, $prenom, PDO::PARAM_STR,30);
-        $requete->bindparam(3, $nom, PDO::PARAM_STR,50);
-        $requete->bindparam(4, $idCours, PDO::PARAM_INT,10);
-        $requete->bindparam(5, $idProf, PDO::PARAM_STR,10);
+        $requete->bindparam(2, $Password, PDO::PARAM_STR,255);
+        $requete->bindparam(3, $prenom, PDO::PARAM_STR,30);
+        $requete->bindparam(4, $nom, PDO::PARAM_STR,50);
+        $requete->bindparam(5, $idCours, PDO::PARAM_INT,10);
+        $requete->bindparam(6, $idProf, PDO::PARAM_STR,10);
 
         $requete->execute();
 

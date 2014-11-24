@@ -44,8 +44,13 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
         header('Location: ../GererSonCompte.php');
         return 0;
     }
+
     // Si l'ancient mot de passe n'est pas bon
-    if($AncientMotPasse == RecupererMotPasse($_SESSION['idUsager'])[0])
+    echo password_verify($AncientMotPasse, RecupererMotPasse($_SESSION['idUsager'])[0]);
+    echo RecupererMotPasse($_SESSION['idUsager'])[0];
+    echo "    //////////////////////    ";
+    echo password_hash($AncientMotPasse,PASSWORD_BCRYPT);
+    if((password_verify($AncientMotPasse, RecupererMotPasse($_SESSION['idUsager'])[0])))
     {
         // Si la confirmation du mot de passe n'est pas identique au mot de passe souhaié
         if ($NouvMotPasse == $ConfNouvMotPasse)
@@ -58,7 +63,8 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
             }
             else
             {
-                $retour = ModifierMotPasse($_SESSION['idUsager'], $NouvMotPasse);
+                $MDPCrypter = password_hash($NouvMotPasse,PASSWORD_BCRYPT);
+                $retour = ModifierMotPasse($_SESSION['idUsager'], $MDPCrypter);
                 unset($_SESSION['erreur']);
                 $_SESSION['reussite']= "Le mot de passe a été changé";
                 setParamChange($_SESSION['idUsager'], true);
@@ -76,8 +82,9 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
     else
     {
         $_SESSION['erreur'] = 'Le mot de passe ne correspond pas à votre ancien mot de passe';
-        header('Location: ../GererSonCompte.php');
+        //header('Location: ../GererSonCompte.php');
     }
 }
+
 
 ?>

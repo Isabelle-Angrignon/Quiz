@@ -24,7 +24,7 @@ ChangerMotPasse($_POST['numeroDA']);
 
 function ChangerMotPasse($NumeroDA){
     try {
-        $retour = ModifierMotPasse($NumeroDA, $NumeroDA);
+        $retour = ModifierMotPasse($NumeroDA, password_hash($NumeroDA,PASSWORD_BCRYPT));
         setParamChange($NumeroDA,0);
         echo $retour;
     }
