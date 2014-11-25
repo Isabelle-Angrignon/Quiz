@@ -42,9 +42,11 @@ function addEventsToReponses() {
     $(".reponsesQuestion").focusin(function() {
         $(this).addClass("Reponsefocused");
     }).focusout(function(event) {
-        if($(event.relatedTarget).attr("id") != "BTN_SupprimerReponse") {
-            $(this).removeClass("Reponsefocused");
-        }
+        setTimeout(function() {
+            if($(document.activeElement).attr("id") != "BTN_SupprimerReponse") {
+                $(this).removeClass("Reponsefocused");
+            }
+        });
     });
 
     $(".reponsesQuestion").off("keydown");
