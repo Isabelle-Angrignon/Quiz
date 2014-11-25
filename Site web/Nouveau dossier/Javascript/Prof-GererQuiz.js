@@ -201,6 +201,7 @@ function updateUlModifQuiz(triage,usagerCourant,idQuiz, filtreEnonce, filtreId) 
             traiterJSONQuestions(resultat, "UlModifQuiz");
             // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
             addClickEventToQuiz(usagerCourant);
+            addClickEventToQuestions(usagerCourant);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
