@@ -105,7 +105,6 @@
     }
     updateAutoSizeTextArea();
     // Ajoute la gestion des hotkeys sur le div dynamique.
-    $(document).off("keydown");
     $(document).keydown(function(e) {
         if(e.ctrlKey == true) {
             // e.which == s
@@ -120,6 +119,7 @@
                     ?>
                 }
                 else {
+                    $(document).off("keydown");
                     prevenirDefautDunEvent(e,function() { $("#BTN_ContinuerAjout").click();});
                 }
             }

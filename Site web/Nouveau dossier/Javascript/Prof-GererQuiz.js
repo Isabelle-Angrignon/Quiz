@@ -42,7 +42,6 @@ function addEventsToReponses() {
     $(".reponsesQuestion").focusin(function() {
         $(this).addClass("Reponsefocused");
     }).focusout(function(event) {
-        alert(event.explicitOriginalTarget);
         if($(event.relatedTarget).attr("id") != "BTN_SupprimerReponse") {
             $(this).removeClass("Reponsefocused");
         }
