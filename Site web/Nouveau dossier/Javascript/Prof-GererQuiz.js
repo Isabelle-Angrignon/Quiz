@@ -42,6 +42,7 @@ function addEventsToReponses() {
     $(".reponsesQuestion").focusin(function() {
         $(this).addClass("Reponsefocused");
     }).focusout(function(event) {
+        alert(event.explicitOriginalTarget);
         if($(event.relatedTarget).attr("id") != "BTN_SupprimerReponse") {
             $(this).removeClass("Reponsefocused");
         }
@@ -89,6 +90,7 @@ function prevenirDefautDunEvent(event, fonction, timeout) {
     else {
         setTimeout(function() {fonction();}, timeout);
     }
+
     event.preventDefault();
 }
 
@@ -986,6 +988,10 @@ function verifierEgalite(premiereVar, deuxiemeVar) {
     return premiereVar == deuxiemeVar;
 }
 
+// attribuerTabIndexToElemQuestion
+// Par Mathieu Dumoulin
+// Description : Cette fonction attribut le tabIndex aux éléments de la page.
+//               Pourquoi le faire en javascript et non en html? Le nombre d'éléments dans la page varie (nombre de réponses) // todo
 function attribuerTabIndexToElemQuestion() {
     // L'enonce possède déjà le tabIndex 1
     var tabIndex = 1;

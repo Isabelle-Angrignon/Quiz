@@ -118,7 +118,6 @@
                         echo '$(document).off("keydown");';
                     }
                     ?>
-
                 }
                 else {
                     prevenirDefautDunEvent(e,function() { $("#BTN_ContinuerAjout").click();});
