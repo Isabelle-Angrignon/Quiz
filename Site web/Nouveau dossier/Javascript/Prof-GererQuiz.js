@@ -42,9 +42,11 @@ function addEventsToReponses() {
     $(".reponsesQuestion").focusin(function() {
         $(this).addClass("Reponsefocused");
     }).focusout(function(event) {
-        if($(event.relatedTarget).attr("id") != "BTN_SupprimerReponse") {
-            $(this).removeClass("Reponsefocused");
-        }
+        setTimeout(function() {
+            if($(document.activeElement).attr("id") != "BTN_SupprimerReponse") {
+                $(this).removeClass("Reponsefocused");
+            }
+        });
     });
 
     $(".reponsesQuestion").off("keydown");
@@ -89,6 +91,7 @@ function prevenirDefautDunEvent(event, fonction, timeout) {
     else {
         setTimeout(function() {fonction();}, timeout);
     }
+
     event.preventDefault();
 }
 
@@ -200,6 +203,7 @@ function updateUlModifQuiz(triage,usagerCourant,idQuiz, filtreEnonce, filtreId) 
             traiterJSONQuestions(resultat, "UlModifQuiz");
             // En retirant les anciens li, l'ancien événement click est détruit donc on doit le recréer.
             addClickEventToQuiz(usagerCourant);
+            addClickEventToQuestions(usagerCourant);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + "   /////    " + textStatus + "   /////    " + errorThrown);
@@ -986,6 +990,10 @@ function verifierEgalite(premiereVar, deuxiemeVar) {
     return premiereVar == deuxiemeVar;
 }
 
+// attribuerTabIndexToElemQuestion
+// Par Mathieu Dumoulin
+// Description : Cette fonction attribut le tabIndex aux éléments de la page.
+//               Pourquoi le faire en javascript et non en html? Le nombre d'éléments dans la page varie (nombre de réponses) // todo
 function attribuerTabIndexToElemQuestion() {
     // L'enonce possède déjà le tabIndex 1
     var tabIndex = 1;

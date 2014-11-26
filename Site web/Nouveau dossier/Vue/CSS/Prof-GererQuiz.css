@@ -312,6 +312,7 @@ textarea.Reponsefocused{
     vertical-align: top;
     margin-left: 5%;
     height:500px;
+    width:43%;
 }
 #parametresQuestion {
     width: 100%;
@@ -357,6 +358,7 @@ textarea.Reponsefocused{
     border-radius: 10px;
     padding: 5px;
     background-color:#d3d3d3;
+    font-size: 15px;
 }
 
 
