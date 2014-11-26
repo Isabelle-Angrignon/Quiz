@@ -211,12 +211,7 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP) {
 	document.body.appendChild(fondOmbrage);
 	fondOmbrage.appendChild(divPrincipale);
 
-    $(document).keydown(function(e) {
-        if(e.which == 27) {
-            $("#dFondOmbrage").remove();
-            $(document).off("keydown");
-        }
-    });
+    ajouterKeyDownFrameDynamique();
 
     if(pathFichierPHP != null) {
         insererHTMLfromPHP(idDivPrincipal, pathFichierPHP);
@@ -308,6 +303,18 @@ function insererHTMLfromPHP(idConteneur, pathFichierPHP) {
 function viderHTMLfromElement(idElement) {
     var selecteur = "#" + idElement;
     $(selecteur).html("");
+}
+
+// ajouterKeyDownFrameDynamique
+// Par Mathieu Dumoulin
+// Description : Cette fonction ajoute les événements qui s'appliquent à tous les divs dynamiques
+function ajouterKeyDownFrameDynamique() {
+    $(document).keydown(function(e) {
+        if(e.which == 27) {
+            $("#dFondOmbrage").remove();
+            $(document).off("keydown");
+        }
+    });
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

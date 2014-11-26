@@ -39,9 +39,9 @@
     // En résumé, lorsque je clique sur un des div d'enoncé de réponse, s'il n'est pas déjà en train d'être déplacé,
     // disable son attribut qui le rend selectable jusqu'à temps qu'il perd le focus
     $("#Ul_Reponses").sortable().click(function(){
-        if ( $(this).is('.ui-sortable-helper') ) {
+      /*  if ( $(this).is('.ui-sortable-helper') ) {
             return;
-        }
+        }*/
         $(this).sortable( "option", "disabled", true );
         $(this).sortable("option", "cancel", ".fixed");
     // Ici j'utilise l'event focusout car, contrairement à l'event blur, focusout est déclanché
@@ -120,6 +120,7 @@
                 }
                 else {
                     $(document).off("keydown");
+                    ajouterKeyDownFrameDynamique();
                     prevenirDefautDunEvent(e,function() { $("#BTN_ContinuerAjout").click();});
                 }
             }

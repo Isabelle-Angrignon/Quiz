@@ -42,9 +42,10 @@ function addEventsToReponses() {
     $(".reponsesQuestion").focusin(function() {
         $(this).addClass("Reponsefocused");
     }).focusout(function(event) {
+        var ancienFocus = this;
         setTimeout(function() {
             if($(document.activeElement).attr("id") != "BTN_SupprimerReponse") {
-                $(this).removeClass("Reponsefocused");
+                $(ancienFocus).removeClass("Reponsefocused");
             }
         });
     });
