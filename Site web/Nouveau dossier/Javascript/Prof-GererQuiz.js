@@ -309,6 +309,9 @@ function lierQuestionAQuiz(idQuiz, idQuestion, positionQuestion) {
     });
 }
 
+// supprimerLienQuestionAQuiz
+// Par Mathieu Dumoulin
+// Description : Cette fonction fait un appel AJAX pour supprimer le lien d'une question à un quiz dans la BD.
 function supprimerLienQuestionAQuiz(idQuiz, idQuestion) {
     $.ajax({
         type: "post",
@@ -321,6 +324,9 @@ function supprimerLienQuestionAQuiz(idQuiz, idQuestion) {
     });
 }
 
+// changerOrdreQuestionsDansQuiz
+// Par Mathieu Dumoulin
+// Description : Cette fonction récupère les questions dans le Ul_ModifQuiz et change leur ordre dans la db à l'aide d'un appel AJAX
 function changerOrdreQuestionsDansQuiz() {
     var jsonQuestions = getJSONQuestionDansQuiz();
 
@@ -339,7 +345,7 @@ function changerOrdreQuestionsDansQuiz() {
 // Intrants: idQuestion = Identifiant représentant la question dans la session
 //           etat = Action causant l'ouverture du div dynamique
 // Extrant: Il n'y a pas d'extrant
-// Description: Cette fonction envoi, à l'aide de AJAX, les variables passées en paramètre dans la session
+// Description: Cette fonction envoi, à l'aide d'AJAX, les variables passées en paramètre dans la session
 function ajouterVariableSessionQuestion(idQuestion, etat) {
     $.ajax({
         type: "post",
@@ -352,6 +358,11 @@ function ajouterVariableSessionQuestion(idQuestion, etat) {
     });
 }
 
+// ajouterVariableSessionQuiz
+// Par Mathieu Dumoulin
+// Intrants : idQuiz = identifiant du quiz à passer dans la session
+//            etat = action qui est posé lors de l'ouverture d'un quiz (modification ou ajout)
+// Description : Cette fonction ajoute, à l'aide d'AJAX, les variables liés à un quiz dans la session
 function ajouterVariableSessionQuiz(idQuiz, etat) {
     $.ajax({
         type: "post",
@@ -450,6 +461,11 @@ function reponsesSontValides() {
     return reponsesSontNonVides && uneBonneReponse;
 }
 
+// ajouterNouvelleReponse
+// Par Mathieu Dumoulin
+// Intrants : estBonneReponse = Un booléen qui définit si ma nouvelle réponse doit être cochée pour dire qu'elle est vrai ou non
+//            veutFocus = un booléen qui définit si ma nouvelle réponse doit avoir le focus ou non
+// Description : Cette fonction ajoute une nouvelle réponse via PHP à l'aide d'un appel AJAX
 function ajouterNouvelleReponse(estBonneReponse, veutFocus) {
     var aCocher;
     if(estBonneReponse == null) {
@@ -466,19 +482,22 @@ function ajouterNouvelleReponse(estBonneReponse, veutFocus) {
         dataType: "html",
         async:false,
         success: function(resultat) {
+            // Ajoute ma nouvelle réponse dans la liste des réponses
             $("#Ul_Reponses").append(resultat);
+            // rend tous les textArea ajustable en hauteur selon leur contenu
             updateAutoSizeTextArea();
             addEventsToReponses();
+            // Donne le focus à la réponse si veutFocus est à true
             if(veutFocus) {
                 $("#Ul_Reponses li:last-child").children(".reponsesQuestion").focus();
             }
-
+            // Redistribut le tabIndex dans mon interface car il y a un nouvel élément
             attribuerTabIndexToElemQuestion();
 
         }
     });
 }
-
+// todo Commentaires ... /////
 function supprimerReponseCourante() {
     var aRetirerClasseReponsefocused = false;
     if($("#Ul_Reponses").children("li").length == 1) {
