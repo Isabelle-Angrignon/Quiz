@@ -70,7 +70,7 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
                 setParamChange($_SESSION['idUsager'], true);
                 $_SESSION['paramChange'] = 1;
                 header('Location: ../GererSonCompte.php');
-                echo $retour;
+
             }
         }
         else
@@ -82,7 +82,7 @@ function ChangerMotPasse($AncientMotPasse , $NouvMotPasse , $ConfNouvMotPasse){
     else
     {
         $_SESSION['erreur'] = 'Le mot de passe ne correspond pas à votre ancien mot de passe';
-        //header('Location: ../GererSonCompte.php');
+        header('Location: ../GererSonCompte.php');
     }
 }
 
