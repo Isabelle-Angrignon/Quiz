@@ -66,7 +66,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
                   remplirUIModifGroupeAjax($(ui.item).attr('id'));
                   remplirUIEtudiantCoursAjax($(ui.item).attr('id'));
                   $('#BTN_GestionGoupe').show();
-                  $('#BTN_Cours').hide();
 
               },
               remove: function (event, ui) {
@@ -76,7 +75,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
                   $('#UlEtudiants').empty();
                   ListerEtudiantAjax();
                   $('#BTN_GestionGoupe').hide();
-                  $('#BTN_Cours').show();
               }
 
           });
@@ -107,7 +105,6 @@ Description: Cette interface représente l'interface principale d'un professeur 
              <?php ListerCoursDansUl("UlCours"); ?>
 
 			</ul>
-            <div id="BTN_Cours" class="ListeDivElementStyle BoutonDiv">Ajouter un cours</div>
 		</div>
 		<div id="ListeModifGroupe" class="Liste ListeGererCours">
 			<div id="QuizDropZone" class="ListeDivElementStyle"> </div>
@@ -135,9 +132,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
 	?>
  <script>
      $('#BTN_GestionGoupe').hide();
-     $( "#BTN_Cours" ).click(function() {
-         creeFrameDynamique('divDynamique','Vue/dynamique-CreerCours.php');
-     });
+
      $( "#BTN_CSV" ).click(function() {
          creeFrameDynamique('divDynamique','Vue/dynamique-CSV.php');
      });

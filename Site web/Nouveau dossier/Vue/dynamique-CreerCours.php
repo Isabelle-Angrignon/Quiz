@@ -33,11 +33,20 @@
     $('#soumettre').button();
     $('#soumettre').click(function(){
         if (estValide()) {
-            ajouterCoursAjax($('#TB_Nom').val(), $('#TB_Code').val())
-            $('#UlCours').empty();
-            ListerCoursAjax();
-            $('#dFondOmbrage').remove();
-            $('#DivDynamique').remove();
+            swal({   title: "Êtes-vous sur?",
+                text: "Voulez vous vraiment ajouter le cours : " + $("#TB_Nom").val() + " avec le code cours : " +
+                $("#TB_Code").val() + " ? ",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#FFA64F",/*todo ancien... #DD6B55   */
+                confirmButtonText: "GO ! ",
+                closeOnConfirm:false
+            }, function(){
+                ajouterCoursAjax($('#TB_Nom').val(), $('#TB_Code').val());
+                $("#TB_Nom").val("");
+                $("TB_Code").val("");
+            });
+
         }
     });
 
