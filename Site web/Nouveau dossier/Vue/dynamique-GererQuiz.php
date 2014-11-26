@@ -11,12 +11,26 @@
     }
     if($_SESSION['etat'] == "modifierQuiz")
     {
-        $infoQuiz = recupererInfoQuiz($_SESSION['idQuiz']);
-        $titreQuiz = $infoQuiz['titreQuiz'];
-        $ordreQuestionsAleatoire = $infoQuiz['ordreQuestionsAleatoire'];
-        $estDisponible = $infoQuiz['estDisponible'];
-        $idProprietaire = $infoQuiz['idUsager_Proprietaire'];
+        if(isset($_SESSION['idQuiz']))
+        {
+            // Récuperation des informations de la bd par rapport à ce quiz
+            $infoQuiz = recupererInfoQuiz($_SESSION['idQuiz']);
+            $titreQuiz = $infoQuiz['titreQuiz'];
+            $ordreQuestionsAleatoire = $infoQuiz['ordreQuestionsAleatoire'];
+            $estDisponible = $infoQuiz['estDisponible'];
+            $idProprietaire = $infoQuiz['idUsager_Proprietaire'];
+        }
+        else
+        {
+            // Gestion d'erreur si l'identifiant du quiz n'est pas reçu dans ce fichier et que c'est une modification de quiz
+            echo "<script>
+            fermerDivDynamique();
+            swal(\"Erreur lors de l'ouverture\",\"Erreur lors de l'ouverture du quiz. Veuillez vous recommencer. Si le problème persiste, veuillez contacter un administrateur.\", 'error');
+            </script>";
 
+        }
+
+        // Si l'usager propriétaire du quiz n'est pas l'usager courant, affiche un message pour signaler qu'aucune modif ne va être enregistrée dans la bd.
         if($idProprietaire != $_SESSION["idUsager"]) {
             echo "<script>swal('Oups',
                 'Vous ne disposez pas des droits pour modifier ce quiz. Aucune modification ne sera sauvegardée.',
@@ -27,6 +41,7 @@
 
 <script>
     $(document).ready(function() {
+        // ----------- Gestion des cours en javascript ---------------------------- //
         $("#DDL_Cours").children("option").each(function() {
             creerNouveauInput("checkbox","listeCoursQuiz", "cours", $(this).attr("value"), $(this).text(), 50);
             // Coche la checkbox des cours qui sont déjà lié à la question
@@ -38,43 +53,22 @@
             }
         });
 
+        // --------------------------- Jquery UI ---------------------------------- //
         $("#paramQuiz").accordion({
             heightStyle:"content"
-        }).disableSelection();/*.children("div").focusin(function(e){
-            var currentTabIndex = document.activeElement.tabIndex;
-            $(this).parent("#paramQuiz").accordion("option", "active", currentTabIndex - 1 );
-        });*/
+        }).disableSelection();
 
         $('#titreQuiz').on('keydown', function(e) {
+            // Si on appui sur tab lorsqu'on est sur le titre du quiz
             if (e.which == 9) {
                 if (!e.shiftKey) {
+                    // On ouvre l'accordion à l'index 0.
                     $("#paramQuiz").accordion( "option", "active", 0 );
                 }
             }
         });
-        $('#paramQuiz').on('keydown', function(e) {
-            if (e.which == 9) {
-                if (!e.shiftKey) {
-                    var active = $( "#paramQuiz" ).accordion( "option", "active" );
-                    $("#paramQuiz").accordion( "option", "active", active + 1 );
-                }
-            }
-        });
 
-        $('#BTN_SupprimerQuiz').on('keydown', function(e) {
-            if (e.which == 9) {
-                if (!e.shiftKey) {
-                    $("#titreQuiz").focus();
-                }
-            }
-        });
-
-        $("#titreQuiz").focusin(function(e) {
-            $(this).css("background-color", "rgba(236, 99, 0, 0.62)");
-        }).focusout(function(e) {
-            $(this).css("background-color", "#E66100");
-        });
-
+        // Change le texte du boutton de l'ordre des questions dans le quiz lorsqu'on clique dessus.
         $("#ordreQuestionQuiz").button().change(function() {
             if($(this).prop("checked") == true) {
                 $(this).next("label").children("span").text("Fixe");
@@ -84,6 +78,7 @@
             }
         });
 
+        // Change le texte du boutton de la disponibilité du quiz lorsqu'on clique dessus.
         $("#disponibiliteQuiz").button().change(function() {
             if($(this).prop("checked") == true) {
                 $(this).next("label").children("span").text("N'est pas disponible");
@@ -96,19 +91,45 @@
         $("#BTN_EnregistrerQuiz").button();
         $("#BTN_SupprimerQuiz").button();
 
+        // --------------------------- Paramètres de quiz  ---------------------------------- //
+        $('#paramQuiz').on('keydown', function(e) {
+            if (e.which == 9) {
+                if (!e.shiftKey) {
+                    // Ouvre l'index de l'accordion correspondante au tabIndex
+                    var active = $( "#paramQuiz" ).accordion( "option", "active" );
+                    $("#paramQuiz").accordion( "option", "active", active + 1 );
+                }
+            }
+        });
+
+        // --------------------------- Titre du quiz ---------------------------------- //
+        // Gestion de la couleur de fond dans le titre du quiz selon s'il est focus ou non
+        $("#titreQuiz").focusin(function(e) {
+            $(this).css("background-color", "rgba(236, 99, 0, 0.62)");
+        }).focusout(function(e) {
+            $(this).css("background-color", "#E66100");
+        });
+
+        // --------------------------- Gestion des événements le div dynamique ---------------------------------- //
+        // Gestion du Ctrl + s sur un quiz qui sauvegarde les modifications/ajoute le quiz en simulant un clic sur le boutton BTN_EnregistrerQuiz
         $(document).keydown(function(e) {
             if(e.ctrlKey == true) {
                 // e.which == s
                 if(e.which == 83) {
                     prevenirDefautDunEvent(e, function() { $("#BTN_EnregistrerQuiz").click();});
+                    // Si la modification est valide (s'il n'y a aucun conflit de droits)
                     <?php if($_SESSION["etat"] == "modifierQuiz" && $idProprietaire == $_SESSION['idUsager']) {
+                    // J'enlève l'évènement keydown pour ne pas avoir plusieurs fois le même event sur le même élément
                         echo '$(document).off("keydown");';
                     }?>
                 }
             }
         });
 
+        // --------------------------- Gestion des événements sur les boutons de confirmation ---------------------------------- //
+        // Sert à faire une boucle avec les tabIndex pour faciliter la navigation avec le tab
         $("#BTN_EnregistrerQuiz").keydown(function(e) {
+            // Si tu pèse tab et que tu est sur le BTN_SupprimerQuiz
             if(e.which == 9)
             {
                 $("#titreQuiz").focus();

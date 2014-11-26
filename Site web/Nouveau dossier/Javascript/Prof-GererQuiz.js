@@ -3,17 +3,22 @@
 // Date : 17/09/2014
 // Description : Contient tout le code Javascript spécifique à la page Prof-GererQuiz.php
 
-
+// addClickEventToQuestions
+// Par Mathieu Dumoulin
+// Description : Cette fonction retire et ajoute l'évènement clic sur les questions.
 function addClickEventToQuestions(usagerCourant) {
+    // Retire l'évènement pour ne pas avoir plusieurs fois le même évènement qui se déclanche par la suite sur les même actions.
     $("#UlQuestion li, #UlModifQuiz li").off("click");
     $("#UlQuestion li, #UlModifQuiz li").click( function() {
+        // Si l'usager n'est pas l'usager proprietaire de la question, avertir l'usager
         if(usagerCourant != $(this).children(".divProfDansLi").attr("placeholder")) {
             swal("Oups",
             "Vous ne disposez pas des droits pour modifier cette question. Aucune modification ne sera sauvegardée.",
             "warning");
         }
-
+        // Valeur par défaut de l'etat
         var etat = "";
+        // Par défaut, j'initialise le id des nouvelles questions à -1
         if($(this).attr("id") == -1) {
             etat = "nouvelleQuestion";
         }
@@ -28,6 +33,9 @@ function addClickEventToQuestions(usagerCourant) {
     });
 }
 
+// addClickEventToQuiz
+// Par Mathieu Dumoulin
+// Description : Cette fonction retire puis ajoute l'évènement clic sur les 'li' de la liste UlQuiz
 function addClickEventToQuiz() {
     $("#UlQuiz li").off("click");
     $("#UlQuiz li").click( function() {
@@ -37,13 +45,25 @@ function addClickEventToQuiz() {
     });
 }
 
+// addEventsToReponses
+// Par Mathieu Dumoulin
+// Description : Cette fonction retire et ajoute les évènements qui sont liés aux réponses de la page dynamique-GererQuestion.php
 function addEventsToReponses() {
+    // Retire les évènements focusin et focusout
     $(".reponsesQuestion").off("focusin").off("focusout");
+    // Gère l'ajout de la classe Reponsefocused lorsqu'une réponse à le focus
     $(".reponsesQuestion").focusin(function() {
         $(this).addClass("Reponsefocused");
+        // Gère la suppression de la classe Reponsefocused lorsqu'une réponse perd le focus
     }).focusout(function(event) {
+        // Je prend l'ancien élément qui à le focus ici car, à la suite du timeOut, this ne réprésente plus la question qui s'est faite focusOut
         var ancienFocus = this;
+        // setTimeout est la pour contourner le fait qu'avec FireFox on ne peut pas accèder au nouvel élément qui a le focus
         setTimeout(function() {
+            // Si le nouvel élément qui a le focus n'est pas le Boutton pour supprimer une réponse.
+            // Cette vérification est faite car on veut, lors du clic sur ce boutton, capter tous les éléments qui ont la classe Reponsefocused et les supprimer.
+            // En cliquant sur ce boutton, sans cette condition, la réponse que l'on veut supprimer perd la classe lorsque le focus n'est plus sur elle.
+            // Alors cette condition est essentielle à la suppression d'une réponse.
             if($(document.activeElement).attr("id") != "BTN_SupprimerReponse") {
                 $(ancienFocus).removeClass("Reponsefocused");
             }
@@ -52,12 +72,12 @@ function addEventsToReponses() {
 
     $(".reponsesQuestion").off("keydown");
     $(".reponsesQuestion").keydown(function(e) {
-
-        // Si c'est shift+enter qui est appuyer
         if(e.shiftKey == true ) {
+        // Si c'est shift+enter qui est appuyer
             if(e.which == 13) {
                 prevenirDefautDunEvent(e, function() { $("#BTN_AjouterReponse").click() });
             }
+            // Si c'est shift+Suppr
             else if(e.which == 46) {
                 prevenirDefautDunEvent(e, function() { $("#BTN_SupprimerReponse").click() });
             }
@@ -72,6 +92,7 @@ function addEventsToReponses() {
                      $("#Ul_Reponses").children("li:nth-child("+ (currentIndex)+")").children(".reponsesQuestion").focus();
                  }
              }
+             // Si c'est la flèche du bas
             else if(e.which == 40) {
                  var currentIndex = $(".Reponsefocused").parent("li").index();
                  if(currentIndex != $("#Ul_Reponses li").length + 1) {
@@ -85,6 +106,15 @@ function addEventsToReponses() {
 
 }
 
+// prevenirDefautDunEvent
+// Par Mathieu Dumoulin
+// Intrants : event = l'événement dont on veut prévenir le comportement par défaut
+//            fonction = une fonction qui va être éxécuté dans le timeOut
+//            timeout = Le temps d'attente du timeOut. Par défaut, je l'initialise à 0.
+// Description : Cette fonction sert seulement pour permettre d'empêcher le comportement par défaut des événements sous Firefox.
+//               Sous chrome, un seul event.preventDefault() fonctionne parfaitement.
+//               Sous Firefox, je dois forcer un timeout pour empêcher l'évènement de "bubble" tout de suite et d'accomplir son comportement par défaut.
+// Solution alternatives qui ne fonctionnent pas sur Firefox : event.stopImmediatePropagation(), return false, event.stopPropagation()
 function prevenirDefautDunEvent(event, fonction, timeout) {
     if(timeout == null) {
         setTimeout(function() {fonction();}, 0);
@@ -96,7 +126,14 @@ function prevenirDefautDunEvent(event, fonction, timeout) {
     event.preventDefault();
 }
 
+// Gère le autoheight du textarea
+function h(e) {
+    // Ajuste le height de l'élément à la hauteur de son scroll pour simuler l'ajustement de la hauteur de l'élément.
+    $(e).css({'height':'auto'}).height(e.scrollHeight);
+}
+
 function updateAutoSizeTextArea() {
+    // Permet à tous les textArea de simuler l'ajustement de leur hauteur
     $('textarea').each(function () {
         h(this);
     }).on('input', function () {
@@ -104,21 +141,33 @@ function updateAutoSizeTextArea() {
     });
 }
 
+// ajouterReponsesViaJSON
+// Par Mathieu Dumoulin
+// Intrant : json = Représente un json contenant toutes les réponses à ajouter
+// Description : Cette fonction parcour toutes les réponses contenues dans le json et les ajoutes dans la liste des réponses selon leurs attributs.
 function ajouterReponsesViaJSON(json) {
-    for(var i = 0; i < dictionnaireReponsesChoixMulti.reponses.length; ++i) {
-        ajouterNouvelleReponse(json.reponses[i].estBonneReponse);
+    for(var i = 0; i < json.reponses.length; ++i) {
+        ajouterNouvelleReponse(json.reponses[i].estBonneReponse, true);
+        // Donne le id ce la réponse dans le input en tant qu'attribut value
         $("#Ul_Reponses li:last-child").children("input[type=text]").attr("value", json.reponses[i].idReponse);
+        // Donne l'énonce de la réponse dans le textArea
         $("#Ul_Reponses li:last-child").children(".reponsesQuestion").val(json.reponses[i].enonce);
     }
+    // Re aplique les events sur les réponses car lors de la création de nouvelles réponses dynamiquement, ces nouvelles réponses n'ont pas les events.
     addEventsToReponses();
 }
 
+// traiterJSONQuestions
+// Par Mathieu Dumoulin
+// Intrants : resultat : le JSON qu'il faut traiter
+// Description : Cette fonction ajoute, pour chacune des rangées contenues dans le json resultat, une question sous forme de 'li' dans le idParent
 function traiterJSONQuestions(resultat, idParent) {
     var enonceDeLaQuestion;
     var nomProf;
     var idProprietaire;
     for(var i = 0; i < resultat.length; ++i) {
         enonceDeLaQuestion = resultat[i].enonceQuestion;
+        // Je réduit l'énoncé pour qu'elle entre dans une rangé de son li parent pour des questions d'estétisme. 30 à été trouvé par essai/erreur
         if(enonceDeLaQuestion.length > 30) {
             enonceDeLaQuestion = enonceDeLaQuestion.substring(0, 30) + "...";
         }
@@ -243,6 +292,12 @@ function updateUlQuestion(idCours, usagerCourant, triage, idQuiz, filtreEnonce, 
     });
 }
 
+// lierQuestionAQuiz
+// Par Mathieu Dumoulin
+// Intrants : idQuiz = Identifiant du quiz à lier
+//            idQuestion = Identifiant de la question à lier
+//            positionQuestion : Position de la question dans le quiz
+// Description : Cette fonction fait un appel ajax pour lier la question au quiz à la BD.
 function lierQuestionAQuiz(idQuiz, idQuestion, positionQuestion) {
     $.ajax({
         type: "post",
@@ -358,7 +413,7 @@ function permettreModificationReponses() {
 // Description : Cette fonction ajoute les réponses vrai/faux dans le #Ul_Reponses
 function ajouterReponsesVraiFaux() {
     // Création du frame des réponses vrai/faux
-    $.when(ajouterNouvelleReponse(), ajouterNouvelleReponse()).done( function() {
+    $.when(ajouterNouvelleReponse(null, true), ajouterNouvelleReponse(null, true)).done( function() {
 
         $("#Ul_Reponses li").ready(function() {
             // Réponse vrai
@@ -395,7 +450,7 @@ function reponsesSontValides() {
     return reponsesSontNonVides && uneBonneReponse;
 }
 
-function ajouterNouvelleReponse(estBonneReponse) {
+function ajouterNouvelleReponse(estBonneReponse, veutFocus) {
     var aCocher;
     if(estBonneReponse == null) {
         // Si je n'ai aucune réponse, je coche cette nouvelle réponse
@@ -414,7 +469,10 @@ function ajouterNouvelleReponse(estBonneReponse) {
             $("#Ul_Reponses").append(resultat);
             updateAutoSizeTextArea();
             addEventsToReponses();
-            $("#Ul_Reponses li:last-child").children(".reponsesQuestion").focus();
+            if(veutFocus) {
+                $("#Ul_Reponses li:last-child").children(".reponsesQuestion").focus();
+            }
+
             attribuerTabIndexToElemQuestion();
 
         }

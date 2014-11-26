@@ -22,7 +22,7 @@ include("../Modele/ModeleInscriptionsEtudiantCours.php");
 include("../Modele/ModeleUtilisateurs.php");
 demarrerSession();
 redirigerSiNonConnecte('Prof');
-$result =  InscrireEtudiantCours($_POST['idE'],$_POST['nom'],$_POST['prenom'],$_POST['idCours'], $_SESSION['idUsager']);
+$result =  InscrireEtudiantCours($_POST['idE'],password_hash($_POST['idE'],PASSWORD_BCRYPT),$_POST['nom'],$_POST['prenom'],$_POST['idCours'], $_SESSION['idUsager']);
 
 
 

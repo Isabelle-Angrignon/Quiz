@@ -39,6 +39,7 @@ if($doitArreter)
     exit();
 }
 
+// Si tous les paramètres passés en post sont valides
 include("cFonctionsProf-GererQuiz.php");
 include("../Modele/ModeleUtilisateurs.php");
 include("../Modele/ModeleQuestions.php");
