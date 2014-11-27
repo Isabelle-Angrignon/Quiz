@@ -393,21 +393,25 @@ function gererQuestionRepondue(lien, typeQuiz) {
     $("#UlChoixReponse .ui-selected").each(function() {
         idReponse = $(this).attr("id");
     });
-
-     //Valider cette réponse
-     $.ajax({
-        type:"POST",
-        url:"Controleur/FonctionQuizEtudiant/validerReponseAQuestion.php",
-        data: {"idReponse": idReponse},
-        async : !1,
-        datatype: "text",
-        success: function(resultat) {
-            traiterResultatReponse(resultat, lien, typeQuiz);
-        },
-         error: function(jqXHR, textStatus, errorThrown) {
-             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
-        }
-    });
+    if(idReponse == null){
+        swalQuestionNonRepondue();
+    }
+    else{
+         //Valider cette réponse
+         $.ajax({
+            type:"POST",
+            url:"Controleur/FonctionQuizEtudiant/validerReponseAQuestion.php",
+            data: {"idReponse": idReponse},
+            async : !1,
+            datatype: "text",
+            success: function(resultat) {
+                traiterResultatReponse(resultat, lien, typeQuiz);
+            },
+             error: function(jqXHR, textStatus, errorThrown) {
+                 alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
+            }
+        });
+    }
 }
 
 // Par: Isabelle Angrignon
