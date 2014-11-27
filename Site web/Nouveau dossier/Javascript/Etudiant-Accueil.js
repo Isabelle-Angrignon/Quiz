@@ -57,7 +57,7 @@ function ouvrirUnQuiz(typeQuiz, idQuiz){
 function ouvrirUnQuizFormatif(idQuiz){
     var ordreQuestEstAleatoire = getOrdreQuestionEstAleatoire(idQuiz);
     if (genererListeQuestions("FORMATIF", idQuiz, ordreQuestEstAleatoire) == 1) {
-        creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php");
+        creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php", true);
     }
     else  {
         swal({ title: "Désolé",   text: "Il n'y a aucune question dans ce quiz.",   type: "warning",   confirmButtonText: "Ok" });
