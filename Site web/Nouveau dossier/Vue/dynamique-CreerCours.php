@@ -39,12 +39,11 @@
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#FFA64F",/*todo ancien... #DD6B55   */
-                confirmButtonText: "GO ! ",
-                closeOnConfirm:false
+                confirmButtonText: "Accepter "
             }, function(){
                 ajouterCoursAjax($('#TB_Nom').val(), $('#TB_Code').val());
                 $("#TB_Nom").val("");
-                $("TB_Code").val("");
+                $("#TB_Code").val("");
             });
 
         }
