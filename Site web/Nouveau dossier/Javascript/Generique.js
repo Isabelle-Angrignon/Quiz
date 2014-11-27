@@ -320,6 +320,12 @@ function ajouterKeyDownFrameDynamique() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+// ChercherUsagerAjax
+// par : Simon Bouchard
+// description : Permet de retrouver un usager par rapport a son numero de DA pour confirmer une action
+// parametre : idUsager = id de l'usager dont il faut trouver le nom prénom , functiononTrue = la fonction appelé si l'usager souhaite
+// faire une action sur ce compte (le parametre idUsager sera passer aussi a la functionOnTrue) , text = le texte qu'affichera le sweet alert
 function ChercherUsagerAjax(idUsager , functionOnTrue, texte) {
         $.ajax({
             type: 'POST',
@@ -350,19 +356,7 @@ function ChercherUsagerAjax(idUsager , functionOnTrue, texte) {
         });
 }
 
-function ListerStatsAjax() {
-    $.ajax({
-        type: 'POST',
-        url: "Controleur/ListerStats.php",
-        dataType: "text",
-        success: function(resultat) {
-            alert(resultat);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
-        }
-    });
-}
+
 
 // reintialiserMotDePasse
 // Fait par : Simon Bouchard
@@ -394,7 +388,10 @@ function reinitialiserMotDePasse(numeroDA) {
 }
 
 
-
+// setVarSessionAjax
+// fait par : Simon Bouchard
+// Permet de set un variable de session du serveur php a travers le AJAX
+// Parametre: clee= la clée de la variable de session , valeur = la valeur a mettre dans la variable de session
 function setVarSessionAjax(clee,valeur){
     $.ajax({
         type: 'POST',
@@ -410,6 +407,9 @@ function setVarSessionAjax(clee,valeur){
     });
 }
 
+// getVarSessionAjax
+// Permet d'obtenir la valeur de la valeur de session d'une variable de session php
+// Parametre : clee = la clée de la variable de session que l'on souhaite obtenir
 function getVarSessionAjax(clee){
     return $.ajax({
         type: 'POST',
