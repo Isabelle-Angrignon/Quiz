@@ -189,19 +189,40 @@ function creeBaliseAvecClasse(baliseACreer, classe) {
 
 
 // creeFrameDynamique
-// Par Mathieu Dumoulin
+// Par Mathieu Dumoulin modifié par Isabelle Angrignon
 // Date : 23/09/14
 // Intrant(s) : idDivPrincipal = l'identifiant du pop up
 //              pathFichierPHP = Le path du fichier PHP qui représente le contenu du divPrincipal
+//              confirmerAvantQuitter = boolean si on doit afficher un avis de fermeture du div dynamique
 // Extrant(s) : Le div représentant la page de base du "pop up"
-// Description : Cette fonction créée, à l'aide de balises div, un squelette de fenêtre "pop up" avec un fond en ombragé
-function creeFrameDynamique(idDivPrincipal, pathFichierPHP) {
+// Description : Cette fonction crée, à l'aide de balises div, un squelette de fenêtre "pop up" avec un fond en ombragé
+function creeFrameDynamique(idDivPrincipal, pathFichierPHP,confirmerAvantQuitter) {
 	var fondOmbrage = creeBaliseAvecClasse("div", "dFondOmbrage");
 	fondOmbrage.setAttribute("id", "dFondOmbrage");
-	fondOmbrage.onmousedown = function(event) {
-		// detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
-		$(this).detach();
-	};
+    if (confirmerAvantQuitter == true){
+        fondOmbrage.onmousedown = function(event) {
+            //todo sweetAlert
+            swal({   title: "Quitter ce quiz",
+                text: "Vous vous apprêtez à quitter ce quiz. Toute progression sera perdue.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#FFA64F",
+                confirmButtonText: "Quitter",
+                cancelButtonText: "Continuer",
+            }, function(){
+                // detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
+                $("#dFondOmbrage").detach();
+            });
+
+        };
+    }
+    else{
+        fondOmbrage.onmousedown = function(event) {
+            // detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
+            $(this).detach();
+        };
+    }
+
 
 	var divPrincipale =  creeBaliseAvecClasse("div", "dDivPrincipale");
 	// Nécessaire pour empecher l'événement onclick de son parent d'être activé lorsqu'on clic dessus ce div
@@ -332,7 +353,7 @@ function ChercherUsagerAjax(idUsager , functionOnTrue, texte) {
                         text: "Est-ce bien "+resultat.prenom + " " + resultat.nom + texte,
                         type: "warning",
                         showCancelButton: true,
-                        confirmButtonColor: "#FFA64F",/*todo ancien... #DD6B55   */
+                        confirmButtonColor: "#FFA64F",
                         confirmButtonText: "GO ! ",
                         closeOnConfirm:false
                     }, function(){
