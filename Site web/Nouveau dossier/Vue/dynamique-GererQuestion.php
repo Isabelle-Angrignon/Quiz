@@ -24,6 +24,7 @@
     {
         if(isset($_SESSION["idQuestion"]))
         {
+            // Récuperation des données de la question
             $maQuestion = getQuestion($_SESSION["idQuestion"]);
             $enonceQuestion = $maQuestion[0]["enonceQuestion"];
             $typeQuestion = $maQuestion[0]["typeQuestion"];
@@ -262,7 +263,7 @@
                 afficherTypesQuestions();
                 if($_SESSION["etat"] == "modifierQuestion")
                 {
-                    echo "<script>cocherTypeQuestionSelonQuestion('".$typeQuestion."');</script>";
+                    echo "<script>cocherRadioButtonAvecValeur('".$typeQuestion."');</script>";
                 }
                 else if($_SESSION["etat"] == "nouvelleQuestion")
                 {

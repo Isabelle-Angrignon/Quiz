@@ -497,9 +497,13 @@ function ajouterNouvelleReponse(estBonneReponse, veutFocus) {
         }
     });
 }
-// todo Commentaires ... /////
+// supprimerReponseCourante
+// Par Mathieu Dumoulin
+// Description :
 function supprimerReponseCourante() {
+    // Si la classe Reponsefocused à déjà été retirée
     var aRetirerClasseReponsefocused = false;
+    // Gestion des erreurs liés à l'interface
     if($("#Ul_Reponses").children("li").length == 1) {
         swal("Oups", "Vous ne pouvez pas avoir de question sans aucune réponse", "error");
     }
@@ -507,6 +511,7 @@ function supprimerReponseCourante() {
         swal("Oups", "Veuillez sélectionner une réponse pour la supprimer.", "warning");
     }
     else {
+        // Récupère l'index du li qui possède la classe Reponsefocused
         var indexReponseCourrante = $(".Reponsefocused").parent("li").index();
 
         var indexNouveauFocus = indexReponseCourrante;
@@ -527,6 +532,7 @@ function supprimerReponseCourante() {
         // Si l'élément a déjà été supprimé, le sélecteur ne va correspondre à aucun élément et cette commande ne va pas être éxécutée.
         $(".Reponsefocused").removeClass("Reponsefocused");
     }
+    // Redistribut le tabIndex au travers des éléments de ma question
     attribuerTabIndexToElemQuestion();
 }
 
@@ -535,7 +541,7 @@ function supprimerReponseCourante() {
 // Date: 14/10/2014
 // Description: Cette fonction communique avec Vue/Prof-GererQuiz-AjoutElement.php en lui passant l'action qu'il veut commettre.
 //              Cette page lui renvoie la liste des cours qui comporte la question passée en paramètre sous forme JSON.
-//              Par la suite, dans l'attribut success, je coche chacune des CheckBox qui correspondent aux cours renvoyés.
+//              Par la suite, dans l'attribut success d'AJAX, je coche chacune des CheckBox qui correspondent aux cours renvoyés.
 function cocherCheckBoxCoursSelonQuestion(idQuestion) {
     $.ajax({
         type:"POST",
@@ -544,8 +550,11 @@ function cocherCheckBoxCoursSelonQuestion(idQuestion) {
         dataType: "json",
         success: function(resultat){
             for(var i = 0; i < resultat.length; ++i) {
+                // Parcours tous les cours de ma liste de cours
                 $("#listeAjoutCours input[type=checkbox]").each(function(){
+                    // Si ça correspond à un cours qui est coché dans la bd
                     if($(this).attr("value") == resultat[i].idCours) {
+                        // Coche le dans l'interface
                         $(this).prop('checked', true);
                     }
                 });
@@ -557,6 +566,11 @@ function cocherCheckBoxCoursSelonQuestion(idQuestion) {
     });
 }
 
+// cocherCheckBoxCoursSelonQuiz
+// Par Mathieu Dumoulin
+// Description : Cette fonction communique avec Vue/Prof-GererQuiz-AjoutElement.php en lui passant l'action qu'il veut commettre.
+//              Cette page lui renvoie la liste des cours qui comporte le quiz passé en paramètre sous forme JSON.
+//              Par la suite, dans l'attribut success d'AJAX, je coche chacune des CheckBox qui correspondent aux cours renvoyés.
 function cocherCheckBoxCoursSelonQuiz(idQuiz) {
     $.ajax({
         type:"POST",
@@ -565,8 +579,11 @@ function cocherCheckBoxCoursSelonQuiz(idQuiz) {
         dataType: "json",
         success: function(resultat){
             for(var i = 0; i < resultat.length; ++i) {
+                // Parcours tous les cours de ma liste de cours
                 $("#listeCoursQuiz input[type=checkbox]").each(function(){
+                    // Si ça correspond à un cours qui est coché dans la bd
                     if($(this).attr("value") == resultat[i].idCours) {
+                        // Coche le dans l'interface
                         $(this).prop('checked', true);
                     }
                 });
@@ -578,33 +595,33 @@ function cocherCheckBoxCoursSelonQuiz(idQuiz) {
     });
 }
 
-// cocherCheckBoxSelonValue
+// cocherCheckBoxCoursSelonCoursCourant
 // Par Mathieu Dumoulin
 // Date: 24/10/2014
-// Intrants: idConteneur = le id du ul contenant ce CheckBox
-// Description:
+// Intrants: idUl = l'identifiant de la liste parente de l'objet à cocher
+// Description: Parcours la liste des cours  enfant du parent idUl et coche le cours qui correspond au cours sélectionné du DDL_Cours
 function cocherCheckBoxCoursSelonCoursCourant(idUl) {
+    // Parcours chacun des checkbox de la liste parente
     $("#" + idUl + " li").children("input[type=checkbox]").each( function() {
+        // Si le checkbox correspond au cours sélectionné
        if($(this).attr("value") == $("#DDL_Cours option:selected").attr("value")) {
+           // Coche le
            $(this).prop('checked', true);
        }
     });
 }
 
+// cocherRadioButtonAvecValeur
+// Par Mathieu Dumoulin
+// Intrants: valeur = la valeur du radio button qui doit être coché
+// Description: Parcours la liste des types de question et coche le type de question qui correspond à la valeur passée en paramètre
 function cocherRadioButtonAvecValeur(valeur){
     $("#TypeQuestion li").children("input[type=radio]").each( function() {
+        // Si l'élément courant correspond à la valeur
         if($(this).attr("value") == valeur) {
+            // Coche le
             $(this).prop('checked', true);
         }
-    });
-}
-
-
-function cocherTypeQuestionSelonQuestion(typeQuestion) {
-    $("#TypeQuestion input[type=radio]").each(function() {
-       if($(this).attr("value") == typeQuestion) {
-          $(this).prop('checked', true);
-       }
     });
 }
 
@@ -617,23 +634,32 @@ function cocherTypeQuizAssocieSelonQuestion(typeQuiz) {
         // Si mon checkbox correspond à un typeQuiz qui est coché
         for(var i = 0; i < typeQuiz.length; ++i) {
             if($(this).attr("value") == typeQuiz[i].typeQuiz) {
+                // Je le coche
                 $(this).prop('checked', true);
             }
         }
     });
 }
 
+// cocherTypeQuizAssocieParDefaut
+// Par Mathieu Dumoulin
+// Description : Coche tous les checkbox enfant de la liste qui a pour id idParent
 function cocherTypeQuizAssocieParDefaut(idParent) {
     $("#" + idParent).children("li").each(function() {
         $(this).children("input[type=checkbox]").prop("checked", true);
     });
 }
 
-
+// getJSONQuestionDansQuiz
+// Par Mathieu Dumoulin
+// Description : Cette fonction prend le quiz dans le QuizDropZone et les questions que ce quiz contient dans l'interface et transpose le tout
+//               sous forme de JSON.
 function getJSONQuestionDansQuiz() {
+    // Structure initiale de mon JSON: l'id du quiz ainsi qu'un tableau 2 dimension comportant les questions de ce quiz.
     var jsonQuestions = '[{"idQuiz":"' + $("#QuizDropZone li:first-child").attr("id") + '"},' +
                        '{"questions":[';
 
+    // Parcours chacune des questions, prend leur identifiant ainsi que leur position dans la liste (au cas si les questions sont en ordre fixe dans le quiz)
     $("#UlModifQuiz li").each(function() {
         jsonQuestions += '{"idQuestion":"' + $(this).attr("id") + '", "positionQuestion":"' + ($(this).index() +1)  +'"},'
     });
@@ -644,8 +670,8 @@ function getJSONQuestionDansQuiz() {
     }
     // Je ferme par la suite mon string de format JSON
     jsonQuestions += "]}]";
+    // Je transforme la string en JSON
     jsonQuestions = JSON.parse(jsonQuestions);
-
 
     return jsonQuestions;
 }
@@ -691,6 +717,10 @@ function jsonifierReponsesQuestionCourante() {
     return jsonReponses;
 }
 
+// jsonifierCoursSelectionnes
+// Par Mathieu Dumoulin
+// Description : Cette fonction prend tous les checkbox enfant de l'élément à identifiant idUlParent
+// et les transpose dans un JSON contenant des cours.
 function jsonifierCoursSelectionnes(idUlParent) {
 
     // Ouverture du string de format JSON
@@ -716,7 +746,10 @@ function jsonifierCoursSelectionnes(idUlParent) {
     return jsonCours;
 }
 
-
+// jsonifierTypeQuizAssQuestionCourante
+// Par Mathieu Dumoulin
+// Description : Cette fonction prend tous les checkbox enfant de l'élément à identifiant idUlParent
+// et les transpose dans un JSON contenant les types de quiz.
 function jsonifierTypeQuizAssQuestionCourante() {
 
     // Ouverture du string de format JSON
@@ -742,29 +775,45 @@ function jsonifierTypeQuizAssQuestionCourante() {
     return jsonTypeQuizAss;
 }
 
+// getJSONEnonceQuestion
+// Par Mathieu Dumoulin
+// Description : Récupères les éléments propre à une question ( son énoncé, son propriétaire, le lienWeb,
+//               l'ordre de ces réponses ainsi que son identifiant (si c'est une modification de question)
 function getJSONEnonceQuestion(idCreateur, idQuestion ) {
+    // Récupère l'énoncé
     var enonce = $("#EnonceQuestion").val();
 
     enonce = modifierChainePourJSON(enonce);
-
+    // Création du string qui va devenir un JSON
     var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"' + idCreateur + '", "lienWeb":"'
                        + $("#conteneurLienWeb input[type=text]").val() + '", "ordreReponsesAleatoire":"' + !$("#ordreReponsesQuestion").prop("checked") + '"';
     if(idQuestion != null) {
         jsonQuestion +=', "idQuestion":"'+ idQuestion+'"';
     }
     jsonQuestion += '}';
+    // Transforme le string en JSON
     jsonQuestion = JSON.parse(jsonQuestion);
 
     return jsonQuestion;
 }
 
+// modifierChainePourJSON
+// Par Mathieu Dumoulin
+// Description : Transforme la chaine de caractère pour qu'il n'y ai pas de conflits avec les guillemets, new lines et
+//               pas de blancs aux extrémités  de cette chaine.
 function modifierChainePourJSON(chaine) {
     // Rend littéraire les new lines (\n), les guillemets (") de la chaine ainsi que les blancs qui sont à ses extrémités
     return chaine.replace(/[\"]/g, '\\"').replace(/[\n]/g, '\\n').trim();
 }
 
+// ajouterQuestion
+// Par Mathieu Dumoulin
+// Intrants : idCreateur = Identifiant de l'usager qui veut ajouter la question
+// Description : Cette fonction récupère les éléments de l'interface dynamique-GererQuestion et les envois par AJAX au PHP
+//               pour qu'il ajoute la quesiton dans la base de données.
 function ajouterQuestion(idCreateur, continuer) {
     if( reponsesSontValides()) {
+        // Récupère les éléments en lien avec la question dans l'interface dynamique-GererQuestion
         var jsonQuestion = getJSONEnonceQuestion(idCreateur);
         var jsonReponses = jsonifierReponsesQuestionCourante();
         var jsonCours = jsonifierCoursSelectionnes("listeAjoutCours");
@@ -781,27 +830,34 @@ function ajouterQuestion(idCreateur, continuer) {
                 "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
             dataType: "text",
             success: function(resultat){
+                // Gestion des erreurs si j'en ai trouvés par programmation dans le fichier php
                 if(resultat.trim() != "") {
                     swal("Erreur !", resultat, "error");
                 }
                 else {
+                    // Si ce n'est pas ajouter et continuer
                     if(continuer == null) {
-                        $(".dFondOmbrage").detach();
+                        fermerDivDynamique();
                     }
                     else {
+                        // Sinon je reinitialise le contenu de ma page "Vue/dynamique-GererQuestion.php"
                         viderHTMLfromElement("popupPrincipal");
                         insererHTMLfromPHP("popupPrincipal", "Vue/dynamique-GererQuestion.php");
                     }
 
+                    // Je "refresh" la page Prof-GererQuiz pour qu'elle d'ajuste à l'ajout
                     var cours = $("#DDL_Cours option:selected").attr("value");
                     var filtreEnonce = $("#TB_Filtre").val();
                     var filtreId = $("#TB_FiltreID").val();
 
                     // Gestion de l'affichage des questions dans les listes
+                    // S'il n'y a pas de quiz en train d'être modifié
                     if($("#QuizDropZone").children("li").length == 0) {
+                        // Refresh seulement la liste des questions
                         updateUlQuestion( cours, idCreateur, "default", "", filtreEnonce, filtreId);
                     }
                     else {
+                        // Sinon, refresh la liste des questions et l'affichage du contenu du quiz
                         var idQuiz = $("#QuizDropZone li:first-child").attr("id");
                         updateUlQuestion(cours, idCreateur, "pasDansCeQuiz", idQuiz, filtreEnonce, filtreId);
                         updateUlModifQuiz("selonQuiz", idCreateur, idQuiz);
@@ -819,15 +875,22 @@ function ajouterQuestion(idCreateur, continuer) {
     }
 
 }
-
+// modifierQuestion
+// Par Mathieu Dumoulin
+// Intrants : idUsagerCourant = Identifiant de l'usager qui veut modifier la question
+//            idQuestion = Identifiant de la question à modifier
+//            idProprietaire = Identifiant du propriétaire de la question
+// Description : Cette fonction récupère les éléments de l'interface dynamique-GererQuestion et les envois par AJAX au PHP
+//               pour qu'il modifie la quesiton dans la base de données.
 function modifierQuestion( idUsagerCourant,idQuestion, idProprietaire) {
 
     if(idUsagerCourant != idProprietaire) {
         swal("Avertissement",
-            "Vous ne pouvez pas modifier cette question car vous n'êtes  pas le propriétaire. Veuillez contacter le propriétaire si vous voulez la modifier.",
+            "Vous ne pouvez pas modifier cette question car vous n'êtes pas le propriétaire. Veuillez contacter le propriétaire si vous voulez la modifier.",
             "error" );
     }
     else if(reponsesSontValides()) {
+        // Récupère les éléments en lien avec la question dans l'interface dynamique-GererQuestion
         var jsonQuestion = getJSONEnonceQuestion(idUsagerCourant, idQuestion);
         var jsonReponses = jsonifierReponsesQuestionCourante();
         var jsonCours = jsonifierCoursSelectionnes("listeAjoutCours");
@@ -843,20 +906,27 @@ function modifierQuestion( idUsagerCourant,idQuestion, idProprietaire) {
                 "typeQuestion":typeQuestion, "tableauTypeQuizAssocie":jsonTypeQuizAss},
             dataType: "text",
             success: function(resultat){
+                // Gestion des erreurs si j'en ai trouvés par programmation dans le fichier php
                 if(resultat.trim() != "") {
                     swal("Erreur !", resultat, "error");
                 }
                 else {
-                    $(".dFondOmbrage").detach();
+                    // S'il n'y a pas eu d'erreur
+                    // Je ferme le div dynamique
+                    fermerDivDynamique();
+                    // Et je met à jour la page Prof-GererQuiz pour qu'elle représente le contenu réel de la base de données
                     var cours = $("#DDL_Cours option:selected").attr("value");
                     var filtreEnonce = $("#TB_Filtre").val();
                     var filtreId = $("#TB_FiltreID").val();
 
                     // Gestion de l'affichage des questions dans les listes
+                    // S'il n'y a pas de quiz en train d'être modifié
                     if($("#QuizDropZone").children("li").length == 0) {
+                        // Refresh seulement la liste des questions
                         updateUlQuestion( cours, idUsagerCourant, "default", "", filtreEnonce,filtreId);
                     }
                     else {
+                    // Sinon, refresh la liste des questions et l'affichage du contenu du quiz
                         var idQuiz = $("#QuizDropZone li:first-child").attr("id");
                         updateUlQuestion(cours, idUsagerCourant, "pasDansCeQuiz", idQuiz, filtreEnonce,filtreId);
                         updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
@@ -873,11 +943,18 @@ function modifierQuestion( idUsagerCourant,idQuestion, idProprietaire) {
         swal("Oups !", "Cette question n'est pas valide car elle contient une réponse qui est vide et/ou ne contient pas de bonne réponse.", "warning");
     }
 }
-
+// fermerDivDynamique
+// Par Mathieu Dumoulin
 function fermerDivDynamique() {
     $(".dFondOmbrage").detach();
 }
 
+// supprimerQuestion
+// Par Mathieu Dumoulin
+// Intrants : idUsagerCourant = Identifiant de l'usager qui veut modifier la question
+//            idQuestion = Identifiant de la question à modifier
+//            idProprietaire = Identifiant du propriétaire de la question
+// Description : Cette fonction envoi l'identifiant de la question par AJAX au PHP pour qu'il supprime la quesiton dans la base de données.
 function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
     if(idUsagerCourant != idProprietaire) {
         swal("Avertissement",
@@ -885,6 +962,7 @@ function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
             "error" );
     }
     else {
+        // Confirmation de l'usager pour supprimer la question
         swal({   title: "Êtes-vous sur?",
             text: "Cette action va supprimer cette question ainsi que toutes les références à cette question. Êtes-vous sur de vouloir continuer?",
             type: "warning",
@@ -893,6 +971,7 @@ function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
             confirmButtonText: "Supprimer cette question",
             closeOnConfirm: false
         }, function(aAccepter){
+            // Si l'usager a accepté, fait un appel AJAX pour supprimer
             if(aAccepter) {
                 $.ajax({
                     type:"POST",
@@ -901,20 +980,28 @@ function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
                     data: {"idQuestion":idQuestion},
                     dataType: "text",
                     success: function(resultat){
+                        // Gestion des erreurs si j'en ai trouvés par programmation dans le fichier php
                         if(resultat.trim() != "") {
                             swal("Erreur !", resultat, "error");
                         }
                         else {
-                            $(".dFondOmbrage").detach();
+                            // S'il n'y a pas eu d'erreur
+                            // Je ferme le div dynamique
+                            fermerDivDynamique();
+
+                            // Et je met à jour la page Prof-GererQuiz pour qu'elle représente le contenu réel de la base de données
                             var cours = $("#DDL_Cours option:selected").attr("value");
                             var filtreEnonce = $("#TB_Filtre").val();
                             var filtreId = $("#TB_FiltreID").val();
 
                             // Gestion de l'affichage des questions dans les listes
+                            // S'il n'y a pas de quiz en train d'être modifié
                             if($("#QuizDropZone").children("li").length == 0) {
+                                // Refresh seulement la liste des questions
                                 updateUlQuestion( cours, idUsagerCourant, "default", "",filtreEnonce, filtreId);
                             }
                             else {
+                            // Sinon, refresh la liste des questions et l'affichage du contenu du quiz
                                 var idQuiz = $("#QuizDropZone li:first-child").attr("id");
                                 updateUlQuestion(cours, idUsagerCourant, "pasDansCeQuiz", idQuiz, filtreEnonce, filtreId);
                                 updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
@@ -933,6 +1020,11 @@ function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
     }
 }
 
+// ajouterQuiz
+// Par Mathieu Dumoulin
+// Intrant : idUsagerProprietaire = Identifiant de l'usager qui créé le quiz
+// Description :  Cette fonction récupère les éléments de l'interface dynamique-GererQuiz et les envois par AJAX au PHP
+//               pour qu'il ajoute le quiz dans la base de données.
 function ajouterQuiz(idUsagerProprietaire) {
     // Prise du titre du quiz dans l'interface.
     var titreQuiz = $("#titreQuiz").val();
@@ -950,14 +1042,17 @@ function ajouterQuiz(idUsagerProprietaire) {
         data: {"titreQuiz":titreQuiz, "ordreEstAleatoire":ordreEstAleatoire, "estDisponible":estDisponible, "jsonCours":jsonCours, "idProprietaire":idUsagerProprietaire},
         dataType: "text",
         success: function(resultat){
+            // Gestion des erreurs si j'en ai trouvés par programmation dans le fichier php
             if(resultat.trim() != "") {
                 swal("Erreur !", resultat, "error");
             }
             else {
                 swal("Félicitation !", "Votre quiz à été ajouté", "success");
                 fermerDivDynamique();
+                // Je met à jour la page Prof-GererQuiz pour qu'elle représente le contenu réel de la base de données
                 var idCours = $("#DDL_Cours option:selected").attr("value");
                 updateUlQuiz(idCours, idUsagerProprietaire);
+                // Je retire le quiz qui est en cours de modification pour simplifier le listage.
                 retirerQuizDeQuizDropZone(idCours, idUsagerProprietaire);
             }
         },
@@ -967,6 +1062,13 @@ function ajouterQuiz(idUsagerProprietaire) {
     });
 }
 
+// modifierQuiz
+// Par Mathieu Dumoulin
+// Intrants : idQuiz = Identifiant du quiz à modifier
+//            idUsagerCourant = Identifiant de l'usager qui essaye de modifier le quiz
+//            idProprietaire = Identifiant de l'usager propriétaire du quiz
+// Description : Cette fonction récupère les éléments de l'interface dynamique-GererQuiz et les envois par AJAX au PHP
+//               pour qu'il modifie le quiz dans la base de données.
 function modifierQuiz(idQuiz, idUsagerCourant, idProprietaire) {
     if(idProprietaire != idUsagerCourant) {
         swal("Avertissement",
@@ -990,15 +1092,17 @@ function modifierQuiz(idQuiz, idUsagerCourant, idProprietaire) {
             data: {"idQuiz":idQuiz, "titreQuiz":titreQuiz, "ordreEstAleatoire":ordreEstAleatoire, "estDisponible":estDisponible, "jsonCours":jsonCours, "idProprietaire":idUsagerCourant},
             dataType: "text",
             success: function(resultat){
+                // Gestion des erreurs si j'en ai trouvés par programmation dans le fichier php
                 if(resultat.trim() != "") {
                     swal("Erreur !", resultat, "error");
                 }
                 else {
                     swal("Félicitation !", "Votre quiz à été modifié", "success");
                     fermerDivDynamique();
+                    // Je met à jour la page Prof-GererQuiz pour qu'elle représente le contenu réel de la base de données
                     var idCours = $("#DDL_Cours option:selected").attr("value");
                     updateUlQuiz(idCours, idUsagerCourant);
-                    // Retire le quiz qui est en cour de modification
+                    // Je retire le quiz qui est en cours de modification pour simplifier le listage.
                     retirerQuizDeQuizDropZone(idCours, idUsagerCourant);
                 }
             },
@@ -1010,14 +1114,21 @@ function modifierQuiz(idQuiz, idUsagerCourant, idProprietaire) {
 
 }
 
+// supprimerQuiz
+// Par Mathieu Dumoulin
+// Intrants : idQuiz = Identifiant du quiz à modifier
+//            idUsagerCourant = Identifiant de l'usager qui essaye de modifier le quiz
+//            idProprietaire = Identifiant de l'usager propriétaire du quiz
+// Description : Cette fonction envoie par AJAX l'identifiant du quiz pour que le PHP supprime ce quiz dans la base de données.
 function supprimerQuiz(idQuiz, idUsagerCourant, idProprietaire) {
-
+    // Si l'usager ne dispose pas des droits de suppression sur le quiz
     if(idProprietaire != idUsagerCourant) {
         swal("Avertissement",
             "Vous ne pouvez pas supprimer ce quiz car vous n'êtes pas le propriétaire. Veuillez contacter le propriétaire si vous voulez le supprimer.",
             "error" );
     }
     else {
+        // Demande de confirmation avant suppression
         swal({   title: "Êtes-vous sur?",
             text: "Cette action va supprimer ce quiz ainsi que toutes ces références. Êtes-vous sur de vouloir continuer?",
             type: "warning",
@@ -1026,6 +1137,7 @@ function supprimerQuiz(idQuiz, idUsagerCourant, idProprietaire) {
             confirmButtonText: "Supprimer ce quiz",
             closeOnConfirm:false
         }, function(aAccepter){
+            // Si l'usager a confirmé la suppression
             if(aAccepter) {
                 $.ajax({
                     type:"POST",
@@ -1034,20 +1146,22 @@ function supprimerQuiz(idQuiz, idUsagerCourant, idProprietaire) {
                     data: {"idQuiz":idQuiz},
                     dataType: "text",
                     success: function(resultat){
+                        // Gestion des erreurs si j'en ai trouvés par programmation dans le fichier php
                         if(resultat.trim() != "") {
                             swal("Erreur !", resultat, "error");
                         }
                         else {
                             $(".dFondOmbrage").detach();
+                            var cours = $("#DDL_Cours option:selected").attr("value");
+                            // Impossible pour l'instant car on à empêcher la modification/supression du quiz qui est dans le QuizDropZone.
                             if($("#QuizDropZone").children("li").length == 1 && $("#QuizDropZone").children("li").attr("id") == idQuiz) {
-                                $("#QuizDropZone").children("li").remove();
+
                             }
                             else {
-                                var cours = $("#DDL_Cours option:selected").attr("value");
                                 updateUlQuiz(cours, idUsagerCourant);
-                                // Retire le quiz qui est en cour de modification
-                                retirerQuizDeQuizDropZone(cours, idUsagerCourant);
                             }
+                            // Retire le quiz qui est en cour de modification et met à jour les listes de questions
+                            retirerQuizDeQuizDropZone(cours, idUsagerCourant);
                             swal("Félicitation !", "Votre quiz à été supprimée", "success");
                         }
                     }
@@ -1057,6 +1171,11 @@ function supprimerQuiz(idQuiz, idUsagerCourant, idProprietaire) {
     }
 }
 
+// retirerQuizDeQuizDropZone
+// Par Mathieu Dumoulin
+// Intrants : idCours = Identifiant du cours qui est sélectionné dans le DDL_Cours
+//            idUsagerCourrant = Identifiant de l'usager qui est connecté en se moment.
+// Description : Cette fonction retire le quiz du QuizDropZone et met à jours les listes de questions.
 function retirerQuizDeQuizDropZone(idCours, idUsagerCourrant) {
     // Retire le quiz qui est en cour de modification
     updateUlQuestion(idCours, idUsagerCourrant,  "default");
@@ -1071,10 +1190,12 @@ function verifierEgalite(premiereVar, deuxiemeVar) {
 // attribuerTabIndexToElemQuestion
 // Par Mathieu Dumoulin
 // Description : Cette fonction attribut le tabIndex aux éléments de la page.
-//               Pourquoi le faire en javascript et non en html? Le nombre d'éléments dans la page varie (nombre de réponses) // todo
+//               Pourquoi le faire en javascript et non en html?
+//               Réponse : Le nombre d'éléments dans la page varie (nombre de réponses) alors tous les contrôles ont un tabIndex qui doit changer
 function attribuerTabIndexToElemQuestion() {
     // L'enonce possède déjà le tabIndex 1
     var tabIndex = 1;
+    // Attribut un tabIndex à toutes les réponses
     $("#Ul_Reponses li").each(function() {
         $(this).children("textarea").attr("tabIndex", ++tabIndex);
     });
