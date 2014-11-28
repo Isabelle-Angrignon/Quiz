@@ -1,4 +1,7 @@
 <?php
+// dynamique-AjouterProf.php
+// Partie de page contenant un interface qui sert a créer une nouveau professeur.
+// Fait aussi la vérification que l'usager rentre pas nimporte quoi
 ?>
 
 

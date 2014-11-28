@@ -1,4 +1,10 @@
-﻿#login{
+﻿/*
+Login.css
+Fait par : Simon Bouchard, Isabelle Angrignon , Mathieu Dumoulin
+Contient tout le css de la page index.php
+*/
+
+#login{
 	border:2px black solid;
 	border-radius:15px;
     background: #eeeeee;

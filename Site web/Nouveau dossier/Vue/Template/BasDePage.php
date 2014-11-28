@@ -1,3 +1,8 @@
+<?php
+//BasDePage.php
+//Fait par : Mathieu Dumoulin , modifié par Simon Bouchard
+// Doit être inclut en tant que bas de page de la page ( sticky footer)
+?>
 <div id="bdp">
         <nav id="navbdp">
 		<a href="APropos.php" class="NavBar">À propos</a>
