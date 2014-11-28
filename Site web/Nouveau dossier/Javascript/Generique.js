@@ -201,7 +201,6 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP,confirmerAvantQuitter
 	fondOmbrage.setAttribute("id", "dFondOmbrage");
     if (confirmerAvantQuitter == true){
         fondOmbrage.onmousedown = function(event) {
-            //todo sweetAlert
             swal({   title: "Quitter ce quiz",
                 text: "Vous vous apprêtez à quitter ce quiz. Toute progression sera perdue.",
                 type: "warning",
