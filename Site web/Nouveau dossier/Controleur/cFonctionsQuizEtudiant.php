@@ -161,6 +161,7 @@ function resetVarSessionQuiz()
     unset($_SESSION['listeQuestionRepondues']);
     unset($_SESSION['listeResultats']);
 
+    // pour affichage
     $_SESSION['questionsRepondues'] = 0;
     $_SESSION['bonnesReponses'] = 0;
 }

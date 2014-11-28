@@ -1,4 +1,11 @@
-﻿body{
+﻿/*
+Template.css
+Fait par : Tout les dévelopeurs
+Ce fichier contient tout le css qui peut être utile a plus d'une page. Il est INDISPENSABLE qu'il soit inclut dans toute les pages
+du site (ce que fait InclusionTemplate.php)
+*/
+
+body{
 	background-color: #A8C1D7;
 }
 html,body{

@@ -39,10 +39,11 @@ function recupererElementsQuestion($idQuestion)
 // Nom: trieParDefaultQuestions
 // Par: Mathieu Dumoulin
 // Intrants: $idCours = identifiant du cours en question. $idProprietaire = identifiant du professeur en question
+//           $filtreEnonce (recherche si contient l'expression) et $filtreId (recherche id exacte), pour filtrer les questions
 // Extrants: Le résultat de la procédure, sous forme de JSON
 // Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestions()
 function trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce, $filtreId)
-{  // todo premier modifié....
+{
 
     $filtreEnonce = '%'.$filtreEnonce.'%';
     $filtreId==""?$filtreId=0:$filtreId=$filtreId;

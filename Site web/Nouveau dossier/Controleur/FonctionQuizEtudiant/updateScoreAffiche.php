@@ -64,7 +64,7 @@ if (isset($_SESSION['typeQuiz']) && $_SESSION['typeQuiz']!= "ALEATOIRE")
 }
 else
 {
-    echo $_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues'];
+    echo($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']);
 }
 
 

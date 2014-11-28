@@ -1,3 +1,9 @@
+<?php
+// InclusionJQuery.php
+// Fichier php que l'on peut inclure si on souhaite posséder tout les objets et fonctions javascript
+//
+?>
+
 <script src="sweetalert-master/lib/sweet-alert.js"></script>
 <link rel="stylesheet" type="text/css" href="sweetalert-master/lib/sweet-alert.css">
 <link rel="stylesheet" href="jquery-ui-1.11.2.custom/jquery-ui.theme.css" type="text/css" media="all" >

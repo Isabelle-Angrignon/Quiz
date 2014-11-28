@@ -1,22 +1,10 @@
 ﻿/*  
-	Prof-GererCours.css
-	Par : Mathieu Dumoulin
-	Date : 19/09/2014
-	Description : Contient le css qui est spécifique au HTML de la page Prof-GererCours.php 
+	GereCours.css
+	Par : Simon Bouchard
+	Description : Contient le css qui est spécifique au HTML de la page GererCours.php
 */
 
-/* CSS propre au drop down list des cours */
-fieldset {
-	border:0;
-	width:25%;
-	margin-top:30px;
-	margin-left:3%;
-	padding:0;
-}
 
-#DDL_Cours {
-	width:100%;
-}
 #soumettre{
     width:50%;
     display: inline-block;
@@ -30,7 +18,8 @@ fieldset {
 }
 
 #ListeModifGroupe {
-	margin-left:11%;
+	margin-left:8%;
+    width: 23%;
 }
 
 #ListeModifGroupe ul {
@@ -46,6 +35,8 @@ fieldset {
     text-align: center;
     max-height: 50px;
     overflow: hidden;
+    width: 85%;
+    margin-left: 7.5%;
 }
 
 #QuizDropZone li {
@@ -71,7 +62,8 @@ fieldset {
 }
 
 #ListeGererEtudiants {
-	margin-left:11%;
+	margin-left:8%;
+    width:23%;
 }
 
 #UlQuestion {
@@ -121,11 +113,11 @@ fieldset {
     margin-left:6%;
 }
 #ModifierGroupe{
-
+    margin-right: 6%;
 }
 #GererEtudiants {
 	float:right;
-    margin-right: 2%;
+    margin-right: 4%;
 
 }
 

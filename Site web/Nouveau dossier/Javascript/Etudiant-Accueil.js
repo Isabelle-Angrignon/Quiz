@@ -57,7 +57,7 @@ function ouvrirUnQuiz(typeQuiz, idQuiz){
 function ouvrirUnQuizFormatif(idQuiz){
     var ordreQuestEstAleatoire = getOrdreQuestionEstAleatoire(idQuiz);
     if (genererListeQuestions("FORMATIF", idQuiz, ordreQuestEstAleatoire) == 1) {
-        creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php");
+        creeFrameDynamique("divDynamique", "Vue/dynamique-RepondreQuestion.php", true);
     }
     else  {
         swal({ title: "Désolé",   text: "Il n'y a aucune question dans ce quiz.",   type: "warning",   confirmButtonText: "Ok" });
@@ -262,8 +262,9 @@ function genererQuestionsAleatoires(){
 // Nom: traiterResultatReponse
 // But: 1 - Vérifie si on est rendu à la dernière question: si oui, on s'assure que le "sweet alert" de quiz terminé va
 //          s'afficher après le "sweet alert" du résultats de la question qui vient d'être répondue.
-//      2 - Afficher le "sweet alert" approprié selon qu'on a bien répondu, mal répondu ou pas répondu du tout.
-//          Si répondu, on appelle "continuerQuiz" qui s'occupe de la suite des choses.
+//      2 - Afficher le "sweet alert" si on u ou pas répondu du tout.
+//      3 - Si répondu, met en couleur les réponses selon bon ou mauvais et change le bouton pour "suivant"
+//          on appelle ensuite "continuerQuiz" qui s'occupe de la suite des choses.
 //      3 - Met à jour le score affiché.
 // Intrants:  résultat int 1|0
 //            lien (hypertext) string:  vers les notes de cours reliées à la question répondue affiché en cas de
@@ -272,12 +273,7 @@ function genererQuestionsAleatoires(){
 // Extrants: aucun
 function traiterResultatReponse(resultat, lien, typeQuiz){
 
-    var close  = true; //Variable pour dire au sweetalert de "réponse" de se fermer après qu'on ait cliqué ok.
-    // si c'est la dernière question, alors on va afficher un autre sweetalert pour le score final donc,
-    //la variable close devra être mise à false sinon on ne verra pas les deux alertes.
-    if (estDerniereQuestion() == 1){ close =false; }//valide que la dernière question a été chargée dans la page
-
-    //Gestion des 4 cas de réponses possibles: 1, 0, X ou non répondu; 1 = bonne réponse, 0 = erreur, x= erreur de correction
+    //Gestion des cas de réponses possibles: 1, 0, X; 1 = bonne réponse, 0 = erreur, x= erreur de correction
     if(resultat == 1) {
 
         updateScoreAffiche(resultat);
@@ -291,10 +287,9 @@ function traiterResultatReponse(resultat, lien, typeQuiz){
         $("#btnValider").hide();
         $("#btnSuivant").show();
         $("#btnSuivant").click(function(){
-            continuerQuiz();//todo resurchaerge bouton suivant pour continuer
+            continuerQuiz();
             $( "#UlChoixReponse" ).selectable( "enable" );
         });
-
     }
     else if(resultat == 0) {
                 //On affiche le lien hypertext que si: il y en a un, la réponse est mauvaise et on est en type de quiz aléatoire
@@ -310,12 +305,12 @@ function traiterResultatReponse(resultat, lien, typeQuiz){
             $("#btnValider").hide();
             $("#btnSuivant").show();
             $("#btnSuivant").click(function(){
-                continuerQuiz();//todo resurchaerge bouton suivant pour continuer
+                continuerQuiz();
                 $( "#UlChoixReponse" ).selectable( "enable" );
             });
         }
         else{
-            swalMauvaiseReponseLien(close,lien);
+            swalMauvaiseReponseLien(true,lien);
         }
         updateScoreAffiche(resultat);
     }
@@ -323,7 +318,7 @@ function traiterResultatReponse(resultat, lien, typeQuiz){
         swalErreurDeCorrection();
     }
     else {
-        swalQuestionNonRepondue();
+     //   swalQuestionNonRepondue();
     }
 }
 
@@ -393,21 +388,25 @@ function gererQuestionRepondue(lien, typeQuiz) {
     $("#UlChoixReponse .ui-selected").each(function() {
         idReponse = $(this).attr("id");
     });
-
-     //Valider cette réponse
-     $.ajax({
-        type:"POST",
-        url:"Controleur/FonctionQuizEtudiant/validerReponseAQuestion.php",
-        data: {"idReponse": idReponse},
-        async : !1,
-        datatype: "text",
-        success: function(resultat) {
-            traiterResultatReponse(resultat, lien, typeQuiz);
-        },
-         error: function(jqXHR, textStatus, errorThrown) {
-             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
-        }
-    });
+    if(idReponse == null){
+        swalQuestionNonRepondue();
+    }
+    else{
+         //Valider cette réponse
+         $.ajax({
+            type:"POST",
+            url:"Controleur/FonctionQuizEtudiant/validerReponseAQuestion.php",
+            data: {"idReponse": idReponse},
+            async : !1,
+            datatype: "text",
+            success: function(resultat) {
+                traiterResultatReponse(resultat, lien, typeQuiz);
+            },
+             error: function(jqXHR, textStatus, errorThrown) {
+                 alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
+            }
+        });
+    }
 }
 
 // Par: Isabelle Angrignon
@@ -446,7 +445,7 @@ function updateScoreAffiche(resultat){
         datatype: "text",
         async : !1,
         success: function(score) {
-            $('#labelScore').text(score);
+            $('#labelScore').text(score.trim());// .trim parce que sinon il y a une espace qui s'ajoute avant!
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
@@ -529,5 +528,20 @@ function gererFinQuiz(){
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
         }
+    });
+}
+
+// Gère le autoheight du textarea
+function h(e) {
+    // Ajuste le height de l'élément à la hauteur de son scroll pour simuler l'ajustement de la hauteur de l'élément.
+    $(e).css({'height':'auto'}).height(e.scrollHeight);
+}
+
+function updateAutoSizeTextArea() {
+    // Permet à tous les textArea de simuler l'ajustement de leur hauteur
+    $('textarea').each(function () {
+        h(this);
+    }).on('input', function () {
+        h(this);
     });
 }

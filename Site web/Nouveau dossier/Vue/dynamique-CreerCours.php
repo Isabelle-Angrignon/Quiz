@@ -1,4 +1,7 @@
 <?php
+// dynamique-CreerCours.php
+//  Partie de page contenant l'interface pour créer un nouveau cours et limite l'usager afin qu'il ne rentre pas nimporte quoi.
+
 ?>
 
 
@@ -39,12 +42,11 @@
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#FFA64F",/*todo ancien... #DD6B55   */
-                confirmButtonText: "GO ! ",
-                closeOnConfirm:false
+                confirmButtonText: "Accepter "
             }, function(){
                 ajouterCoursAjax($('#TB_Nom').val(), $('#TB_Code').val());
                 $("#TB_Nom").val("");
-                $("TB_Code").val("");
+                $("#TB_Code").val("");
             });
 
         }

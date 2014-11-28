@@ -1,3 +1,9 @@
+<?php
+//template.php
+//La page de base en php sur laquel devrait être basée toute les autres pages !
+//
+?>
+
 <!DOCTYPE html>
 <html>
 

@@ -189,19 +189,39 @@ function creeBaliseAvecClasse(baliseACreer, classe) {
 
 
 // creeFrameDynamique
-// Par Mathieu Dumoulin
+// Par Mathieu Dumoulin modifié par Isabelle Angrignon
 // Date : 23/09/14
 // Intrant(s) : idDivPrincipal = l'identifiant du pop up
 //              pathFichierPHP = Le path du fichier PHP qui représente le contenu du divPrincipal
+//              confirmerAvantQuitter = boolean si on doit afficher un avis de fermeture du div dynamique
 // Extrant(s) : Le div représentant la page de base du "pop up"
-// Description : Cette fonction créée, à l'aide de balises div, un squelette de fenêtre "pop up" avec un fond en ombragé
-function creeFrameDynamique(idDivPrincipal, pathFichierPHP) {
+// Description : Cette fonction crée, à l'aide de balises div, un squelette de fenêtre "pop up" avec un fond en ombragé
+function creeFrameDynamique(idDivPrincipal, pathFichierPHP,confirmerAvantQuitter) {
 	var fondOmbrage = creeBaliseAvecClasse("div", "dFondOmbrage");
 	fondOmbrage.setAttribute("id", "dFondOmbrage");
-	fondOmbrage.onmousedown = function(event) {
-		// detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
-		$(this).detach();
-	};
+    if (confirmerAvantQuitter == true){
+        fondOmbrage.onmousedown = function(event) {
+            swal({   title: "Quitter ce quiz",
+                text: "Vous vous apprêtez à quitter ce quiz. Toute progression sera perdue.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#FFA64F",
+                confirmButtonText: "Quitter",
+                cancelButtonText: "Continuer",
+            }, function(){
+                // detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
+                $("#dFondOmbrage").detach();
+            });
+
+        };
+    }
+    else{
+        fondOmbrage.onmousedown = function(event) {
+            // detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
+            $(this).detach();
+        };
+    }
+
 
 	var divPrincipale =  creeBaliseAvecClasse("div", "dDivPrincipale");
 	// Nécessaire pour empecher l'événement onclick de son parent d'être activé lorsqu'on clic dessus ce div
@@ -320,6 +340,12 @@ function ajouterKeyDownFrameDynamique() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+// ChercherUsagerAjax
+// par : Simon Bouchard
+// description : Permet de retrouver un usager par rapport a son numero de DA pour confirmer une action
+// parametre : idUsager = id de l'usager dont il faut trouver le nom prénom , functiononTrue = la fonction appelé si l'usager souhaite
+// faire une action sur ce compte (le parametre idUsager sera passer aussi a la functionOnTrue) , text = le texte qu'affichera le sweet alert
 function ChercherUsagerAjax(idUsager , functionOnTrue, texte) {
         $.ajax({
             type: 'POST',
@@ -332,7 +358,7 @@ function ChercherUsagerAjax(idUsager , functionOnTrue, texte) {
                         text: "Est-ce bien "+resultat.prenom + " " + resultat.nom + texte,
                         type: "warning",
                         showCancelButton: true,
-                        confirmButtonColor: "#FFA64F",/*todo ancien... #DD6B55   */
+                        confirmButtonColor: "#FFA64F",
                         confirmButtonText: "GO ! ",
                         closeOnConfirm:false
                     }, function(){
@@ -350,19 +376,7 @@ function ChercherUsagerAjax(idUsager , functionOnTrue, texte) {
         });
 }
 
-function ListerStatsAjax() {
-    $.ajax({
-        type: 'POST',
-        url: "Controleur/ListerStats.php",
-        dataType: "text",
-        success: function(resultat) {
-            alert(resultat);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert(jqXHR + "   /////    " + textStatus + "   /////    " + errorThrown);
-        }
-    });
-}
+
 
 // reintialiserMotDePasse
 // Fait par : Simon Bouchard
@@ -394,7 +408,10 @@ function reinitialiserMotDePasse(numeroDA) {
 }
 
 
-
+// setVarSessionAjax
+// fait par : Simon Bouchard
+// Permet de set un variable de session du serveur php a travers le AJAX
+// Parametre: clee= la clée de la variable de session , valeur = la valeur a mettre dans la variable de session
 function setVarSessionAjax(clee,valeur){
     $.ajax({
         type: 'POST',
@@ -410,6 +427,9 @@ function setVarSessionAjax(clee,valeur){
     });
 }
 
+// getVarSessionAjax
+// Permet d'obtenir la valeur de la valeur de session d'une variable de session php
+// Parametre : clee = la clée de la variable de session que l'on souhaite obtenir
 function getVarSessionAjax(clee){
     return $.ajax({
         type: 'POST',
