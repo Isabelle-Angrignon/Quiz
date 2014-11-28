@@ -445,7 +445,7 @@ function updateScoreAffiche(resultat){
         datatype: "text",
         async : !1,
         success: function(score) {
-            $('#labelScore').text(score);
+            $('#labelScore').text(score.trim());// .trim parce que sinon il y a une espace qui s'ajoute avant!
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert( textStatus + " /// " + errorThrown +" /// "+ jqXHR.responseText);
