@@ -240,7 +240,7 @@ function updateUlQuiz(idCours, idProprietaire) {
 //            filtreEnonce = filtre à appliquer sur l'énoncé des questions. [Optionnel] car parfois pas de filtre.
 //            filtreId =  filtre à appliquer sur l'id des questions. [Optionnel] car parfois pas de filtre.
 // Description : Cette fonction est très similaire à updateUlQuestion. Différences : Le nombre de paramêtres passés ainsi que le nom du parent.
-function updateUlModifQuiz(triage,usagerCourant,idQuiz, filtreEnonce, filtreId) {//todo en cours
+function updateUlModifQuiz(triage,usagerCourant,idQuiz, filtreEnonce, filtreId) {
     $("#UlModifQuiz li").remove();
     $.ajax({
         type: 'POST',
