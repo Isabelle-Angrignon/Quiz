@@ -104,13 +104,27 @@ div.suiviQuiz {
     background-color: rgba(125, 171, 211, 1);
     width:90%;
   /*  min-height:70px;*/
-    max-height: 100px;
+    max-height: 200px;
     overflow-y: auto;
     border-radius:10px;
     padding:20px;
+    padding-top:10px;
     border:solid rgba(51, 51, 51, 0.77) 1px;
+    overflow-x:hidden;
 }
 
+#labelEnonce textarea {
+    background-color:inherit;
+    margin:0;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size:16px;
+    resize:none;
+    width:100%;
+    color:black;
+    outline: none;
+    border:none;
+    font-weight:100;
+}
 /*Div qui contient le ul - li -  des choix de réoponse*/
 #divChoixReponse{
     margin-left: 12.5%;

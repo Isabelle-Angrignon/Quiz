@@ -53,6 +53,8 @@ else{
             gererQuestionRepondue(lien, typeQuiz );
         });
     });
+    updateAutoSizeTextArea();
+    $(".dFondOmbrage").disableSelection();
 </script>
 
 <div id="enteteQuiz" class="suiviQuiz">
@@ -126,15 +128,12 @@ else{
     </div>
 
     <div id="labelEnonce" class="zoneQuestion" >
-
-        <label  class="zoneQuestion">
-            <?php
+        <textarea  class="zoneQuestion" disabled><?php
             if (!empty($infoQuestion))
             {
                 echo $infoQuestion[0]['enonceQuestion'];
-            }
-            ?>
-        </label>
+            } ?>
+        </textarea>
     </div>
 
     <div id="divChoixReponse"  class="Liste zoneQuestion ">
