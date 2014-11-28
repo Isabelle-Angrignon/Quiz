@@ -35,6 +35,8 @@
     text-align: center;
     max-height: 50px;
     overflow: hidden;
+    width: 85%;
+    margin-left: 7.5%;
 }
 
 #QuizDropZone li {
@@ -111,11 +113,11 @@
     margin-left:6%;
 }
 #ModifierGroupe{
-
+    margin-right: 6%;
 }
 #GererEtudiants {
 	float:right;
-    margin-right: 2%;
+    margin-right: 4%;
 
 }
 
