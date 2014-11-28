@@ -1,4 +1,7 @@
 <?php
+// dynamique-CreerCours.php
+//  Partie de page contenant l'interface pour créer un nouveau cours et limite l'usager afin qu'il ne rentre pas nimporte quoi.
+
 ?>
 
 

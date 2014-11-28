@@ -1,3 +1,7 @@
+<?php
+//EnteteSite.php
+// Ce fichier contient l'entete du site soit sa signature dans chacune des pages
+?>
 <div id="enteteSite" class="fixed">
 	<a href="index.php"><img class="logo" src="Vue/Images/Logo_QIz.png" alt="logo" ></a>
     <a href="index.php"><p id="nomSite"> QUIZINFO</p></a>

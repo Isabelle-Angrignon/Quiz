@@ -1,3 +1,7 @@
+<?php
+//MenuProf.php
+// A inclure lorsque cette un étudiant est connecter. Ce fichier générera le menu de l'étudiant
+?>
 
 <nav class="fixed">
 	<a href='Prof-GererQuiz.php' class='NavBar'>Mes quiz et questions</a>
