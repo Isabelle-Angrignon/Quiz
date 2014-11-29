@@ -18,6 +18,13 @@
     demarrerSession();
     gestionParamChange();
     redirigerSiNonConnecte('Etudiant');
+
+    $texteGenererAleatoire = "OUTIL DE PRATIQUE:
+                                Génère aléatoirement une série de questions provenant de la banque de questions du cours choisi.
+                                Vous pouvez quitter quand vous le souhaiter.
+                                Aucune statistique n'est conservée.
+                                Votre prof peut vous suggérer un lien si vous avez une mauvaise réponse.";
+
     ?>
 
     <script src="Javascript/Etudiant-Accueil.js"></script>
@@ -42,6 +49,7 @@
             $("#UlQuizAleatoire").click( function() {
                 ouvrirUnQuiz("ALEATOIRE",null);
             });
+            $("#BTN_QuizAleatoire").tooltip({ show: { delay: 300, effect : "fade", duration: 800 }   });
         });
     </script>
 
@@ -93,11 +101,11 @@ resetVarSessionScoreAffiche();
                  les items de quiz appaîtront ici
             </ul>
         </div>-->
-        <div id="QuizAleatoire" class="Liste ListeGererQuiz">
+        <div id="QuizAleatoire" class="Liste ListeGererQuiz" >
 
             <label>Aléatoire</label>
             <ul id="UlQuizAleatoire">
-                <li class="ui-state-default" >Générer</li>
+                <li id="BTN_QuizAleatoire" class="ui-state-default" title="<?= $texteGenererAleatoire?>">Générer</li>
             </ul>
 
         </div>

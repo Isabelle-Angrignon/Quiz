@@ -66,8 +66,7 @@ else{
                 </label>
             </td>
             <td>
-                <label id="labelScore" class="suiviQuiz">
-                    <?php
+                <label id="labelScore" class="suiviQuiz"><?php
                     if($aleatoire) {
                         echo($_SESSION['bonnesReponses'] . ' / ' . $_SESSION['questionsRepondues']);
                     }
