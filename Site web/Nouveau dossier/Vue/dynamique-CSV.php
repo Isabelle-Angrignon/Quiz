@@ -1,7 +1,9 @@
 <?php
+// DynamiqueCSV.php
+//Interface d'intégration d'un fichier CSV
+// Provoque un refresh et retourne a la page GererCours.php
 ?>
-<?php
-?>
+
 
 <script>
     $('#coursPost').val($('#QuizDropZone').children().attr('id'));

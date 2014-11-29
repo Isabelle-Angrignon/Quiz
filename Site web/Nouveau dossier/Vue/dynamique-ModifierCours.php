@@ -1,4 +1,6 @@
 <?php
+// dynamique-ModifierCours.php
+// Interface de modification d'un cours de la page Admin.php
 ?>
 
 

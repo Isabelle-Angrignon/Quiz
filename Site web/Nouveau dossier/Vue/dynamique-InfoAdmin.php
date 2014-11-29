@@ -1,4 +1,6 @@
 <?php
+// dynamique-InfoAdmin.php
+// Interface donnant les infos pour la documentation et l'installation du serveur a un administrateur
 ?>
 
 <p class="titre">Connection à la documentation</p>
