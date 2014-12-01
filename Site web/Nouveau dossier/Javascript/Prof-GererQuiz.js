@@ -401,8 +401,9 @@ function ajouterVariableSessionProprietaireQuestion(idProprietaire) {
 function enleverModificationReponses() {
     // Disable les boutons d'ajout et de suppression de réponse
     $("#reponseConteneur input[type=button]").attr("disabled", "disabled");
+    // Disable le bouton d'ordre des réponses
+    $("#ordreReponsesQuestion").prop("checked",true).attr("disabled", "disabled").button("refresh");
     // J'empêche l'usager de modifier le texte des réponses.
-
     $("#Ul_Reponses li .reponsesQuestion").prop("disabled", "disabled").keydown(function(e) {
         e.preventDefault();
     });
@@ -414,6 +415,8 @@ function enleverModificationReponses() {
 function permettreModificationReponses() {
     // Enable les boutons d'ajout et de suppression de réponses
     $("#reponseConteneur input[type=button]").removeAttr("disabled");
+    // Enable le bouton d'ordre des réponses
+    $("#ordreReponsesQuestion").removeAttr("disabled");
     // Je permet à l'usager de modifier le texte des réponses. Ça cancel entre autre le event.preventDefault() qui était bind lors du choix de type Vrai/Faux
     $("#Ul_Reponses li .reponsesQuestion").keydown(function() {
         return true;
