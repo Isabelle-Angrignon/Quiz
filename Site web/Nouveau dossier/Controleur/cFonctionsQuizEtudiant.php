@@ -115,7 +115,7 @@ function genererReponsesCMU($idQuestion, $ordreReponse)
             GenererLiSelectReponse('UlChoixReponse', $row['enonceReponse'], $row['idReponse']);
             if($row['reponseEstValide'] == 1)
             {
-                $_SESSION['idBonneReponse'] = $row['idReponse'];//todo ajouté
+                $_SESSION['idBonneReponse'] = $row['idReponse'];
             }
         }
     }
