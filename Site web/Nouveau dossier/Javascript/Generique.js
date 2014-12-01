@@ -169,10 +169,6 @@ function ajouterLi_AvecDiv_V2(idUl, element,idElement, estThemeJqueryUI, texteDi
     liTag.appendChild(divDansLi);
     document.getElementById(idUl).appendChild(liTag);
     // 29 est le nombre de caractère que l'on permet
-    if(element.length > 29) {
-        $(liTag).css("padding-top", "5px");
-        $(liTag).css("height", "50px");
-    }
 }
 
 // creeBaliseAvecClasse(baliseACreer, classe)

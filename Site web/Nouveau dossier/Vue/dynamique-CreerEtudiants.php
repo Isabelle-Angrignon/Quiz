@@ -13,9 +13,9 @@
         </div>
 
         <div class="droite">
-            <input type="text" id="TB_NumeroDA"  /><br>
-            <input type="text" id="TB_Nom"  /> <br>
-            <input type="text" id="TB_Prenom"  />
+            <input type="text" id="TB_NumeroDA" autofocus  /><br>
+            <input type="text" id="TB_Nom"  tabindex="1" /> <br>
+            <input type="text" id="TB_Prenom" tabindex="2"  />
         </div>
     </div>
     <div id="soumettre" class="ListeDivElementStyle JquerryButton">Ajouter l'étudiant</div>
@@ -23,6 +23,19 @@
 
 
 <script>
+    $("#divDynamique").ready(function(){
+        $("#TB_NumeroDA").focus();
+
+        $("#divDynamique").keydown(function(e) {
+
+            if(e.which == 13) {
+                e.preventDefault();
+                setTimeout(function() {$("#soumettre").click();}, 0);
+
+            }
+        });
+    });
+
     function estValide(){
         temp = true;
         temp = ($('#TB_NumeroDA').val() != "" && $('#TB_Nom').val() != "" && $('#TB_Prenom').val() != "");
@@ -50,6 +63,7 @@
     $('#soumettre').button();
     $('#soumettre').click(function(){
         if(estValide()) {
+            $("#divDynamique").off("keydown");
             creerEtudiantCoursAjax($('#TB_NumeroDA').val(), $('#TB_Nom').val(), $('#TB_Prenom').val())
 
             if ($('#QuizDropZone').children().length > 0) {
@@ -61,7 +75,6 @@
                 ListerEtudiantAjax();
             }
             $('#dFondOmbrage').remove();
-            $('#DivDynamique').remove();
         }
 
     });
