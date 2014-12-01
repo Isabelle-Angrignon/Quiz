@@ -3,7 +3,7 @@
 
 
 
-    <p class="titre">Supprimer un compte</p>
+    <p class="titre">Supprimer un étudiant</p>
     <hr>
     <div class="conteneur" >
         <div class="gauche">
@@ -23,7 +23,7 @@
     $('#soumettre').click(function(){
         if($('#TB_DA').val().length != 0 && $('#TB_DA').val().length <= 10 && $('#TB_DA').val()[0] != "4") {
 
-            ChercherUsagerAjax($('#TB_DA').val(),supprimerUnCompte);
+            ChercherUsagerAjax($('#TB_DA').val(),supprimerUnCompte, " dont vous souhaitez supprimer le compte");
 
         }
         else{
