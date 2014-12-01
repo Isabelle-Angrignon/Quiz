@@ -27,14 +27,19 @@ $Key = array_keys($stats[0]);
 for ( $i = 0 ; $i < count($Key); $i++)      // Crée un header pour les colonnes
 {
     if ($i%2 == 0 ) {
-        echo $Key[$i] . ";";
+        echo $Key[$i] . "¦";
     }
 }
 echo  "\n";
 for ($i = 0 ; $i < count($stats); $i++)         // Boucle pour remplir les stats
 {
     for ($j = 0 ; $j < count($stats[$i])/2; $j++) {
-        echo $stats[$i][$j] . ";";
+        if($j != 10) {
+            echo $stats[$i][$j] . "¦";
+        }
+        else{
+            echo str_replace("\n"," ", $stats[$i][$j] ) . "¦";
+        }
     }
     echo "\n";
 }
