@@ -402,7 +402,8 @@ function enleverModificationReponses() {
     // Disable les boutons d'ajout et de suppression de réponse
     $("#reponseConteneur input[type=button]").attr("disabled", "disabled");
     // J'empêche l'usager de modifier le texte des réponses.
-    $("#Ul_Reponses li .reponsesQuestion").keydown(function(e) {
+
+    $("#Ul_Reponses li .reponsesQuestion").prop("disabled", "disabled").keydown(function(e) {
         e.preventDefault();
     });
 }
@@ -523,12 +524,12 @@ function supprimerReponseCourante() {
         // .remove() gère automatiquement de supprimer la classe de l'élément (en supprimant l'élément)
         $(".Reponsefocused").parent().remove();
         // Empêche la suppression de la classe Reponsefocused du nouvel élément focus.
-        aSupprimerClasseReponsefocused = true
+        aRetirerClasseReponsefocused = true
 
 
         $("#Ul_Reponses").children("li:nth-child(" + (indexNouveauFocus+1) + ")").children(".reponsesQuestion").focus();
     }
-    if(!aSupprimerClasseReponsefocused)  {
+    if(!aRetirerClasseReponsefocused)  {
         // Si l'élément a déjà été supprimé, le sélecteur ne va correspondre à aucun élément et cette commande ne va pas être éxécutée.
         $(".Reponsefocused").removeClass("Reponsefocused");
     }
@@ -786,7 +787,7 @@ function getJSONEnonceQuestion(idCreateur, idQuestion ) {
     enonce = modifierChainePourJSON(enonce);
     // Création du string qui va devenir un JSON
     var jsonQuestion = '{"enonceQuestion" : "' + enonce + '", "idUsager_Proprietaire":"' + idCreateur + '", "lienWeb":"'
-                       + $("#conteneurLienWeb input[type=text]").val() + '", "ordreReponsesAleatoire":"' + !$("#ordreReponsesQuestion").prop("checked") + '"';
+                       + encodeURI($("#conteneurLienWeb input[type=text]").val()) + '", "ordreReponsesAleatoire":"' + !$("#ordreReponsesQuestion").prop("checked") + '"';
     if(idQuestion != null) {
         jsonQuestion +=', "idQuestion":"'+ idQuestion+'"';
     }
@@ -802,6 +803,8 @@ function getJSONEnonceQuestion(idCreateur, idQuestion ) {
 // Description : Transforme la chaine de caractère pour qu'il n'y ai pas de conflits avec les guillemets, new lines et
 //               pas de blancs aux extrémités  de cette chaine.
 function modifierChainePourJSON(chaine) {
+    // Gère les backslash pour qu'ils ne soient plus des caractères d'échappement (escape caracter)
+    chaine = chaine.replace(/[\\]/g, '\\\\');
     // Rend littéraire les new lines (\n), les guillemets (") de la chaine ainsi que les blancs qui sont à ses extrémités
     return chaine.replace(/[\"]/g, '\\"').replace(/[\n]/g, '\\n').trim();
 }

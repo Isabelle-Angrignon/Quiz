@@ -12,7 +12,20 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //TODO devrait penser a indiquer les parametre post que le fichier prend
 $doitArreter = false;
-$question = $_POST['tableauQuestion'];
+// Gestion des erreurs par programmation
+
+if(isset($_POST['tableauQuestion']))
+{
+    $question = $_POST['tableauQuestion'];
+}
+else
+{
+    // Si je n'ai pas de question passé dans le POST
+    echo "Vous devez envoyer une question à ajouter";
+    // Quitte le script PHP
+    exit();
+}
+
 if($question['enonceQuestion'] == "")
 {
     echo "Vous devez entrer un énoncé à votre question.   ";
@@ -36,6 +49,7 @@ if(!isset($_POST['typeQuestion']))
 
 if($doitArreter)
 {
+    // Quitte le script PHP
     exit();
 }
 
@@ -48,7 +62,7 @@ include("../Modele/ModeleAssociationQuestionCours.php");
 include("../Modele/ModeleAssociationTypesQuizQuestion.php");
 include("../Modele/ModeleQuestionsVraiFaux.php");
 
-
+// Simplifie la lecture si c'est de simple variable comparé à des $_POST['...']
 $tableauQuestion = $_POST['tableauQuestion'];
 $tableauReponses = $_POST['tableauReponses'];
 $tableauCours = $_POST['tableauCours'];

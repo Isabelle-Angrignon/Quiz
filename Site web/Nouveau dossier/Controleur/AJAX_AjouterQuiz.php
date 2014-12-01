@@ -1,5 +1,13 @@
 <?php
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  AJAX_AjouterQuiz
+//  Par: Mathieu Dumoulin
+//
+//  Description :
+//  Ce fichier récupère les informations passés dans le POST par rapport à un quiz et l'ajoute dans la BD.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 $doitArreter = false;
@@ -34,7 +42,7 @@ if($doitArreter)
     exit();
 }
 
-
+// Si les paramètres du quiz sont valides
 include("cFonctionsProf-GererQuiz.php");
 include("../Modele/ModeleUtilisateurs.php");
 include("../Modele/ModeleQuiz.php");

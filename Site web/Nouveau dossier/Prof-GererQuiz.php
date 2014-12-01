@@ -167,7 +167,7 @@ Description: Cette interface représente l'interface principale d'un professeur 
             });
 
             $("#DDL_Cours").selectmenu({
-                width:400,
+                width:410,
                 select: function(event, ui) {
                     var idCours = $("#DDL_Cours option:selected").attr("value");
                     $("#TB_Filtre").val("");
