@@ -24,12 +24,7 @@
 	?>
 
 	<div class="contenu">
-            <?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur'])))
-            {
-                echo ' <script>$(document).ready(function(){ swal({title:"Erreur" ,type:"warning", text:"'. $_SESSION['erreur'] .'"});});</script>';
-                unset($_SESSION['erreur']);
-            }
-            ?>
+
         <div id="login">
             <p id="titreConnexion">Connexion</p>
             <hr>
@@ -51,14 +46,25 @@
     </div>
     <script>
         $("#btnConnexion").button();
-        $(document).ready(function(){
-            $("#TBNomUsager").focus();
-        });
     </script>
 	
 	<?php
 		include("Vue/Template/BasDePage.php");
 	?>
+<?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur'])))
+{
+    echo ' <script>
+                     $(document).ready(function(){
+                      swal({
+                      title:"Erreur",
+                      type:"warning",
+                       text:"'. $_SESSION['erreur'] .'"},
+                       function() {
+                        setTimeout(function(){$("#TBNomUsager").focus();},400);
+                       });});</script>';
+    unset($_SESSION['erreur']);
+}
+?>
 <![endif]>
 </body>
 
