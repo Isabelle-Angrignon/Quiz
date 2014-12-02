@@ -110,18 +110,15 @@
             $(this).css("background-color", "#E66100");
         });
 
-        // --------------------------- Gestion des événements le div dynamique ---------------------------------- //
+        $("#titreQuiz").focus();
+
+        // --------------------------- Gestion des événements sur le div dynamique ---------------------------------- //
         // Gestion du Ctrl + s sur un quiz qui sauvegarde les modifications/ajoute le quiz en simulant un clic sur le boutton BTN_EnregistrerQuiz
         $(document).keydown(function(e) {
             if(e.ctrlKey == true) {
                 // e.which == s
                 if(e.which == 83) {
                     prevenirDefautDunEvent(e, function() { $("#BTN_EnregistrerQuiz").click();});
-                    // Si la modification est valide (s'il n'y a aucun conflit de droits)
-                    <?php if($_SESSION["etat"] == "modifierQuiz" && $idProprietaire == $_SESSION['idUsager']) {
-                    // J'enlève l'évènement keydown pour ne pas avoir plusieurs fois le même event sur le même élément
-                        echo '$(document).off("keydown");';
-                    }?>
                 }
             }
         });
@@ -141,7 +138,7 @@
 </script>
 
 <div id="sectionTitreQuiz">
-    <input type="text" name="TitreQuiz" placeholder="Titre du quiz" id="titreQuiz" tabindex="1" value="<?php if($_SESSION['etat'] == "modifierQuiz") { echo $titreQuiz; } ?>">
+    <input type="text" name="TitreQuiz" placeholder="Titre du quiz" id="titreQuiz" tabindex="1" value="<?php if($_SESSION['etat'] == "modifierQuiz") { echo htmlspecialchars($titreQuiz); } ?>">
 </div>
 <div id="paramQuiz">
     <h3>Ordre des questions</h3>

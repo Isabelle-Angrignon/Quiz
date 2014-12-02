@@ -116,14 +116,14 @@ function addEventsToReponses() {
 //               Sous Firefox, je dois forcer un timeout pour empêcher l'évènement de "bubble" tout de suite et d'accomplir son comportement par défaut.
 // Solution alternatives qui ne fonctionnent pas sur Firefox : event.stopImmediatePropagation(), return false, event.stopPropagation()
 function prevenirDefautDunEvent(event, fonction, timeout) {
+    event.preventDefault();
+
     if(timeout == null) {
         setTimeout(function() {fonction();}, 0);
     }
     else {
         setTimeout(function() {fonction();}, timeout);
     }
-
-    event.preventDefault();
 }
 
 // Gère le autoheight du textarea
@@ -401,11 +401,19 @@ function ajouterVariableSessionProprietaireQuestion(idProprietaire) {
 function enleverModificationReponses() {
     // Disable les boutons d'ajout et de suppression de réponse
     $("#reponseConteneur input[type=button]").attr("disabled", "disabled");
+    // Disable le bouton d'ordre des réponses et le coche à fixe
+    $("#ordreReponsesQuestion").prop("checked",true).attr("disabled", "disabled").button("refresh");
+    $("#ordreReponsesQuestion").next("label").children("span").text("Fixe");
     // J'empêche l'usager de modifier le texte des réponses.
-
     $("#Ul_Reponses li .reponsesQuestion").prop("disabled", "disabled").keydown(function(e) {
         e.preventDefault();
     });
+    // Retire la classe .Reponsefocused si elle est encore appliquée.
+    $(".Reponsefocused").removeClass("Reponsefocused");
+
+    $("#Ul_Reponses").sortable( "option", "disabled", true );
+    $("#Ul_Reponses").sortable("option", "cancel", ".fixed");
+
 }
 
 // permettreModificationReponses
@@ -414,6 +422,8 @@ function enleverModificationReponses() {
 function permettreModificationReponses() {
     // Enable les boutons d'ajout et de suppression de réponses
     $("#reponseConteneur input[type=button]").removeAttr("disabled");
+    // Enable le bouton d'ordre des réponses
+    $("#ordreReponsesQuestion").attr("disabled",false).button("refresh");
     // Je permet à l'usager de modifier le texte des réponses. Ça cancel entre autre le event.preventDefault() qui était bind lors du choix de type Vrai/Faux
     $("#Ul_Reponses li .reponsesQuestion").keydown(function() {
         return true;
@@ -838,6 +848,8 @@ function ajouterQuestion(idCreateur, continuer) {
                     swal("Erreur !", resultat, "error");
                 }
                 else {
+                    // Retire le keydown ajouter à l'ouverture du div dynamique
+                    $(document).off("keydown");
                     // Si ce n'est pas ajouter et continuer
                     if(continuer == null) {
                         fermerDivDynamique();
@@ -914,6 +926,8 @@ function modifierQuestion( idUsagerCourant,idQuestion, idProprietaire) {
                     swal("Erreur !", resultat, "error");
                 }
                 else {
+                    // Retire le keydown ajouter à l'ouverture du div dynamique
+                    $(document).off("keydown");
                     // S'il n'y a pas eu d'erreur
                     // Je ferme le div dynamique
                     fermerDivDynamique();
@@ -988,6 +1002,8 @@ function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
                             swal("Erreur !", resultat, "error");
                         }
                         else {
+                            // Retire le keydown ajouter à l'ouverture du div dynamique
+                            $(document).off("keydown");
                             // S'il n'y a pas eu d'erreur
                             // Je ferme le div dynamique
                             fermerDivDynamique();
@@ -1009,7 +1025,6 @@ function supprimerQuestion(idUsagerCourant, idQuestion, idProprietaire) {
                                 updateUlQuestion(cours, idUsagerCourant, "pasDansCeQuiz", idQuiz, filtreEnonce, filtreId);
                                 updateUlModifQuiz("selonQuiz", idUsagerCourant, idQuiz);
                             }
-
                             swal("Félicitation !", "Votre question à été supprimée", "success");
                         }
                     },
@@ -1050,6 +1065,8 @@ function ajouterQuiz(idUsagerProprietaire) {
                 swal("Erreur !", resultat, "error");
             }
             else {
+                // Retire le keydown ajouter à l'ouverture du div dynamique
+                $(document).off("keydown");
                 swal("Félicitation !", "Votre quiz à été ajouté", "success");
                 fermerDivDynamique();
                 // Je met à jour la page Prof-GererQuiz pour qu'elle représente le contenu réel de la base de données
@@ -1100,6 +1117,8 @@ function modifierQuiz(idQuiz, idUsagerCourant, idProprietaire) {
                     swal("Erreur !", resultat, "error");
                 }
                 else {
+                    // Retire le keydown ajouter à l'ouverture du div dynamique
+                    $(document).off("keydown");
                     swal("Félicitation !", "Votre quiz à été modifié", "success");
                     fermerDivDynamique();
                     // Je met à jour la page Prof-GererQuiz pour qu'elle représente le contenu réel de la base de données
@@ -1154,6 +1173,8 @@ function supprimerQuiz(idQuiz, idUsagerCourant, idProprietaire) {
                             swal("Erreur !", resultat, "error");
                         }
                         else {
+                            // Retire le keydown ajouter à l'ouverture du div dynamique
+                            $(document).off("keydown");
                             $(".dFondOmbrage").detach();
                             var cours = $("#DDL_Cours option:selected").attr("value");
                             // Impossible pour l'instant car on à empêcher la modification/supression du quiz qui est dans le QuizDropZone.

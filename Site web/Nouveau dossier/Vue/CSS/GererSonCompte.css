@@ -81,6 +81,7 @@ Contient le css de la page GererSonCompte.css
     text-align:center;
     font-size:2em;
     margin:0 auto;
+    margin-top: 15px;
 }
 
 #ChampInfoUsager {

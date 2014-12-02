@@ -16,6 +16,7 @@
 // Cette fonction insère le contenu d'un fichier a l'intérieur de la page admin
 // Intrant : path = le path du fichier dont le contenu doit être insérer dans la page admin
 function CreerDeploiement(path){
+    $("#deploiement").off("keydown");
     $('#deploiement').remove();
     var zeDiv = document.createElement('div');
     zeDiv.setAttribute('id','deploiement');

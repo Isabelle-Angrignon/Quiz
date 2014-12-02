@@ -46,12 +46,8 @@
 
                 <input type="submit" id="btnConnexion" value="Se connecter"/>
             </form>
-
-
-
-
         </div>
-
+        <div id="avertissementBrowser"><b>Avertissement</b> : le QuizInfo n'est pas stable avec Firefox sur les ordis du Collège Lionel-Groulx. Ce problème est externe à notre projet. Pour une version plus stable, veuillez utiliser Chrome.</div>
     </div>
     <script>
         $("#btnConnexion").button();
