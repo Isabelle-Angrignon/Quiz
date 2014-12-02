@@ -119,6 +119,7 @@
     // En résumé, lorsque je clique sur un des div d'enoncé de réponse, s'il n'est pas déjà en train d'être déplacé,
     // disable son attribut qui le rend selectable jusqu'à temps qu'il perd le focus
     $("#Ul_Reponses").sortable().click(function(e){
+
         if($(e.target).prop("disabled") == false) {
             $(this).sortable( "option", "disabled", true );
             $(this).sortable("option", "cancel", ".fixed");
@@ -127,8 +128,11 @@
         // Ici j'utilise l'event focusout car, contrairement à l'event blur, focusout est déclanché
         // lorsque l'élément en question perd son focus sur un de ses enfants
     }).focusout(function(){
-        $(this).sortable( 'option', 'disabled', false);
-        $(this).sortable("option", "cancel", "");
+        if($("#TypeQuestion li input[type=radio]:checked").attr("value") != "VRAI_FAUX") {
+            $(this).sortable( 'option', 'disabled', false);
+            $(this).sortable("option", "cancel", "");
+        }
+
     });
 
     // Création d'un accordion de JQuery UI
@@ -163,22 +167,8 @@
                 // Et que shift n'est pas appuyé
                 if(!e.shiftKey) {
                     prevenirDefautDunEvent(e,function() { $("#BTN_ConfirmerQuestion").click(); });
-                    <?php
-                    // Si j'ai le droit de modifier/ajouter
-                    if((isset($_SESSION['idProprietaire']) && $_SESSION['idProprietaire'] == $_SESSION['idUsager']))
-                    {
-                        echo 'if( reponsesSontValides() && $("#EnonceQuestion").val() != "") {$(document).off("keydown");}';
-                    }
-                    ?>
                 }
                 else {
-                    // Si la question est valide, j'enlève l'événement keydown
-                    // (pour éviter d'avoir plusieurs fois l'événement keydown sur mon div dynamique)
-                    if(reponsesSontValides() && $("#EnonceQuestion").val() != "") {
-                        $(document).off("keydown");
-                        ajouterKeyDownFrameDynamique();
-                    }
-
                     prevenirDefautDunEvent(e,function() { $("#BTN_ContinuerAjout").click();});
                 }
             }

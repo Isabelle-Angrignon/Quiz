@@ -203,9 +203,10 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP,confirmerAvantQuitter
                 showCancelButton: true,
                 confirmButtonColor: "#FFA64F",
                 confirmButtonText: "Quitter",
-                cancelButtonText: "Continuer",
+                cancelButtonText: "Continuer"
             }, function(){
                 // detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
+                $(document).off("keydown");
                 $("#dFondOmbrage").detach();
             });
 
@@ -214,6 +215,7 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP,confirmerAvantQuitter
     else{
         fondOmbrage.onmousedown = function(event) {
             // detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
+            $(document).off("keydown");
             $(this).detach();
         };
     }
