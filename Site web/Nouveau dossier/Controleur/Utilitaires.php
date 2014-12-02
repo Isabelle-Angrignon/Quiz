@@ -133,10 +133,17 @@ function GenererLi_V2($idUi , $valeur , $idLi, $textDiv , $classDiv)
 }
 
 //fonction php qui appelle simplement la version javascript pour creer les éléements d'une liste "selectable" de réponse
-//(sans étiquette de nom de prof).
+//(sans étiquette de nom de prof mais dans un textarea pour gérer les \n ).
 function GenererLiSelectReponse($idUl , $valeur , $idLi)
 {
-    echo "<script>ajouterLi_ToUl_Selectable( '". $idUl . "' , '". str_replace("'", " \'" , $valeur) . "','".$idLi."', true);</script>";
+   // $valeur = str_replace("'", " \'" , $valeur);
+    //$valeur =  str_replace("\n", "\" + \n \"",$valeur);
+    $valeur =  str_replace("\n", "\\n",$valeur);
+
+    echo "<script>
+        ajouterLi_ToUl_Selectable_TextArea( '". $idUl . "' , \"". $valeur . "\",'".$idLi."', true,'zoneQuestion' );
+        updateAutoSizeTextArea();
+        </script>";
 }
 
 //fonction php qui appelle simplement la version javascript pour creer les éléements d'une liste "selectable" de réponse

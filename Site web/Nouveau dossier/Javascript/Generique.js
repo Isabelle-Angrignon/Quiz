@@ -79,7 +79,7 @@ function ajouterLi_ToUl_V2(idUl, element,idElement, estThemeJqueryUI) {
 }
 
 // Nom : ajouterLi_ToUl_Selectable
-// Par : Isabelle Angrignon
+// Par : Mathieu Dumoulin, modifié par Isabelle Angrignon
 // Date : 19/09/2014
 // Intrant(s) : String idUl, String element,String idElement , bool estThemeJqueryUI
 // Extrant(s) : Il n'y a pas d'extrant
@@ -98,13 +98,15 @@ function ajouterLi_ToUl_Selectable(idUl, element,idElement, estThemeJqueryUI) {
     document.getElementById(idUl).appendChild(liTag);
 }
 // Nom : ajouterLi_ToUl_Selectable_Div
-// Par : Isabelle Angrignon
+// Par : Mathieu Dumoulin, modifié par Isabelle Angrignon
 // Date : 19/09/2014
 // Intrant(s) : String idUl, String element,String idElement , bool estThemeJqueryUI
 // Extrant(s) : Il n'y a pas d'extrant
-// Description : Cette fonction prend l'id d'une balise Ul et lui ajoute un Li créé dynamiquement comportant le texte (element) passer en paramêtre
-//				 en donnant les classe pour le thême d'un selectable au Li si estThemeJqueryUI est à true.
-//               La différence de cette fonction comparée aux autres est quelle ajoute le terme selectable à la classe JQueryUI que le Li se fait attribuée.
+// Description : Cette fonction prend l'id d'une balise Ul et lui ajoute un Li créé dynamiquement comportant le texte (element) passer en paramètre
+//				 en donnant les classe pour le thème d'un selectable au Li si estThemeJqueryUI est à true.
+//               La différence de cette fonction comparée aux autres est quelle ajoute le terme selectable à la classe JQueryUI que le Li se fait attribuer
+//               et insère un div dans le li avec sa classe.  Le div contient une autre information formaté différement.
+//               On a aussi un endroit pour garder une donnée récupérable si l'item est sélectionné.
 function ajouterLi_ToUl_Selectable_Div(idUl, element,idElement, estThemeJqueryUI, texteDiv, classDiv, donneeAGarder) {
     // Initialisation du li
     var liTag = document.createElement("li");
@@ -121,6 +123,38 @@ function ajouterLi_ToUl_Selectable_Div(idUl, element,idElement, estThemeJqueryUI
     divDansLi.setAttribute("placeholder", donneeAGarder);
     // Ajout du div dans le li
     liTag.appendChild(divDansLi);
+    document.getElementById(idUl).appendChild(liTag);
+}
+
+// Nom : ajouterLi_ToUl_Selectable_TextArea
+// Par : Mathieu Dumoulin, modifié par Isabelle Angrignon
+// Date : 01/12/2014
+// Intrant(s) : String idUl, String element,String idElement , bool estThemeJqueryUI
+// Extrant(s) : Il n'y a pas d'extrant
+// Description : Cette fonction prend l'id d'une balise Ul et lui ajoute un Li créé dynamiquement comportant le texte (element) passer en paramêtre
+//				 en donnant les classe pour le thème d'un selectable au Li si estThemeJqueryUI est à true.
+//               La différence de cette fonction comparée aux autres est quelle ajoute le terme selectable à la classe JQueryUI que le Li se fait attribuer
+//               et insère un textArea dans le li avec sa classe ce qui permet le formatage selon un textarea.  On a aussi un endroit pour garder une donnée récupérable si l'item est sélectionné.
+function ajouterLi_ToUl_Selectable_TextArea(idUl, element,idElement, estThemeJqueryUI, classTextArea) {
+    // Initialisation du li
+    var liTag = document.createElement("li");
+    liTag.setAttribute("id",idElement);
+    if(estThemeJqueryUI) {
+        liTag.setAttribute("class", "ui-state-default selectable");
+    }
+    // Initialisation du textarea qui va dans le li
+    var textareaDansLi = document.createElement("textarea");
+    textareaDansLi.setAttribute("class", classTextArea);
+    $(textareaDansLi).val(element).attr("readonly", true);
+
+  //  $(textareaDansLi).parent("li").click(function(e) {
+    /*$("#UlChoixReponse").children("li").click(function() {
+        alert(this);
+       // $("#UlChoixReponse").children("li:first-child").click();
+    });*/
+
+    // Ajout du textarea dans le li
+    liTag.appendChild(textareaDansLi);
     document.getElementById(idUl).appendChild(liTag);
 }
 

@@ -77,12 +77,12 @@ function genererReponsesVF($idQuestion)
     if (!empty($listeReponses))
     {
         $_SESSION['listeReponses'] = $listeReponses;
-        $_SESSION['idBonneReponse'] = $listeReponses[0]['reponseEstVrai'];//todo modifié
+        $_SESSION['idBonneReponse'] = $listeReponses[0]['reponseEstVrai'];
     }
     else
     {
         unset($_SESSION['listeReponses']);
-        unset($_SESSION['idBonneReponse']);//todo modifié
+        unset($_SESSION['idBonneReponse']);
     }
     //générer deux li, un vrai et un faux
     GenererLiSelectReponse('UlChoixReponse', 'Vrai', '1' );

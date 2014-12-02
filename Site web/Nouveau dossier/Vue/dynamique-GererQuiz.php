@@ -119,11 +119,6 @@
                 // e.which == s
                 if(e.which == 83) {
                     prevenirDefautDunEvent(e, function() { $("#BTN_EnregistrerQuiz").click();});
-                    // Si la modification est valide (s'il n'y a aucun conflit de droits)
-                    <?php if($_SESSION["etat"] == "modifierQuiz" && $idProprietaire == $_SESSION['idUsager']) {
-                    // J'enlève l'évènement keydown pour ne pas avoir plusieurs fois le même event sur le même élément
-                        echo '$(document).off("keydown");';
-                    }?>
                 }
             }
         });

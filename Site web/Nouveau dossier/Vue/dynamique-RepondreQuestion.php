@@ -33,13 +33,39 @@ else{
 <script>
     $(function() {
         $("#UlChoixReponse").selectable({
+
+            //Empeche la sélection multiple
+            tolerance:"fit",
+
+            //Gestion spaghetti pour textarea dans le li...
+            //todo: développement futur: éliminer le li et n'utiliser que des textareas
+            //Les textarea contrairement aux li permettent de gérer des réponses sur plusieurs lignes par exemple,
+            // des exemples de code, de fonctions.
             selected: function(event, ui) {
-                $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected").each(
-                    function(key,value){
-                        $(value).find('*').removeClass("ui-selected");
+                $(ui.selected).children("textarea").css("color","#e69700").css("border", "none");
+                $(ui.selected).removeClass("elementGrand");
+            },
+            cancel: "input", //Permet de sélectionner "à travers" le textarea
+            unselected: function(event, ui) {
+                $(ui.unselected).children("textarea").css("color","white" );
+                var hauteurLi;
+                $(ui.unselected).each(function() {
+                    hauteurLi  = $(this).height();
+                    if ( hauteurLi > 85) {
+                        $(this).addClass("elementGrand");
                     }
-                );
+                })
+            },
+            unselecting : function(event, ui){
+                var hauteurLi;
+                $(ui.unselecting).each(function() {
+                    hauteurLi  = $(this).height();
+                    if ( hauteurLi > 85) {
+                        $(this).addClass("elementGrand");
+                    }
+                })
             }
+            // fin du spaghetti...
         });
 
         //bouton valider/suivant...
@@ -53,6 +79,8 @@ else{
             gererQuestionRepondue(lien, typeQuiz );
         });
     });
+
+
     updateAutoSizeTextArea();
     $(".dFondOmbrage").disableSelection();
 </script>
@@ -153,3 +181,14 @@ else{
 </div>
 
 
+<script>
+    $(function() {
+        var hauteurLi;
+        $("#UlChoixReponse").children("li").each(function() {
+            hauteurLi  = $(this).height();
+            if ( hauteurLi > 85) {
+                $(this).addClass("elementGrand");
+            }
+        })
+    });
+</script>

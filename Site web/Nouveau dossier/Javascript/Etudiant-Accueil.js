@@ -356,7 +356,7 @@ function swalMauvaiseReponseLien(close, lien){
                 $("#btnValider").hide();
                 $("#btnSuivant").show();
                 $("#btnSuivant").click(function(){
-                    continuerQuiz();//todo resurchaerge bouton suivant pour continuer
+                    continuerQuiz();
                     $( "#UlChoixReponse" ).selectable( "enable" );
                 });
             }
