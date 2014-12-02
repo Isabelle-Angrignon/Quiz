@@ -1065,6 +1065,8 @@ function ajouterQuiz(idUsagerProprietaire) {
                 swal("Erreur !", resultat, "error");
             }
             else {
+                // Retire le keydown ajouter à l'ouverture du div dynamique
+                $(document).off("keydown");
                 swal("Félicitation !", "Votre quiz à été ajouté", "success");
                 fermerDivDynamique();
                 // Je met à jour la page Prof-GererQuiz pour qu'elle représente le contenu réel de la base de données
@@ -1115,6 +1117,8 @@ function modifierQuiz(idQuiz, idUsagerCourant, idProprietaire) {
                     swal("Erreur !", resultat, "error");
                 }
                 else {
+                    // Retire le keydown ajouter à l'ouverture du div dynamique
+                    $(document).off("keydown");
                     swal("Félicitation !", "Votre quiz à été modifié", "success");
                     fermerDivDynamique();
                     // Je met à jour la page Prof-GererQuiz pour qu'elle représente le contenu réel de la base de données
@@ -1169,6 +1173,8 @@ function supprimerQuiz(idQuiz, idUsagerCourant, idProprietaire) {
                             swal("Erreur !", resultat, "error");
                         }
                         else {
+                            // Retire le keydown ajouter à l'ouverture du div dynamique
+                            $(document).off("keydown");
                             $(".dFondOmbrage").detach();
                             var cours = $("#DDL_Cours option:selected").attr("value");
                             // Impossible pour l'instant car on à empêcher la modification/supression du quiz qui est dans le QuizDropZone.
