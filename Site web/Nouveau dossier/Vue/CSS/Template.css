@@ -46,12 +46,13 @@ div#enteteSite{
 	margin-right:0px;
 }
 
-#NomUsager{
+#NomUsager {
     vertical-align: top;
-    float:left;
-    font-family: Arial;
-    font-size:medium;
-    margin:3px;
+    float: left;
+    font-family: cursive;
+    font-size: 18px;
+    margin: 10px;
+    margin-top: -3px;
 }
 #EspaceDeconnexion{
     display: inline-block;
@@ -59,16 +60,15 @@ div#enteteSite{
     padding:13px;
 
 }
-#BTN_Deconnecter{
+#BTN_Deconnecter {
     vertical-align: top;
-    float:right;;
+    float: right;
     background-color: #eceef0;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding: 3px;
     border: solid black 3px;
-    border-radius:3px;
-    margin:1px;
-    cursor:pointer;
+    border-radius: 3px;
+    margin-top: -4px;
+    cursor: pointer;
     text-align: center;
 }
 #BTN_Deconnecter:hover{
@@ -86,14 +86,14 @@ div#enteteSite{
 	cursor:pointer;
 }
 
-#nomSite{
-	float:left;
-	font-family:Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-	font-size:x-large;
-	position:relative;
-	margin: 0.5%;
-	margin-left: 5%;
-	cursor:pointer;
+#nomSite {
+    float: left;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: x-large;
+    position: relative;
+    margin: 0.3%;
+    cursor: pointer;
+    font-size: 32px;
 }
 
 .contenu{

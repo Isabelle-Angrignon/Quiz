@@ -13,17 +13,18 @@
         </div>
 
         <div class="droite">
-            <input type="text" id="TB_NumeroDA" autofocus  /><br>
-            <input type="text" id="TB_Nom"  tabindex="1" /> <br>
-            <input type="text" id="TB_Prenom" tabindex="2"  />
+            <input type="text" id="TB_NumeroDA" tabindex="1" autofocus  /><br>
+            <input type="text" id="TB_Nom"  tabindex="2" /> <br>
+            <input type="text" id="TB_Prenom" tabindex="3"  />
         </div>
     </div>
-    <div id="soumettre" class="ListeDivElementStyle JquerryButton">Ajouter l'étudiant</div>
+    <div id="soumettre" class="ListeDivElementStyle JquerryButton" tabindex="4">Ajouter l'étudiant</div>
 
 
 
 <script>
     $("#divDynamique").ready(function(){
+        $("#divDynamique").on("keydown");
         $("#TB_NumeroDA").focus();
 
         $("#divDynamique").keydown(function(e) {
@@ -34,6 +35,15 @@
 
             }
         });
+    });
+
+    $("#soumettre").keydown(function(e) {
+
+        if(e.which == 9) {
+            e.preventDefault();
+            setTimeout(function(){$("#TB_NumeroDA").focus();},0);
+
+        }
     });
 
     function estValide(){

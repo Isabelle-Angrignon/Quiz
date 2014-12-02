@@ -17,15 +17,33 @@
         </div>
 
         <div class="droite">
-            <input type="text" id="TB_Nom" /><br>
-            <input type="text" id="TB_Code"  /> <br>
+            <input type="text" id="TB_Nom" tabindex="1" /><br>
+            <input type="text" id="TB_Code" tabindex="2"  /> <br>
         </div>
     </div>
-    <div id="soumettre" class="ListeDivElementStyle JquerryButton">Modifier le cours</div>
+    <div id="soumettre" tabindex="3" class="ListeDivElementStyle JquerryButton">Modifier le cours</div>
 
 
 
 <script>
+    $("#deploiement").ready(function(){
+        $("#TB_Nom").focus();
+
+        $("#deploiement").keydown(function(e) {
+
+            if(e.which == 13) {
+                e.preventDefault();
+                setTimeout(function() {$("#soumettre").click();}, 0);
+            }
+        });
+    });
+    $("#soumettre").keydown(function(e) {
+
+        if(e.which == 9) {
+            e.preventDefault();
+            setTimeout(function() {$("#TB_Nom").focus();}, 0);
+        }
+    });
     function estValide(){
         temp = true;
         temp = ($('#TB_Nom').val() != "" && $('#TB_Code').val() != "" );

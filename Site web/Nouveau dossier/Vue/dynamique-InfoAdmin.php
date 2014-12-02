@@ -19,6 +19,16 @@
 <div id="soumettre" class="ListeDivElementStyle JquerryButton">Fermer</div>
 
 <script>
+    $("#deploiement").ready(function(){
+        $("#soumettre").focus();
+        $("#deploiement").keydown(function(e) {
+
+            if(e.which == 13) {
+                e.preventDefault();
+                setTimeout(function() {$("#soumettre").click();}, 0);
+            }
+        });
+    });
     $('#soumettre').button();
     $('#soumettre').click(function(){
         $('#deploiement').remove();
