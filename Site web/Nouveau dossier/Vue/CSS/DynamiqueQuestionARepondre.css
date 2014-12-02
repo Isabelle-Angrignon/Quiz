@@ -125,6 +125,8 @@ div.suiviQuiz {
     border:none;
     font-weight:100;
 }
+
+
 /*Div qui contient le ul - li -  des choix de réoponse*/
 #divChoixReponse{
     margin-left: 12.5%;
@@ -139,23 +141,48 @@ div.suiviQuiz {
     font-family:"Comic Sans MS", cursive, sans-serif;
     border-radius:10px;
 }
-
+/*Fond orange sur mousedown de sélection*/
 #UlChoixReponse .ui-selecting { background: #fec71b; }
+#UlChoixReponse .elementGrand.ui-selecting { background: #fec71b; }
+
 
 #UlChoixReponse .ui-selected {
     border: 1px solid #bebdbd;
     background: #f9f9f9 url("../../jquery-ui-1.11.2.custom/images/ui-bg_highlight-hard_100_f9f9f9_1x100.png") 50% 50% repeat-x;
-    color: #e69700;  /* vert #44b806; */
+    color: #e69700;
     font-weight: bold;
+}
+
+/*Si le choix de réponse est plus gand que le format std, on prend l'image étirée*/
+#UlChoixReponse li.elementGrand {
+    background: #518ec4 url("../../jquery-ui-1.11.2.custom/images/ui-bg_highlight-soft_42_518ec4_1x150.png") 100% 0% repeat-x;
 }
 
 #UlChoixReponse li {
     background-color: rgba(79, 168, 255, 0.45);
     height: auto;
     min-height: 43px;
-    max-height: 70px;
-    overflow-y: auto;
+    max-height: 150px;
     margin-bottom: 2px;
+}
+/*Au départ, on utilisait un li pour mettre l'.énoncé de réponse mais on s'est appreçu qu'on ne pouvait
+pas metrre des réponses formatées comme du code sur plusieurs lignes.  On a donc ajouté un textarea dans le li
+On aurait dû carrément remplacer le li par un textarea mais cela demandait une révision de code que nous n'avions pas
+le temps de faire.*/
+#UlChoixReponse li textarea{
+    background-color:rgba(0,0,0,0);
+    margin:0;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size:16px;
+    resize:none;
+    width:100%;
+    color:white;
+    outline: none;
+    border:none;
+    font-weight:100;
+    max-height: 150px;
+    overflow-y: auto;
+    cursor: pointer;
 }
 
 #btnSuivant{
