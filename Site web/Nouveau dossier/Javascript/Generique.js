@@ -217,7 +217,6 @@ function creeBaliseAvecClasse(baliseACreer, classe) {
 	return balise;
 } 
 
-
 // creeFrameDynamique
 // Par Mathieu Dumoulin modifié par Isabelle Angrignon
 // Date : 23/09/14
@@ -230,12 +229,13 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP,confirmerAvantQuitter
 	var fondOmbrage = creeBaliseAvecClasse("div", "dFondOmbrage");
 	fondOmbrage.setAttribute("id", "dFondOmbrage");
     if (confirmerAvantQuitter == true){
+        // Si on click hors du div dynamique ou sur "esc", on demande la permission aavnt de quitter
         fondOmbrage.onmousedown = function(event) {
-            demanderDeQuitter();
+            swalDemanderDeQuitter();
         };
         $(document).keyup(function (e) {
             if (e.which == 27) {
-                demanderDeQuitter();
+                swalDemanderDeQuitter();
             }
         });
     }
@@ -264,7 +264,7 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP,confirmerAvantQuitter
 	return divPrincipale;
 }
 
-function demanderDeQuitter(){
+function swalDemanderDeQuitter(){
     swal({   title: "Quitter ce quiz",
         text: "Vous vous apprêtez à quitter ce quiz. Toute progression sera perdue.",
         type: "warning",
@@ -365,8 +365,8 @@ function viderHTMLfromElement(idElement) {
 }
 
 // ajouterKeyDownFrameDynamique
-// Par Mathieu Dumoulin
-// Description : Cette fonction ajoute les événements qui s'appliquent à tous les divs dynamiques
+// Par Mathieu Dumoulin, modifié par Isabelle Angrignon
+// Description : Cette fonction ajoute les événements qui s'appliquent à tous les divs dynamiques qui ne demandent pas de confirmation avant de quitter
 function ajouterKeyDownFrameDynamique(confirmerAvantQuitter) {
     if (confirmerAvantQuitter != true) {
         $(document).keydown(function (e) {
