@@ -95,14 +95,16 @@ function listerQuestionsDunQuiz($idQuiz, $idProprietaire)
 function listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours, $typeQuiz, $filtreEnonce, $filtreId)
 {
     $filtreEnonce = @'%'.$filtreEnonce.'%';
+    $filtreId==""?$filtreId=0:$filtreId=$filtreId;
     $bdd = connecterProf();
-    $requete = $bdd->prepare("CALL listerQuestionsPasDansQuiz(?,?,?,?,?)");
+    $requete = $bdd->prepare("CALL listerQuestionsPasDansQuiz(?,?,?,?,?,?)");
 
     $requete->bindParam(1, $idQuiz, PDO::PARAM_INT);
     $requete->bindParam(2, $idProprietaire, PDO::PARAM_STR, 10);
     $requete->bindParam(3, $idCours, PDO::PARAM_INT);
     $requete->bindParam(4, $typeQuiz, PDO::PARAM_STR,20);
     $requete->bindParam(5, $filtreEnonce, PDO::PARAM_STR, 32);
+    $requete->bindParam(6, $filtreId, PDO::PARAM_INT,10);
 
     $requete->execute();
     $resultat = $requete->fetchAll();

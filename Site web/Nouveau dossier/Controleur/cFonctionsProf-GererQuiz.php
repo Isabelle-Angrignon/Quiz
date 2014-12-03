@@ -317,7 +317,7 @@ function modifierReponses($bdd, $tableauReponses, $identifiantQuestion, $typeQue
     {
         $tabIdAnciennesReponses = array();
     }
-    if($typeQuestion != "Vrai_Faux")
+    if($typeQuestion != "VRAI_FAUX")
     {
         // Si on encode pas notre tableauReponses, PHP ne le reconnait pas comme étant un vrai JSON.
         $tableauNouvelleReponses = json_decode(json_encode($tableauReponses));
