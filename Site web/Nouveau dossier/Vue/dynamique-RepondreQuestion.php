@@ -42,6 +42,16 @@ else{
             //Les textarea contrairement aux li permettent de gérer des réponses sur plusieurs lignes par exemple,
             // des exemples de code, de fonctions.
             selected: function(event, ui) {
+        /*        $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected").each(
+                    function(key,value) {
+                        $(value).find('*').removeClass("ui-selected");
+                    });
+
+                $(ui.selected).children("textarea").siblings().css("color","white" ).each(
+                    function(key,value) {
+                        $(value).find('*').css("color","white" );
+                    });*/
+
                 $(ui.selected).children("textarea").css("color","#e69700").css("border", "none");
                 $(ui.selected).removeClass("elementGrand");
             },
@@ -79,8 +89,6 @@ else{
             gererQuestionRepondue(lien, typeQuiz );
         });
     });
-
-
     updateAutoSizeTextArea();
     $(".dFondOmbrage").disableSelection();
 </script>

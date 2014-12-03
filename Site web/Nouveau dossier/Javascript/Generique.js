@@ -217,7 +217,6 @@ function creeBaliseAvecClasse(baliseACreer, classe) {
 	return balise;
 } 
 
-
 // creeFrameDynamique
 // Par Mathieu Dumoulin modifié par Isabelle Angrignon
 // Date : 23/09/14
@@ -230,21 +229,15 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP,confirmerAvantQuitter
 	var fondOmbrage = creeBaliseAvecClasse("div", "dFondOmbrage");
 	fondOmbrage.setAttribute("id", "dFondOmbrage");
     if (confirmerAvantQuitter == true){
+        // Si on click hors du div dynamique ou sur "esc", on demande la permission aavnt de quitter
         fondOmbrage.onmousedown = function(event) {
-            swal({   title: "Quitter ce quiz",
-                text: "Vous vous apprêtez à quitter ce quiz. Toute progression sera perdue.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#FFA64F",
-                confirmButtonText: "Quitter",
-                cancelButtonText: "Continuer"
-            }, function(){
-                // detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
-                $(document).off("keydown");
-                $("#dFondOmbrage").detach();
-            });
-
+            swalDemanderDeQuitter();
         };
+        $(document).keyup(function (e) {
+            if (e.which == 27) {
+                swalDemanderDeQuitter();
+            }
+        });
     }
     else{
         fondOmbrage.onmousedown = function(event) {
@@ -254,7 +247,6 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP,confirmerAvantQuitter
         };
     }
 
-
 	var divPrincipale =  creeBaliseAvecClasse("div", "dDivPrincipale");
 	// Nécessaire pour empecher l'événement onclick de son parent d'être activé lorsqu'on clic dessus ce div
 	divPrincipale.onmousedown = function(event) {  event.stopPropagation(); };
@@ -263,13 +255,28 @@ function creeFrameDynamique(idDivPrincipal, pathFichierPHP,confirmerAvantQuitter
 	document.body.appendChild(fondOmbrage);
 	fondOmbrage.appendChild(divPrincipale);
 
-    ajouterKeyDownFrameDynamique();
+    ajouterKeyDownFrameDynamique(confirmerAvantQuitter);
 
     if(pathFichierPHP != null) {
         insererHTMLfromPHP(idDivPrincipal, pathFichierPHP);
     }
 	
 	return divPrincipale;
+}
+
+function swalDemanderDeQuitter(){
+    swal({   title: "Quitter ce quiz",
+        text: "Vous vous apprêtez à quitter ce quiz. Toute progression sera perdue.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#FFA64F",
+        confirmButtonText: "Quitter",
+        cancelButtonText: "Continuer"
+    }, function(){
+        // detach() fait comme la méthode remove() mais ne delete pas les événements liés à l'objet
+        $(document).off("keydown");
+        $("#dFondOmbrage").detach();
+    });
 }
 
 // insererNouveauDiv
@@ -358,15 +365,17 @@ function viderHTMLfromElement(idElement) {
 }
 
 // ajouterKeyDownFrameDynamique
-// Par Mathieu Dumoulin
-// Description : Cette fonction ajoute les événements qui s'appliquent à tous les divs dynamiques
-function ajouterKeyDownFrameDynamique() {
-    $(document).keydown(function(e) {
-        if(e.which == 27) {
-            $("#dFondOmbrage").remove();
-            $(document).off("keydown");
-        }
-    });
+// Par Mathieu Dumoulin, modifié par Isabelle Angrignon
+// Description : Cette fonction ajoute les événements qui s'appliquent à tous les divs dynamiques qui ne demandent pas de confirmation avant de quitter
+function ajouterKeyDownFrameDynamique(confirmerAvantQuitter) {
+    if (confirmerAvantQuitter != true) {
+        $(document).keydown(function (e) {
+            if (e.which == 27) {
+                $("#dFondOmbrage").remove();
+                $(document).off("keydown");
+            }
+        });
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
