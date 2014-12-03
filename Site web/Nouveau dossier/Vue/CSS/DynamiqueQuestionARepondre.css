@@ -154,33 +154,26 @@ div.suiviQuiz {
 }
 
 /*Si le choix de réponse est plus gand que le format std, on prend l'image étirée*/
-#UlChoixReponse li.elementGrand {
+#UlChoixReponse textarea.elementGrand {
     background: #518ec4 url("../../jquery-ui-1.11.2.custom/images/ui-bg_highlight-soft_42_518ec4_1x150.png") 100% 0% repeat-x;
 }
 
-#UlChoixReponse li {
+#UlChoixReponse textarea {
     background-color: rgba(79, 168, 255, 0.45);
-    height: auto;
-    min-height: 43px;
+    /*min-height: 43px;*/
     max-height: 150px;
     margin-bottom: 2px;
-}
-/*Au départ, on utilisait un li pour mettre l'.énoncé de réponse mais on s'est appreçu qu'on ne pouvait
-pas metrre des réponses formatées comme du code sur plusieurs lignes.  On a donc ajouté un textarea dans le li
-On aurait dû carrément remplacer le li par un textarea mais cela demandait une révision de code que nous n'avions pas
-le temps de faire.*/
-#UlChoixReponse li textarea{
-    background-color:rgba(0,0,0,0);
-    margin:0;
+    /*Écraser le formatage par défaut d'un textarea*/
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-size:16px;
     resize:none;
-    width:100%;
+    width:90%;
     color:white;
     outline: none;
-    border:none;
+    padding: 15px;
+    padding-bottom:0;
+    border-radius:10px;
     font-weight:100;
-    max-height: 150px;
     overflow-y: auto;
     cursor: pointer;
 }
