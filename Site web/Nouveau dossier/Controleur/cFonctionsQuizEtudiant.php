@@ -85,8 +85,8 @@ function genererReponsesVF($idQuestion)
         unset($_SESSION['idBonneReponse']);
     }
     //générer deux li, un vrai et un faux
-    GenererLiSelectReponse('UlChoixReponse', 'Vrai', '1' );
-    GenererLiSelectReponse('UlChoixReponse', 'Faux', '0' );
+    GenererTextareaSelectReponse('UlChoixReponse', 'Vrai', '1' );
+    GenererTextareaSelectReponse('UlChoixReponse', 'Faux', '0' );
 }
 
 /*
@@ -112,7 +112,7 @@ function genererReponsesCMU($idQuestion, $ordreReponse)
 
         foreach ($listeReponses as $row)
         {
-            GenererLiSelectReponse('UlChoixReponse', $row['enonceReponse'], $row['idReponse']);
+            GenererTextareaSelectReponse('UlChoixReponse', $row['enonceReponse'], $row['idReponse']);
             if($row['reponseEstValide'] == 1)
             {
                 $_SESSION['idBonneReponse'] = $row['idReponse'];

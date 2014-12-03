@@ -533,6 +533,7 @@ function gererFinQuiz(){
 
 // Gère le autoheight du textarea
 function h(e) {
+    //alert(e.scrollHeight);
     // Ajuste le height de l'élément à la hauteur de son scroll pour simuler l'ajustement de la hauteur de l'élément.
     $(e).css({'height':'auto'}).height(e.scrollHeight);
 }

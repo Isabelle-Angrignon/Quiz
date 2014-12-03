@@ -35,29 +35,24 @@ else{
         $("#UlChoixReponse").selectable({
 
             //Empeche la sélection multiple
-            tolerance:"fit",
+          //  tolerance:"fit",
 
             //Gestion spaghetti pour textarea dans le li...
             //todo: développement futur: éliminer le li et n'utiliser que des textareas
             //Les textarea contrairement aux li permettent de gérer des réponses sur plusieurs lignes par exemple,
             // des exemples de code, de fonctions.
             selected: function(event, ui) {
-        /*        $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected").each(
+                $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected").each(
                     function(key,value) {
                         $(value).find('*').removeClass("ui-selected");
+                        if ( $(this).height()  > 85) {
+                            $(this).addClass("elementGrand");
+                        }
                     });
-
-                $(ui.selected).children("textarea").siblings().css("color","white" ).each(
-                    function(key,value) {
-                        $(value).find('*').css("color","white" );
-                    });*/
-
-                $(ui.selected).children("textarea").css("color","#e69700").css("border", "none");
                 $(ui.selected).removeClass("elementGrand");
             },
             cancel: "input", //Permet de sélectionner "à travers" le textarea
             unselected: function(event, ui) {
-                $(ui.unselected).children("textarea").css("color","white" );
                 var hauteurLi;
                 $(ui.unselected).each(function() {
                     hauteurLi  = $(this).height();
@@ -192,7 +187,7 @@ else{
 <script>
     $(function() {
         var hauteurLi;
-        $("#UlChoixReponse").children("li").each(function() {
+        $("#UlChoixReponse").children("textarea").each(function() {
             hauteurLi  = $(this).height();
             if ( hauteurLi > 85) {
                 $(this).addClass("elementGrand");
