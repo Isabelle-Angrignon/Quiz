@@ -78,7 +78,7 @@ else{
         $("#btnSuivant").hide();
         $("#btnValider").button(); // attache le theme JQueryUI au bouton
         $("#btnValider").click( function() {
-            var lien = "<?php echo $_SESSION["infoQuestion"][0]['referenceWeb']; ?>";
+            var lien = "<?php echo urldecode($_SESSION["infoQuestion"][0]['referenceWeb']); ?>";//on encode les url à la création
             lien = lien!=null?lien:"";
             var typeQuiz = "<?php echo $_SESSION["typeQuiz"]; ?>";
             gererQuestionRepondue(lien, typeQuiz );
