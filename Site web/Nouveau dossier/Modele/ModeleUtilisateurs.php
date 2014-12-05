@@ -13,7 +13,7 @@ function getConnection()
     if(!isset($_SESSION['typeUsager']))
     {
         // Nécessaire pour ne pas faire une boucle de redirection à cause de la fonction redirigerSiDejaConnecte
-        unset($_SESSION["idUsager"]);
+        if (isset($_SESSION["idUsager"])){unset($_SESSION["idUsager"]);}
         $_SESSION['erreur'] = "Vous avez perdu la connexion au serveur. Veuillez vous reconnecter";
         // header("location:index.php") ne marche pas ici car le header est envoyé dès qu'un echo ou un changement d'une variable de session survient.
         // Alors, la page n'est redirigé qu'au prochain chargement de la page. C'est pourquoi on redirige en javascript.
@@ -44,7 +44,7 @@ function connecterProf()
     //'mysql:host=172.17.104.99:8080;dbname=projetquiz', 'Professeur', 'prof'
     try
     {
-        $bdd = new PDO(getStringConnection(), 'Admin', 'admin',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $bdd = new PDO(getStringConnection(), 'Professeur', 'prof',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $bdd;
     }
