@@ -48,8 +48,9 @@ But:
 	si non, affiche l'alerte de mot de passe / idUsager non valide et retourne à la page index.  */
 function validerUsager()
 {				
-	// a retirer et mettre connecterEtudiant
-	$bdd = getConnection();
+	// Vu qu'il n'y a aucun type d'usager de défini, on ne peut pas utiliser getConnection.
+    // c'Est pourquoi on utilise connecterEtudiant.
+	$bdd = connecterEtudiant();
 
 	if (isset($_POST['nomUsager']) AND isset($_POST['motDePasse']))
 	{
