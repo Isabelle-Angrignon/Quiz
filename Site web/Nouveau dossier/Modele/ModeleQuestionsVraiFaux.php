@@ -3,7 +3,7 @@
 
 function afficherQuestionVraiFaux($idQuestion)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
 
     $requete = $bdd->prepare("CALL listerQuestionVraiFauxSelonQuestion(?)");
 
@@ -23,7 +23,7 @@ function ajouterLienQuestionsVraiFaux($connexion, $idQuestion, $estVrai)
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {
@@ -57,7 +57,7 @@ function supprimerLienQuestionVraiFaux($connexion, $idQuestion)
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {

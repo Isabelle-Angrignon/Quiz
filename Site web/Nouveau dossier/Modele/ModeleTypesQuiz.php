@@ -2,7 +2,7 @@
 
 function listerTypesQuiz()
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL listerTypesQuiz()");
 
     $requete->execute();

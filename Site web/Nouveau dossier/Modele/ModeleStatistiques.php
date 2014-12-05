@@ -4,7 +4,7 @@
 function miseAJourStatsQuestion($idEtudiant, $idQuestion , $idQuiz, $estBon)
 {
 
-    $bdd = connecterEtudiant();
+    $bdd = getConnection();
     if (isset($idEtudiant) AND isset($idQuestion) AND isset($idQuiz)  AND isset($estBon))
     {
         $requete = $bdd->prepare("CALL miseAJourStats(?, ?, ? , ?)");
@@ -26,7 +26,7 @@ function miseAJourStatsQuestion($idEtudiant, $idQuestion , $idQuiz, $estBon)
 
 function obtenirStat()
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL ListerStats()");
     $requete->execute();
     $resultat = $requete->fetchAll();

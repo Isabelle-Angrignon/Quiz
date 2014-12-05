@@ -7,7 +7,7 @@
 //               Elle retourne un JSON pour simplifier la transition avec AJAX.
 function listerQuizSelonCoursProprietaire($idCours, $idProprietaire)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL listerQuizSelonCoursProprietaire(?,?)");
 
     $requete->bindParam(1, $idCours, PDO::PARAM_INT,10);
@@ -48,7 +48,7 @@ function ajouterQuiz( $connexion, $titreQuiz, $ordreEstAleatoire, $idProprietair
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {
@@ -94,7 +94,7 @@ function modifierQuiz( $connexion, $idQuiz, $titreQuiz, $ordreEstAleatoire, $idP
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {
@@ -135,7 +135,7 @@ function modifierQuiz( $connexion, $idQuiz, $titreQuiz, $ordreEstAleatoire, $idP
 
 function supprimerQuiz($idQuiz)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
 
     $requete = $bdd->prepare("CALL supprimerQuiz(?)");
 

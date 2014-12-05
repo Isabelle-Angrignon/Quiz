@@ -3,7 +3,7 @@
 
 function listerCoursSelonQuiz($idQuiz)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
 
     $requete = $bdd->prepare("CALL listerCoursSelonQuiz(?)");
 
@@ -23,7 +23,7 @@ function associerQuizCours($connexion, $idQuiz, $idCours)
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {
@@ -56,7 +56,7 @@ function supprimerLienQuizCours($connexion, $idQuiz)
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {

@@ -53,7 +53,7 @@ function ajouterReponse($connexion, $enonceReponse, $imageReponse,$idQuestion, $
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {
@@ -89,7 +89,7 @@ function modifierReponse($connexion, $idReponse, $enonceReponse,$imageReponse, $
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {
@@ -125,7 +125,7 @@ function supprimerReponse($connexion, $idReponse)
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {
