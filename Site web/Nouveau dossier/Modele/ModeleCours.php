@@ -7,7 +7,7 @@
 //
 function LireCours()
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL listerCours()");
     $requete->execute();
     $resultat = $requete->fetchAll();
