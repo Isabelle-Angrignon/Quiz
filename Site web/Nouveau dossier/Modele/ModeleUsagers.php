@@ -16,7 +16,7 @@ function ajouterUsager($id,$Password , $nom, $prenom)
 {
 	// a retirer et mettre connecterProf
     $reussi = 0;
-    $bdd = connecterProf();
+    $bdd = getConnection();
 	if (isset($id) AND isset($prenom) AND isset($nom))
 	{
 		$requete = $bdd->prepare("CALL ajouterUsager(?, ? , ?, ?)");
@@ -49,7 +49,7 @@ But:
 function validerUsager()
 {				
 	// a retirer et mettre connecterEtudiant
-	$bdd = connecterEtudiant();
+	$bdd = getConnection();
 
 	if (isset($_POST['nomUsager']) AND isset($_POST['motDePasse']))
 	{
@@ -93,7 +93,7 @@ function validerUsager()
 // Fonction permettant de trouver l'adresse e-mail d'un usager.
 
 function recupererAdresseEmail($idUsager){
-    $bdd = connecterAdmin();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL recupererEmailUsager(?)");
     $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
 
@@ -105,7 +105,7 @@ function recupererAdresseEmail($idUsager){
 }
 
 function ModifierAdresseEmail($idUsager, $NouveauEMail){
-    $bdd = connecterAdmin();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL ModifierEmail(? , ?)");
     $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
     $requete->bindparam(2, $NouveauEMail, PDO::PARAM_STR,255);
@@ -118,7 +118,7 @@ function ModifierAdresseEmail($idUsager, $NouveauEMail){
 }
 
 function ModifierMotPasse($idUsager, $NouveauMotPasse){
-    $bdd = connecterAdmin();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL ModifierMotDePasse(? , ?)");
     $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
     $requete->bindparam(2, $NouveauMotPasse, PDO::PARAM_STR,255);
@@ -132,7 +132,7 @@ function ModifierMotPasse($idUsager, $NouveauMotPasse){
 }
 
 function RecupererMotPasse($Pid){
-    $bdd = connecterAdmin();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL recupererMotPasse(?)");
     $requete->bindparam(1, $Pid, PDO::PARAM_STR,10);
 
@@ -147,7 +147,7 @@ function setParamChange($idUsager,$estChanger)
 {
     $paramChange = -1;
     if ($estChanger == true){ $paramChange = 1;} else{ $paramChange = 0;}
-    $bdd = connecterAdmin();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL ModifierParamChange(? , ?)");
     $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
     $requete->bindparam(2, $paramChange, PDO::PARAM_INT);
@@ -157,7 +157,7 @@ function setParamChange($idUsager,$estChanger)
 
 function recupererParamChange($idUsager)
 {
-    $bdd = connecterAdmin();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL recupererParamChange(?)");
     $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
 
@@ -171,7 +171,7 @@ function recupererParamChange($idUsager)
 }
 
 function ChercherUsager($idUsager){
-    $bdd = connecterEtudiant();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL ChercherUsager(?)");
     $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
 
@@ -194,7 +194,7 @@ function ChercherUsager($idUsager){
 }
 
 function SupprimerUnCompte($numeroDA){
-    $bdd = connecterAdmin();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL supprimerCompte(?)");
     $requete->bindparam(1, $numeroDA, PDO::PARAM_STR,10);
 
@@ -206,7 +206,7 @@ function SupprimerUnCompte($numeroDA){
 }
 
 function nommerAdmin($idUsager){
-    $bdd = connecterAdmin();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL nommerAdmin(?)");
     $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
 

@@ -10,7 +10,7 @@
 */
 function LireCoursEtudiant($idEtudiant)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
 
     $requete = $bdd->prepare("CALL listerCoursEtudiant( ? )");
     $requete->bindparam(1, $idEtudiant, PDO::PARAM_STR,10);
@@ -25,7 +25,7 @@ function LireCoursEtudiant($idEtudiant)
 
 function LireEtudiantDansUnCours($idCours, $IdProf)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL ListerEtudiantUnCours(? , ?)");
     $requete->bindparam(1, $idCours, PDO::PARAM_INT,10);
     $requete->bindparam(2, $IdProf, PDO::PARAM_STR,10);
@@ -41,7 +41,7 @@ function LireEtudiantDansUnCours($idCours, $IdProf)
 
 function LireEtudiantPasDansUnCours($idCours, $IdProf)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL ListerEtudiantPasDansUnCours(? , ?)");
     $requete->bindparam(1, $idCours, PDO::PARAM_INT,10);
     $requete->bindparam(2, $IdProf, PDO::PARAM_STR,10);
@@ -57,7 +57,7 @@ function LireEtudiantPasDansUnCours($idCours, $IdProf)
 
 function InscrireEtudiantCours($idEtudiant ,$Password , $nom , $prenom, $idCours, $idProf)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
 
     if (isset($idEtudiant) AND isset($prenom) AND isset($nom))
     {
@@ -83,7 +83,7 @@ function InscrireEtudiantCours($idEtudiant ,$Password , $nom , $prenom, $idCours
 
 function desinscrireEtudiantCours($idEtudiant , $idCours, $idProf)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     if (isset($idEtudiant) AND isset($idCours) AND isset($idProf))
     {
         $requete = $bdd->prepare("CALL desinscrireEtudiantCours(?, ?, ?)");
@@ -105,7 +105,7 @@ function desinscrireEtudiantCours($idEtudiant , $idCours, $idProf)
 
 function desinscrireToutEtudiantCours($idCours, $idProf)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     if (isset($idCours) AND isset($idProf))
     {
         $requete = $bdd->prepare("CALL desinscrireToutEtudiantCours(?, ?)");

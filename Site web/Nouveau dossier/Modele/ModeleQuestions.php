@@ -47,7 +47,7 @@ function trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce, $filt
 
     $filtreEnonce = '%'.$filtreEnonce.'%';
     $filtreId==""?$filtreId=0:$filtreId=$filtreId;
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL listerQuestions(?,?,?,?)");
 
     $requete->bindParam(1, $idCours, PDO::PARAM_INT,10);
@@ -71,7 +71,7 @@ function trieParDefaultQuestions($idCours, $idProprietaire, $filtreEnonce, $filt
 // Description: Cette fonction communique à la BD à l'aide de la fonction listerQuestionsSelonQuiz()
 function listerQuestionsDunQuiz($idQuiz, $idProprietaire)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL listerQuestionsSelonQuiz(?,?)");
 
     $requete->bindParam(1, $idQuiz, PDO::PARAM_INT);
@@ -96,7 +96,7 @@ function listerQuestionsPasDansCeQuiz($idQuiz, $idProprietaire, $idCours, $typeQ
 {
     $filtreEnonce = @'%'.$filtreEnonce.'%';
     $filtreId==""?$filtreId=0:$filtreId=$filtreId;
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL listerQuestionsPasDansQuiz(?,?,?,?,?,?)");
 
     $requete->bindParam(1, $idQuiz, PDO::PARAM_INT);
@@ -125,7 +125,7 @@ function ajouterQuestion($connexion, $enonceQuestion, $lienImage, $difficulte, $
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {
@@ -169,7 +169,7 @@ function modifierQuestion($connexion, $idQuestion,$enonceQuestion, $lienImage, $
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {
@@ -207,7 +207,7 @@ function modifierQuestion($connexion, $idQuestion,$enonceQuestion, $lienImage, $
 
 function supprimerQuestion($idQuestion)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
 
     $requete = $bdd->prepare("CALL supprimerQuestion(?)");
 

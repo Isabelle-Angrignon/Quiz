@@ -3,7 +3,7 @@
 
 function listerTypesQuestions()
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL listerTypesQuestion()");
 
     $requete->execute();

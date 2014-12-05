@@ -20,7 +20,7 @@ function LireCours()
 
 function AjouterCours($nomCours, $CodeCours)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL AjouterCours(?,?)");
     $requete->bindparam(1, $nomCours, PDO::PARAM_STR,200);
     $requete->bindparam(2, $CodeCours, PDO::PARAM_STR,10);
@@ -32,7 +32,7 @@ function AjouterCours($nomCours, $CodeCours)
 
 function ModifierCours($IdCours,$nomCours, $CodeCours)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL modifierCours(?,?,?)");
     $requete->bindparam(1, $IdCours, PDO::PARAM_INT);
     $requete->bindparam(2, $nomCours, PDO::PARAM_STR,200);

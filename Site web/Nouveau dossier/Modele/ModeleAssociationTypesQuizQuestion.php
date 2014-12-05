@@ -3,7 +3,7 @@
 
 function listerTypesQuizAssocie($idQuestion)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL listertypesquizassocie(?)");
 
     $requete->bindparam(1, $idQuestion, PDO::PARAM_INT);
@@ -21,7 +21,7 @@ function associerTypeQuizQuestion($connexion, $idQuestion, $typeQuiz)
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {
@@ -55,7 +55,7 @@ function dissocierTypeQuizQuestion($connexion, $idQuestion)
 {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {

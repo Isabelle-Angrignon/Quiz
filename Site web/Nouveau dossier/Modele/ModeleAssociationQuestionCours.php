@@ -6,7 +6,7 @@
 // Description: Cette fonction appelle la procédure stockée "listerCoursSelonQuestion" et retourne son résultat sous forme de JSON
 function listerCoursSelonQuestion($idQuestion)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL listerCoursSelonQuestion(?)");
 
     $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
@@ -23,7 +23,7 @@ function listerCoursSelonQuestion($idQuestion)
 function associerQuestionACours($connexion, $idQuestion, $idCours) {
     if(!isset($connexion))
     {
-        $bdd = connecterProf();
+        $bdd = getConnection();
     }
     else
     {

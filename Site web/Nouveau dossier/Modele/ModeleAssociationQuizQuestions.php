@@ -2,7 +2,7 @@
 
  function lierQuizQuestion($idQuiz, $idQuestion, $positionQuestion)
  {
-     $bdd = connecterProf();
+     $bdd = getConnection();
      $requete = $bdd->prepare("CALL associerQuestionQuiz(?,?,?)");
 
      $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
@@ -17,7 +17,7 @@
 
 function supprimerLienQuizQuestion($idQuiz, $idQuestion)
 {
-    $bdd = connecterProf();
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL supprimerLienQuestionQuiz(?,?)");
 
     $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
@@ -31,7 +31,7 @@ function supprimerLienQuizQuestion($idQuiz, $idQuestion)
 
  function changerOrdreQuizQuestion($idQuiz, $idQuestion, $positionQuestion)
  {
-     $bdd = connecterProf();
+     $bdd = getConnection();
      $requete = $bdd->prepare("CALL changerOrdreQuestionQuiz(?,?,?)");
 
      $requete->bindParam(1, $idQuestion, PDO::PARAM_INT);
