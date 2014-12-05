@@ -170,12 +170,11 @@ function ajouterUneQuestion($tableauDeQuestion, $tableauReponses, $tableauCours,
             $estVrai = 0;
             foreach($tableauReponses['reponses'] as $reponse)
             {
-                if($reponse['idReponse'] == 1 && $reponse["estBonneReponse"] == true)
+                if($reponse['idReponse'] == 1 && $reponse["estBonneReponse"] == "true")
                 {
                     $estVrai = 1;
                 }
             }
-
             ajouterLienQuestionsVraiFaux($bdd, $idQuestion[0], $estVrai);
         }
 
