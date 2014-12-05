@@ -7,7 +7,7 @@
 //              les réponses de questions de type vrai/faux sont contenues dans la fonction recupererReponsesVraiFaux
 function recupererReponsesAQuestion($idQuestion)
 {
-    $bdd = getConnection($_SESSION['typeUsager']);
+    $bdd = getConnection();
 
     if (isset($idQuestion))
     {
@@ -29,7 +29,7 @@ function recupererReponsesAQuestion($idQuestion)
 // Description: Cette fonction retourne toutes les réponses liés à une question de type Vrai/Faux
 function recupererReponsesVraiFaux($idQuestion)
 {
-    $bdd = getConnection($_SESSION['typeUsager']);
+    $bdd = getConnection();
 
     if (isset($idQuestion))
     {

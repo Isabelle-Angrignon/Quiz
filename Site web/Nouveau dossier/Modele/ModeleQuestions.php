@@ -11,7 +11,7 @@
 function recupererElementsQuestion($idQuestion)
 {
 
-    $bdd = getConnection($_SESSION['typeUsager']);
+    $bdd = getConnection();
 
     if (isset($idQuestion))
     {

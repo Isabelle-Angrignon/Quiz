@@ -8,7 +8,7 @@
 */
 function genererQuestionsAleatoires($cours)
 {
-    $bdd = getConnection($_SESSION['typeUsager']);
+    $bdd = getConnection();
 
     if (isset($cours))
     {
@@ -43,7 +43,7 @@ function genererQuestionsAleatoires($cours)
 */
 function genererQuestionsQuiz($idQuiz)
 {
-    $bdd = getConnection($_SESSION['typeUsager']);
+    $bdd = getConnection();
 
     if (isset($idQuiz))
     {
@@ -80,7 +80,7 @@ function genererQuestionsQuiz($idQuiz)
 */
 function ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz)
 {
-    $bdd = getConnection($_SESSION['typeUsager']);
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL ListerQuizEtudiantCours( ? , ? , ? )");
     $requete->bindparam(1, $idEtudiant, PDO::PARAM_STR,10);
     $requete->bindparam(2, $idCours, PDO::PARAM_INT,10);
@@ -101,7 +101,7 @@ function ListerQuizEtudiantCours($idEtudiant, $idCours, $typeQuiz)
 */
 function ListerQuizEtudiant($idEtudiant, $typeQuiz)
 {
-    $bdd = getConnection($_SESSION['typeUsager']);
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL listerQuizEtudiant( ? , ? )");
     $requete->bindparam(1, $idEtudiant, PDO::PARAM_STR,10);
     $requete->bindparam(2, $typeQuiz, PDO::PARAM_STR,20);
@@ -122,7 +122,7 @@ function ListerQuizEtudiant($idEtudiant, $typeQuiz)
 */
 function recupererCoursQuizEtudiant($idQuiz, $idEtudiant)
 {
-    $bdd = getConnection($_SESSION['typeUsager']);
+    $bdd = getConnection();
     $requete = $bdd->prepare("CALL recupererCoursQuizEtudiant( ? , ? )");
     $requete->bindparam(1, $idQuiz, PDO::PARAM_INT,10);
     $requete->bindparam(2, $idEtudiant, PDO::PARAM_STR,10);

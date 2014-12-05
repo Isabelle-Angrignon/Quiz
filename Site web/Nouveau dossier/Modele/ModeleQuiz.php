@@ -24,7 +24,7 @@ function listerQuizSelonCoursProprietaire($idCours, $idProprietaire)
 
 function recupererInfoQuiz($idQuiz)
 {
-    $bdd = getConnection($_SESSION['typeUsager']);
+    $bdd = getConnection();
 
     if (isset($idQuiz))
     {
