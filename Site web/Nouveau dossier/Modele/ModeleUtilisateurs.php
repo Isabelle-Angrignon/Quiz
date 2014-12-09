@@ -13,12 +13,12 @@ function getConnection()
     if(!isset($_SESSION['typeUsager']))
     {
         // Nécessaire pour ne pas faire une boucle de redirection à cause de la fonction redirigerSiDejaConnecte
-        unset($_SESSION["idUsager"]);
-        $_SESSION['erreur'] = "Vous avez perdu la connexion au serveur. Veuillez vous reconnecter";
+        // unset($_SESSION["idUsager"]);
+        //$_SESSION['erreur'] = "Vous avez perdu la connexion au serveur. Veuillez vous reconnecter";
         // header("location:index.php") ne marche pas ici car le header est envoyé dès qu'un echo ou un changement d'une variable de session survient.
         // Alors, la page n'est redirigé qu'au prochain chargement de la page. C'est pourquoi on redirige en javascript.
-        echo '<script>window.location = "index.php";</script>';
-        exit();
+        // echo '<script>window.location = "index.php";</script>';
+        // exit();
     }
     switch($_SESSION['typeUsager'])
     {

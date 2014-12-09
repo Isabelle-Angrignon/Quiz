@@ -6,6 +6,7 @@ if(!isset($_POST['idQuiz']))
     exit();
 }
 
+session_start();
 include("cFonctionsProf-GererQuiz.php");
 include("../Modele/ModeleUtilisateurs.php");
 include("../Modele/ModeleQuiz.php");

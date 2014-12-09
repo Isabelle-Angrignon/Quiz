@@ -2,6 +2,7 @@
 
 include("../Modele/ModeleUtilisateurs.php");
 include("../Modele/ModeleAssociationQuizQuestions.php");
+session_start();
 
 if(isset($_POST['idQuiz']) && isset($_POST['idQuestion']))
 {

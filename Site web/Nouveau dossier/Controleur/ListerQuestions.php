@@ -8,6 +8,7 @@
 */
     include("../Modele/ModeleQuestions.php");
     include("../Modele/ModeleUtilisateurs.php");
+    session_start();
 
     $triage = $_POST['Triage'];
     $idProprietaire = $_POST['idProprietaire'];

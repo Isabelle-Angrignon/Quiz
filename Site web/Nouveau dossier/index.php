@@ -51,7 +51,8 @@
 	<?php
 		include("Vue/Template/BasDePage.php");
 	?>
-<?php if ((isset($_SESSION['erreur'])) && (!empty($_SESSION['erreur'])))
+<?php
+if(isset($_SESSION['erreur']) && !empty($_SESSION['erreur']))
 {
     echo ' <script>
                      $(document).ready(function(){

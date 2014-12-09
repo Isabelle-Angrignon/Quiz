@@ -158,7 +158,7 @@ function setParamChange($idUsager,$estChanger)
 
 function recupererParamChange($idUsager)
 {
-    $bdd = getConnection();
+    $bdd = connecterEtudiant();
     $requete = $bdd->prepare("CALL recupererParamChange(?)");
     $requete->bindparam(1, $idUsager, PDO::PARAM_STR,10);
 

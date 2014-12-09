@@ -5,6 +5,7 @@
 
 include("../Modele/ModeleUtilisateurs.php");
 include("../Modele/ModeleQuiz.php");
+session_start();
 if(isset($_POST['idCours']) && isset($_POST['idProprietaire']))
 {
     $listeQuiz = listerQuizSelonCoursProprietaire($_POST['idCours'], $_POST['idProprietaire']);

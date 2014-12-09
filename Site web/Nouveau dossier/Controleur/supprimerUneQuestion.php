@@ -13,7 +13,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 include("../Modele/ModeleUtilisateurs.php");
 include("../Modele/ModeleQuestions.php");
-
+session_start();
 
 if(isset($_POST['idQuestion']))
 {

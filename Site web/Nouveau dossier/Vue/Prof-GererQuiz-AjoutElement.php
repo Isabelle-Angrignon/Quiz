@@ -2,6 +2,7 @@
 include("../Modele/ModeleAssociationQuestionCours.php");
 include("../Modele/ModeleUtilisateurs.php");
 include("../Modele/ModeleAssociationQuizCours.php");
+session_start();
 // Prof-GererQuiz-AjoutElement
 // Par Mathieu Dumoulin
 // Date: 13/10/2014

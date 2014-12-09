@@ -42,6 +42,7 @@ if($doitArreter)
     exit();
 }
 
+session_start();
 // Si les paramètres du quiz sont valides
 include("cFonctionsProf-GererQuiz.php");
 include("../Modele/ModeleUtilisateurs.php");

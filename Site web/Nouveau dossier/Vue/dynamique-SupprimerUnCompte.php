@@ -40,6 +40,7 @@
     $('#soumettre').button();
     $('#soumettre').click(function(){
         if($('#TB_DA').val().length != 0 && $('#TB_DA').val().length <= 10 && $('#TB_DA').val()[0] != "4") {
+            $("#deploiement").off("keydown");
             ChercherUsagerAjax($('#TB_DA').val(),supprimerUnCompte, " dont vous souhaitez supprimer le compte");
             $("#deploiement").remove();
         }
