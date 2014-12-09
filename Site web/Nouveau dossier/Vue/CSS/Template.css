@@ -222,7 +222,11 @@ div#enteteSite{
     background-color: #eeeeee;
 }
 
-
+.ui-selectmenu-open {
+    overflow-x: hidden;
+    overflow-y:auto;
+    max-height: 400px;
+}
 
 
 /*------------------------------------------------ Menu de navigation ------------------------------------------------*/

@@ -317,6 +317,7 @@ textarea.Reponsefocused{
 #parametresQuestion {
     width: 100%;
     height:350px;
+    overflow-y:scroll;
 }
 
 #parametresQuestion .ui-widget-content {
